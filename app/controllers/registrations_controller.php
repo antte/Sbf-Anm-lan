@@ -3,7 +3,11 @@ App::import('Sanitize');
 
 class RegistrationsController extends AppController {
 	
-	var $helpers = array('Form', 'Html' , 'Javascript');
+	var $helpers = array('Form', 'Html', 'Javascript');
+	
+	var $validate = array(
+        'email' => 'email'
+    );
 	
 	function index() {
 		
@@ -17,9 +21,8 @@ class RegistrationsController extends AppController {
 		$this->set('roles', $this->Role->find('list', array('fields' => array('Role.name'))));
 		
 		if(!empty($this->data)) {
-			// Passes the data through the Sanitize clean filter and saves the registration
-			if($this->Registration->save(Sanitize::clean($this->data))) {
-				//save successful TODO user needs feedback here
+			if($this->Registration->save(Sanitize::clean($this->data))) { // Passes the data through the Sanitize clean filter and saves the registration
+				// registration data saved successfully
 				$this->Session->setFlash("Tack för din anmälan, {$this->data['Registration']['first_name']}.");
 				$this->redirect(array('action' => 'confirm'));
 			}
