@@ -84,7 +84,7 @@ class DATABASE_CONFIG {
 		'host' => 'localhost',
 		'login' => 'Sbf',
 		'password' => 'Anm-lan',
-		'database' => 'Sbf-Anm-lan',
+		'database' => 'sbf-anmalan',
 		'prefix' => '',
 	);
 
