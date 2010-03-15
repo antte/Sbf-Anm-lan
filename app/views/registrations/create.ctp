@@ -2,6 +2,7 @@
 	<!--  /* Form helper - action post - parsed to the registration model class*/-->
 	<?php echo $form->create('Registration'); ?> 
 		<fieldset>
+<<<<<<< HEAD
 			<label for="firstname" >Fšrnamn </label> 
 				<input type="text" name="first_name" id="firstname" />
 			
@@ -28,15 +29,34 @@
 				<input type="text" name="city" id="city" />
 			
 			
+=======
+			<label for="firstname" ></label> 
+				<input type="text" name="firstname" id="firstname" />
+			<label for="lastname" ></label> 
+				<input type="text" name="lastname" id="lastname" />
+			<select id="role">
+				<?php //TO DO foreach loop roles get it from controller ?>
+				<option value=""> </option>
+>>>>>>> e35b5ffdda186c54839710d8b26a6a1eb4d37cdb
 				
 				
 				
 				
+<<<<<<< HEAD
 			
+=======
+			</select>	
+		
+>>>>>>> e35b5ffdda186c54839710d8b26a6a1eb4d37cdb
 		
 		
 		</fieldset>	
 	
 	
+<<<<<<< HEAD
 	<?php echo $form->end('Submit'); ?>	
 </section> 
+=======
+	<?php echo $form->end(); ?>	
+</section
+>>>>>>> e35b5ffdda186c54839710d8b26a6a1eb4d37cdb
