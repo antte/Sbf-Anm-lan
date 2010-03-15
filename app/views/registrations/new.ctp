@@ -6,8 +6,14 @@
 				<input type="text" name="firstname" id="firstname" />
 			<label for="lastname" ></label> 
 				<input type="text" name="lastname" id="lastname" />
-			<select type="text" name="firstname" id="firstname" />
-			
+			<select id="role">
+				<?php //TO DO foreach loop roles get it from controller ?>
+				<option value=""> </option>
+				
+				
+				
+				
+			</select>	
 		
 		
 		
@@ -15,4 +21,4 @@
 	
 	
 	<?php echo $form->end(); ?>	
-</section>
+</section
