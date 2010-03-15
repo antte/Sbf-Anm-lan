@@ -1,62 +1,26 @@
 <section>
-	<!--  /* Form helper - action post - parsed to the registration model class*/-->
-	<?php echo $form->create('Registration'); ?> 
+	<!--  Form helper - sets action post - parse form to the registration model class-->
+	<?php echo $form->create('Registration',array('action' => 'create')); ?> 
 		<fieldset>
-<<<<<<< HEAD
-			<label for="firstname" >Förnamn </label> 
-				<input type="text" name="first_name" id="firstname" />
+			<!--  Form helper - create input first_name  -->
+			<?php echo $form->input('first_name', array('type' => 'text', 'label' => 'Förnamn')); ?>
+			<?php echo $form->input('last_name', array('type' => 'text', 'label' => 'Efternamn')); ?>
 			
-			<label for="lastname" >Efternamn </label> 
-				<input type="text" name="last_name" id="lastname" />
+			<?php 
+				//testdata to option 
+				$roleId = array( '1' => 'Vinnare', '2' => 'Medfoljande' , '3' => 'Bamse');
+				echo $form->input('role', array('options' => array($roleId), 'label' => 'Anmäl dig som')); ?>
 			
-			<label>Anmäl dig som</label>
-				<select id="role">
-					<?php //TODO foreach loop roles get it from controller ?>
-					<option value=""> </option>
-				</select>	
+			<?php echo $form->input('email', array('type' => 'text', 'label' => 'E-post')); ?>
+			<?php echo $form->input('phone', array('type' => 'text', 'label' => 'Telefon')); ?>
+			<?php echo $form->input('c_o', array('type' => 'text', 'label' => 'c/o')); ?>
+			<?php echo $form->input('street_address', array('type' => 'text', 'label' => 'Adress')); ?>
+			<?php echo $form->input('postal_code', array('type' => 'text', 'label' => 'Postnr')); ?>
+			<?php echo $form->input('city', array('type' => 'text', 'label' => 'Stad')); ?>
+
 			
-			<label for="email" >E-post:</label> 
-				<input type="text" name="email" id="email" />
-			<label for="phone" >Telefon:</label> 
-				<input type="text" name="phone" id="phone" />
-			<label for="c_o" >c/o:</label> 
-				<input type="text" name="c_o" id="c_o" />
-			<label for="street_address" >Adress:</label> 
-				<input type="text" name="street_address" id="street_address" />
-			<label for="postal_code" >Postnr:</label> 
-				<input type="text" name="postal_code" id="postal_code" />
-			<label for="city" >Stad:</label> 
-				<input type="text" name="city" id="city" />
-			
-			
-=======
-			<label for="firstname" ></label> 
-				<input type="text" name="firstname" id="firstname" />
-			<label for="lastname" ></label> 
-				<input type="text" name="lastname" id="lastname" />
-			<select id="role">
-				<?php //TO DO foreach loop roles get it from controller ?>
-				<option value=""> </option>
->>>>>>> e35b5ffdda186c54839710d8b26a6a1eb4d37cdb
-				
-				
-				
-				
-<<<<<<< HEAD
-			
-=======
-			</select>	
-		
->>>>>>> e35b5ffdda186c54839710d8b26a6a1eb4d37cdb
-		
-		
 		</fieldset>	
 	
-	
-<<<<<<< HEAD
+	<!--  Form helper - end form-->
 	<?php echo $form->end('Submit'); ?>	
 </section> 
-=======
-	<?php echo $form->end(); ?>	
-</section
->>>>>>> e35b5ffdda186c54839710d8b26a6a1eb4d37cdb
