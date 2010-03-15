@@ -10,8 +10,6 @@
 		echo $html->meta('icon');
 
 		echo $html->css('cake.generic');
-		
-		echo $html->js('/jquery.1.4.2-min');
 
 		echo $scripts_for_layout;
 	?>

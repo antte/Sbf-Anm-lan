@@ -3,7 +3,7 @@ App::import('Sanitize');
 
 class RegistrationsController extends AppController {
 	
-	var $helpers = array('Form', 'Html');
+	var $helpers = array('Form', 'Html' , 'Javascript');
 	
 	function index() {
 		
