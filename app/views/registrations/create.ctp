@@ -14,6 +14,17 @@
 		
 		<!--  Form helper - create input with label  -->
 			<?php 
+				echo $form->hidden('event_id', array('default' => $event_id));
+				echo $form->input('first_name', array('type' => 'text', 'label' => 'Förnamn'));
+				echo $form->input('last_name', array('type' => 'text', 'label' => 'Efternamn'));
+				echo $form->input('role_id', array('options' => array($roles), 'label' => 'Anmäl dig som', 'empty' => '(välj en)'));
+				echo $form->input('email', array('type' => 'text', 'label' => 'E-post'));
+				echo $form->input('retype_email', array('type' => 'text', 'label' => 'Bekräfta E-post'));
+				echo $form->input('phone', array('type' => 'text', 'label' => 'Telefon'));
+				echo $form->input('c_o', array('type' => 'text', 'label' => 'c/o'));
+				echo $form->input('street_address', array('type' => 'text', 'label' => 'Adress'));
+				echo $form->input('postal_code', array('type' => 'text', 'label' => 'Postnr'));
+				echo $form->input('city', array('type' => 'text', 'label' => 'Stad'));
 				echo $form->hidden($event_id);
 			?>
 		<fieldset class="name grid_8">
