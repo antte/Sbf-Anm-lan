@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 15, 2010 at 10:41 AM
+-- Generation Time: Mar 16, 2010 at 10:28 AM
 -- Server version: 5.1.36
 -- PHP Version: 5.3.0
 
@@ -31,7 +31,7 @@ INSERT INTO `events` (`id`, `name`) VALUES
 
 
 --
--- Dumping data for table `registrator`
+-- Dumping data for table `registrators`
 --
 
 
