@@ -1,4 +1,4 @@
-<!-- Help class that includes this js file even thou we are not in head tag -->
+﻿<!-- Help class that includes this js file even thou we are not in head tag -->
 <?php echo $javascript->link('jquery.1.4.2-min', $inline = false) ?>
 <?php echo $javascript->link('jquery.validate', $inline = false) ?>
 <?php echo $javascript->link('jq.validate.registration', $inline = false) ?>
@@ -20,7 +20,6 @@
 			<?php echo $form->input('street_address', array('type' => 'text', 'label' => 'Adress', 'id' => 'street_address', 'class' => 'required')); ?>
 			<?php echo $form->input('postal_code', array('type' => 'text', 'label' => 'Postnr', 'id' => 'postal_code', 'class' => 'required digits')); ?>
 			<?php echo $form->input('city', array('type' => 'text', 'label' => 'Stad', 'id' => 'city', 'class' => 'required')); ?>
-								
 		</fieldset>
 	<!--  Form helper - end form-->
 	<?php echo $form->end('skicka'); ?>	

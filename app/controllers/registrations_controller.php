@@ -1,4 +1,4 @@
-<?php
+ï»¿<?php
 App::import('Sanitize');
 
 class RegistrationsController extends AppController {
@@ -14,22 +14,27 @@ class RegistrationsController extends AppController {
 		$this->set('events', $this->Registration->Event->find('all'));
 	}
 	
-	function create($id) {
+	function create($id = null) {
+		
+		if (!$id) $this->redirect(array('action' => 'index'));
+		
 		$this->set("event_id", $id);
 		
 		$this->loadModel("Role");
-		//Find list fetches roles as an assoc array
-		$this->set('roles', $this->Role->find('list', array('fields' => array('Role.name'))));
+		$this->set('roles', $this->Role->find('list', array('fields' => array('Role.name')))); //Find list fetches roles as an assoc array
 		
 		if(!empty($this->data)) {
 			if($this->Registration->save(Sanitize::clean($this->data))) { // Passes the data through the Sanitize clean filter and saves the registration
 				// registration data saved successfully
-				$this->Session->setFlash("Tack fšr din anmŠlan, {$this->data['Registration']['first_name']}.");
+				$this->Session->setFlash("Tack fÃ¶r din anmÃ¤lan, {$this->data['Registration']['first_name']}.");
 				$this->redirect(array('action' => 'confirm'));
 			}
 		}
 	}
 	
+	/**
+	 * When a registration is saved this view will be called and a feedback message shown
+	 */
 	function confirm() {
 		
 	}

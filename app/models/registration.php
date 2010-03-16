@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 	Class Registration extends AppModel {
 		var $hasOne = "Registrator";
