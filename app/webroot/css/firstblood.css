@@ -1,0 +1,45 @@
+
+label {
+	clear: left;
+	float: left;
+	font-size: 150%;
+	font-weight: bold;
+	cursor: pointer;
+}
+input, textarea, select {
+	float: left;
+	clear: left;
+	font-size: 150%;
+	padding: 3px;
+	font-family: arial, tahoma, verdana, sans-serif;
+}
+
+select {
+	font-size: 150%;
+}
+
+fieldset {
+	border: 1px solid #888;
+	padding: 20px;
+}
+
+.first_name, .last_name, .email, .retype_email {
+	float: left;
+	margin-right: 20px;
+}
+
+.postcode {
+	clear: both;
+	width: 180px;
+}
+
+.postcode, .city {
+	float: left;
+	margin-right: 20px;
+}
+
+label.error {
+	font-size: 100%;
+	color: red;
+	font-weight: bold;
+}
