@@ -14,7 +14,6 @@
 		
 		<!--  Form helper - create input with label  -->
 			<?php 
-<<<<<<< HEAD
 				echo $form->hidden('event_id', array('default' => $event_id));
 				echo $form->input('first_name', array('type' => 'text', 'label' => 'Förnamn'));
 				echo $form->input('last_name', array('type' => 'text', 'label' => 'Efternamn'));
@@ -25,10 +24,8 @@
 				echo $form->input('c_o', array('type' => 'text', 'label' => 'c/o'));
 				echo $form->input('street_address', array('type' => 'text', 'label' => 'Adress'));
 				echo $form->input('postal_code', array('type' => 'text', 'label' => 'Postnr'));
-				echo $form->input('city', array('type' => 'text', 'label' => 'Stad')); 
-=======
+				echo $form->input('city', array('type' => 'text', 'label' => 'Stad'));
 				echo $form->hidden($event_id);
->>>>>>> b91ace174491926ac087ed2bea93c25623ce12c0
 			?>
 		<fieldset class="name grid_8">
 			<?php
