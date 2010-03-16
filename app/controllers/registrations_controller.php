@@ -14,12 +14,12 @@ class RegistrationsController extends AppController {
 		$this->set('events', $this->Registration->Event->find('all'));
 	}
 	
-	function create($id) {
+	function create($id = null) {
+		
 		$this->set("event_id", $id);
 		
 		$this->loadModel("Role");
-		//Find list fetches roles as an assoc array
-		$this->set('roles', $this->Role->find('list', array('fields' => array('Role.name'))));
+		$this->set('roles', $this->Role->find('list', array('fields' => array('Role.name')))); //Find list fetches roles as an assoc array
 		
 		if(!empty($this->data)) {
 			if($this->Registration->save(Sanitize::clean($this->data))) { // Passes the data through the Sanitize clean filter and saves the registration
@@ -30,6 +30,9 @@ class RegistrationsController extends AppController {
 		}
 	}
 	
+	/**
+	 * When a registration is saved this view will be called and a feedback message shown
+	 */
 	function confirm() {
 		
 	}
