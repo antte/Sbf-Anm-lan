@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 15, 2010 at 10:15 AM
+-- Generation Time: Mar 16, 2010 at 10:08 AM
 -- Server version: 5.1.36
 -- PHP Version: 5.3.0
 
@@ -21,9 +21,9 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 CREATE TABLE IF NOT EXISTS `events` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(127) NOT NULL,
+  `name` varchar(127) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -34,12 +34,12 @@ CREATE TABLE IF NOT EXISTS `events` (
 CREATE TABLE IF NOT EXISTS `people` (
   `registration_id` int(11) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `role_id` int(11) NOT NULL,
-  `first_name` varchar(127) NOT NULL,
-  `last_name` varchar(127) NOT NULL,
+  `role_id` int(11) DEFAULT NULL,
+  `first_name` varchar(127) COLLATE utf8_bin NOT NULL,
+  `last_name` varchar(127) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`),
   KEY `registration_id` (`registration_id`,`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -52,26 +52,26 @@ CREATE TABLE IF NOT EXISTS `registrations` (
   `registrator_id` int(11) NOT NULL,
   `event_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `registrator`
+-- Table structure for table `registrators`
 --
 
-CREATE TABLE IF NOT EXISTS `registrator` (
+CREATE TABLE IF NOT EXISTS `registrators` (
   `registration_id` int(11) NOT NULL,
-  `role_id` int(11) NOT NULL,
-  `first_name` varchar(127) NOT NULL,
-  `last_name` varchar(127) NOT NULL,
-  `email` varchar(127) NOT NULL,
-  `phone` varchar(127) NOT NULL,
-  `address` varchar(127) NOT NULL,
-  `city` varchar(127) NOT NULL,
-  `postal_code` varchar(127) NOT NULL,
+  `role_id` int(11) DEFAULT NULL,
+  `first_name` varchar(127) COLLATE utf8_bin NOT NULL,
+  `last_name` varchar(127) COLLATE utf8_bin NOT NULL,
+  `email` varchar(127) COLLATE utf8_bin NOT NULL,
+  `phone` varchar(127) COLLATE utf8_bin DEFAULT NULL,
+  `address` varchar(127) COLLATE utf8_bin DEFAULT NULL,
+  `city` varchar(127) COLLATE utf8_bin DEFAULT NULL,
+  `postal_code` varchar(127) COLLATE utf8_bin DEFAULT NULL,
   KEY `registration_id` (`registration_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -81,6 +81,6 @@ CREATE TABLE IF NOT EXISTS `registrator` (
 
 CREATE TABLE IF NOT EXISTS `roles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(127) NOT NULL,
+  `name` varchar(127) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=6 ;
