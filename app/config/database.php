@@ -87,6 +87,7 @@ class DATABASE_CONFIG {
 		'database' => 'sbf-anmalan',
 		'encoding' => 'utf8',
 		'prefix' => '',
+		'encoding' => 'utf8'
 	);
 
 	var $test = array(
