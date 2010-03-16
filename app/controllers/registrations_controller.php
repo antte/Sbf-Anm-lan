@@ -16,6 +16,8 @@ class RegistrationsController extends AppController {
 	
 	function create($id = null) {
 		
+		if (!$id) $this->redirect(array('action' => 'index'));
+		
 		$this->set("event_id", $id);
 		
 		$this->loadModel("Role");
