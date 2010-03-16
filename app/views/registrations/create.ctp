@@ -17,9 +17,10 @@
 				echo $form->hidden($event_id);
 			?>
 		<fieldset class="name grid_8">
+			<p class="obligatory">* är obligatoriska uppgifter!</p>
 			<?php
-				echo $form->input('first_name', array('type' => 'text', 'label' => 'Förnamn *', 'div' => 'first_name grid_4'));
-				echo $form->input('last_name', array('type' => 'text', 'label' => 'Efternamn *', 'div' => 'last_name grid_4'));
+				echo $form->input('first_name', array('type' => 'text', 'label' => 'Förnamn *', 'div' => 'first_name'));
+				echo $form->input('last_name', array('type' => 'text', 'label' => 'Efternamn *', 'div' => 'last_name'));
 			?>
 		</fieldset>
 		<fieldset class="role grid_8">
@@ -29,8 +30,8 @@
 			</fieldset>
 		<fieldset class="email grid_8">
 			<?php
-				echo $form->input('email', array('type' => 'text', 'label' => 'E-post *', 'div' => 'email grid_4'));
-				echo $form->input('retype_email', array('type' => 'text', 'label' => 'Bekräfta e-post *', 'div' => 'retype_email grid_4'));
+				echo $form->input('email', array('type' => 'text', 'label' => 'E-post *', 'div' => 'email'));
+				echo $form->input('retype_email', array('type' => 'text', 'label' => 'Bekräfta e-post *', 'div' => 'retype_email'));
 			?>
 		</fieldset>
 		<fieldset class="contact grid_8">

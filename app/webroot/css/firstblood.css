@@ -14,21 +14,34 @@ input, textarea, select {
 	font-family: arial, tahoma, verdana, sans-serif;
 }
 
+input + label {
+	margin-top: 0px;
+}
+
 select {
 	font-size: 150%;
 }
 
 fieldset {
-	border: 1px solid #888;
+	background: #eee;
+	padding: 20px;
 }
 
+.first_name, .last_name, .email, .retype_email {
+	float: left;
+	width: 310px;
+}
+
+.first_name input, .last_name input, .email input, .retype_email input {
+	width: 270px;	
+}
 
 .postcode {
 	clear: both;
-	width: 85px;
+	width: 110px;
 }
 .postcode input { 
-	width: 70px; 
+	width: 90px; 
 }
 .postcode label.error {
 	position: relative;
@@ -41,8 +54,18 @@ fieldset {
 	margin-right: 20px;
 }
 
+#registration .submit {
+	margin-left: 10px;
+}
+
 label.error {
 	font-size: 100%;
 	color: red;
 	font-weight: bold;
+}
+
+.obligatory {
+	width: 100%;
+	text-align: right;
+	font-weight:bold;
 }
