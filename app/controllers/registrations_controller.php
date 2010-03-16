@@ -33,12 +33,27 @@ class RegistrationsController extends AppController {
 	 * Just to save the data from create action
 	 */
 	function add() {
-		if (!empty($this->data)) $this->set('data', $this->data);
 		if(!empty($this->data)) {
-			if($this->Registration->save($this->data)) { // Passes the data through the Sanitize clean filter and saves the registration
-				// registration data saved successfully
-				$this->Session->setFlash("Tack för din anmälan, {$this->data['Registrator']['first_name']}.");
-				
+			
+			//Before we save the date we check to see if a similar registration has already been registered
+			$found = $this->Registration->find('first', array(
+			'conditions' => array(
+				'event_id' 		=> $this->data['Registration']['event_id'],
+				'first_name' 	=> $this->data['Registration']['first_name'],
+				'last_name' 	=> $this->data['Registration']['last_name'],
+				'email' 		=> $this->data['Registration']['email']
+			)));
+			
+			if (empty($found)) {
+				if($this->Registration->save($this->data)) { // Passes the data through the Sanitize clean filter and saves the registration
+					// registration data saved successfully
+					$this->Session->setFlash("Tack för din anmälan, {$this->data['Registration']['first_name']}.");
+					
+				} else {
+					$this->Session->setFlash("Det blev fel."); //TODO vad blev fel?
+				}
+			} else {
+				$this->Session->setFlash("Det verkar som att du redan är anmäld.");
 			}
 		}
 	}

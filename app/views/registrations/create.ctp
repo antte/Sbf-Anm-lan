@@ -14,10 +14,10 @@
 		<fieldset>
 			<!--  Form helper - create input with label  -->
 			<?php 
-				echo $form->hidden($event_id);
+				echo $form->hidden('event_id', array('default' => $event_id));
 				echo $form->input('first_name', array('type' => 'text', 'label' => 'Förnamn'));
 				echo $form->input('last_name', array('type' => 'text', 'label' => 'Efternamn'));
-				echo $form->input('role', array('options' => array($roles), 'label' => 'Anmäl dig som', 'empty' => '(välj en)'));
+				echo $form->input('role_id', array('options' => array($roles), 'label' => 'Anmäl dig som', 'empty' => '(välj en)'));
 				echo $form->input('email', array('type' => 'text', 'label' => 'E-post'));
 				echo $form->input('retype_email', array('type' => 'text', 'label' => 'Bekräfta E-post'));
 				echo $form->input('phone', array('type' => 'text', 'label' => 'Telefon'));
