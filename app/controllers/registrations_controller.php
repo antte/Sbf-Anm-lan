@@ -1,4 +1,4 @@
-<?php
+ï»¿<?php
 App::import('Sanitize');
 
 class RegistrationsController extends AppController {
@@ -24,7 +24,7 @@ class RegistrationsController extends AppController {
 		if(!empty($this->data)) {
 			if($this->Registration->save(Sanitize::clean($this->data))) { // Passes the data through the Sanitize clean filter and saves the registration
 				// registration data saved successfully
-				$this->Session->setFlash("Tack fšr din anmŠlan, {$this->data['Registration']['first_name']}.");
+				$this->Session->setFlash("Tack fÃ¶r din anmÃ¤lan, {$this->data['Registration']['first_name']}.");
 				$this->redirect(array('action' => 'confirm'));
 			}
 		}
