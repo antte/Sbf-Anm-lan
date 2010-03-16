@@ -33,21 +33,14 @@ class RegistrationsController extends AppController {
 	 * Just to save the data from create action
 	 */
 	function add() {
+		if (!empty($this->data)) $this->set('data', $this->data);
 		if(!empty($this->data)) {
-			if($this->Registration->save(Sanitize::clean($this->data))) { // Passes the data through the Sanitize clean filter and saves the registration
+			if($this->Registration->save($this->data)) { // Passes the data through the Sanitize clean filter and saves the registration
 				// registration data saved successfully
-				$this->Session->setFlash("Tack för din anmälan, {$this->data['Registration']['first_name']}.");
-				$this->redirect(array('action' => 'confirm'));
+				$this->Session->setFlash("Tack för din anmälan, {$this->data['Registrator']['first_name']}.");
+				
 			}
 		}
-	}
-	
-	/**
-	 * When a registration is saved this view will be called and a feedback message shown
-	 * TODO maybe we could use add for the same purpose instead?
-	 */
-	function confirm() {
-		
 	}
 	
 }
