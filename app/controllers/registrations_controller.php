@@ -6,7 +6,7 @@ class RegistrationsController extends AppController {
 	var $helpers = array('Form', 'Html', 'Javascript');
 	
 	var $validate = array(
-        'email' => 'email'
+        'email' => 'email' /*TODO does this work?*/
     );
 	
 	function index() {
