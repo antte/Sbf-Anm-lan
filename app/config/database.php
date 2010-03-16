@@ -85,6 +85,7 @@ class DATABASE_CONFIG {
 		'login' => 'Sbf',
 		'password' => 'Anm-lan',
 		'database' => 'sbf-anmalan',
+		'encoding' => 'utf8',
 		'prefix' => '',
 		'encoding' => 'utf8'
 	);
