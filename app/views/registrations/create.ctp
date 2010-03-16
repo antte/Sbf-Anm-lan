@@ -18,28 +18,28 @@
 			?>
 		<fieldset class="name grid_8">
 			<?php
-				echo $form->input('first_name', array('type' => 'text', 'label' => 'Förnamn', 'div' => 'first_name'));
-				echo $form->input('last_name', array('type' => 'text', 'label' => 'Efternamn', 'div' => 'last_name'));
+				echo $form->input('first_name', array('type' => 'text', 'label' => 'Förnamn *', 'div' => 'first_name grid_4'));
+				echo $form->input('last_name', array('type' => 'text', 'label' => 'Efternamn *', 'div' => 'last_name grid_4'));
 			?>
 		</fieldset>
 		<fieldset class="role grid_8">
 			<?php
-				echo $form->input('role', array('options' => array($roles), 'label' => 'Anmäl dig som', 'empty' => '(välj en)', 'div' => 'role'));
+				echo $form->input('role', array('options' => array($roles), 'label' => 'Anmäl dig som *', 'empty' => '(välj en)', 'div' => 'role'));
 			?>
 			</fieldset>
 		<fieldset class="email grid_8">
 			<?php
-				echo $form->input('email', array('type' => 'text', 'label' => 'E-post', 'div' => 'email'));
-				echo $form->input('retype_email', array('type' => 'text', 'label' => 'Bekräfta e-post', 'div' => 'retype_email'));
+				echo $form->input('email', array('type' => 'text', 'label' => 'E-post *', 'div' => 'email grid_4'));
+				echo $form->input('retype_email', array('type' => 'text', 'label' => 'Bekräfta e-post *', 'div' => 'retype_email grid_4'));
 			?>
 		</fieldset>
 		<fieldset class="contact grid_8">
 			<?php
-				echo $form->input('phone', array('type' => 'text', 'label' => 'Telefon', 'div' => 'phone'));
-				echo $form->input('c_o', array('type' => 'text', 'label' => 'c/o', 'div' => 'c_o'));
-				echo $form->input('street_address', array('type' => 'text', 'label' => 'Adress', 'div' => 'address'));
-				echo $form->input('postal_code', array('type' => 'text', 'label' => 'Postnr', 'div' => 'postcode'));
-				echo $form->input('city', array('type' => 'text', 'label' => 'Stad', 'div' => 'city')); 
+				echo $form->input('phone', array('type' => 'text', 'label' => 'Telefon *', 'div' => 'phone'));
+				echo $form->input('c_o', array('type' => 'text', 'label' => 'C/O', 'div' => 'c_o'));
+				echo $form->input('street_address', array('type' => 'text', 'label' => 'Adress *', 'div' => 'address'));
+				echo $form->input('postal_code', array('type' => 'text', 'label' => 'Postnr *', 'div' => 'postcode'));
+				echo $form->input('city', array('type' => 'text', 'label' => 'Stad *', 'div' => 'city')); 
 			?>						
 		</fieldset>
 	<!--  Form helper - end form-->

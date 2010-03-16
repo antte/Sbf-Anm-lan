@@ -20,17 +20,20 @@ select {
 
 fieldset {
 	border: 1px solid #888;
-	padding: 20px;
 }
 
-.first_name, .last_name, .email, .retype_email {
-	float: left;
-	margin-right: 20px;
-}
 
 .postcode {
 	clear: both;
-	width: 180px;
+	width: 85px;
+}
+.postcode input { 
+	width: 70px; 
+}
+.postcode label.error {
+	position: relative;
+	width: 200px;
+	margin-top: 20px;
 }
 
 .postcode, .city {
