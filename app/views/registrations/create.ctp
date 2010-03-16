@@ -1,4 +1,4 @@
-<!-- Help class that includes this js file even thou we are not in head tag -->
+ï»¿<!-- Help class that includes this js file even thou we are not in head tag -->
 <?php echo $javascript->link('jquery.1.4.2-min', $inline = false) ?>
 
 
@@ -8,9 +8,9 @@
 		<fieldset>
 			<!--  Form helper - create input with label  -->
 			<?php echo $form->hidden($event_id)?>
-			<?php echo $form->input('first_name', array('type' => 'text', 'label' => 'Fšrnamn', 'id' => 'first_name')); ?>
+			<?php echo $form->input('first_name', array('type' => 'text', 'label' => 'FÅ¡rnamn', 'id' => 'first_name')); ?>
 			<?php echo $form->input('last_name', array('type' => 'text', 'label' => 'Efternamn', 'id' => 'last_name')); ?>
-			<?php echo $form->input('role', array('options' => array($roles), 'label' => 'AnmŠl dig som', 'id' => 'role', 'empty' => '(vŠlj en)')); ?>
+			<?php echo $form->input('role', array('options' => array($roles), 'label' => 'AnmÅ l dig som', 'id' => 'role', 'empty' => '(vÅ lj en)')); ?>
 			<?php echo $form->input('email', array('type' => 'text', 'label' => 'E-post', 'id' => 'email')); ?>
 			<?php echo $form->input('phone', array('type' => 'text', 'label' => 'Telefon', 'id' => 'phone')); ?>
 			<?php echo $form->input('c_o', array('type' => 'text', 'label' => 'c/o', 'id' => 'c_o')); ?>

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 	Class Event extends AppModel {
 		
