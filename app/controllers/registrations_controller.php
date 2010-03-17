@@ -31,6 +31,8 @@ class RegistrationsController extends AppController {
 	function add() {
 		if(!empty($this->data)) {
 			
+			debug($this->data);
+			
 			//Before we save the date we check to see if a similar registration has already been registered
 			$found = $this->Registration->find('first', array(
 			'conditions' => array(
@@ -41,11 +43,12 @@ class RegistrationsController extends AppController {
 			)));
 			
 			if (empty($found)) {
-				if($this->Registration->save($this->data)) { // Passes the data through the Sanitize clean filter and saves the registration
+				if($this->Registration->save($this->data)) { // TODO Passes the data through the Sanitize clean filter and saves the registration
 					// registration data saved successfully
 					$this->Session->setFlash("Tack för din anmälan, {$this->data['Registration']['first_name']}.");
 					
 				} else {
+					$this->set('errors', $this->Registration->validationErrors);
 					$this->Session->setFlash("Det blev fel."); //TODO vad blev fel?
 				}
 			} else {
