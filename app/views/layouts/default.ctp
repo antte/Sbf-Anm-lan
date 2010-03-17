@@ -20,6 +20,10 @@
 		echo $scripts_for_layout;
 		echo $html->css('firstblood');
 	?>
+	<!--[if lte IE 6]>
+		<?php echo $html->css('ie'); ?>
+	<![endif]-->
+	
 </head>
 <body>
 	<div id="wrap">

@@ -12,7 +12,6 @@ input, textarea, select {
 	font-size: 150%;
 	padding: 3px;
 	font-family: arial, tahoma, verdana, sans-serif;
-	width:290px;
 }
 
 select {
@@ -21,7 +20,6 @@ select {
 
 fieldset {
 	background: #eee;
-	padding: 20px;
 }
 
 .postcode {
@@ -49,11 +47,9 @@ fieldset {
 
  .first_name, .last_name, .email, .retype_email {
 	float: left;
-	width: 310px;
 }
 
 .first_name input, .last_name input, .email input, .retype_email input {
-	width: 290px;	
 }
 
 #registration .submit {
@@ -70,4 +66,8 @@ label.error {
 	width: 100%;
 	text-align: right;
 	font-weight: bold;
+}
+
+fieldset div {
+	margin: 10px;
 }

@@ -16,6 +16,9 @@ class RegistrationsController extends AppController {
 	 */
 	function create($event_id = null) {
 		
+		$this->set('errors', $this->Session->read('errors')); //if we get any validation errors, errors will cointain them
+		$this->Session->write('errors', null);
+		
 		if (!$event_id) $this->redirect(array('action' => 'index')); //can't create registration without event
 		
 		$this->set("event_id", $event_id);
@@ -29,9 +32,8 @@ class RegistrationsController extends AppController {
 	 * Just to save the data from create action
 	 */
 	function add() {
+		
 		if(!empty($this->data)) {
-			
-			debug($this->data);
 			
 			//Before we save the date we check to see if a similar registration has already been registered
 			$found = $this->Registration->find('first', array(
@@ -43,7 +45,7 @@ class RegistrationsController extends AppController {
 			)));
 			
 			if (empty($found)) {
-				if($this->Registration->save($this->data)) { // TODO Passes the data through the Sanitize clean filter and saves the registration
+				if($this->Registration->save(Sanitize::clean($this->data))) { // TODO Passes the data through the Sanitize clean filter and saves the registration
 					// registration data saved successfully
 					$this->Session->setFlash("Tack för din anmälan, {$this->data['Registration']['first_name']}.");
 					
