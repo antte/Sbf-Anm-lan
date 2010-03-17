@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 16, 2010 at 10:08 AM
+-- Generation Time: Mar 17, 2010 at 09:03 AM
 -- Server version: 5.1.36
 -- PHP Version: 5.3.0
 
@@ -49,29 +49,17 @@ CREATE TABLE IF NOT EXISTS `people` (
 
 CREATE TABLE IF NOT EXISTS `registrations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `registrator_id` int(11) NOT NULL,
   `event_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `registrators`
---
-
-CREATE TABLE IF NOT EXISTS `registrators` (
-  `registration_id` int(11) NOT NULL,
-  `role_id` int(11) DEFAULT NULL,
   `first_name` varchar(127) COLLATE utf8_bin NOT NULL,
   `last_name` varchar(127) COLLATE utf8_bin NOT NULL,
+  `role_id` int(11) DEFAULT NULL,
   `email` varchar(127) COLLATE utf8_bin NOT NULL,
   `phone` varchar(127) COLLATE utf8_bin DEFAULT NULL,
-  `address` varchar(127) COLLATE utf8_bin DEFAULT NULL,
+  `street_address` varchar(127) COLLATE utf8_bin DEFAULT NULL,
   `city` varchar(127) COLLATE utf8_bin DEFAULT NULL,
   `postal_code` varchar(127) COLLATE utf8_bin DEFAULT NULL,
-  KEY `registration_id` (`registration_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=7 ;
 
 -- --------------------------------------------------------
 

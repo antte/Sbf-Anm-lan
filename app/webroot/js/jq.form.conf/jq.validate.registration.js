@@ -22,7 +22,7 @@ $(document).ready(function(){
 		    	email: true
 	 		},
 	 		'data[Registration][phone]': {
-				required: true,
+				required: false,
 				minlength: 7,
 				maxlength: 127
 			},
