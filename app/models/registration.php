@@ -57,5 +57,7 @@
 	 			'message' => 'Vi beh&ouml;ver veta din postort.'
 	 		)
     	);
+    	
+    	// TODO check to make sure that event_id is correct (is an event etc)
 		
 	}

@@ -7,9 +7,19 @@
 ?>
 
 <div id="registration" class="grid_8">
-
-
-<div id="registration" class="">
+	
+	<?php 
+		if (!empty($errors)) {
+			echo '<ul id="validationErrors" class="message">';
+				foreach ($errors as $error):?>
+					<li>
+						<?php echo $error; ?>
+					</li>
+				<?php endforeach;
+			echo '</ul>';
+		}
+	?>
+	
 	<!--  Form helper - sets action post - parse form to the registration model class-->
 	<?php echo $form->create('Registration'); ?> 
 		

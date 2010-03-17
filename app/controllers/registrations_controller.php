@@ -48,8 +48,14 @@ class RegistrationsController extends AppController {
 					$this->Session->setFlash("Tack för din anmälan, {$this->data['Registration']['first_name']}.");
 					
 				} else {
-					$this->set('errors', $this->Registration->validationErrors);
-					$this->Session->setFlash("Det blev fel."); //TODO vad blev fel?
+					$this->Session->setFlash("Det blev fel.");
+					$this->Session->write('errors', $this->Registration->validationErrors);
+					if (!is_numeric($this->data['Registration']['event_id'])) { 
+						//Normally the event_id should be present but a malicious user could omit or change it so we need to verify it
+						$this->flash("Error", array('action' => 'index'));
+					}
+					$this->redirect(array('action' => 'create', $this->data['Registration']['event_id']));
+					
 				}
 			} else {
 				$this->Session->setFlash("Det verkar som att du redan är anmäld.");
