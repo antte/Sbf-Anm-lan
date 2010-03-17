@@ -38,14 +38,9 @@
 	
 	<footer>
 		<div class="container_12">
-			<?php echo $html->link(
-					$html->image('cake.power.gif', array('alt'=> __("CakePHP: the rapid development php framework", true), 'border'=>"0")),
-					'http://www.cakephp.org/',
-					array('target'=>'_blank'), null, false
-				);
-			?>
+			<?php echo $cakeDebug; ?>
 		</div>
+
 	</footer>
-	<?php echo $cakeDebug; ?>
 </body>
 </html>
