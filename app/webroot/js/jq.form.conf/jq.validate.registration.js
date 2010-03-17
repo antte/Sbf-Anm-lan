@@ -21,8 +21,7 @@ $(document).ready(function(){
 		    	equalTo: "#RegistrationEmail",
 		    	email: true
 	 		},
-	 		'data[Registration][phone]': {
-				required: true,
+	 		'data[Registration][phone]': {		
 				minlength: 7 
 			},
 			'data[Registration][c_o]': {

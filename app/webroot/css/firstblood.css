@@ -12,10 +12,7 @@ input, textarea, select {
 	font-size: 150%;
 	padding: 3px;
 	font-family: arial, tahoma, verdana, sans-serif;
-}
-
-input + label {
-	margin-top: 0px;
+	width:290px;
 }
 
 select {
@@ -27,31 +24,36 @@ fieldset {
 	padding: 20px;
 }
 
-.first_name, .last_name, .email, .retype_email {
+.postcode {
+	width: 90px;
+	display: inline;
+	float: left;
+	position: relative;
+}
+
+.postcode input {
+	width: 60px;
+	display: inline;
+}
+
+.city {
+	display: inline;
+	float: left;
+	position: relative;
+}
+
+.city input {
+	width: 200px;
+	display: inline;
+}
+
+ .first_name, .last_name, .email, .retype_email {
 	float: left;
 	width: 310px;
 }
 
 .first_name input, .last_name input, .email input, .retype_email input {
-	width: 270px;	
-}
-
-.postcode {
-	clear: both;
-	width: 110px;
-}
-.postcode input { 
-	width: 90px; 
-}
-.postcode label.error {
-	position: relative;
-	width: 200px;
-	margin-top: 20px;
-}
-
-.postcode, .city {
-	float: left;
-	margin-right: 20px;
+	width: 290px;	
 }
 
 #registration .submit {
@@ -67,5 +69,5 @@ label.error {
 .obligatory {
 	width: 100%;
 	text-align: right;
-	font-weight:bold;
+	font-weight: bold;
 }
