@@ -6,15 +6,26 @@
 	echo $javascript->link('jq.form.conf/jq.validate.registration', $inline = false);
 ?>
 
-
-
-<div id="registration" class="">
+<div id="registration" class="grid_8">
+	
+	<?php 
+		if (!empty($errors)) {
+			echo '<ul id="validationErrors" class="message">';
+				foreach ($errors as $error):?>
+					<li>
+						<?php echo $error; ?>
+					</li>
+				<?php endforeach;
+			echo '</ul>';
+		}
+	?>
+	
 	<!--  Form helper - sets action post - parse form to the registration model class-->
 	<?php echo $form->create('Registration'); ?> 
 		
 		<!--  Form helper - create input with label  -->
 			<?php 
-				echo $form->hidden($event_id);
+				echo $form->hidden('event_id', array('type' => 'text', 'default' => $event_id));
 			?>
 		<fieldset class="name grid_8 alpha" >
 			<p class="obligatory">Fält markerade med * är obligatoriska uppgifter!</p>
@@ -25,7 +36,7 @@
 		</fieldset>
 		<fieldset class="role grid_8 alpha">
 			<?php
-				echo $form->input('role', array('options' => array($roles), 'label' => 'Anmäl dig som *', 'empty' => '(välj en)', 'div' => 'role grid_4 alpha'));
+				echo $form->input('role_id', array('options' => array($roles), 'label' => 'Anmäl dig som *', 'empty' => '(välj en)', 'div' => 'role alpha'));
 			?>
 			</fieldset>
 		<fieldset class="email grid_8 alpha">
