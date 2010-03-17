@@ -21,10 +21,8 @@ $(document).ready(function(){
 		    	equalTo: "#RegistrationEmail",
 		    	email: true
 	 		},
-	 		'data[Registration][phone]': {
-				required: false,
-				minlength: 7,
-				maxlength: 127
+	 		'data[Registration][phone]': {		
+				minlength: 7 
 			},
 			'data[Registration][c_o]': {
 	      		maxlength: 127

@@ -30,7 +30,8 @@
 }
 
 .alpha {
-	margin-left: 0
+	margin-left: 0;
+	clear:left;
 }
 
 .omega {

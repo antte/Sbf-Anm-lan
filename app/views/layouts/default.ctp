@@ -15,9 +15,10 @@
 		echo $html->css('stickyfooter');
 		echo $html->css('960');
 		echo $html->css('text');
-		echo $html->css('firstblood');
+		
 
 		echo $scripts_for_layout;
+		echo $html->css('firstblood');
 	?>
 </head>
 <body>
