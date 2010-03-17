@@ -5,10 +5,6 @@ class RegistrationsController extends AppController {
 	
 	var $helpers = array('Form', 'Html', 'Javascript');
 	
-	var $validate = array(
-        'email' => 'email' /*TODO does this work?*/
-    );
-	
 	function index() {
 		
 		$this->set('events', $this->Registration->Event->find('all'));
