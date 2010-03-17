@@ -23,7 +23,8 @@ $(document).ready(function(){
 	 		},
 	 		'data[Registration][phone]': {
 				required: true,
-				minlength: 7 
+				minlength: 7,
+				maxlength: 127
 			},
 			'data[Registration][c_o]': {
 	      		maxlength: 127
