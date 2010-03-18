@@ -48,7 +48,7 @@
 		    	'rule' => 'notEmpty',
 		    	'rule' => array('between',5, 5),
 		    	'rule' => 'numeric',
-	 			'message' => 'Ange en korrekt postnummer.'
+	 			'message' => 'Ange ett korrekt postnummer.'
 	 		),
 	 		'city' => array (
 		    	'rule' => array('notEmpty', array('maxLength',127)),

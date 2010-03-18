@@ -6,7 +6,7 @@ class RegistrationsController extends AppController {
 	var $helpers = array('Form', 'Html', 'Javascript');
 	
 	function index() {
-		
+		//TODO detta borde ju vara i events controllern
 		$this->set('events', $this->Registration->Event->find('all'));
 	}
 	
@@ -16,10 +16,12 @@ class RegistrationsController extends AppController {
 	 */
 	function create($event_id = null) {
 		
-		$this->set('errors', $this->Session->read('errors')); //if we get any validation errors, errors will cointain them
-		$this->Session->write('errors', null);
+		//can't create registration without event
+		if (!$event_id) $this->redirect(array('action' => 'index'));
 		
-		if (!$event_id) $this->redirect(array('action' => 'index')); //can't create registration without event
+		//if we get any validation errors, errors will cointain them
+		$this->set('errors', $this->Session->read('errors'));
+		$this->Session->write('errors', null);
 		
 		$this->set("event_id", $event_id);
 		
@@ -45,9 +47,11 @@ class RegistrationsController extends AppController {
 			)));
 			
 			if (empty($found)) {
-				if($this->Registration->save(Sanitize::clean($this->data))) { // TODO Passes the data through the Sanitize clean filter and saves the registration
+				// Passes the data through the Sanitize clean filter and saves the registration
+				if($this->Registration->save(Sanitize::clean($this->data))) { 
 					// registration data saved successfully
-					$this->Session->setFlash("Tack för din anmälan, {$this->data['Registration']['first_name']}.");
+					$firstName = Sanitize::clean($this->data['Registration']['first_name']);
+					$this->Session->setFlash("Tack för din anmälan, $firstName.");
 					
 				} else {
 					$this->Session->setFlash("Det blev fel.");
@@ -56,12 +60,16 @@ class RegistrationsController extends AppController {
 						//Normally the event_id should be present but a malicious user could omit or change it so we need to verify it
 						$this->flash("Error", array('action' => 'index'));
 					}
-					$this->redirect(array('action' => 'create', $this->data['Registration']['event_id']));
-					
 				}
 			} else {
 				$this->Session->setFlash("Det verkar som att du redan är anmäld.");
 			}
+			
+			$this->redirect(array('action' => 'create', $this->data['Registration']['event_id']));
+		
+		} else {
+			$this->Session->setFlash("Hur tycker du själv att det går?.");
+			$this->redirect(array('controller' => 'events', 'action' => 'index'));
 		}
 	}
 	
