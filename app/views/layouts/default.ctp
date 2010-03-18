@@ -28,7 +28,7 @@
 	<div id="wrap">
 		<header>
 			<div class="container_12">
-				<h1>Svenska bilsportsförbundet</h1>
+				<h1>Svenska bilsportförbundet</h1>
 			</div>
 		</header>
 		<div id="main" class="clearfix">

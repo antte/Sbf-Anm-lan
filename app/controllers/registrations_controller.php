@@ -27,6 +27,9 @@ class RegistrationsController extends AppController {
 		$this->loadModel('Event');
 		$this->set("eventName", $this->Event->field('name', array('id' => $eventId)));
 		
+		$this->loadModel('Event');
+		$this->set("eventName", $this->Event->field('name', array('id' => $event_id)));
+		
 		$this->loadModel("Role");
 		$this->set('roles', $this->Role->find('list', array('fields' => array('Role.name')))); //Find list fetches roles as an assoc array
 		
@@ -37,6 +40,23 @@ class RegistrationsController extends AppController {
 	 */
 	function add() {
 		
+<<<<<<< HEAD
+		$save_status = $this->Registration->save_and_return_status($this->data);
+		
+		$this->Session->setFlash($save_status['flash']);
+		$this->Session->write('errors', $this->Registration->validationErrors);
+		
+		switch ($save_status['type']) {
+			case 2:
+				//success
+				$this->redirect(array('action' => 'create', $save_status['event_id']));
+				break;
+			case 4:
+				//failure
+				$this->redirect(array('action' => 'create', $save_status['event_id']));
+				break;
+			case 400:
+=======
 		$saveStatus = $this->Registration->saveAndReturnStatus($this->data);
 		
 		$this->Session->setFlash($saveStatus['flash']);
@@ -53,6 +73,7 @@ class RegistrationsController extends AppController {
 				break;
 			case 400:
 				//bad request
+>>>>>>> ebb87f043c2c900aa27e933b417c03cde8ee0713
 				$this->redirect(array('action' => 'index'));
 				break;
 			default:
