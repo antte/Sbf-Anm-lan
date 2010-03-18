@@ -20,6 +20,7 @@ select {
 
 fieldset {
 	background: #eee;
+	padding-top: 10px;
 }
 
 .postcode {
@@ -49,7 +50,8 @@ fieldset {
 	float: left;
 }
 
-.first_name input, .last_name input, .email input, .retype_email input {
+.first_name input, .last_name input, .email input, .retype_email input, .phone input, .c_o input, .address input, .city input {
+	width: 220px;
 }
 
 #registration .submit {
@@ -62,12 +64,17 @@ label.error {
 	font-weight: bold;
 }
 
-.obligatory {
-	width: 100%;
+.required {
+	position: relative;
+	width: 610px;
 	text-align: right;
 	font-weight: bold;
 }
 
-fieldset div {
-	margin: 10px;
+.postcode, .c_o, .address {
+	clear: left;
+}
+
+input, select {
+	margin-bottom: 10px;
 }

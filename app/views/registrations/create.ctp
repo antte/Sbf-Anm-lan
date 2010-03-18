@@ -30,30 +30,30 @@
 				echo $form->hidden('event_id', array('type' => 'text', 'default' => $event_id));
 			?>
 		<fieldset class="name grid_8 alpha" >
-			<p class="obligatory">Fält markerade med * är obligatoriska uppgifter!</p>
+			<p class="required">Fält markerade med * är obligatoriska uppgifter!</p>
 			<?php
-				echo $form->input('first_name', array('type' => 'text', 'label' => 'Förnamn *', 'div' => 'first_name grid_4 alpha'));
-				echo $form->input('last_name', array('type' => 'text', 'label' => 'Efternamn *', 'div' => 'last_name grid_4 omega'));
+				echo $form->input('first_name', array('type' => 'text', 'label' => 'Förnamn *', 'div' => 'first_name grid_3'));
+				echo $form->input('last_name', array('type' => 'text', 'label' => 'Efternamn *', 'div' => 'last_name grid_3'));
 			?>
 		</fieldset>
 		<fieldset class="role grid_8 alpha">
 			<?php
-				echo $form->input('role_id', array('options' => array($roles), 'label' => 'Anmäl dig som *', 'empty' => '(välj en)', 'div' => 'role alpha'));
+				echo $form->input('role_id', array('options' => array($roles), 'label' => 'Anmäl dig som *', 'empty' => '(välj en)', 'div' => 'role grid_5'));
 			?>
 			</fieldset>
 		<fieldset class="email grid_8 alpha">
 			<?php
-				echo $form->input('email', array('type' => 'text', 'label' => 'E-post *', 'div' => 'email grid_4 alpha' ));
-				echo $form->input('retype_email', array('type' => 'text', 'label' => 'Bekräfta e-post *', 'div' => 'retype_email grid_4 omega'));
+				echo $form->input('email', array('type' => 'text', 'label' => 'E-post *', 'div' => 'email grid_3' ));
+				echo $form->input('retype_email', array('type' => 'text', 'label' => 'Bekräfta e-post *', 'div' => 'retype_email grid_3'));
 			?>
 		</fieldset>
 		<fieldset class="contact grid_8 alpha">
 			<?php
-				echo $form->input('phone', array('type' => 'text', 'label' => 'Telefon', 'div' => 'phone grid_4 alpha'));
-				echo $form->input('c_o', array('type' => 'text', 'label' => 'C/O', 'div' => 'c_o grid_4 alpha'));
-				echo $form->input('street_address', array('type' => 'text', 'label' => 'Adress *', 'div' => 'address grid_4 alpha'));
-				echo $form->input('postal_code', array('type' => 'text', 'label' => 'Postnr *', 'div' => 'postcode alpha' ));
-				echo $form->input('city', array('type' => 'text', 'label' => 'Stad *', 'div' => 'city omega')); 
+				echo $form->input('phone', array('type' => 'text', 'label' => 'Telefon', 'div' => 'phone grid_3'));
+				echo $form->input('c_o', array('type' => 'text', 'label' => 'C/O', 'div' => 'c_o grid_3'));
+				echo $form->input('street_address', array('type' => 'text', 'label' => 'Adress *', 'div' => 'address grid_3'));
+				echo $form->input('postal_code', array('type' => 'text', 'label' => 'Postnr *', 'div' => 'postcode grid_2' ));
+				echo $form->input('city', array('type' => 'text', 'label' => 'Stad *', 'div' => 'city grid_3')); 
 			?>						
 		</fieldset>
 		<fieldset class="contact grid_8 alpha">
