@@ -13,7 +13,7 @@ jQuery.extend(jQuery.validator.messages, {
 	dateISO: "Ange ett korrekt datum (&ARING;&ARING;&ARING;&ARING;-MM-DD).",
 	number: "Ange ett korrekt nummer.",
 	digits: "Ange endast siffror.",
-	equalTo: "Ange samma v&auml;rde igen.",
+	equalTo: "Ange samma e-post igen.",
 	range: jQuery.validator.format("Ange ett v&auml;rde mellan {0} och {1}."),
 	max: jQuery.validator.format("Ange ett v&auml;rde som &auml;r st&ouml;rre eller lika med {0}."),
 	min: jQuery.validator.format("Ange ett v&auml;rde som &auml;r mindre eller lika med {0}."),

@@ -46,7 +46,15 @@ $(document).ready(function(){
 				required: "Du måste fylla i en korrekt postkod.",
 				rangelength: "Du måste fylla i en korrekt postkod.",
 				digits: "Du måste fylla i en korrekt postkod."
+			},
+		
+		messages: {
+			'data[Registration][retype_email]': {
+				required: "Ange samma epost igen.",
+				rangelenght: "Ange samma e-post igen.",
+				digits: "Ange samma e-post igen."
 			}
+		}
 		}
 	});
 	//validator.showErrors({'data[Registration][retype_email]': "Ange samma e-postadress igen."});
