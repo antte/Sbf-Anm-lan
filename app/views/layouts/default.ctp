@@ -17,7 +17,6 @@
 		echo $html->css('text');
 		
 
-		echo $scripts_for_layout;
 		echo $html->css('firstblood');
 	?>
 	<!--[if lte IE 6]>
@@ -42,9 +41,10 @@
 	
 	<footer>
 		<div class="container_12">
-			<?php echo $cakeDebug; ?>
+			<?php
+			 echo $cakeDebug; ?>
 		</div>
-
+		<?php echo $scripts_for_layout;?>
 	</footer>
 </body>
 </html>
