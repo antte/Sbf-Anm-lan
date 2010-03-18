@@ -9,19 +9,3 @@ body {
 .container_12 {
 	text-align: left;
 }
-
-
-div {
-	width:200px;
-}
-
-div {
-    \width: 220px;
-    w\idth: 200px;
- }
-
-
-* html div {  /* This is the Tan hack */
-	width: 140px; 
-	w\idth: 100px; 
-}
