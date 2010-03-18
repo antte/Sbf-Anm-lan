@@ -13,19 +13,19 @@ class RegistrationsController extends AppController {
 	 * Creates a registration to an event
 	 * @param $event_id Id of an event for which the registration is created.
 	 */
-	function create($event_id = null) {
+	function create($eventId = null) {
 		
 		//can't create registration without event
-		if (!$event_id) $this->redirect(array('action' => 'index'));
+		if (!$eventId) $this->redirect(array('action' => 'index'));
 		
 		//if we get any validation errors, errors will cointain them
 		$this->set('errors', $this->Session->read('errors'));
 		$this->Session->write('errors', null);
 		
-		$this->set("event_id", $event_id);
+		$this->set("event_id", $eventId);
 		
 		$this->loadModel('Event');
-		$this->set("eventName", $this->Event->field('name', array('id' => $event_id)));
+		$this->set("eventName", $this->Event->field('name', array('id' => $eventId)));
 		
 		$this->loadModel("Role");
 		$this->set('roles', $this->Role->find('list', array('fields' => array('Role.name')))); //Find list fetches roles as an assoc array
@@ -37,21 +37,22 @@ class RegistrationsController extends AppController {
 	 */
 	function add() {
 		
-		$save_status = $this->Registration->save_and_return_status($this->data);
+		$saveStatus = $this->Registration->saveAndReturnStatus($this->data);
 		
-		$this->Session->setFlash($save_status['flash']);
+		$this->Session->setFlash($saveStatus['flash']);
 		$this->Session->write('errors', $this->Registration->validationErrors);
 		
-		switch ($save_status['type']) {
+		switch ($saveStatus['type']) {
 			case 2:
 				//success
-				$this->redirect(array('action' => 'create', $save_status['event_id']));
+				$this->redirect(array('action' => 'create', $saveStatus['event_id']));
 				break;
 			case 4:
 				//failure
-				$this->redirect(array('action' => 'create', $save_status['event_id']));
+				$this->redirect(array('action' => 'create', $saveStatus['event_id']));
 				break;
 			case 400:
+				//bad request
 				$this->redirect(array('action' => 'index'));
 				break;
 			default:

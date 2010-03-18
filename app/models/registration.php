@@ -9,11 +9,11 @@
 		var $validate = array(
         	'first_name' => array (
 				'rule' 		=> array('notEmpty', 'maxLength',127),
-				'message' 	=> 'F&ouml;rnamn m&aring;ste finnas och vara h&ouml;gst 127 tecken.'
+				'message' 	=> 'Förnamn måste finnas och vara högst 127 tecken.'
         	),
         	'last_name' => array (
 				'rule' 		=> array('notEmpty', 'maxLength',127),
-				'message' 	=> 'Efternamn m&aring;ste finnas och vara h&ouml;gst 127 tecken.'
+				'message' 	=> 'Efternamn måste finnas och vara högst 127 tecken.'
         	),
         	'email' => array (
         		'rule' 		=> 'email',
@@ -25,7 +25,7 @@
 		    	'rule' => array(
         			'multiple', array('min' => 1)	
         		),
-        		'message' => 'Du m&aring;ste v&auml;lja i vilken roll du vill anm&auml;la dig.'
+        		'message' => 'Du måste välja i vilken roll du vill anmäla dig.'
 	 		),
 	 		'retype_email' => array (
 		    	/* TODO equalTo: "#RegistrationEmail", */
@@ -40,11 +40,11 @@
 			),
 			'c_o' => array (
 	      		'rule' 		=> array('maxLength',127),
-				'message' 	=> 'F&aring;r inte vara ht&ouml;gre &auml;n 127 tecken.'
+				'message' 	=> 'Får inte vara högre än 127 tecken.'
 			),
 			'street_address' => array (
 		    	'rule' 		=> array('notEmpty', 'maxLength', 127),
-				'message' 	=> 'Vi beh&ouml;ver din adress.'
+				'message' 	=> 'Vi behöver din adress.'
 	 		),
 	 		'postal_code' => array (
 		    	'rule' 		=> 'notEmpty',
@@ -53,7 +53,7 @@
 	 		),
 	 		'city' => array (
 		    	'rule' 		=> array('notEmpty', array('maxLength',127)),
-	 			'message' 	=> 'Vi beh&ouml;ver veta din postort.'
+	 			'message' 	=> 'Vi behöver veta din postort.'
 	 		)
     	);
     	
@@ -69,56 +69,59 @@
     	 * status['type'] = 4 		for failure
     	 * status['type'] = 400 	for a bad request (data is weird)
     	 * status['event_id']		contains the event_id from the data
-    	 * status['validationErrors']
     	 */
-    	function save_and_return_status($data) {
+    	function saveAndReturnStatus($data) {
     		$status = array();
     		
-    		$clean_data = Sanitize::clean($data);
-    		$status['event_id'] = $clean_data['Registration']['event_id'];
+    		$cleanData = Sanitize::clean($data);
+    		$status['event_id'] = $cleanData['Registration']['event_id'];
     		
     		$status['flash'] = "Det blev fel..."; //Default feedback message
     		
-	    	if(!empty($data)) {
-				
-				//Before we save the data we check to see if a similar registration has already been registered
-				$duplicate_registration = $this->find('first', array(
-				'conditions' => array(
-					'event_id' 		=> $clean_data['Registration']['event_id'],
-					'first_name' 	=> $clean_data['Registration']['first_name'],
-					'last_name' 	=> $clean_data['Registration']['last_name'],
-					'email' 		=> $clean_data['Registration']['email']
-				)));
-				
-				if (empty($duplicate_registration)) {
-					if($this->save($clean_data)) { 
-						// registration data saved successfully
-						$status['flash'] = "Tack för din anmälan, {$clean_data['Registration']['first_name']}.";
-						$status['type'] = 2;
-					} else {
-						if (!is_numeric($clean_data['Registration']['event_id'])) { 
-							//Normally the event_id should be present but a malicious user could omit or change it so we need to verify it
-							// TODO use security component to verify instead
-							$status['flash'] = "Hur tycker du själv att det går?";
-							$status['type'] = 400; // TODO controller should send to index without passing go
-						}
-						
-						//save was unsuccessful
-						$status['flash'] = "Det blev fel.";
-						$status['type'] = 4;
-						
-					}
-				} else {
-					$status['flash'] = "Det verkar som att du redan är anmäld.";
-					$status['type'] = 4;
-				}
-			
-			} else {
-				$status['flash'] = "Hur tycker du själv att det går?";
+	    	if(empty($data)) {
+	    		$status['flash'] = "Hur tycker du själv att det går?";
 				$status['type'] = 4;
+				return $status;
+	    	}
+				
+			//Before we save the data we check to see if a similar registration has already been registered
+			if ($this->isDuplicate($cleanData)) {
+				$status['flash'] = "Det verkar som att du redan är anmäld.";
+				$status['type'] = 4;
+				return $status;
 			}
-    		
+			
+			if(!$this->save($cleanData)) { 
+				if (!is_numeric($cleanData['Registration']['event_id'])) { 
+					//Normally the event_id should be present but a malicious user could omit or change it so we need to verify it
+					// TODO use security component to verify instead
+					$status['flash'] = "Hur tycker du själv att det går?";
+					$status['type'] = 400;
+					return $status;
+				}
+				//save was unsuccessful
+				$status['flash'] = "Det blev fel.";
+				$status['type'] = 4;
+				return $status;
+			}
+			
+			// registration data saved successfully
+			$status['flash'] = "Tack för din anmälan, {$cleanData['Registration']['first_name']}.";
+			$status['type'] = 2;
+				    		
     		return $status;
+    	}
+    	
+    	private function isDuplicate($data) {
+    		$duplicateRegistration = $this->find('first', array(
+				'conditions' => array(
+					'event_id' 		=> $data['Registration']['event_id'],
+					'first_name' 	=> $data['Registration']['first_name'],
+					'last_name' 	=> $data['Registration']['last_name'],
+					'email' 		=> $data['Registration']['email']
+				)));
+			if (empty($duplicateRegistration)) return false;
+			else return true;
     	}
     	
 	}
