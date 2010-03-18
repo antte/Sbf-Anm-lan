@@ -1,10 +1,6 @@
-<<<<<<< HEAD
-﻿it<?php
-=======
-﻿<?php
+<?php
 	
 	App::import('Sanitize');
->>>>>>> ebb87f043c2c900aa27e933b417c03cde8ee0713
 
 	Class Registration extends AppModel {
 		var $belongsTo = "Event";
@@ -51,16 +47,9 @@
 				'message' 	=> 'Vi behöver din adress.'
 	 		),
 	 		'postal_code' => array (
-<<<<<<< HEAD
-		    	'rule' => 'notEmpty',
-		    	'rule' => array('between',5, 5),
-		    	'rule' => 'numeric',
-	 			'message' => 'Ange en korrekt postnummer.'
-=======
 		    	'rule' 		=> 'notEmpty',
 		    	'rule' 		=> array('between',5, 6),
 	 			'message' 	=> 'Ange ett korrekt postnummer.'
->>>>>>> ebb87f043c2c900aa27e933b417c03cde8ee0713
 	 		),
 	 		'city' => array (
 		    	'rule' 		=> array('notEmpty', array('maxLength',127)),
