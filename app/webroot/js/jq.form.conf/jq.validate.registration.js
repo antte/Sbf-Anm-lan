@@ -44,7 +44,12 @@ $(document).ready(function(){
 		messages: {
 			'data[Registration][postal_code]': {
 				required: "Du måste fylla i en korrekt postkod.",
-				regex: "Du måste fylla i en korrekt postkod.",
+				regex: "Du måste fylla i en korrekt postkod."
+			},
+			'data[Registration][retype_email]': {
+				required: "Ange samma epost igen.",
+				rangelenght: "Ange samma e-post igen.",
+				digits: "Ange samma e-post igen."
 			}
 		}
 	});

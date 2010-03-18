@@ -8,6 +8,8 @@
 
 <div id="registration" class="grid_8">
 	
+	<h2><?php echo $eventName; ?></h2>
+	
 	<?php 
 		if (!empty($errors)) {
 			echo '<ul id="validationErrors" class="message">';
