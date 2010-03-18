@@ -31,10 +31,10 @@ $(document).ready(function(){
 		    	required: true,
 		    	maxlength: 127
 	 		},
-	 		'data[Registration][postal_code]': {
+	 	'data[Registration][postal_code]': {
 		    	required: true,
-		    	rangelength: [5,5],
-		    	digits: true
+		    	regex: "^[0-9 ']{5,6}$"  
+
 	 		},
 	 		'data[Registration][city]': {
 		    	required: true,
@@ -44,11 +44,10 @@ $(document).ready(function(){
 		messages: {
 			'data[Registration][postal_code]': {
 				required: "Du måste fylla i en korrekt postkod.",
-				rangelength: "Du måste fylla i en korrekt postkod.",
-				digits: "Du måste fylla i en korrekt postkod."
+				regex: "Du måste fylla i en korrekt postkod.",
 			}
 		}
 	});
-	//validator.showErrors({'data[Registration][retype_email]': "Ange samma e-postadress igen."});
 
-})
+});
+
