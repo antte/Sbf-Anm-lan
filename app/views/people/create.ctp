@@ -59,9 +59,9 @@
 				<li>
 					<fieldset class="name grid_8 alpha" >
 						<?php 
-							echo $form->input('first_name_$i', array('type' => 'text', 'label' => 'Förnamn *', 'div' => 'first_name grid_2'));
-							echo $form->input('last_name_$i', array('type' => 'text', 'label' => 'Efternamn *', 'div' => 'last_name grid_2'));
-							echo $form->input('role_id_$i', array('options' => array($roles), 'label' => 'Anmäl dig som *', 'empty' => '(välj en)', 'div' => 'role grid_3'));
+							echo $form->input("People.$i.first_name", array('type' => 'text', 'label' => 'Förnamn *', 'div' => 'first_name grid_2'));
+							echo $form->input("People.$i.last_name", array('type' => 'text', 'label' => 'Efternamn *', 'div' => 'last_name grid_2'));
+							echo $form->input("People.$i.role_id", array('options' => array($roles), 'label' => 'Anmäl dig som *', 'empty' => '(välj en)', 'div' => 'role grid_3'));
 						?>
 					</fieldset>
 				</li>
