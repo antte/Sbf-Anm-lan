@@ -1,4 +1,4 @@
-﻿<h2>SBF events</h2>
+<h2>SBF events</h2>
 <ul>
 <?php 
 	foreach( $events as $event ){
