@@ -54,6 +54,34 @@ fieldset {
 	width: 220px;
 }
 
+.amount label {
+	clear: right;	
+}
+
+#choosepeopleamount fieldset.amount .submit {
+	float: left;
+	margin-left: 10px;
+}
+
+#choosepeopleamount .first_name input, #choosepeopleamount .last_name input {
+	width: 120px;
+}
+
+#choosepeopleamount .role select {
+	width: 190px;
+}
+
+#RegistrationPeopleAddForm ol li {
+	clear: both;
+	position: relative;
+	margin: 0;
+}
+
+div.submit {
+	float: right;
+	margin-right: 10px;
+}
+	
 #registration .submit {
 	margin-left: 10px;
 }
@@ -65,7 +93,6 @@ label.error {
 }
 
 .required {
-	position: relative;
 	width: 610px;
 	text-align: right;
 	font-weight: bold;

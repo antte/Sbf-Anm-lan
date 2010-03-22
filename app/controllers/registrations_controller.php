@@ -5,8 +5,7 @@ class RegistrationsController extends AppController {
 	var $helpers = array('Form', 'Html', 'Javascript');
 	
 	function index() {
-		//TODO detta borde ju vara i events controllern
-		$this->set('events', $this->Registration->Event->find('all'));
+		$this->redirect(array('controller' => 'events'));
 	}
 	
 	/**
@@ -64,4 +63,7 @@ class RegistrationsController extends AppController {
 		}
 	}
 	
+	function choose_people() {
+		
+	}
 }
