@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 class RegistrationsController extends AppController {
 	
