@@ -24,5 +24,4 @@ class PeopleController extends AppController {
 			
 
 	}
-
 }
