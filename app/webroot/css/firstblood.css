@@ -105,3 +105,9 @@ label.error {
 input, select {
 	margin-bottom: 10px;
 }
+
+ol li {
+	position: relative;
+	clear: left;
+	margin-left: 0;
+}
