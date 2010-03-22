@@ -4,7 +4,13 @@
 	echo $javascript->link('jquery.validate', $inline = false);
 	echo $javascript->link('jq.form.conf/messages_se', $inline = false);
 	echo $javascript->link('jq.form.conf/jq.validate.registration', $inline = false);
+	echo $javascript->link('jquery.multiFieldExtender.min', $inline = false);
+	echo $javascript->link('addPersonField', $inline = false);
 	
+	
+?>
+
+<?php 	
 	/*
 	 * setting a bunch of variables for testing
 	 * TODO remove this when deploying

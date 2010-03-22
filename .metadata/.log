@@ -1,0 +1,102 @@
+!SESSION 2010-03-21 19:52:27.054 -----------------------------------------------
+eclipse.buildId=M20090917-0800
+java.version=1.6.0_17
+java.vendor=Apple Inc.
+BootLoader constants: OS=macosx, ARCH=x86, WS=cocoa, NL=sv_SE
+Framework arguments:  -product org.eclipse.epp.package.jee.product -product org.eclipse.epp.package.jee.product -keyring /Users/timrombergjakobsson/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86 -product org.eclipse.epp.package.jee.product -data /Users/timrombergjakobsson/MyWeb/Sbf-Anm-lan -product org.eclipse.epp.package.jee.product -keyring /Users/timrombergjakobsson/.eclipse_keyring -showlocation
+
+!ENTRY org.eclipse.jface 2 0 2010-03-21 19:52:42.466
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2010-03-21 19:52:42.466
+!MESSAGE A conflict occurred for ALT+COMMAND+Q P:
+Binding(ALT+COMMAND+Q P,
+	ParameterizedCommand(Command(org.eclipse.ui.views.showView,Show View,
+		Shows a particular view,
+		Category(org.eclipse.ui.category.views,Views,Commands for opening views,true),
+		org.eclipse.ui.handlers.ShowViewHandler@cbe322,
+		[Lorg.eclipse.ui.internal.commands.Parameter;@1ad080f,,true),[Lorg.eclipse.core.commands.Parameterization;@ec2522),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,cocoa,system)
+Binding(ALT+COMMAND+Q P,
+	ParameterizedCommand(Command(org.eclipse.ui.views.showView,Show View,
+		Shows a particular view,
+		Category(org.eclipse.ui.category.views,Views,Commands for opening views,true),
+		org.eclipse.ui.handlers.ShowViewHandler@cbe322,
+		[Lorg.eclipse.ui.internal.commands.Parameter;@1ad080f,,true),[Lorg.eclipse.core.commands.Parameterization;@17a04af),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,cocoa,system)
+
+!ENTRY org.eclipse.core.net 1 0 2010-03-21 19:52:42.596
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY com.vectrace.MercurialEclipse 4 0 2010-03-21 19:52:43.363
+!MESSAGE Cannot run program "hg": error=2, No such file or directory, error code: -100
+!STACK 1
+Cannot run program "hg": error=2, No such file or directory, error code: -100
+	at com.vectrace.MercurialEclipse.commands.AbstractShellCommand.executeToStream(AbstractShellCommand.java:221)
+	at com.vectrace.MercurialEclipse.commands.AbstractShellCommand.executeToBytes(AbstractShellCommand.java:139)
+	at com.vectrace.MercurialEclipse.commands.AbstractShellCommand.executeToBytes(AbstractShellCommand.java:126)
+	at com.vectrace.MercurialEclipse.commands.HgDebugInstallClient.debugInstall(HgDebugInstallClient.java:24)
+	at com.vectrace.MercurialEclipse.MercurialEclipsePlugin.checkHgInstallation(MercurialEclipsePlugin.java:117)
+	at com.vectrace.MercurialEclipse.MercurialEclipsePlugin$1.run(MercurialEclipsePlugin.java:86)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: java.io.IOException: Cannot run program "hg": error=2, No such file or directory
+	at java.lang.ProcessBuilder.start(ProcessBuilder.java:459)
+	at com.vectrace.MercurialEclipse.commands.AbstractShellCommand.executeToStream(AbstractShellCommand.java:191)
+	... 6 more
+Caused by: java.io.IOException: error=2, No such file or directory
+	at java.lang.UNIXProcess.forkAndExec(Native Method)
+	at java.lang.UNIXProcess.<init>(UNIXProcess.java:53)
+	at java.lang.ProcessImpl.start(ProcessImpl.java:91)
+	at java.lang.ProcessBuilder.start(ProcessBuilder.java:452)
+	... 7 more
+!SUBENTRY 1 com.vectrace.MercurialEclipse 4 -100 2010-03-21 19:52:43.364
+!MESSAGE Cannot run program "hg": error=2, No such file or directory
+!STACK 0
+java.io.IOException: Cannot run program "hg": error=2, No such file or directory
+	at java.lang.ProcessBuilder.start(ProcessBuilder.java:459)
+	at com.vectrace.MercurialEclipse.commands.AbstractShellCommand.executeToStream(AbstractShellCommand.java:191)
+	at com.vectrace.MercurialEclipse.commands.AbstractShellCommand.executeToBytes(AbstractShellCommand.java:139)
+	at com.vectrace.MercurialEclipse.commands.AbstractShellCommand.executeToBytes(AbstractShellCommand.java:126)
+	at com.vectrace.MercurialEclipse.commands.HgDebugInstallClient.debugInstall(HgDebugInstallClient.java:24)
+	at com.vectrace.MercurialEclipse.MercurialEclipsePlugin.checkHgInstallation(MercurialEclipsePlugin.java:117)
+	at com.vectrace.MercurialEclipse.MercurialEclipsePlugin$1.run(MercurialEclipsePlugin.java:86)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: java.io.IOException: error=2, No such file or directory
+	at java.lang.UNIXProcess.forkAndExec(Native Method)
+	at java.lang.UNIXProcess.<init>(UNIXProcess.java:53)
+	at java.lang.ProcessImpl.start(ProcessImpl.java:91)
+	at java.lang.ProcessBuilder.start(ProcessBuilder.java:452)
+	... 7 more
+!SESSION 2010-03-21 20:05:28.854 -----------------------------------------------
+eclipse.buildId=M20090917-0800
+java.version=1.6.0_17
+java.vendor=Apple Inc.
+BootLoader constants: OS=macosx, ARCH=x86, WS=cocoa, NL=sv_SE
+Framework arguments:  -product org.eclipse.epp.package.jee.product -product org.eclipse.epp.package.jee.product -product org.eclipse.epp.package.jee.product -product org.eclipse.epp.package.jee.product -keyring /Users/timrombergjakobsson/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86 -product org.eclipse.epp.package.jee.product -product org.eclipse.epp.package.jee.product -product org.eclipse.epp.package.jee.product -data /Users/timrombergjakobsson/MyWeb/Sbf-Anm-lan -product org.eclipse.epp.package.jee.product -keyring /Users/timrombergjakobsson/.eclipse_keyring -showlocation
+
+!ENTRY org.eclipse.core.net 1 0 2010-03-21 20:05:37.615
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.jface 2 0 2010-03-21 20:06:00.377
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2010-03-21 20:06:00.377
+!MESSAGE A conflict occurred for ALT+COMMAND+Q P:
+Binding(ALT+COMMAND+Q P,
+	ParameterizedCommand(Command(org.eclipse.ui.views.showView,Show View,
+		Shows a particular view,
+		Category(org.eclipse.ui.category.views,Views,Commands for opening views,true),
+		org.eclipse.ui.handlers.ShowViewHandler@82384a,
+		[Lorg.eclipse.ui.internal.commands.Parameter;@13dbe08,,true),[Lorg.eclipse.core.commands.Parameterization;@87080f),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,cocoa,system)
+Binding(ALT+COMMAND+Q P,
+	ParameterizedCommand(Command(org.eclipse.ui.views.showView,Show View,
+		Shows a particular view,
+		Category(org.eclipse.ui.category.views,Views,Commands for opening views,true),
+		org.eclipse.ui.handlers.ShowViewHandler@82384a,
+		[Lorg.eclipse.ui.internal.commands.Parameter;@13dbe08,,true),[Lorg.eclipse.core.commands.Parameterization;@1224873),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,cocoa,system)
