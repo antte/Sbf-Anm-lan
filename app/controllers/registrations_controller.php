@@ -7,7 +7,6 @@ class RegistrationsController extends AppController {
 	function index() {
 		$this->redirect(array('controller' => 'events'));
 	}
-	
 	/**
 	 * Creates a registration to an event
 	 * @param $event_id Id of an event for which the registration is created.
@@ -63,7 +62,4 @@ class RegistrationsController extends AppController {
 		}
 	}
 	
-	function choose_people() {
-		
-	}
 }
