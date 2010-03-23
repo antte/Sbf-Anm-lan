@@ -9,7 +9,7 @@ $(document).ready(function(){
 		i++;
 		$('#choosepeopleamount li:last-child').after(fieldValue(i));
 		$('#choosepeopleamount li:last-child').hide().fadeIn('slow');
-		console.log(i);
+		//console.log(i);
 		
 		
 		$('#choosepeopleamount li:last-child .removeField').click(function(){

@@ -53,6 +53,29 @@ $(document).ready(function(){
 			}
 		}
 	});
-
+	
+	
+	$('#PeopleAddForm').validate({ 
+		rules: {
+			'data[People][0][first_name]': {
+				required: true,
+				maxlength: 127
+			},
+			'data[People][0][last_name]': {
+				required: true,
+				maxlength: 127
+			},
+			'data[People][0][role_id]': {
+				required: true
+			}
+		},
+	
+		messages: {
+			'data[People][first_name]': {
+				required: "Du måste fylla i en korrekt postkod."
+			}
+		}
+	});
+	
+	
 });
-
