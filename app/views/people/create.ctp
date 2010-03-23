@@ -3,8 +3,9 @@
 	echo $javascript->link('jquery.1.4.2-min', $inline = false);
 	echo $javascript->link('jquery.validate', $inline = false);
 	echo $javascript->link('jq.form.conf/messages_se', $inline = false);
-	echo $javascript->link('jq.form.conf/jq.validate.registration', $inline = false);
+	echo $javascript->link('jq.form.conf/jq.validate.persons', $inline = false);
 	echo $javascript->link('addPersonField', $inline = false);
+	
 	
 	/*
 	 * setting a bunch of variables for testing
@@ -60,7 +61,7 @@
 	<?php echo $form->create('Person'); ?>
 		
 		<!--  Form helper - create input with label  -->
-		<p class="required">Fält markerade med * är obligatoriska uppgifter!</p>
+		<p class="requiredinfo">Fält markerade med * är obligatoriska uppgifter!</p>
 		
 		
 		
@@ -69,9 +70,9 @@
 				<li>
 					<fieldset class="name grid_8 alpha" >
 						<?php 
-							echo $form->input("Person.$i.first_name", array('type' => 'text', 'label' => 'Förnamn *', 'div' => 'first_name grid_2'));
-							echo $form->input("Person.$i.last_name", array('type' => 'text', 'label' => 'Efternamn *', 'div' => 'last_name grid_2'));
-							echo $form->input("Person.$i.role_id", array('options' => array($roles), 'label' => 'Anmäl dig som *', 'empty' => '(välj en)', 'div' => 'role grid_3'));
+							echo $form->input("Person.$i.first_name", array('type' => 'text', 'label' => 'Förnamn *', 'div' => 'first_name grid_2', 'class' => 'required'));
+							echo $form->input("Person.$i.last_name", array('type' => 'text', 'label' => 'Efternamn *', 'div' => 'last_name grid_2', 'class' => 'required'));
+							echo $form->input("Person.$i.role_id", array('options' => array($roles), 'label' => 'Anmäl dig som *', 'empty' => '(välj en)', 'div' => 'role grid_3', 'class' => 'required'));
 						?>
 					</fieldset>
 				</li>

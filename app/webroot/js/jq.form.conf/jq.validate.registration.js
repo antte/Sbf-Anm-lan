@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	
 	$('#RegistrationAddForm').validate({ 
 		rules: {
 			'data[Registration][first_name]': {
@@ -53,6 +54,7 @@ $(document).ready(function(){
 			}
 		}
 	});
-
+	
+	
+	
 });
-

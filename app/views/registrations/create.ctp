@@ -30,7 +30,7 @@
 				echo $form->hidden('event_id', array('default' => $event_id));
 			?>
 		<fieldset class="name grid_8 alpha" >
-			<p class="required">Fält markerade med * är obligatoriska uppgifter!</p>
+			<p class="requiredinfo">Fält markerade med * är obligatoriska uppgifter!</p>
 			<?php
 				echo $form->input('first_name', array('type' => 'text', 'label' => 'Förnamn *', 'div' => 'first_name grid_3'));
 				echo $form->input('last_name', array('type' => 'text', 'label' => 'Efternamn *', 'div' => 'last_name grid_3'));
