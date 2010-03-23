@@ -70,46 +70,12 @@
     	 * status['type'] = 400 	for a bad request (data is weird)
     	 * status['event_id']		contains the event_id from the data
     	 */
-    	function saveAndReturnStatus($data) {
+    	function saveAndReturnStatus($registration) {
     		$status = array();
     		
-    		$cleanData = Sanitize::clean($data);
-    		$status['event_id'] = $cleanData['Registration']['event_id'];
-    		
-    		$status['flash'] = "Det blev fel..."; //Default feedback message
-    		
-	    	if(empty($data)) {
-	    		$status['flash'] = "Hur tycker du själv att det går?";
-				$status['type'] = 4;
-				return $status;
-	    	}
-				
-			//Before we save the data we check to see if a similar registration has already been registered
-			if ($this->isDuplicate($cleanData)) {
-				$status['flash'] = "Det verkar som att du redan är anmäld.";
-				$status['type'] = 4;
-				return $status;
-			}
-			
-			if(!$this->save($cleanData)) { 
-				if (!is_numeric($cleanData['Registration']['event_id'])) { 
-					//Normally the event_id should be present but a malicious user could omit or change it so we need to verify it
-					// TODO use security component to verify instead
-					$status['flash'] = "Hur tycker du själv att det går?";
-					$status['type'] = 400;
-					return $status;
-				}
-				//save was unsuccessful
-				$status['flash'] = "Det blev fel.";
-				$status['type'] = 4;
-				return $status;
-			}
-			
-			// registration data saved successfully
-			$status['flash'] = "Tack för din anmälan, {$cleanData['Registration']['first_name']}.";
-			$status['type'] = 2;
+    		//debug($registration);
 				    		
-    		return $status;
+    		return $status = 1 ;
     	}
     	
     	private function isDuplicate($data) {
