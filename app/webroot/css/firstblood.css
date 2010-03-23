@@ -14,6 +14,10 @@ input, textarea, select {
 	font-family: arial, tahoma, verdana, sans-serif;
 }
 
+.submit input {
+	cursor: pointer;
+}
+
 select {
 	font-size: 150%;
 }
@@ -112,24 +116,39 @@ ol li {
 	margin-left: 0;
 }
 
+* html ol li {
+	float: left;
+}
+
 p#addField {
-	margin-left: 10px;
 	cursor: pointer;
 	font-weight: bold;
 }
 p#addField span {
-	font-size: 200%;
+	font-size: 250%;
 	color: green;
 	border: 0;
 }
+p#addField:hover { 
+	color: green; 
+}
 
 p.removeField {
-	margin-left: 10px;
 	cursor: pointer;
 	font-weight: bold;
 }
 p.removeField span {
-	font-size: 200%;
+	font-size: 150%;
 	color: red;
 	border: 0;
+}
+
+p.removeField:hover {
+	color: red;
+}
+
+.removeFieldDiv {
+	float: left;
+	width: 55px;
+	margin: 0;
 }

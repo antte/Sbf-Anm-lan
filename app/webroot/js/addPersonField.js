@@ -1,7 +1,7 @@
 
 $(document).ready(function(){
 	$('#addamount').remove();
-	$('#choosepeopleamount ol').after("<p id='addField'><span>+ </span>Lägg till fler personer</p>");
+	$('#choosepeopleamount ol').after("<div class='grid_3'><p id='addField'><span>+ </span>Lägg till fler personer</p></div>");
 	
 	var i = 0;
 	
@@ -10,9 +10,6 @@ $(document).ready(function(){
 		i++;
 		$('#choosepeopleamount li:last-child').after(fieldValue(i));
 		$('#choosepeopleamount li:last-child').hide().fadeIn('slow');
-		//console.log(i);
-		
-		//updateAmountOfPeopleValidation();
 		
 		$('#choosepeopleamount li:last-child .removeField').click(function(){
 			$(this).parents('li').fadeOut('500', function(){
@@ -32,7 +29,6 @@ $(document).ready(function(){
 function fieldValue(i) {
 	
 	var roles = $('select#Person0RoleId').html();
-	console.log(roles);
 	
 	var string = "<li><fieldset class='name grid_8 alpha'>";
 			string += "<div class='first_name grid_2'>";
@@ -48,7 +44,7 @@ function fieldValue(i) {
 					string += roles;
 				string += "</select>";
 			string += "</div>";
-			string += "<p class='removeField'><span>X </span><br/>Ta bort person</p>";
+			string += "<div class='removeFieldDiv'><p class='removeField'><span>X </span><br/>Ta bort person</p></div>";
 		string += "</fieldset>";
 	string += "</li>";
 
