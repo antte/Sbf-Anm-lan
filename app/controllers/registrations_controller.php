@@ -12,7 +12,6 @@ class RegistrationsController extends AppController {
 	 * @param $event_id Id of an event for which the registration is created.
 	 */
 	function create($eventId = null) {
-		
 		//can't create registration without event
 		if (!$eventId) $this->redirect(array('action' => 'index'));
 		
@@ -37,12 +36,13 @@ class RegistrationsController extends AppController {
 	 * Just to save the data from create action
 	 */
 	function add() {
-
+		//TODO Refactora så att man sparar det i session. Gör om strukturen
 		$saveStatus = $this->Registration->saveAndReturnStatus($this->data);
 		
 		$this->Session->setFlash($saveStatus['flash']);
 		$this->Session->write('errors', $this->Registration->validationErrors);
-		
+		$this->Session->write('Registration.Kontakt', $this->data['Registration']);
+
 		switch ($saveStatus['type']) {
 			case 2:
 				//success

@@ -8,16 +8,16 @@
 		
 		var $validate = array(
         	'first_name' => array (
-				'rule' 		=> array('notEmpty', 'maxLength',127),
+				'rule' 		=> array('notEmpty', 'maxLength' => 127),
 				'message' 	=> 'Förnamn måste finnas och vara högst 127 tecken.'
         	),
         	'last_name' => array (
-				'rule' 		=> array('notEmpty', 'maxLength',127),
+				'rule' 		=> array('notEmpty', 'maxLength' => 127),
 				'message' 	=> 'Efternamn måste finnas och vara högst 127 tecken.'
         	),
         	'email' => array (
         		'rule' 		=> 'email',
-				'rule' 		=> array('maxLength',127),
+				'rule' 		=> array('maxLength' => 127),
         		'rule' 		=> 'notEmpty',
 				'message' 	=> 'Ange en korrekt e-postadress.'
         	),
@@ -30,20 +30,20 @@
 	 		'retype_email' => array (
 		    	/* TODO equalTo: "#RegistrationEmail", */
 		    	'rule' 		=> 'email',
-				'rule' 		=> array('maxLength',127),
+				'rule' 		=> array('maxLength' => 127),
         		'rule' 		=> 'notEmpty',
 				'message' 	=> 'Ange samma e-postadress.'
 	 		),
 	 		'phone' => array (
-				'rule' 		=> array('maxLength',127),
+				'rule' 		=> array('maxLength' => 127),
 	 			'message' 	=> 'Ange ett korrekt telefonnummer.'
 			),
 			'c_o' => array (
-	      		'rule' 		=> array('maxLength',127),
+	      		'rule' 		=> array('maxLength' => 127),
 				'message' 	=> 'Får inte vara högre än 127 tecken.'
 			),
 			'street_address' => array (
-		    	'rule' 		=> array('notEmpty', 'maxLength', 127),
+		    	'rule' 		=> array('notEmpty', 'maxLength' => 127),
 				'message' 	=> 'Vi behöver din adress.'
 	 		),
 	 		'postal_code' => array (
@@ -52,7 +52,7 @@
 	 			'message' 	=> 'Ange ett korrekt postnummer.'
 	 		),
 	 		'city' => array (
-		    	'rule' 		=> array('notEmpty', array('maxLength',127)),
+		    	'rule' 		=> array('notEmpty', 'maxLength' => 127),
 	 			'message' 	=> 'Vi behöver veta din postort.'
 	 		)
     	);

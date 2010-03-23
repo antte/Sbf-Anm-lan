@@ -17,6 +17,18 @@
 	
 ?>
 
+<?php 
+	if (!empty($errors)) {
+		echo '<ul id="validationErrors" class="message">';
+			foreach ($errors as $error):?>
+				<li>
+					<?php echo $error; ?>
+				</li>
+			<?php endforeach;
+		echo '</ul>';
+	}
+?>
+
 <div id="choosepeopleamount" class="grid_8">
 	
 	<h2><?php echo $event['name']; ?></h2>
@@ -37,19 +49,16 @@
 	
 	<fieldset class="amount grid_8 alpha">
 		<?php 
-			echo $form->create('People');
+			echo $form->create('Person');
 			$end = $form->end("Ändra antal personer", array('action' => 'create', 'div' => 'amount_submit'));
 			echo $form->input('amount', array('type' => 'text', 'label' => 'Hur många är i ditt sällskap?', 'value' => $amountOfPeople, 'div' => 'amount grid_7', 'after' => $end));
 		?>
 	</fieldset>
 	
 	<!--  Form helper - sets action post - parse form to the registration model class-->
-	<?php echo $form->create('People'); ?>
+	<?php echo $form->create('Person'); ?>
 		
 		<!--  Form helper - create input with label  -->
-			<?php 
-				echo $form->hidden('event_id', array('default' => $event['id']));
-			?>
 		<p class="required">Fält markerade med * är obligatoriska uppgifter!</p>
 		
 		
@@ -59,9 +68,9 @@
 				<li>
 					<fieldset class="name grid_8 alpha" >
 						<?php 
-							echo $form->input("People.$i.first_name", array('type' => 'text', 'label' => 'Förnamn *', 'div' => 'first_name grid_2'));
-							echo $form->input("People.$i.last_name", array('type' => 'text', 'label' => 'Efternamn *', 'div' => 'last_name grid_2'));
-							echo $form->input("People.$i.role_id", array('options' => array($roles), 'label' => 'Anmäl dig som *', 'empty' => '(välj en)', 'div' => 'role grid_3'));
+							echo $form->input("Person.$i.first_name", array('type' => 'text', 'label' => 'Förnamn *', 'div' => 'first_name grid_2'));
+							echo $form->input("Person.$i.last_name", array('type' => 'text', 'label' => 'Efternamn *', 'div' => 'last_name grid_2'));
+							echo $form->input("Person.$i.role_id", array('options' => array($roles), 'label' => 'Anmäl dig som *', 'empty' => '(välj en)', 'div' => 'role grid_3'));
 						?>
 					</fieldset>
 				</li>

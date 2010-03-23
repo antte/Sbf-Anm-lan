@@ -1,4 +1,4 @@
 <?php
 	class AppController extends Controller {
-		var $components = array("Fallback");
+		//var $components = array('Security'); TODO kolla hur funkar
 	}
