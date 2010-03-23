@@ -4,3 +4,5 @@ vendors
 /.buildpath
 /.project
 /.settings
+/.metadata
+/.DS_Store
