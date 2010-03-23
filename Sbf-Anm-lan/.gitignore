@@ -1,6 +1,0 @@
-app/tmp
-app/config/database.php
-vendors
-/.buildpath
-/.project
-/.settings

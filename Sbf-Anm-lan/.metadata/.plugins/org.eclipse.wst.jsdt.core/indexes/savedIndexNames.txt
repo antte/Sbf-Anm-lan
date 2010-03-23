@@ -1,3 +1,0 @@
-INDEX VERSION 1.121+/Users/timrombergjakobsson/MyWeb/Sbf-Anm-lan/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes
-476942882.index
-3923631257.index
