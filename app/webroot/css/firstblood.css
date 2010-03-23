@@ -111,3 +111,25 @@ ol li {
 	clear: left;
 	margin-left: 0;
 }
+
+p#addField {
+	margin-left: 10px;
+	cursor: pointer;
+	font-weight: bold;
+}
+p#addField span {
+	font-size: 200%;
+	color: green;
+	border: 0;
+}
+
+p.removeField {
+	margin-left: 10px;
+	cursor: pointer;
+	font-weight: bold;
+}
+p.removeField span {
+	font-size: 200%;
+	color: red;
+	border: 0;
+}
