@@ -1,13 +1,4 @@
-<<<<<<< HEAD
-//$(document).ready(function() {
-	//$('#RegistrationPeopleAddForm #li')
-	
-//});
 
-$(document).ready(function () {
-$('#RegistrationPeopleAddForm li').EnableMultiField();
-});
-=======
 $(document).ready(function(){
 	$('#addamount').remove();
 	$('#choosepeopleamount ol').after("<p id='addField'><span>+ </span>Lägg till fler personer</p>");
@@ -87,4 +78,3 @@ function updateFieldIds() {
 	clearTimeout(updateTimer);
 }
 */
->>>>>>> 89fc5a4f930e60699351d0fb041c25b7fe405172
