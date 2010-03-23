@@ -13,9 +13,12 @@
 					$data[$modelName] = $dataSet;
 					$this->set($data);
 					$this->validates();
-					$status[] = $this->validationErrors; 
+					if(!empty($this->validationErrors)){
+						$status[] = $this->validationErrors; 
+					}
 				}
 			}
 			return $status;
 		}
+		
 	}

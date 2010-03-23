@@ -11,7 +11,9 @@ class RegistrationsController extends AppController {
 	 * Creates a registration to an event
 	 * @param $event_id Id of an event for which the registration is created.
 	 */
-	function create($eventId = null) {
+	function create() {
+		$eventId = $this->Session->read('eventId');
+		
 		//can't create registration without event
 		if (!$eventId) $this->redirect(array('action' => 'index'));
 		
@@ -36,30 +38,29 @@ class RegistrationsController extends AppController {
 	 * Just to save the data from create action
 	 */
 	function add() {
-		//TODO Refactora så att man sparar det i session. Gör om strukturen
-		$saveStatus = $this->Registration->saveAndReturnStatus($this->data);
+		debug($this->data);		
 		
-		$this->Session->setFlash($saveStatus['flash']);
-		$this->Session->write('errors', $this->Registration->validationErrors);
-		$this->Session->write('Registration.Kontakt', $this->data['Registration']);
-
-		switch ($saveStatus['type']) {
-			case 2:
-				//success
-				$this->redirect(array('action' => 'create', $saveStatus['event_id']));
-				break;
-			case 4:
-				//failure
-				$this->redirect(array('action' => 'create', $saveStatus['event_id']));
-				break;
-			case 400:
-				//bad request
-				$this->redirect(array('action' => 'index'));
-				break;
-			default:
-				$this->redirect(array('action' => 'index'));
-				break;
+		$this->Registration->save($this->data);
+		debug($this->validationErrors);
+		//$this->Registration->set($this->data);
+		//$this->Registration->validates();
+		/*
+		if(empty($this->validationErrors)) {
+			//if we dont have errors all was successful and we continue with the registration
+			$this->pushToSessionArray('Registration', $this->data);
+			$this->redirect(array('action'=>'finalize'));			
+		} else {
+			$this->Session->write('errors', $this->validationErrors);
+			$this->redirect(array('action' => 'create'));
 		}
+		*/
+	}
+	
+	/**
+	 * Finalizes the registration (saving it)
+	 */
+	function finalize() {
+		$saveStatus = $this->Registration->saveAndReturnStatus($this->Session->read('Registration'));
 	}
 	
 }

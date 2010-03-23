@@ -58,22 +58,15 @@
     	);
     	
     	// TODO check to make sure that event_id is correct (is an event etc)
-		
+	
     	/**
-    	 * Returns a message so that the controller can flash it.
-    	 * Returns how the save went
-    	 * @param $data $this->data from the controller
-    	 * @return 
-    	 * status['flash'] 			contains a user feedback message
-    	 * status['type'] = 2 		for success
-    	 * status['type'] = 4 		for failure
-    	 * status['type'] = 400 	for a bad request (data is weird)
-    	 * status['event_id']		contains the event_id from the data
+    	 * saves all data relating to a registration and returns a status message
+    	 * @param $registration
     	 */
     	function saveAndReturnStatus($registration) {
     		$status = array();
     		
-    		//debug($registration);
+    		debug($registration);
 				    		
     		return $status = 1 ;
     	}

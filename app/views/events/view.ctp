@@ -2,7 +2,7 @@
 <?php 
 	echo "<p>";
 	if ($event['Event']['is_active']) {
-		echo $html->link("Anmäl dig till {$event['Event']['name']}" , array('controller' => 'registrations', 'action' => 'create', $event['Event']['id']));
+		echo $html->link("Anmäl dig till {$event['Event']['name']}" , array('action' => 'next', $event['Event']['id']));
 	} else {
 		echo "Du kan inte anmäla dig till {$event['Event']['name']}.";
 	}
