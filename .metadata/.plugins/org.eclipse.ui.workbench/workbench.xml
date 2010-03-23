@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <workbench progressCount="0" version="2.0">
 <workbenchAdvisor/>
-<window height="768" width="1024" x="134" y="22">
+<window height="778" width="1144" x="-16" y="22">
 <fastViewData fastViewLocation="1024"/>
 <perspectiveBar>
 <itemSize x="160"/>
@@ -14,7 +14,7 @@
 <coolItem id="org.eclipse.jst.j2ee.J2eeMainActionSet" itemType="typeToolBarContribution" x="70" y="22"/>
 <coolItem id="org.eclipse.net4j.examples.actionSet" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="org.eclipse.search.searchActionSet" itemType="typeToolBarContribution" x="84" y="22"/>
-<coolItem id="org.eclipse.ui.edit.text.actionSet.presentation" itemType="typeToolBarContribution" x="32" y="22"/>
+<coolItem id="org.eclipse.ui.edit.text.actionSet.presentation" itemType="typeToolBarContribution" x="76" y="22"/>
 <coolItem id="org.eclipse.wst.server.ui.internal.webbrowser.actionSet" itemType="typeToolBarContribution" x="32" y="22"/>
 <coolItem id="org.eclipse.wst.ws.explorer.explorer" itemType="typeToolBarContribution" x="32" y="22"/>
 <coolItem id="org.eclipse.wst.xml.ui.perspective.NewFileToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
@@ -22,6 +22,8 @@
 <coolItem id="group.nav" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="152" y="22"/>
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
+<coolItem id="org.eclipse.ui.DefaultTextEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="org.eclipse.wst.jsdt.ui.CompilationUnitEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="org.eclipse.wst.jsdt.ui.ClassFileEditor" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.php.editor" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="group.help" itemType="typeGroupMarker"/>
@@ -35,13 +37,35 @@
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
 <part id="1"/>
+<part id="2"/>
+<part id="3"/>
+<part id="4"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
+<editor id="org.eclipse.php.editor" name="app_controller.php" partName="app_controller.php" path="/Users/timrombergjakobsson/MyWeb/Sbf-Anm-lan/Sbf-Anm-lan/app/app_controller.php" title="app_controller.php" tooltip="Sbf-Anm-lan/app/app_controller.php" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Sbf-Anm-lan/app/app_controller.php"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.wst.jsdt.ui.CompilationUnitEditor" name="addPersonField.js" partName="addPersonField.js" path="/Users/timrombergjakobsson/MyWeb/Sbf-Anm-lan/Sbf-Anm-lan/app/webroot/js/addPersonField.js" title="addPersonField.js" tooltip="Sbf-Anm-lan/app/webroot/js/addPersonField.js" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Sbf-Anm-lan/app/webroot/js/addPersonField.js"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="30" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.php.editor" name="people_controller.php" partName="people_controller.php" path="/Users/timrombergjakobsson/MyWeb/Sbf-Anm-lan/Sbf-Anm-lan/app/controllers/people_controller.php" title="people_controller.php" tooltip="Sbf-Anm-lan/app/controllers/people_controller.php" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Sbf-Anm-lan/app/controllers/people_controller.php"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.php.editor" name="events_controller.php" partName="events_controller.php" path="/Users/timrombergjakobsson/MyWeb/Sbf-Anm-lan/Sbf-Anm-lan/app/controllers/events_controller.php" title="events_controller.php" tooltip="Sbf-Anm-lan/app/controllers/events_controller.php" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Sbf-Anm-lan/app/controllers/events_controller.php"/>
+<editorState selectionHorizontalPixel="15" selectionLength="0" selectionOffset="476" selectionTopPixel="0"/>
+</editor>
+<editor activePart="true" focus="true" id="org.eclipse.ui.DefaultTextEditor" name="choose_people.ctp" partName="choose_people.ctp" path="/Users/timrombergjakobsson/MyWeb/Sbf-Anm-lan/Sbf-Anm-lan/app/views/registrations/choose_people.ctp" title="choose_people.ctp" tooltip="Sbf-Anm-lan/app/views/registrations/choose_people.ctp" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Sbf-Anm-lan/app/views/registrations/choose_people.ctp"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="476" selectionTopPixel="0"/>
+</editor>
 </editors>
 <views>
-<view id="org.eclipse.dltk.ui.TypeHierarchy" partName="Type Hierarchy"/>
 <view id="org.eclipse.ui.views.TaskList" partName="Tasks"/>
 <view id="org.eclipse.ui.views.ContentOutline" partName="Outline">
 <viewState/>
@@ -63,7 +87,7 @@
 <view id="org.eclipse.ui.views.PropertySheet" partName="Properties"/>
 <view id="org.eclipse.datatools.connectivity.DataSourceExplorerNavigator" partName="Data Source Explorer"/>
 <view id="org.eclipse.php.ui.explorer" partName="PHP Explorer">
-<viewState group_libraries="1" isWindowWorkingSet="false" layout="2" linkWithEditor="0" rootMode="1" workingSetName="">
+<viewState group_libraries="1" isWindowWorkingSet="false" layout="2" linkWithEditor="1" rootMode="1" workingSetName="">
 <customFilters userDefinedPatternsEnabled="false">
 <xmlDefinedFilters>
 <child filterId="org.eclipse.php.ui.explorer.EmptyInnerPackageFilter" isEnabled="false"/>
@@ -87,6 +111,9 @@
 </view>
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
+<expanded>
+<category IMemento.internal.id="Warnings (27 items)"/>
+</expanded>
 <columnWidths org.eclipse.ui.ide.locationField="84" org.eclipse.ui.ide.markerType="114" org.eclipse.ui.ide.pathField="144" org.eclipse.ui.ide.resourceField="114" org.eclipse.ui.ide.severityAndDescriptionField="300"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.resourceField"/>
@@ -99,7 +126,7 @@
 <view id="org.eclipse.mylyn.tasks.ui.views.tasks" partName="Task List"/>
 <view id="org.eclipse.wst.server.ui.ServersView" partName="Servers"/>
 </views>
-<perspectives activePart="org.eclipse.php.editor" activePerspective="org.eclipse.php.perspective">
+<perspectives activePart="org.eclipse.ui.DefaultTextEditor" activePerspective="org.eclipse.php.perspective">
 <perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
 <descriptor class="org.eclipse.jst.j2ee.internal.perspective.J2EEPerspective" id="org.eclipse.jst.j2ee.J2EEPerspective" label="Java EE"/>
 <alwaysOnActionSet id="org.eclipse.jst.servlet.ui.internal.actions.ConvertToWebModuleTypeActionSet"/>
@@ -254,7 +281,6 @@
 <perspective_action id="org.eclipse.php.debug.ui.PHPDebugPerspective"/>
 <hide_toolbar_item_id id="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly"/>
 <view id="org.eclipse.php.ui.explorer"/>
-<view id="org.eclipse.dltk.ui.TypeHierarchy"/>
 <view id="org.eclipse.ui.views.ProblemView"/>
 <view id="org.eclipse.ui.views.TaskList"/>
 <view id="org.eclipse.ui.console.ConsoleView"/>
@@ -266,10 +292,9 @@
 <info folder="true" part="topLeft">
 <folder activePageID="org.eclipse.php.ui.explorer" appearance="2" expanded="2">
 <page content="org.eclipse.php.ui.explorer" label="PHP Explorer"/>
-<page content="org.eclipse.dltk.ui.TypeHierarchy" label="Type Hierarchy"/>
+<page content="org.eclipse.dltk.ui.TypeHierarchy" label="LabelNotFound"/>
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
-<part id="1"/>
 </presentation>
 </folder>
 </info>
@@ -311,12 +336,63 @@
 </perspective>
 </perspectives>
 <workingSets/>
-<navigationHistory/>
+<navigationHistory>
+<editors>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.php.editor" path="/Sbf-Anm-lan/app/app_controller.php"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.jsdt.ui.CompilationUnitEditor" path="/Sbf-Anm-lan/app/webroot/js/addPersonField.js"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.php.editor" path="/Sbf-Anm-lan/app/controllers/people_controller.php"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.php.editor" path="/Sbf-Anm-lan/app/controllers/events_controller.php"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/Sbf-Anm-lan/app/views/registrations/choose_people.ctp"/>
+</editors>
+<item historyLabel="app_controller.php" index="0">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="addPersonField.js" index="1">
+<position info="not_deleted" x="73" y="0"/>
+</item>
+<item historyLabel="people_controller.php" index="2">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="events_controller.php" index="3">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="addPersonField.js" index="1">
+<position info="not_deleted" x="30" y="0"/>
+</item>
+<item historyLabel="people_controller.php" index="2">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="choose_people.ctp" index="4">
+<position info="not_deleted" x="425" y="0"/>
+</item>
+<item historyLabel="people_controller.php" index="2">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="choose_people.ctp" index="4">
+<position info="not_deleted" x="571" y="0"/>
+</item>
+<item historyLabel="events_controller.php" index="3">
+<position/>
+</item>
+<item historyLabel="people_controller.php" index="2">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="addPersonField.js" index="1">
+<position info="not_deleted" x="30" y="0"/>
+</item>
+<item active="true" historyLabel="choose_people.ctp" index="4">
+<position info="not_deleted" x="571" y="0"/>
+</item>
+</navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
 </page>
 <workbenchWindowAdvisor/>
 <actionBarAdvisor/>
 <trimLayout>
+<trimArea IMemento.internal.id="131072">
+<trimItem IMemento.internal.id="org.eclipse.ui.editorss"/>
+<trimItem IMemento.internal.id="right"/>
+</trimArea>
 <trimArea IMemento.internal.id="128">
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.WorkbenchWindow.topBar"/>
 </trimArea>
@@ -324,10 +400,26 @@
 <trimItem IMemento.internal.id="org.eclise.ui.internal.FastViewBar"/>
 <trimItem IMemento.internal.id="org.eclipse.jface.action.StatusLineManager"/>
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.progress.ProgressRegion"/>
+<trimItem IMemento.internal.id="bottom"/>
 </trimArea>
 </trimLayout>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="choose_people.ctp" tooltip="Sbf-Anm-lan/app/views/registrations/choose_people.ctp">
+<persistable path="/Sbf-Anm-lan/app/views/registrations/choose_people.ctp"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.php.editor" name="events_controller.php" tooltip="Sbf-Anm-lan/app/controllers/events_controller.php">
+<persistable path="/Sbf-Anm-lan/app/controllers/events_controller.php"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.php.editor" name="people_controller.php" tooltip="Sbf-Anm-lan/app/controllers/people_controller.php">
+<persistable path="/Sbf-Anm-lan/app/controllers/people_controller.php"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.jsdt.ui.CompilationUnitEditor" name="addPersonField.js" tooltip="Sbf-Anm-lan/app/webroot/js/addPersonField.js">
+<persistable path="/Sbf-Anm-lan/app/webroot/js/addPersonField.js"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.php.editor" name="app_controller.php" tooltip="Sbf-Anm-lan/app/app_controller.php">
+<persistable path="/Sbf-Anm-lan/app/app_controller.php"/>
+</file>
 <file factoryID="org.eclipse.wst.jsdt.ui.ClassFileEditorInputFactory" id="org.eclipse.wst.jsdt.ui.ClassFileEditor" name="ECMA 3 DOM" tooltip="baseBrowserLibrary">
 <persistable org.eclipse.wst.jsdt.ui.ClassFileIdentifier="=Sbf-Anm-lan/\/Users\/timrombergjakobsson\/MyWeb\/Sbf-Anm-lan\/.metadata\/.plugins\/org.eclipse.wst.jsdt.core\/libraries\/baseBrowserLibrary.js&lt;(\/Users\/timrombergjakobsson\/MyWeb\/Sbf-Anm-lan\/.metadata\/.plugins\/org.eclipse.wst.jsdt.core\/libraries\/baseBrowserLibrary.js"/>
 </file>

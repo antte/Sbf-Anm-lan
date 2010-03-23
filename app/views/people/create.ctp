@@ -4,6 +4,7 @@
 	echo $javascript->link('jquery.validate', $inline = false);
 	echo $javascript->link('jq.form.conf/messages_se', $inline = false);
 	echo $javascript->link('jq.form.conf/jq.validate.registration', $inline = false);
+	echo $javascript->link('addPersonField', $inline = false);
 	
 	/*
 	 * setting a bunch of variables for testing
@@ -35,7 +36,7 @@
 		}
 	?>
 	
-	<fieldset class="amount grid_8 alpha">
+	<fieldset id="addamount" class="amount grid_8 alpha">
 		<?php 
 			echo $form->create('People');
 			$end = $form->end("Ändra antal personer", array('action' => 'create', 'div' => 'amount_submit'));
