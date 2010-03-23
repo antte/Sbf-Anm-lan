@@ -4,13 +4,15 @@ $(document).ready(function(){
 	$('#choosepeopleamount ol').after("<p id='addField'><span>+ </span>Lägg till fler personer</p>");
 	
 	var i = 0;
-		
+	
+	
 	$('#addField').click(function(){
 		i++;
 		$('#choosepeopleamount li:last-child').after(fieldValue(i));
 		$('#choosepeopleamount li:last-child').hide().fadeIn('slow');
 		//console.log(i);
 		
+		//updateAmountOfPeopleValidation();
 		
 		$('#choosepeopleamount li:last-child .removeField').click(function(){
 			$(this).parents('li').fadeOut('500', function(){
@@ -28,20 +30,21 @@ $(document).ready(function(){
 
 
 function fieldValue(i) {
-
-var roles = $('#People0RoleId').html();
-
+	
+	var roles = $('select#Person0RoleId').html();
+	console.log(roles);
+	
 	var string = "<li><fieldset class='name grid_8 alpha'>";
 			string += "<div class='first_name grid_2'>";
 				string += "<label for='People" + i + "FirstName'>Förnamn *</label>";
-				string += "<input type='text' id='People" + i + "FirstName' value='' name='data[People][" + i + "][first_name]'>";
+				string += "<input type='text' id='People" + i + "FirstName' class='required' value='' name='data[People][" + i + "][first_name]'>";
 			string += "</div>";
 			string += "<div class='last_name grid_2'>";
 				string += "<label for='People" + i + "LastName'>Efternamn *</label>";
-				string += "<input type='text' id='People" + i + "LastName' value='' name='data[People][" + i + "][last_name]'>";
+				string += "<input type='text' id='People" + i + "LastName' class='required' value='' name='data[People][" + i + "][last_name]'>";
 			string += "</div>";
 			string += "<div class='role grid_3'><label for='People" + i + "RoleId'>Anmäl dig som *</label>";
-				string += "<select id='People" + i + "RoleId' name='data[People][" + i + "][role_id]'>";
+				string += "<select id='People" + i + "RoleId' class='required' name='data[People][" + i + "][role_id]'>";
 					string += roles;
 				string += "</select>";
 			string += "</div>";
