@@ -32,35 +32,50 @@ class RegistrationsController extends AppController {
 		$this->loadModel("Role");
 		$this->set('roles', $this->Role->find('list', array('fields' => array('Role.name')))); //Find list fetches roles as an assoc array
 		
+		$this->set('sessionApa' , $this->Session->read());
+	
 	}
 	
 	/**
 	 * Just to save the data from create action
 	 */
-	function add() {
-		debug($this->data);		
-		
-		$this->Registration->save($this->data);
-		debug($this->validationErrors);
-		//$this->Registration->set($this->data);
-		//$this->Registration->validates();
-		/*
+	function add() {		
 		if(empty($this->validationErrors)) {
 			//if we dont have errors all was successful and we continue with the registration
-			$this->pushToSessionArray('Registration', $this->data);
+			$this->saveModelDataToSession('Registration', $this->data);
 			$this->redirect(array('action'=>'finalize'));			
 		} else {
 			$this->Session->write('errors', $this->validationErrors);
 			$this->redirect(array('action' => 'create'));
 		}
-		*/
+		
 	}
 	
 	/**
 	 * Finalizes the registration (saving it)
 	 */
 	function finalize() {
+		/*
+		$success = $this->Registration->saveAll($this->Session->read('Registration'));
+		
+		if ($success) {
+			$this->Session->del('Registraion');
+		} else {
+			
+		}*/
+		
 		$saveStatus = $this->Registration->saveAndReturnStatus($this->Session->read('Registration'));
+		/*
+		if($saveStatus['code'] == 2) {
+			$this->Session->del('Registraion');
+		}
+		*/
+	}
+	
+	function clearSession() {
+		$this->Session->del('Registration');
+		$this->Session->setFlash('Session rensad');
+		$this->redirect(array ('action' => 'create'));
 	}
 	
 }

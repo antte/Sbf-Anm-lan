@@ -15,11 +15,17 @@
         	'last_name' => array (
 				'rule'	 =>	'notEmpty',
         		'rule' 		=> array('maxLength' => 127),
+
+				'rule' 		=> array('notEmpty', 'maxLength',127),
+				'message' 	=> 'Förnamn måste finnas och vara högst 127 tecken.'
+        	),
+        	'last_name' => array (
+				'rule' 		=> array('notEmpty', 'maxLength', 127),
 				'message' 	=> 'Efternamn måste finnas och vara högst 127 tecken.'
         	),
         	'email' => array (
         		'rule' 		=> 'email',
-				'rule' 		=> array('maxLength' => 127),
+				'rule' 		=> array('maxLength',127),
         		'rule' 		=> 'notEmpty',
 				'message' 	=> 'Ange en korrekt e-postadress.'
         	),
@@ -32,20 +38,20 @@
 	 		'retype_email' => array (
 		    	/* TODO equalTo: "#RegistrationEmail", */
 		    	'rule' 		=> 'email',
-				'rule' 		=> array('maxLength' => 127),
+				'rule' 		=> array('maxLength', 127),
         		'rule' 		=> 'notEmpty',
 				'message' 	=> 'Ange samma e-postadress.'
 	 		),
 	 		'phone' => array (
-				'rule' 		=> array('maxLength' => 127),
+				'rule' 		=> array('maxLength',127),
 	 			'message' 	=> 'Ange ett korrekt telefonnummer.'
 			),
 			'c_o' => array (
-	      		'rule' 		=> array('maxLength' => 127),
+	      		'rule' 		=> array('maxLength',127),
 				'message' 	=> 'Får inte vara högre än 127 tecken.'
 			),
 			'street_address' => array (
-		    	'rule' 		=> array('notEmpty', 'maxLength' => 127),
+		    	'rule' 		=> array('notEmpty', 'maxLength',127),
 				'message' 	=> 'Vi behöver din adress.'
 	 		),
 	 		'postal_code' => array (
@@ -54,7 +60,7 @@
 	 			'message' 	=> 'Ange ett korrekt postnummer.'
 	 		),
 	 		'city' => array (
-		    	'rule' 		=> array('notEmpty', 'maxLength' => 127),
+		    	'rule' 		=> array('notEmpty', 'maxLength', 127),
 	 			'message' 	=> 'Vi behöver veta din postort.'
 	 		)
     	);
@@ -64,14 +70,28 @@
     	/**
     	 * saves all data relating to a registration and returns a status message
     	 * @param $registration
+    	 * @return array $status['code'] similar to http error codes
     	 */
     	function saveAndReturnStatus($registration) {
+    		$success = $this->saveAll($registration);
+    		if ($success) {
+    			debug("hej");
+    		} else {
+    			debug("nej");
+    		}
+    		/*
     		$status = array();
-    		
-    		debug($registration);
-				    		
-    		return $status = 1 ;
+    		if($this->saveAll($registration)) {
+    			$status['flash'] = "Tack för din anmälan";
+    			$status['code'] = 2;
+    		} else {
+    			$status['flash'] = "Det blev fel";
+    			$status['code'] = 4;
+    		}
+    		return $status;
+    		*/
     	}
+    	
     	
     	private function isDuplicate($data) {
     		$duplicateRegistration = $this->find('first', array(
