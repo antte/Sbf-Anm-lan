@@ -14,7 +14,6 @@
 	
 	
 	$event = array( 'id' => '1', 'name' => 'Testevent från php-koden' );
-	$roles = array( '1' => 'blaaa', '2' => 'blelble' );
 	//$amount = 1;
 	
 ?>
