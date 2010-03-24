@@ -9,12 +9,12 @@
 		var $validate = array(
         	'first_name' => array (
 				'rule'	 =>	'notEmpty',
-				'rule'		=> array('maxLength' => 127),
+				'rule'		=> array('maxLength', 127),
 				'message' 	=> 'Förnamn måste finnas och vara högst 127 tecken.'
         	),
         	'last_name' => array (
 				'rule'	 =>	'notEmpty',
-        		'rule' 		=> array('maxLength' => 127),
+        		'rule' 		=> array('maxLength',127),
 
 				'rule' 		=> array('notEmpty', 'maxLength',127),
 				'message' 	=> 'Förnamn måste finnas och vara högst 127 tecken.'
