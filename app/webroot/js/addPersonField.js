@@ -3,15 +3,16 @@ $(document).ready(function(){
 	$('#addamount').remove();
 	$('#choosepeopleamount ol').after("<div class='grid_3'><p id='addField'>Lägg till fler personer</p></div>");
 	
+	//TODO check how many people fields already exists (only a problem when the user disables and then allows javascript in the middle of failure)
 	var i = 0;
 	
 	
 	$('#addField').click(function(){
 		i++;
-		$('#choosepeopleamount li:last-child').after(fieldValue(i));
-		$('#choosepeopleamount li:last-child').hide().fadeIn('slow');
+		$('#choosepeopleamount ol li:last-child').after(fieldValue(i));
+		$('#choosepeopleamount ol li:last-child').hide().fadeIn('slow');
 		
-		$('#choosepeopleamount li:last-child .removeField').click(function(){
+		$('#choosepeopleamount ol li:last-child .removeField').click(function(){
 			$(this).parents('li').fadeOut('500', function(){
 				$(this).remove();
 			});
