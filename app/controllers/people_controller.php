@@ -10,8 +10,9 @@ class PeopleController extends AppController {
 	function create($amountOfPeople = 1){
 
 		$this->set('amountOfPeople' , $amountOfPeople);
-
-		$this->set('event' , $this->Person->Registration->Event->findById($event =1));
+		
+		$event = $this->Person->Registration->Event->find('first', array('conditions' => array('id' => $this->Session->read('eventId')), 'fields' => array('Event.id', 'Event.name')));
+		$this->set('event' , $event['Event']);
 			
 		$this->set('roles',$this->Person->Role->find('list'));
 

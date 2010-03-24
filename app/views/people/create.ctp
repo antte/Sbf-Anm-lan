@@ -6,16 +6,6 @@
 	echo $javascript->link('jq.form.conf/jq.validate.persons', $inline = false);
 	echo $javascript->link('addPersonField', $inline = false);
 	
-	
-	/*
-	 * setting a bunch of variables for testing
-	 * TODO remove this when deploying
-	 */
-	
-	
-	$event = array( 'id' => '1', 'name' => 'Testevent från php-koden' );
-	//$amount = 1;
-	
 ?>
 
 <div id="choosepeopleamount" class="grid_8">
