@@ -8,59 +8,75 @@
 		
 		var $validate = array(
         	'first_name' => array (
-				'rule'	 =>	'notEmpty',
+				'required'  => true,
+        		'allowEmpty'=> false,
 				'rule'		=> array('maxLength', 127),
 				'message' 	=> 'Förnamn måste finnas och vara högst 127 tecken.'
         	),
+        	
         	'last_name' => array (
-				'rule'	 =>	'notEmpty',
+				'required'  => true,
+        		'allowEmpty'=> false,
         		'rule' 		=> array('maxLength',127),
-
-				'rule' 		=> array('notEmpty', 'maxLength',127),
-				'message' 	=> 'Förnamn måste finnas och vara högst 127 tecken.'
-        	),
-        	'last_name' => array (
-				'rule' 		=> array('notEmpty', 'maxLength', 127),
 				'message' 	=> 'Efternamn måste finnas och vara högst 127 tecken.'
         	),
+        	
         	'email' => array (
-        		'rule' 		=> 'email',
-				'rule' 		=> array('maxLength',127),
-        		'rule' 		=> 'notEmpty',
-				'message' 	=> 'Ange en korrekt e-postadress.'
-        	),
-			'role_id' => array (
-		    	'rule' => array(
-        			'multiple', array('min' => 1)	
+        		'rule1' => array(
+        			'rule' => 'email',
+        			'message' 	=> 'Ange en korrekt e-postadress.',
+        			'required'  => true,
+        			'allowEmpty'=> false
         		),
+        		
+        		'rule2' => array(
+        			'rule' 		=> array('maxLength',127),
+        			'message' 	=> 'Ange en korrekt e-postadress.',
+        			'required'  => true,
+        			'allowEmpty'=> false
+        		)
+       		),
+			
+        	'role_id' => array (
+		    	'rule' => array('multiple', array('min' => 1)),
         		'message' => 'Du måste välja i vilken roll du vill anmäla dig.'
+	 		),  
+	 		
+        	'retype_email' => array (
+	 			'email_verification' => array(
+					'rule' => array('verifies', 'email'),
+					'message' => 'Du måste fylla i samma email igen'
+				)
 	 		),
-	 		'retype_email' => array (
-		    	/* TODO equalTo: "#RegistrationEmail", */
-		    	'rule' 		=> 'email',
-				'rule' 		=> array('maxLength', 127),
-        		'rule' 		=> 'notEmpty',
-				'message' 	=> 'Ange samma e-postadress.'
-	 		),
+	 	
 	 		'phone' => array (
 				'rule' 		=> array('maxLength',127),
 	 			'message' 	=> 'Ange ett korrekt telefonnummer.'
 			),
+			
 			'c_o' => array (
 	      		'rule' 		=> array('maxLength',127),
 				'message' 	=> 'Får inte vara högre än 127 tecken.'
 			),
+			
 			'street_address' => array (
-		    	'rule' 		=> array('notEmpty', 'maxLength',127),
+		    	'rule' 		=> array('maxLength',127),
+				'required'  => true,
+        		'allowEmpty'=> false,
 				'message' 	=> 'Vi behöver din adress.'
 	 		),
+	 		
 	 		'postal_code' => array (
-		    	'rule' 		=> 'notEmpty',
+		    	'required'  => true,
+        		'allowEmpty'=> false,
 		    	'rule' 		=> array('between',5, 6),
 	 			'message' 	=> 'Ange ett korrekt postnummer.'
 	 		),
+	 		
 	 		'city' => array (
-		    	'rule' 		=> array('notEmpty', 'maxLength', 127),
+		    	'rule' 		=> array('maxLength', 127),
+	 			'required'  => true,
+        		'allowEmpty'=> false,
 	 			'message' 	=> 'Vi behöver veta din postort.'
 	 		)
     	);
@@ -104,5 +120,12 @@
 			if (empty($duplicateRegistration)) return false;
 			else return true;
     	}
+    	
+    	
+	 function verifies($data, $field) {
+		$value = Set::extract($data, "{s}");
+		return ($value[0] == $this->data[$this->name][$field]);
+	}
+
     	
 	}
