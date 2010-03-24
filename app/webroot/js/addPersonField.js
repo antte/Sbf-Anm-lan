@@ -1,7 +1,7 @@
 
 $(document).ready(function(){
 	$('#addamount').remove();
-	$('#choosepeopleamount ol').after("<div class='grid_3'><p id='addField'><span>+ </span>Lägg till fler personer</p></div>");
+	$('#choosepeopleamount ol').after("<div class='grid_3'><p id='addField'>Lägg till fler personer</p></div>");
 	
 	var i = 0;
 	
@@ -32,19 +32,19 @@ function fieldValue(i) {
 	
 	var string = "<li><fieldset class='name grid_8 alpha'>";
 			string += "<div class='first_name grid_2'>";
-				string += "<label for='People" + i + "FirstName'>Förnamn *</label>";
-				string += "<input type='text' id='People" + i + "FirstName' class='required' value='' name='data[People][" + i + "][first_name]'>";
+				string += "<label for='Person" + i + "FirstName'>Förnamn *</label>";
+				string += "<input type='text' id='Person" + i + "FirstName' class='required' value='' name='data[Person][" + i + "][first_name]'>";
 			string += "</div>";
 			string += "<div class='last_name grid_2'>";
-				string += "<label for='People" + i + "LastName'>Efternamn *</label>";
-				string += "<input type='text' id='People" + i + "LastName' class='required' value='' name='data[People][" + i + "][last_name]'>";
+				string += "<label for='Person" + i + "LastName'>Efternamn *</label>";
+				string += "<input type='text' id='Person" + i + "LastName' class='required' value='' name='data[Person][" + i + "][last_name]'>";
 			string += "</div>";
 			string += "<div class='role grid_3'><label for='People" + i + "RoleId'>Anmäl dig som *</label>";
-				string += "<select id='People" + i + "RoleId' class='required' name='data[People][" + i + "][role_id]'>";
+				string += "<select id='Person" + i + "RoleId' class='required' name='data[Person][" + i + "][role_id]'>";
 					string += roles;
 				string += "</select>";
 			string += "</div>";
-			string += "<div class='removeFieldDiv'><p class='removeField'><span>X </span><br/>Ta bort person</p></div>";
+			string += "<div class='removeFieldDiv'><p class='removeField'>Ta bort</p></div>";
 		string += "</fieldset>";
 	string += "</li>";
 
