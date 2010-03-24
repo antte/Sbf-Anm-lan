@@ -1,43 +1,38 @@
--- phpMyAdmin SQL Dump
--- version 3.2.4
+﻿-- phpMyAdmin SQL Dump
+-- version 3.2.0.1
 -- http://www.phpmyadmin.net
 --
--- Värd: localhost
--- Skapad: 17 mars 2010 kl 10:26
--- Serverversion: 5.1.37
--- PHP-version: 5.2.11
+-- Host: localhost
+-- Generation Time: Mar 24, 2010 at 08:50 AM
+-- Server version: 5.1.36
+-- PHP Version: 5.3.0
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
 --
--- Databas: `sbf-anmalan`
+-- Database: `sbf-anmalan`
 --
 
 -- --------------------------------------------------------
 
 --
--- Struktur för tabell `events`
+-- Table structure for table `events`
 --
 
-CREATE TABLE `events` (
+CREATE TABLE IF NOT EXISTS `events` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(127) COLLATE utf8_bin NOT NULL,
+  `is_active` int(1) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=6 ;
 
 -- --------------------------------------------------------
 
 --
--- Struktur för tabell `people`
+-- Table structure for table `people`
 --
 
-CREATE TABLE `people` (
+CREATE TABLE IF NOT EXISTS `people` (
   `registration_id` int(11) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `role_id` int(11) DEFAULT NULL,
@@ -50,10 +45,10 @@ CREATE TABLE `people` (
 -- --------------------------------------------------------
 
 --
--- Struktur för tabell `registrations`
+-- Table structure for table `registrations`
 --
 
-CREATE TABLE `registrations` (
+CREATE TABLE IF NOT EXISTS `registrations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `event_id` int(11) NOT NULL,
   `first_name` varchar(127) COLLATE utf8_bin NOT NULL,
@@ -65,16 +60,16 @@ CREATE TABLE `registrations` (
   `city` varchar(127) COLLATE utf8_bin DEFAULT NULL,
   `postal_code` varchar(127) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=28 ;
 
 -- --------------------------------------------------------
 
 --
--- Struktur för tabell `roles`
+-- Table structure for table `roles`
 --
 
-CREATE TABLE `roles` (
+CREATE TABLE IF NOT EXISTS `roles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(127) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=8 ;

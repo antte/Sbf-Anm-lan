@@ -97,9 +97,11 @@ label.error {
 }
 
 .requiredinfo {
+	margin-left: 10px;
 	width: 610px;
-	text-align: right;
 	font-weight: bold;
+	text-indent: 20px;
+	background: url(../img/info.png) no-repeat 0 0;
 }
 
 .postcode, .c_o, .address {
@@ -121,26 +123,20 @@ ol li {
 }
 
 p#addField {
+	text-indent: 20px;
+	background: url(../img/add.png) no-repeat 0 0;
 	cursor: pointer;
 	font-weight: bold;
-}
-p#addField span {
-	font-size: 250%;
-	color: green;
-	border: 0;
 }
 p#addField:hover { 
 	color: green; 
 }
 
 p.removeField {
+	text-indent: 20px;
+	background: url(../img/remove.png) no-repeat 0 0;
 	cursor: pointer;
 	font-weight: bold;
-}
-p.removeField span {
-	font-size: 150%;
-	color: red;
-	border: 0;
 }
 
 p.removeField:hover {
@@ -151,4 +147,13 @@ p.removeField:hover {
 	float: left;
 	width: 55px;
 	margin: 0;
+}
+
+#validationErrors li {
+	list-style-image: url(../img/error.png);
+}
+
+label.error {
+	text-indent: 20px;
+	background: url(../img/warning.png) no-repeat 0 0;
 }
