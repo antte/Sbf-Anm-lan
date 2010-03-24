@@ -26,16 +26,13 @@
 	<h3>Fyll i vilka som ska komma</h3>
 	
 	<?php 
-		if (!empty($errors)) {
-			echo '<ul id="validationErrors" class="message">';
-				foreach ($errors as $error):?>
+		if (!empty($errors)) {?>
+			<ul id="validationErrors" class="message">
 					<li>
-						<?php pr($error); ?>
+						Du måste fylla i <strong>förnamn</strong>, <strong>efternamn</strong> och <strong>roll</strong> för alla personer.
 					</li>
-				<?php endforeach;
-			echo '</ul>';
-		}
-	?>
+			</ul>
+		<?php } ?>
 	
 	<fieldset id="addamount" class="amount grid_8 alpha">
 		<?php 

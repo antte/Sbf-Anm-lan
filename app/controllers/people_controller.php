@@ -32,7 +32,7 @@ class PeopleController extends AppController {
 				$this->redirect(array('controller' => 'registrations', 'action'=>'create', $this->Session->read('eventId')));			
 			} else {
 				$this->Session->write('errors', $errors);
-				$this->redirect(array('action' => 'create', sizeof($errors)));
+				$this->redirect(array('action' => 'create', sizeof($this->data['Person'])));
 			}
 		}
 		
