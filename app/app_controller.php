@@ -8,9 +8,12 @@
 		 * @param string $arrayName
 		 * @param mixed $dataToPush
 		 */
-		function pushToSessionArray($arrayName, $dataToPush) {
+		function saveModelDataToSession($modelName, $dataToPush) {
+			// Kan vara ide att hämta från någon konfigfil
+			$arrayName = 'Registration';
 			$array = $this->Session->read($arrayName);
-			$array[] = $dataToPush;
+			$array[$modelName] = $dataToPush[$modelName];
 			$this->Session->write($arrayName, $array);
 		}
+		
 	}

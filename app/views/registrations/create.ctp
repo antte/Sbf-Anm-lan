@@ -1,16 +1,16 @@
-﻿<!-- Help class that includes this js file even thou we are not in head tag -->
+﻿<!-- Help class that	 includes this js file even thou we are not in head tag -->
 <?php 
 	echo $javascript->link('jquery.1.4.2-min', $inline = false);
 	echo $javascript->link('jquery.validate', $inline = false);
 	echo $javascript->link('jq.form.conf/messages_se', $inline = false);
 	echo $javascript->link('jq.form.conf/jq.validate.registration', $inline = false);
 ?>
-
+<?php $html->link('Töm Model session array', array('action' => 'clearSession', 'Registration'));?>
 <div id="registration" class="grid_8">
 	
 	<h2><?php echo $eventName; ?></h2>
-	
 	<?php 
+	debug($sessionApa);
 		if (!empty($errors)) {
 			echo '<ul id="validationErrors" class="message">';
 				foreach ($errors as $error):?>

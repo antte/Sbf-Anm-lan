@@ -64,11 +64,13 @@
     	 * @param $registration
     	 */
     	function saveAndReturnStatus($registration) {
-    		$status = array();
-    		
-    		debug($registration);
-				    		
-    		return $status = 1 ;
+    		// hitta moduler 
+    		foreach ($registration as $modul ){
+    			debug($modul);
+    		} 
+	   		//hänta ut sessiondata från moduler
+    		//spara data i Modul i DB
+    	
     	}
     	
     	private function isDuplicate($data) {
