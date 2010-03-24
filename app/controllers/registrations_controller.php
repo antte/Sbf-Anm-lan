@@ -42,7 +42,7 @@ class RegistrationsController extends AppController {
 	function add() {		
 		if(empty($this->validationErrors)) {
 			//if we dont have errors all was successful and we continue with the registration
-			$this->pushToSessionArray('Registration', $this->data);
+			$this->saveModelDataToSession('Registration', $this->data);
 			$this->redirect(array('action'=>'finalize'));			
 		} else {
 			$this->Session->write('errors', $this->validationErrors);
@@ -55,8 +55,21 @@ class RegistrationsController extends AppController {
 	 * Finalizes the registration (saving it)
 	 */
 	function finalize() {
-		$saveStatus = $this->Registration->saveAndReturnStatus($this->Session->read('Registration'));
+		/*
+		$success = $this->Registration->saveAll($this->Session->read('Registration'));
 		
+		if ($success) {
+			$this->Session->del('Registraion');
+		} else {
+			
+		}*/
+		
+		$saveStatus = $this->Registration->saveAndReturnStatus($this->Session->read('Registration'));
+		/*
+		if($saveStatus['code'] == 2) {
+			$this->Session->del('Registraion');
+		}
+		*/
 	}
 	
 	function clearSession() {
