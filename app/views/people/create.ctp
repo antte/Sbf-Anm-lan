@@ -19,18 +19,6 @@
 	
 ?>
 
-<?php 
-	if (!empty($errors)) {
-		echo '<ul id="validationErrors" class="message">';
-			foreach ($errors as $error):?>
-				<li>
-					<?php echo $error; ?>
-				</li>
-			<?php endforeach;
-		echo '</ul>';
-	}
-?>
-
 <div id="choosepeopleamount" class="grid_8">
 	
 	<h2><?php echo $event['name']; ?></h2>
@@ -42,7 +30,7 @@
 			echo '<ul id="validationErrors" class="message">';
 				foreach ($errors as $error):?>
 					<li>
-						<?php echo $error; ?>
+						<?php pr($error); ?>
 					</li>
 				<?php endforeach;
 			echo '</ul>';
@@ -53,7 +41,7 @@
 		<?php 
 			echo $form->create('Person');
 			$end = $form->end("Ändra antal personer", array('action' => 'create', 'div' => 'amount_submit'));
-			echo $form->input('amount', array('type' => 'text', 'label' => 'Hur många är i ditt sällskap?', 'value' => $amountOfPeople, 'div' => 'amount grid_7', 'after' => $end));
+			echo $form->input('amount', array('type' => 'text', 'label' => 'Hur många är i ditt sällskap?', 'value' => $amountOfPeople, 'div' => 'amount', 'after' => $end));
 		?>
 	</fieldset>
 	
