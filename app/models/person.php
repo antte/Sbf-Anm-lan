@@ -12,8 +12,6 @@ Class Person extends AppModel {
 	var $validate = array(
         'first_name' => array (
 			'rule' 		=> array('notEmpty', 'maxLength'=>127),
-	//		'rule' 		=> 'notEmpty',
-	//		'rule'		=> array('maxLength'=> 127),
 			'message' 	=> 'Förnamn måste finnas och vara högst 127 tecken.'
 		),
         'last_name' => array (

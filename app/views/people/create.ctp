@@ -6,29 +6,6 @@
 	echo $javascript->link('jq.form.conf/jq.validate.persons', $inline = false);
 	echo $javascript->link('addPersonField', $inline = false);
 	
-	
-	/*
-	 * setting a bunch of variables for testing
-	 * TODO remove this when deploying
-	 */
-	
-	
-	$event = array( 'id' => '1', 'name' => 'Testevent från php-koden' );
-	$roles = array( '1' => 'blaaa', '2' => 'blelble' );
-	//$amount = 1;
-	
-?>
-
-<?php 
-	if (!empty($errors)) {
-		echo '<ul id="validationErrors" class="message">';
-			foreach ($errors as $error):?>
-				<li>
-					<?php echo pr($error); ?>
-				</li>
-			<?php endforeach;
-		echo '</ul>';
-	}
 ?>
 
 <div id="choosepeopleamount" class="grid_8">
@@ -38,24 +15,25 @@
 	<h3>Fyll i vilka som ska komma</h3>
 	
 	<?php 
-		if (!empty($errors)) {
-			echo '<ul id="validationErrors" class="message">';
-				foreach ($errors as $error):?>
+		if (!empty($errors)) {?>
+			<ul id="validationErrors" class="message">
 					<li>
-						<?php echo $error; ?>
+						Du måste fylla i <strong>förnamn</strong>, <strong>efternamn</strong> och <strong>roll</strong> för alla personer.
 					</li>
-				<?php endforeach;
-			echo '</ul>';
-		}
-	?>
+			</ul>
+		<?php } ?>
 	
-	<fieldset id="addamount" class="amount grid_8 alpha">
+	<!--   -->
 		<?php 
-			echo $form->create('Person');
-			$end = $form->end("Ändra antal personer", array('action' => 'create', 'div' => 'amount_submit'));
-			echo $form->input('amount', array('type' => 'text', 'label' => 'Hur många är i ditt sällskap?', 'value' => $amountOfPeople, 'div' => 'amount grid_7', 'after' => $end));
-		?>
-	</fieldset>
+			echo $form->create('Person', array('id' => 'addamount'));
+			echo '<fieldset class="amount grid_8 alpha">';
+			//$end = $form->end("Ändra antal personer", array('action' => 'create', 'div' => 'amount_submit'));
+			echo $form->input('amount', array('type' => 'text', 'label' => 'Hur många är i ditt sällskap?', 'value' => $amountOfPeople, 'div' => 'amount'));
+			echo $form->submit('Ändra antal personer');
+			echo "</fieldset>";
+			echo $form->end();
+			?>
+	<!--  -->
 	
 	<!--  Form helper - sets action post - parse form to the registration model class-->
 	<?php echo $form->create('Person'); ?>
@@ -72,7 +50,7 @@
 						<?php 
 							echo $form->input("Person.$i.first_name", array('type' => 'text', 'label' => 'Förnamn *', 'div' => 'first_name grid_2', 'class' => 'required'));
 							echo $form->input("Person.$i.last_name", array('type' => 'text', 'label' => 'Efternamn *', 'div' => 'last_name grid_2', 'class' => 'required'));
-							echo $form->input("Person.$i.role_id", array('options' => array($roles), 'label' => 'Anmäl dig som *', 'empty' => '(välj en)', 'div' => 'role grid_3', 'class' => 'required'));
+							echo $form->input("Person.$i.role_id", array('options' => array($roles), 'label' => 'Anmäl dig som *', 'empty' => '(välj en)', 'div' => 'role grid_3', 'class' => 'required role'));
 						?>
 					</fieldset>
 				</li>

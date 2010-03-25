@@ -10,7 +10,7 @@
 	
 	<h2><?php echo $eventName; ?></h2>
 	<?php 
-	debug($sessionApa);
+//	debug($sessionApa);
 		if (!empty($errors)) {
 			echo '<ul id="validationErrors" class="message">';
 				foreach ($errors as $error):?>
