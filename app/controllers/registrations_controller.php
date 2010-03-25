@@ -16,6 +16,7 @@ class RegistrationsController extends AppController {
 		$registration = $this->Session->read('Registration');
 		
 		if(!$this->Registration->saveAll($registration)) {
+			$this->Session->del('Registration');
 			$this->Session->setFlash('Vi ber om ursäkt, din registrering kunde inte slutföras. Kontakta support.');
 			$this->redirect(array('controller' => 'events', 'action' => 'index'));
 		}
@@ -27,6 +28,7 @@ class RegistrationsController extends AppController {
 		$this->Email->template	= 'receipt';
 		$this->Email->sendAs	= 'both'; //both text and html
 		$this->set('registration', $registration);
+		$this->Session->del('Registration');
 		$this->Email->send();
 	}
 	
