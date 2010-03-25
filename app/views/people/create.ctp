@@ -22,16 +22,15 @@
 					</li>
 			</ul>
 		<?php } ?>
-	
-	<fieldset id="addamount" class="amount grid_8 alpha">
-		<div class="grid_7">
-			<?php 
-				echo $form->create('Person');
-				$end = $form->end("Ändra antal personer", array('action' => 'create', 'div' => 'amount_submit'));
-				echo $form->input('amount', array('type' => 'text', 'label' => 'Hur många är i ditt sällskap?', 'value' => $amountOfPeople, 'div' => 'amount', 'after' => $end));
+		<?php 
+			echo $form->create('Person', array('id' => 'addamount'));
+			echo '<fieldset class="amount grid_8 alpha">';
+			//$end = $form->end("Ändra antal personer", array('action' => 'create', 'div' => 'amount_submit'));
+			echo $form->input('amount', array('type' => 'text', 'label' => 'Hur många är i ditt sällskap?', 'value' => $amountOfPeople, 'div' => 'amount'));
+			echo $form->submit('Ändra antal personer');
+			echo "</fieldset>";
+			echo $form->end();
 			?>
-		</div>
-	</fieldset>
 	
 	<!--  Form helper - sets action post - parse form to the registration model class-->
 	<?php echo $form->create('Person'); ?>
@@ -48,7 +47,7 @@
 						<?php 
 							echo $form->input("Person.$i.first_name", array('type' => 'text', 'label' => 'Förnamn *', 'div' => 'first_name grid_2', 'class' => 'required'));
 							echo $form->input("Person.$i.last_name", array('type' => 'text', 'label' => 'Efternamn *', 'div' => 'last_name grid_2', 'class' => 'required'));
-							echo $form->input("Person.$i.role_id", array('options' => array($roles), 'label' => 'Anmäl dig som *', 'empty' => '(välj en)', 'div' => 'role grid_3', 'class' => 'required'));
+							echo $form->input("Person.$i.role_id", array('options' => array($roles), 'label' => 'Anmäl dig som *', 'empty' => '(välj en)', 'div' => 'role grid_3', 'class' => 'required role'));
 						?>
 					</fieldset>
 				</li>

@@ -46,7 +46,8 @@ class RegistrationsController extends AppController {
 			$this->saveModelDataToSession('Registration', $this->data);
 			$this->redirect(array('action'=>'finalize'));			
 		} else {
-			$this->Session->write('errors', $this->validationErrors);
+			$this->Session->write('errors', $this->Registration->validationErrors);
+			$this->Set('errors', $this->Registration->validationErrors);
 			$this->redirect(array('action' => 'create'));
 		}
 		
