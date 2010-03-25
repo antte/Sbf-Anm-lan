@@ -20,7 +20,7 @@
 		
 		<div class="grid_4 alpha">
 			<h4>Bokare</h4>
-			<p>Förnamn</p>
+			<p class="first_name">Förnamn</p>
 			<p>Efternamn</p>
 		</div>
 		

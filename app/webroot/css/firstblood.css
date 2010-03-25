@@ -192,6 +192,17 @@ p.phone {
 	background: url(../img/phone.png) no-repeat 0 0;
 }
 
-#entrants ol li {
+#entrants ol li p {
+	float:left;
 
 }
+
+#entrants ol li {
+	clear:left;
+		
+}
+
+#entrants p {
+	text-indent:10px;
+		
+}	
