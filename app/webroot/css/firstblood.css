@@ -157,3 +157,8 @@ label.error {
 	text-indent: 20px;
 	background: url(../img/warning.png) no-repeat 0 0;
 }
+
+#info p {
+	background: #eee;
+	padding:10px;
+}	
