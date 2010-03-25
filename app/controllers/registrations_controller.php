@@ -29,4 +29,5 @@ class RegistrationsController extends AppController {
 		$this->redirect(array ('action' => 'create'));
 	}
 	
+	
 }

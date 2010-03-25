@@ -29,6 +29,7 @@
     		} else {
     			debug("nej");
     		}
+    		
     		/*
     		$status = array();
     		if($this->saveAll($registration)) {
@@ -43,3 +44,10 @@
     	}
     	
 	}
+	
+	
+	
+	
+	
+	
+	
