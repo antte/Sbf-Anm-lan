@@ -24,11 +24,13 @@
 		<?php } ?>
 	
 	<fieldset id="addamount" class="amount grid_8 alpha">
-		<?php 
-			echo $form->create('Person');
-			$end = $form->end("Ändra antal personer", array('action' => 'create', 'div' => 'amount_submit'));
-			echo $form->input('amount', array('type' => 'text', 'label' => 'Hur många är i ditt sällskap?', 'value' => $amountOfPeople, 'div' => 'amount', 'after' => $end));
-		?>
+		<div class="grid_7">
+			<?php 
+				echo $form->create('Person');
+				$end = $form->end("Ändra antal personer", array('action' => 'create', 'div' => 'amount_submit'));
+				echo $form->input('amount', array('type' => 'text', 'label' => 'Hur många är i ditt sällskap?', 'value' => $amountOfPeople, 'div' => 'amount', 'after' => $end));
+			?>
+		</div>
 	</fieldset>
 	
 	<!--  Form helper - sets action post - parse form to the registration model class-->
