@@ -6,21 +6,9 @@ class RegistrationsController extends AppController {
 	 * Finalizes the registration (saving it)
 	 */
 	function finalize() {
-		/*
-		$success = $this->Registration->saveAll($this->Session->read('Registration'));
-		
-		if ($success) {
-			$this->Session->del('Registraion');
-		} else {
-			
-		}*/
-		
+		$eventId['Registration']['event_id'] = $this->Session->read('eventId');
+		$this->saveModelDataToSession('Registration', $eventId);
 		$saveStatus = $this->Registration->saveAndReturnStatus($this->Session->read('Registration'));
-		/*
-		if($saveStatus['code'] == 2) {
-			$this->Session->del('Registraion');
-		}
-		*/
 	}
 	
 	function clearSession() {
@@ -28,6 +16,5 @@ class RegistrationsController extends AppController {
 		$this->Session->setFlash('Session rensad');
 		$this->redirect(array ('action' => 'create'));
 	}
-	
 	
 }

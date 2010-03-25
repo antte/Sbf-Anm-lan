@@ -10,7 +10,6 @@ class PeopleController extends AppController {
 	function create($amountOfPeople = 1){
 
 		$this->set('amountOfPeople' , $amountOfPeople);
-		
 		$event = $this->Person->Registration->Event->find('first', array('conditions' => array('id' => $this->Session->read('eventId')), 'fields' => array('Event.id', 'Event.name')));
 		$this->set('event' , $event['Event']);
 			
@@ -20,13 +19,14 @@ class PeopleController extends AppController {
 	}
 
 	function add(){
-		if(isset($this->data['amount'])){
+		if(isset($this->data['Person']['amount'])){
 			$this->Session->del('errors');
-			$this->redirect(array('action'=>'create',$this->data['amount']));
+			$this->redirect(array('action'=>'create',$this->data['Person']['amount']));
 		}
 		
 		if($this->data['Person']){
 			$errors = $this->Person->validatesMultiple($this->data);
+			
 			if(empty($errors)) {
 				//if we dont have errors all was successful and we continue with the registration
 				$this->saveModelDataToSession('Person', $this->data);
@@ -36,7 +36,6 @@ class PeopleController extends AppController {
 				$this->redirect(array('action' => 'create', sizeof($this->data['Person'])));
 			}
 		}
-		
 	}
 	
 	
