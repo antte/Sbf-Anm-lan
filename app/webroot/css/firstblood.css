@@ -162,3 +162,25 @@ label.error {
 	background: #eee;
 	padding:10px;
 }	
+
+#booking_nr, #registrator, #entrants, #event {
+	background: #eee;
+	margin-bottom: 20px;
+}
+
+#booking_nr {
+	font-size: 18px;
+	font-weight: bold;
+}
+
+#receipt_info { 
+	float: right; 
+	background: #eee;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+a.print {
+	padding-left: 20px;
+	background: url(../img/printer.png) no-repeat 0 0;
+}
