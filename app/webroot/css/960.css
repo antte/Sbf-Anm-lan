@@ -509,3 +509,57 @@
 * html .clearfix,*:first-child+html .clearfix {
 	zoom: 1
 }
+
+/* here ends hope and here starts the madness*/
+
+.container_12 .grid_12 .grid_full {
+	width:920px;
+} 
+	
+.container_12 .grid_11 .grid_full {
+	width:840px;
+} 
+
+.container_12 .grid_10 .grid_full {
+	width:760px;
+} 
+
+.container_12 .grid_9 .grid_full {
+	width:680px;
+} 
+
+.container_12 .grid_8 .grid_full {
+	width:600px;
+} 
+
+.container_12 .grid_7 .grid_full {
+	width:520px;
+} 
+
+.container_12 .grid_6 .grid_full {
+	width:440px;
+} 
+
+.container_12 .grid_5 .grid_full {
+	width:360px;
+} 
+
+.container_12 .grid_4 .grid_full {
+	width:280px;
+} 
+
+.container_12 .grid_3 .grid_full {
+	width:200px;
+} 
+
+.container_12 .grid_2 .grid_full {
+	width:120px;
+} 
+
+.container_12 .grid_1 .grid_full {
+	width:40px;
+} 
+
+.grid_full {
+	margin:10px;
+}

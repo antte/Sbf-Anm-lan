@@ -24,12 +24,20 @@ class RegistrationsController extends AppController {
 		$this->Email->to		= "{$registration['Registrator']['first_name']} {$registration['Registrator']['last_name']} <{$registration['Registrator']['email']}>";
 		$eventName = $this->Registration->Event->findById($eventId['Registration']['event_id'], array('fields' => 'name'));
 		$this->Email->subject	= "Kvitto för din anmälan till $eventName";
+		$this->Email->template	= 'receipt';
+		$this->Email->sendAs	= 'both'; //both text and html
+		$this->set('registration', $registration);
+		$this->Email->send();
 	}
 	
 	function clearSession() {
 		$this->Session->del('Registration');
 		$this->Session->setFlash('Session rensad');
 		$this->redirect(array ('action' => 'create'));
+	}
+	
+	function receipt() {
+		
 	}
 	
 }
