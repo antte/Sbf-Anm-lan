@@ -1,4 +1,3 @@
-
 $(document).ready(function(){
 	
 	// Remove the add amount of people form and adds a button to add more people at the bottom
@@ -54,6 +53,7 @@ function fieldValue(i) {
 	$('#choosepeopleamount ol li:last').find('.role select').attr('id', 'data[Person][' + i + '][role_id]');
 	$('#choosepeopleamount ol li:last').find('.role select').attr('name', 'data[Person][' + i + '][role_id]');
 
+	$('#choosepeopleamount ol li:last div:last').after("<a href='#' class='removeField'>Ta bort</a>");
 }
 
 /*
