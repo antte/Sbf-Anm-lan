@@ -8,7 +8,7 @@
 <?php $html->link('Töm Model session array', array('action' => 'clearSession', 'Registration'));?>
 <div id="registration" class="grid_8">
 	
-	<h2><?php echo $eventName; ?></h2>
+	<h2><?php echo "Kontakuppgifter för registrering till $eventName"; ?></h2>
 	<?php 
 //	debug($sessionApa);
 		if (!empty($errors)) {
@@ -23,7 +23,7 @@
 	?>
 	
 	<!--  Form helper - sets action post - parse form to the registration model class-->
-	<?php echo $form->create('Registration'); ?> 
+	<?php echo $form->create('Registrator'); ?> 
 		
 		<!--  Form helper - create input with label  -->
 			<?php 
@@ -64,3 +64,13 @@
 	<!--  Form helper - end form-->
 	<?php echo $form->end(); ?>	
 </div> 
+<div id="info" class="grid_4" >
+	<noscript>
+		<h2> Info </h2>
+		<div>
+			<p>
+				<em>För bästa funktionalitet rekomenderars att Ni sätter på Javascript Annanrs kan information gå förlorad vi omladdning av sidan</em> 
+			</p>
+		</div>
+	</noscript>
+</div>
