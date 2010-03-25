@@ -37,6 +37,8 @@
         		)
        		),
 			
+       		// TODO delete role_id from registations
+       		
         	'role_id' => array (
 		    	'rule' => array('multiple', array('min' => 1)),
         		'message' => 'Du måste välja i vilken roll du vill anmäla dig.'
@@ -92,6 +94,7 @@
     		$success = $this->saveAll($registration);
     		if ($success) {
     			debug("hej");
+    			// TODO do something
     		} else {
     			debug("nej");
     		}

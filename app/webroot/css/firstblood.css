@@ -122,24 +122,24 @@ ol li {
 	float: left;
 }
 
-p#addField {
-	text-indent: 20px;
+#addField {
+	padding-left: 20px;
 	background: url(../img/add.png) no-repeat 0 0;
 	cursor: pointer;
 	font-weight: bold;
 }
-p#addField:hover { 
+#addField:hover { 
 	color: green; 
 }
 
-p.removeField {
-	text-indent: 20px;
+.removeField {
+	padding-left: 20px;
 	background: url(../img/remove.png) no-repeat 0 0;
 	cursor: pointer;
 	font-weight: bold;
 }
 
-p.removeField:hover {
+.removeField:hover {
 	color: red;
 }
 
