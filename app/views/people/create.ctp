@@ -24,7 +24,7 @@
 		echo '<ul id="validationErrors" class="message">';
 			foreach ($errors as $error):?>
 				<li>
-					<?php echo $error; ?>
+					<?php echo pr($error); ?>
 				</li>
 			<?php endforeach;
 		echo '</ul>';
