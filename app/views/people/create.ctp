@@ -22,8 +22,6 @@
 					</li>
 			</ul>
 		<?php } ?>
-	
-	<!--   -->
 		<?php 
 			echo $form->create('Person', array('id' => 'addamount'));
 			echo '<fieldset class="amount grid_8 alpha">';
@@ -33,7 +31,6 @@
 			echo "</fieldset>";
 			echo $form->end();
 			?>
-	<!--  -->
 	
 	<!--  Form helper - sets action post - parse form to the registration model class-->
 	<?php echo $form->create('Person'); ?>

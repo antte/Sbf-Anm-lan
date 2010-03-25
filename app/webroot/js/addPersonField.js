@@ -13,7 +13,8 @@ $(document).ready(function(){
 		i++;
 		
 		// Inserts HTML-code for a new person field and fades it in
-		$('#choosepeopleamount ol li:last').after(fieldValue(i));
+		$('#choosepeopleamount ol li:last').after('<li>' + $('#choosepeopleamount ol li:first').html() + '</li>');
+		fieldValue(i);
 		$('#choosepeopleamount ol li:last').hide().fadeIn('slow');
 		
 		// Removes a person field
@@ -33,33 +34,26 @@ $(document).ready(function(){
 });
 
 /**
+ * Updates the last person field with the right values for the labels and inputs/selects
  * @param i
- * @return the HTML code
  */
 function fieldValue(i) {
 	
-	// TODO more handsome code!
+	// First name
+	$('#choosepeopleamount ol li:last').find('.first_name label').attr('for', 'Person' + i + 'FirstName');
+	$('#choosepeopleamount ol li:last').find('.first_name input').attr('id', 'Person' + i + 'FirstName');
+	$('#choosepeopleamount ol li:last').find('.first_name input').attr('name', 'data[Person][' + i + '][first_name]');
 	
-	var string = "<li><fieldset class='name grid_8 alpha'>";
-	string += 		"<div class='first_name grid_2'>";
-				string += "<label for='Person" + i + "FirstName'>Förnamn *</label>";
-				string += "<input type='text' id='Person" + i + "FirstName' class='required' value='' name='data[Person][" + i + "][first_name]'>";
-			string += "</div>";
-			string += "<div class='last_name grid_2'>";
-				string += "<label for='Person" + i + "LastName'>Efternamn *</label>";
-				string += "<input type='text' id='Person" + i + "LastName' class='required' value='' name='data[Person][" + i + "][last_name]'>";
-			string += "</div>";
-			string += "<div class='role grid_3'><label for='People" + i + "RoleId'>Anmäl dig som *</label>";
-				string += "<select id='Person" + i + "RoleId' class='required' name='data[Person][" + i + "][role_id]'>";
-					// Fetches the drop down code from the first person field
-					string += $('select.role:first').html();
-				string += "</select>";
-			string += "</div>";
-			string += "<div class='removeFieldDiv'><a href='#' class='removeField'>Ta bort</a></div>";
-		string += "</fieldset>";
-	string += "</li>";
+	// Last name
+	$('#choosepeopleamount ol li:last').find('.last_name label').attr('for', 'Person' + i + 'LastName');
+	$('#choosepeopleamount ol li:last').find('.last_name input').attr('id', 'Person' + i + 'LastName');
+	$('#choosepeopleamount ol li:last').find('.last_name input').attr('name', 'data[Person][' + i + '][last_name]');
+	
+	// Roles
+	$('#choosepeopleamount ol li:last').find('.role label').attr('for', 'Person' + i + 'RoleId');
+	$('#choosepeopleamount ol li:last').find('.role select').attr('id', 'data[Person][' + i + '][role_id]');
+	$('#choosepeopleamount ol li:last').find('.role select').attr('name', 'data[Person][' + i + '][role_id]');
 
-	return string;
 }
 
 /*
