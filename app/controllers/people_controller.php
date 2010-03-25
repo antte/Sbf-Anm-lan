@@ -20,9 +20,9 @@ class PeopleController extends AppController {
 	}
 
 	function add(){
-		if(isset($this->data['amount'])){
+		if(isset($this->data['Person']['amount'])){
 			$this->Session->del('errors');
-			$this->redirect(array('action'=>'create',$this->data['amount']));
+			$this->redirect(array('action'=>'create',$this->data['Person']['amount']));
 		}
 		
 		if($this->data['Person']){
@@ -36,7 +36,6 @@ class PeopleController extends AppController {
 				$this->redirect(array('action' => 'create', sizeof($this->data['Person'])));
 			}
 		}
-		
 	}
 	
 	

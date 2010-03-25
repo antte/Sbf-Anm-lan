@@ -23,9 +23,8 @@
 			</ul>
 		<?php } ?>
 		<?php 
-			echo $form->create('Person', array('id' => 'addamount'));
+			echo $form->create('Person'/*, array('id' => 'addamount')*/);
 			echo '<fieldset class="amount grid_8 alpha">';
-			//$end = $form->end("Ändra antal personer", array('action' => 'create', 'div' => 'amount_submit'));
 			echo $form->input('amount', array('type' => 'text', 'label' => 'Hur många är i ditt sällskap?', 'value' => $amountOfPeople, 'div' => 'amount'));
 			echo $form->submit('Ändra antal personer');
 			echo "</fieldset>";
