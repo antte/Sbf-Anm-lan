@@ -4,7 +4,7 @@ class PeopleController extends AppController {
 	var $helpers = array('Html','Form','Javascript');
 
 	function index(){
-
+		
 	}
 
 	function create($amountOfPeople = 1){

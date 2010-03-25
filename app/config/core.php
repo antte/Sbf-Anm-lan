@@ -38,7 +38,7 @@
  * In production mode, flash messages redirect after a time interval.
  * In development mode, you need to click the flash message to continue.
  */
-	Configure::write('debug', 2);
+	Configure::write('debug', 3);
 /**
  * Application wide charset encoding
  */
@@ -190,17 +190,17 @@
  * Default settings provided below
  *
  * File storage engine.
- *
- * 	 Cache::config('default', array(
- *		'engine' => 'File', //[required]
- *		'duration'=> 3600, //[optional]
- *		'probability'=> 100, //[optional]
- * 		'path' => CACHE, //[optional] use system tmp directory - remember to use absolute path
- * 		'prefix' => 'cake_', //[optional]  prefix every cache file with this string
- * 		'lock' => false, //[optional]  use file locking
- * 		'serialize' => true, [optional]
- *	));
- *
+ */
+	Cache::config('default', array(
+	'engine' => 'File', //[required]
+	'duration'=> 3600, //[optional]
+	'probability'=> 100, //[optional]
+	'path' => CACHE, //[optional] use system tmp directory - remember to use absolute path
+	'prefix' => 'cake_', //[optional]  prefix every cache file with this string
+	'lock' => false, //[optional]  use file locking
+	'serialize' => true, //[optional]
+	));
+ /*
  *
  * APC (http://pecl.php.net/package/APC)
  *
