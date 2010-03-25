@@ -9,3 +9,7 @@ body {
 .container_12 {
 	text-align: left;
 }
+
+#PersonAddForm ol li {
+	float: left;
+}
