@@ -10,7 +10,6 @@ class PeopleController extends AppController {
 	function create($amountOfPeople = 1){
 
 		$this->set('amountOfPeople' , $amountOfPeople);
-		
 		$event = $this->Person->Registration->Event->find('first', array('conditions' => array('id' => $this->Session->read('eventId')), 'fields' => array('Event.id', 'Event.name')));
 		$this->set('event' , $event['Event']);
 			
@@ -27,6 +26,7 @@ class PeopleController extends AppController {
 		
 		if($this->data['Person']){
 			$errors = $this->Person->validatesMultiple($this->data);
+			
 			if(empty($errors)) {
 				//if we dont have errors all was successful and we continue with the registration
 				$this->saveModelDataToSession('Person', $this->data);
