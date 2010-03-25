@@ -112,14 +112,10 @@ input, select {
 	margin-bottom: 10px;
 }
 
-ol li {
+form #PersonAddForm ol li {
 	position: relative;
 	clear: left;
 	margin-left: 0;
-}
-
-* html ol li {
-	float: left;
 }
 
 #addField {
@@ -168,7 +164,7 @@ label.error {
 	margin-bottom: 20px;
 }
 
-#booking_nr {
+.booking_nr {
 	font-size: 18px;
 	font-weight: bold;
 }
@@ -178,9 +174,24 @@ label.error {
 	background: #eee;
 	font-size: 16px;
 	font-weight: bold;
-}
+} 
 
 a.print {
 	padding-left: 20px;
 	background: url(../img/printer.png) no-repeat 0 0;
+}
+
+p.email {
+	text-indent: 20px;
+	background: url(../img/email.png) no-repeat 0 0;
+	float: none;
+}
+
+p.phone {
+	text-indent: 20px;
+	background: url(../img/phone.png) no-repeat 0 0;
+}
+
+#entrants ol li {
+
 }
