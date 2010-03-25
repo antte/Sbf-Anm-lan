@@ -21,6 +21,7 @@
     	 * @return array $status['code'] similar to http error codes
     	 */
     	function saveAndReturnStatus($registration) {
+    		debug($registration);
     		$success = $this->saveAll($registration);
     		// TODO we'll want to see if registrations gets an associated event_id, if not we can get it from session (eventId)
     		// TODO send status back
@@ -29,6 +30,7 @@
     		} else {
     			debug("nej");
     		}
+    		
     		/*
     		$status = array();
     		if($this->saveAll($registration)) {
@@ -43,3 +45,10 @@
     	}
     	
 	}
+	
+	
+	
+	
+	
+	
+	

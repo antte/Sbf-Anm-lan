@@ -26,9 +26,6 @@
 	<?php echo $form->create('Registrator'); ?> 
 		
 		<!--  Form helper - create input with label  -->
-			<?php 
-				echo $form->hidden('event_id', array('default' => $event_id));
-			?>
 		<fieldset class="name grid_8 alpha" >
 			<p class="requiredinfo">Fält markerade med * är obligatoriska uppgifter!</p>
 			<?php
