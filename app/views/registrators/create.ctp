@@ -36,11 +36,6 @@
 				echo $form->input('last_name', array('type' => 'text', 'label' => 'Efternamn *', 'div' => 'last_name grid_3'));
 			?>
 		</fieldset>
-		<fieldset class="role grid_8 alpha">
-			<?php
-				echo $form->input('role_id', array('options' => array($roles), 'label' => 'Anmäl dig som *', 'empty' => '(välj en)', 'div' => 'role grid_5'));
-			?>
-			</fieldset>
 		<fieldset class="email grid_8 alpha">
 			<?php
 				echo $form->input('email', array('type' => 'text', 'label' => 'E-post *', 'div' => 'email grid_3' ));
