@@ -4,7 +4,7 @@
 		var $helpers = array('Html', 'Form', 'Javascript');
 		
 		function index() {
-			$this->set('events', $this->Event->find('all'));
+			$this->set('events', $this->Event->find('all'));	
 		}
 		
 		function view($eventId = null) {
