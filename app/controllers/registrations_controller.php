@@ -10,8 +10,11 @@ class RegistrationsController extends AppController {
 	function finalize() {
 		
 		// The only thing registration needs right now is an event id
-		$eventId['Registration']['event_id'] = $this->Session->read('eventId');
-		$this->saveModelDataToSession('Registration', $eventId);
+		$Registration['Registration']['event_id'] = $this->Session->read('eventId');
+		$Registration['Registration']['number'] = $this->Registration->generateUniqueNumber();
+		debug($this->Registration->generateUniqueNumber(1));
+		
+		$this->saveModelDataToSession('Registration', $Registration);
 		
 		$registration = $this->Session->read('Registration');
 		
@@ -21,7 +24,7 @@ class RegistrationsController extends AppController {
 			$this->redirect(array('controller' => 'events', 'action' => 'index'));
 		}
 		
-		$this->Email->from		= 'Svenska bilsportförbundet <info@sbf.se>';
+		/*$this->Email->from		= 'Svenska bilsportförbundet <info@sbf.se>';
 		$this->Email->to		= "{$registration['Registrator']['first_name']} {$registration['Registrator']['last_name']} <{$registration['Registrator']['email']}>";
 		$eventName = $this->Registration->Event->findById($eventId['Registration']['event_id'], array('fields' => 'name'));
 		$this->Email->subject	= "Kvitto för din anmälan till $eventName";
@@ -29,7 +32,7 @@ class RegistrationsController extends AppController {
 		$this->Email->sendAs	= 'both'; //both text and html
 		$this->set('registration', $registration);
 		$this->Session->del('Registration');
-		$this->Email->send();
+		$this->Email->send();*/
 	}
 	
 	function clearSession() {
