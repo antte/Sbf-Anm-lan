@@ -15,6 +15,7 @@
 		echo $html->css('stickyfooter');
 		echo $html->css('960');
 		echo $html->css('text');
+		echo $html->css(array('print'), 'stylesheet', array('media' =>  'print'));
 		
 
 		echo $html->css('firstblood');
