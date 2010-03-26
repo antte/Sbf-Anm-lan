@@ -46,10 +46,23 @@ class RegistrationsController extends AppController {
 	}
 	
 	function testemail() {
-		$this->Email->from    = 'hilol <andreas.fliesberg@gmail.com>';
-		$this->Email->to      = 'an <andreas_fliesberg@hotmail.com>';
-		$this->Email->subject = 'Test';
+		
+		$this->Email->smtpOptions = array(
+	        'port'=>'25', 
+	        'timeout'=>'30',
+	        'host' => 'localhost'
+	        //,'username'=>''
+	        //,'password'=>''
+	        //,'client' =>''
+	   );
+		
+		
+		$this->Email->from    	= 'hilol <info@sbf.se>';
+		$this->Email->to      	= 'anfl <andreas_fliesberg@hotmail.com>';
+		$this->Email->subject 	= 'Test';
+		$this->Email->delivery 	= 'smtp';
 		$this->Email->send('Hello message body!');
+		$this->set('smtperrors', $this->Email->smtpError);
 	}
 	
 }
