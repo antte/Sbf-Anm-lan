@@ -1,0 +1,16 @@
+* {
+	background: none;
+}
+
+html {
+	font-family: "Times New Roman", Times, serif;
+	color: #fff;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: arial, helvetica, verdana, sans-serif;
+}
+
+table {
+	border: 1px solid #fff;
+}

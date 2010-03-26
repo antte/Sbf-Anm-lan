@@ -10,7 +10,7 @@
 	<div class="grid_full">
 		<p>Detta kvitto har skickats till din angivna mailadress.</p>
 		<p>Information om hur du ska gå tillväga för att göra ändringar på din bokning finns längst ned i mailet.</p>
-		<p><a href="#" class="print">Skriv ut detta kvitto</a> och spara det på ett bra ställe.</p>
+		<p><a href="#" class="print" onclick="window.print();return false;">Skriv ut detta kvitto</a> och spara det på ett bra ställe.</p>
 	</div>
 </div>
 
@@ -44,31 +44,34 @@
 <div id="entrants" class="grid_8">
 	<div class="grid_full">
 	
+		<h3>Anmälda personer</h3>
+	
 		<table id="receipt_entrants">
-			<tr>
-				<th><h3>Anmälda personer</h3></th>
-			</tr>
-			<tr>
-				<td><p>Markus</p></td>
-				<td><p>Nordin</p></td>
-				<td><p>Värd</p></td>
-			</tr>
-			<tr>
-				<td><p>Tim</p></td>
-				<td><p>Jakobsson</p></td>
-				<td><p>Programledare</p></td>
-			</tr>
-			<tr>
-				<td><p>Olle</p></td>
-				<td><p>Svensson</p></td>
-				<td><p>Stenhuggare</p></td>
-			</tr>
+			<thead>
+				<tr>
+					<th>Förnamn</th>
+					<th>Efternamn</th>
+					<th>Roll</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Markus</td>
+					<td>Nordin</td>
+					<td>Värd</td>
+				</tr>
+				<tr>
+					<td>Tim</td>
+					<td>Jakobsson</td>
+					<td>Programledare</td>
+				</tr>
+				<tr>
+					<td>Olle</td>
+					<td>Svensson</td>
+					<td>Stenhuggare</td>
+				</tr>
+			</tbody>
 		</table>
 			
 	</div>
 </div>
-
-<div id="event" class="grid_8">
-	<div class="grid_full">
-		</div>
-</div> 
