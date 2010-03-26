@@ -7,7 +7,7 @@
 ?>
 <?php $html->link('Töm Model session array', array('action' => 'clearSession', 'Registration'));?>
 
-<h2><?php echo "Kontakuppgifter för registrering till $eventName"; ?></h2>
+<h2><?php echo "Kontaktuppgifter för anmälan till $eventName"; ?></h2>
 
 <div id="registration" class="grid_8">
 	

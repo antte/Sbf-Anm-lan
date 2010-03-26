@@ -2,52 +2,52 @@ $(document).ready(function(){
 	
 	$('#RegistratorAddForm').validate({ 
 		rules: {
-			'data[Registration][first_name]': {
+			'data[Registrator][first_name]': {
 				required: true,
 				maxlength: 127
 			},
-			'data[Registration][last_name]': {
+			'data[Registrator][last_name]': {
 	      		required: true,
 	      		maxlength: 127
 			},
-			'data[Registration][role]': {
+			'data[Registrator][role]': {
 		    	required: true
 	 		},
-	 		'data[Registration][email]': {
+	 		'data[Registrator][email]': {
 		    	required: true,
 		    	maxlength: 127,
 		    	email: true
 	 		},
-	 		'data[Registration][retype_email]': {
+	 		'data[Registrator][retype_email]': {
 		    	equalTo: "#RegistrationEmail",
 		    	email: true
 	 		},
-	 		'data[Registration][phone]': {		
+	 		'data[Registrator][phone]': {		
 				minlength: 7 
 			},
-			'data[Registration][c_o]': {
+			'data[Registrator][c_o]': {
 	      		maxlength: 127
 			},
-			'data[Registration][street_address]': {
+			'data[Registrator][street_address]': {
 		    	required: true,
 		    	maxlength: 127
 	 		},
-	 	'data[Registration][postal_code]': {
+	 		'data[Registrator][postal_code]': {
 		    	required: true,
 		    	regex: "^[0-9 ']{5,6}$"  
 
 	 		},
-	 		'data[Registration][city]': {
+	 		'data[Registrator][city]': {
 		    	required: true,
 		    	maxlength: 127
 	 		}
 		},
 		messages: {
-			'data[Registration][postal_code]': {
+			'data[Registrator][postal_code]': {
 				required: "Du måste fylla i en korrekt postkod.",
 				regex: "Du måste fylla i en korrekt postkod."
 			},
-			'data[Registration][retype_email]': {
+			'data[Registrator][retype_email]': {
 				required: "Ange samma epost igen.",
 				rangelenght: "Ange samma e-post igen.",
 				digits: "Ange samma e-post igen."
