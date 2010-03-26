@@ -8,8 +8,12 @@ class PeopleController extends AppController {
 	}
 
 	function create($amountOfPeople = 1){
-
-		$this->set('amountOfPeople' , $amountOfPeople);
+		if (!is_numeric($amountOfPeople) || $amountOfPeople < 1) {
+			$this->Session->setFlash('Skriv hur många personer du vill anmäla. Du måste anmäla minst en person.');
+			$this->redirect(array('action' => 'create'));
+		}
+		
+		$this->set('amountOfPeople' , Sanitize::clean($amountOfPeople));
 		$event = $this->Person->Registration->Event->find('first', array('conditions' => array('id' => $this->Session->read('eventId')), 'fields' => array('Event.id', 'Event.name')));
 		$this->set('event' , $event['Event']);
 			
@@ -29,7 +33,7 @@ class PeopleController extends AppController {
 			
 			if(empty($errors)) {
 				//if we dont have errors all was successful and we continue with the registration
-				$this->saveModelDataToSession('Person', $this->data);
+				$this->saveModelDataToSession('Person', Sanitize::clean($this->data));
 				$this->redirect(array('controller' => 'registrators', 'action'=>'create', $this->Session->read('eventId')));			
 			} else {
 				$this->Session->write('errors', $errors);

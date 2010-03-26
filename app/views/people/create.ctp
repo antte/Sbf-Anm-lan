@@ -8,11 +8,9 @@
 	
 ?>
 
+<h2>Fyll i vilka som ska komma till <?php echo $event['name']; ?></h2>
+
 <div id="choosepeopleamount" class="grid_8">
-	
-	<h2><?php echo $event['name']; ?></h2>
-	
-	<h3>Fyll i vilka som ska komma</h3>
 	
 	<?php 
 		if (!empty($errors)) {?>
@@ -23,7 +21,7 @@
 			</ul>
 		<?php } ?>
 		<?php 
-			echo $form->create('Person'/*, array('id' => 'addamount')*/);
+			echo $form->create('Person', array('id' => 'addamount'));
 			echo '<fieldset class="amount grid_8 alpha">';
 			echo $form->input('amount', array('type' => 'text', 'label' => 'Hur många är i ditt sällskap?', 'value' => $amountOfPeople, 'div' => 'amount'));
 			echo $form->submit('Ändra antal personer');
@@ -64,3 +62,14 @@
 	<!--  Form helper - end form-->
 	<?php echo $form->end(); ?>	
 </div> 
+
+<div id="javascript_info" class="grid_4" >
+	<noscript>
+		<div class="grid_full">
+			<h2>Information</h2>
+			<p>
+				<em>För bästa funktionalitet rekommenderas att ni sätter på JavaScript - annars kan information gå förlorad vid felaktigt införda värden i formulären.</em> 
+			</p>
+		</div>
+	</noscript>
+</div>

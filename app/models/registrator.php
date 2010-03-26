@@ -1,4 +1,5 @@
 <?php
+
 	class Registrator extends AppModel {
 		var $belongsTo = array('Registration');
 		

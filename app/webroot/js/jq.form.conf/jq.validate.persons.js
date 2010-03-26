@@ -1,3 +1,3 @@
 $(document).ready(function(){
-	$('fieldset#addamount + form#PersonAddForm').validate();
+	$('form#PersonAddForm').validate();
 });

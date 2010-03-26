@@ -75,6 +75,8 @@ fieldset {
 	width: 190px;
 }
 
+div.amount { margin-left: 10px; }
+
 #RegistrationPeopleAddForm ol li {
 	clear: both;
 	position: relative;
@@ -112,7 +114,7 @@ input, select {
 	margin-bottom: 10px;
 }
 
-form #PersonAddForm ol li {
+form#PersonAddForm ol li {
 	position: relative;
 	clear: left;
 	margin-left: 0;
@@ -154,10 +156,16 @@ label.error {
 	background: url(../img/warning.png) no-repeat 0 0;
 }
 
-#info p {
+#javascript_info, #event_info {
 	background: #eee;
-	padding:10px;
-}	
+	margin-bottom: 20px;
+	float: right;
+}
+
+#javascript_info em {
+	padding-left: 20px;
+	background: url(../img/warning.png) no-repeat 0 0;
+}
 
 #booking_nr, #registrator, #entrants, #event {
 	background: #eee;
