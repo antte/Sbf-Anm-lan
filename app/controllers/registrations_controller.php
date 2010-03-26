@@ -21,15 +21,26 @@ class RegistrationsController extends AppController {
 			$this->redirect(array('controller' => 'events', 'action' => 'index'));
 		}
 		
-		/*$this->Email->from		= 'Svenska bilsportförbundet <info@sbf.se>';
+		$this->Email->smtpOptions = array(
+			'port'			=> '25', 
+			'timeout'		=> '30',
+			'host' 			=> 'localhost'
+		);
+		
+		$this->Email->delivery 	= 'smtp';
+		
+		$this->Email->from		= 'Svenska bilsportförbundet Anmälan <anmalan@sbf.se>';
 		$this->Email->to		= "{$registration['Registrator']['first_name']} {$registration['Registrator']['last_name']} <{$registration['Registrator']['email']}>";
+		
 		$eventName = $this->Registration->Event->findById($eventId['Registration']['event_id'], array('fields' => 'name'));
+		
 		$this->Email->subject	= "Kvitto för din anmälan till $eventName";
 		$this->Email->template	= 'receipt';
 		$this->Email->sendAs	= 'both'; //both text and html
 		$this->set('registration', $registration);
 		$this->Session->del('Registration');
-		$this->Email->send();*/
+		$this->Email->send();
+		debug($this->Email->smtpError);
 	}
 	
 	function clearSession() {
@@ -43,41 +54,6 @@ class RegistrationsController extends AppController {
 	}
 	
 	function getModuleReceipt(){
-		
-	}
-
-	function testemail() {
-		/*
-		$this->Email->smtpOptions = array(
-	        'port'=>'25', 
-	        'timeout'=>'30',
-	        'host' => 'localhost'
-	        //,'username'=>''
-	        //,'password'=>''
-	        //,'client' =>''
-	   );
-		
-		
-		$this->Email->from    	= 'hilol <info@sbf.se>';
-		$this->Email->to      	= 'anfl <andreas_fliesberg@hotmail.com>';
-		$this->Email->subject 	= 'Test';
-		$this->Email->delivery 	= 'smtp';
-		$this->Email->send('Hello message body!');
-		$this->set('smtperrors', $this->Email->smtpError);
-		*/
-		
-		$this->Email->from    = 'Markus <markus.nordin@gmail.com>';
-		$this->Email->to      = 'Andreas <andreas.fliesberg@hotmail.com>';
-		$this->Email->subject = 'Im in ur computer!';
-		$this->Email->send('Trying stuff out!!!');
-		$this->set('smtperrors', $this->Email->smtpError);
-		if($this->Email->send('Trying stuff out!!!')){
-			echo "successess and fame to you!";
-		} else {
-			echo "no email sent!";
-		}
-		
-		
 		
 	}
 	
