@@ -1,3 +1,6 @@
+<?php $people = $this->requestAction('people/receipt');
+//debug($people);
+?> 
 <div id="entrants" class="grid_8">
 	<div class="grid_full">
 	
@@ -12,21 +15,13 @@
 				</tr>
 			</thead>
 			<tbody>
+			<?php foreach($people as $person):	?>
 				<tr>
-					<td>Markus</td>
-					<td>Nordin</td>
-					<td>Värd</td>
+					<td><?php echo $person['first_name'];?></td>
+					<td><?php echo $person['last_name'];?></td>
+					<td><?php echo $person['role_name'];?></td>
 				</tr>
-				<tr>
-					<td>Tim</td>
-					<td>Jakobsson</td>
-					<td>Programledare</td>
-				</tr>
-				<tr>
-					<td>Olle</td>
-					<td>Svensson</td>
-					<td>Stenhuggare</td>
-				</tr>
+			<?php endforeach;?>
 			</tbody>
 		</table>
 			

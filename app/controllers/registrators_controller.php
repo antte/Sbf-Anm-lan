@@ -54,5 +54,12 @@ class RegistratorsController extends AppController {
 		}
 		
 	}
-	
+
+	function receipt(){
+	 	
+		$registrator = $this->Session->read('Registration.Registrator');
+		
+		//debug($registrator);
+		return $registrator;
+	}
 }

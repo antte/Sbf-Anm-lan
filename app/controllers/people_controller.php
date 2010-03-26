@@ -38,6 +38,16 @@ class PeopleController extends AppController {
 		}
 	}
 	
-	
+	function receipt(){
+	 	
+		$people = $this->Session->read('Registration.Person');
+		
+		foreach ($people as &$person){
+			$person['role_name'] = $this->Person->Role->field('name',array ('id'=> $person['role_id'] )); 
+			//debug($result);
+		}
+		//debug($people);
+		return $people;
+	}
 	
 }
