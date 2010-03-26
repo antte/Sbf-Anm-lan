@@ -47,7 +47,7 @@ class RegistrationsController extends AppController {
 	}
 
 	function testemail() {
-		
+		/*
 		$this->Email->smtpOptions = array(
 	        'port'=>'25', 
 	        'timeout'=>'30',
@@ -64,6 +64,21 @@ class RegistrationsController extends AppController {
 		$this->Email->delivery 	= 'smtp';
 		$this->Email->send('Hello message body!');
 		$this->set('smtperrors', $this->Email->smtpError);
+		*/
+		
+		$this->Email->from    = 'Markus <markus.nordin@gmail.com>';
+		$this->Email->to      = 'Andreas <andreas.fliesberg@hotmail.com>';
+		$this->Email->subject = 'Im in ur computer!';
+		$this->Email->send('Trying stuff out!!!');
+		$this->set('smtperrors', $this->Email->smtpError);
+		if($this->Email->send('Trying stuff out!!!')){
+			echo "successess and fame to you!";
+		} else {
+			echo "no email sent!";
+		}
+		
+		
+		
 	}
 	
 }
