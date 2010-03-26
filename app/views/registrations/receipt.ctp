@@ -13,7 +13,7 @@
 		<p><a href="#" class="print" onclick="window.print();return false;">Skriv ut detta kvitto</a> och spara det på ett bra ställe.</p>
 	</div>
 </div>
-
+<!-- element: codeblock seperated into its own ctp-file -->
 <div id="registrator" class="grid_8">
 	<div class="grid_full">
 		<h3>Bokningsinformation</h3>
@@ -40,7 +40,7 @@
 		
 	</div>
 </div>
-
+<!-- element: codeblock seperated into its own ctp-file -->
 <div id="entrants" class="grid_8">
 	<div class="grid_full">
 	
