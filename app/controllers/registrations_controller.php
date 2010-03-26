@@ -21,15 +21,26 @@ class RegistrationsController extends AppController {
 			$this->redirect(array('controller' => 'events', 'action' => 'index'));
 		}
 		
-		/*$this->Email->from		= 'Svenska bilsportförbundet <info@sbf.se>';
+		$this->Email->smtpOptions = array(
+			'port'			=> '25', 
+			'timeout'		=> '30',
+			'host' 			=> 'localhost'
+		);
+		
+		$this->Email->delivery 	= 'smtp';
+		
+		$this->Email->from		= 'Svenska bilsportförbundet Anmälan <anmalan@sbf.se>';
 		$this->Email->to		= "{$registration['Registrator']['first_name']} {$registration['Registrator']['last_name']} <{$registration['Registrator']['email']}>";
+		
 		$eventName = $this->Registration->Event->findById($eventId['Registration']['event_id'], array('fields' => 'name'));
+		
 		$this->Email->subject	= "Kvitto för din anmälan till $eventName";
 		$this->Email->template	= 'receipt';
 		$this->Email->sendAs	= 'both'; //both text and html
 		$this->set('registration', $registration);
 		$this->Session->del('Registration');
-		$this->Email->send();*/
+		$this->Email->send();
+		debug($this->Email->smtpError);
 	}
 	
 	function clearSession() {
@@ -46,24 +57,4 @@ class RegistrationsController extends AppController {
 		
 	}
 
-	function testemail() {
-		
-		$this->Email->smtpOptions = array(
-	        'port'=>'25', 
-	        'timeout'=>'30',
-	        'host' => 'localhost'
-	        //,'username'=>'andreas.fliesberg@gmail.com'
-	        //,'password'=>''
-	        //,'client' =>''
-	   );
-		
-		
-		$this->Email->from    	= 'Anmälan Sbf.se <anmalan@sbf.se>';
-		$this->Email->to      	= 'anfl <andreas_fliesberg@hotmail.com>';
-		$this->Email->subject 	= 'fsbfnousrlh';
-		$this->Email->delivery 	= 'smtp';
-		$this->Email->send('Hello message body!');
-		$this->set('smtperrors', $this->Email->smtpError);
-	}
-	
 }
