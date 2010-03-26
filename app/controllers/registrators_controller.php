@@ -42,7 +42,8 @@ class RegistratorsController extends AppController {
 		$this->Registrator->set($this->data); 
 		if($this->Registrator->validates()) {
 			//if we dont have errors all was successful and we continue with the registration
-			$this->saveModelDataToSession('Registrator', $this->data);
+			
+			$this->saveModelDataToSession('Registrator', Sanitize::clean($this->data));
 			$this->redirect(array('controller' => 'registrations' , 'action' => 'finalize'));
 		} else {
 			$this->Session->write('errors', $this->Registrator->validationErrors);

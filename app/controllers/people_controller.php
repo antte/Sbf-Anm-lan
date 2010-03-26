@@ -33,7 +33,7 @@ class PeopleController extends AppController {
 			
 			if(empty($errors)) {
 				//if we dont have errors all was successful and we continue with the registration
-				$this->saveModelDataToSession('Person', $this->data);
+				$this->saveModelDataToSession('Person', Sanitize::clean($this->data));
 				$this->redirect(array('controller' => 'registrators', 'action'=>'create', $this->Session->read('eventId')));			
 			} else {
 				$this->Session->write('errors', $errors);
