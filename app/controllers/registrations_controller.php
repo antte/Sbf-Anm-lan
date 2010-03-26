@@ -45,4 +45,12 @@ class RegistrationsController extends AppController {
 	function getModuleReceipt(){
 		
 	}
+
+	function testemail() {
+		$this->Email->from    = 'hilol <andreas.fliesberg@gmail.com>';
+		$this->Email->to      = 'an <andreas_fliesberg@hotmail.com>';
+		$this->Email->subject = 'Test';
+		$this->Email->send('Hello message body!');
+	}
+	
 }

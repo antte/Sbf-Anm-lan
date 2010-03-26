@@ -192,17 +192,25 @@ p.phone {
 	background: url(../img/phone.png) no-repeat 0 0;
 }
 
-#entrants ol li p {
-	float:left;
-
+table#receipt_entrants {
+	border-spacing: 5px;
+	border-collapse: none;
 }
 
-#entrants ol li {
-	clear:left;
-		
+table#receipt_entrants th, table#receipt_entrants td {
+	width: 200px;
+}
+table#receipt_entrants th {
+	text-align: left;
+	font-size: 120%;
 }
 
-#entrants p {
-	text-indent:10px;
-		
-}	
+table td {
+	border: 1px solid #444;
+	padding: 5px;
+}
+
+table tbody tr:hover {
+	background: #666;
+	color: #fff;
+}
