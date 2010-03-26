@@ -6,9 +6,11 @@
 	echo $javascript->link('jq.form.conf/jq.validate.registration', $inline = false);
 ?>
 <?php $html->link('Töm Model session array', array('action' => 'clearSession', 'Registration'));?>
+
+<h2><?php echo "Kontakuppgifter för registrering till $eventName"; ?></h2>
+
 <div id="registration" class="grid_8">
 	
-	<h2><?php echo "Kontakuppgifter för registrering till $eventName"; ?></h2>
 	<?php 
 //	debug($sessionApa);
 		if (!empty($errors)) {
@@ -56,12 +58,13 @@
 	<!--  Form helper - end form-->
 	<?php echo $form->end(); ?>	
 </div> 
-<div id="info" class="grid_4" >
+
+<div id="javascript_info" class="grid_4" >
 	<noscript>
-		<h2> Info </h2>
-		<div>
+		<div class="grid_full">
+			<h2>Information</h2>
 			<p>
-				<em>För bästa funktionalitet rekomenderars att Ni sätter på Javascript Annanrs kan information gå förlorad vi omladdning av sidan</em> 
+				<em>För bästa funktionalitet rekommenderas att ni sätter på JavaScript - annars kan information gå förlorad vid felaktigt införda värden i formulären.</em> 
 			</p>
 		</div>
 	</noscript>

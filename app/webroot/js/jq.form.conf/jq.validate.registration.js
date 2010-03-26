@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	
-	$('#RegistrationAddForm').validate({ 
+	$('#RegistratorAddForm').validate({ 
 		rules: {
 			'data[Registration][first_name]': {
 				required: true,
