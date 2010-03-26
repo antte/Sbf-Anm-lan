@@ -11,11 +11,8 @@ class RegistrationsController extends AppController {
 		
 		// The only thing registration needs right now is an event id
 		$Registration['Registration']['event_id'] = $this->Session->read('eventId');
-		$Registration['Registration']['number'] = $this->Registration->generateUniqueNumber();
-		debug($this->Registration->generateUniqueNumber(1));
-		
-		$this->saveModelDataToSession('Registration', $Registration);
-		
+		$kolla = $Registration['Registration']['number'] = $this->Registration->generateUniqueNumber();
+		$this->saveModelDataToSession('Registration', $Registration);		
 		$registration = $this->Session->read('Registration');
 		
 		if(!$this->Registration->saveAll($registration)) {
@@ -45,4 +42,7 @@ class RegistrationsController extends AppController {
 		
 	}
 	
+	function getModuleReceipt(){
+		
+	}
 }
