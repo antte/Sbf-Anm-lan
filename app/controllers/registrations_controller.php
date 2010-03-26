@@ -52,15 +52,15 @@ class RegistrationsController extends AppController {
 	        'port'=>'25', 
 	        'timeout'=>'30',
 	        'host' => 'localhost'
-	        //,'username'=>''
+	        //,'username'=>'andreas.fliesberg@gmail.com'
 	        //,'password'=>''
 	        //,'client' =>''
 	   );
 		
 		
-		$this->Email->from    	= 'hilol <info@sbf.se>';
+		$this->Email->from    	= 'Anmälan Sbf.se <anmalan@sbf.se>';
 		$this->Email->to      	= 'anfl <andreas_fliesberg@hotmail.com>';
-		$this->Email->subject 	= 'Test';
+		$this->Email->subject 	= 'fsbfnousrlh';
 		$this->Email->delivery 	= 'smtp';
 		$this->Email->send('Hello message body!');
 		$this->set('smtperrors', $this->Email->smtpError);
