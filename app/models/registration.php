@@ -1,54 +1,48 @@
 <?php
-	
-	App::import('Sanitize');
 
-	Class Registration extends AppModel {
-		var $belongsTo = array('Event');
-		var $hasMany = array('Person');
-		var $hasOne = array('Registrator');
-		
-		var $validate = array(
+App::import('Sanitize');
+
+Class Registration extends AppModel {
+	var $belongsTo = array('Event');
+	var $hasMany = array('Person');
+	var $hasOne = array('Registrator');
+
+	var $validate = array(
         	'event_id' => array (
 				'required'  => true,
         		'allowEmpty'=> false,
 				'rule'		=> 'numeric',
-        	)
-    	);
-	
-    	/**
-    	 * Saves all data relating to a registration and returns a status message
-    	 * @param $registration
-    	 * @return array $status['code'] similar to http error codes
-    	 */
-    	function saveAndReturnStatus($registration) {
-    		debug($registration);
-    		$success = $this->saveAll($registration);
-    		// TODO we'll want to see if registrations gets an associated event_id, if not we can get it from session (eventId)
-    		// TODO send status back
-    		if ($success) {
-    			debug("hej");
-    		} else {
-    			debug("nej");
-    		}
-    		
-    		/*
-    		$status = array();
-    		if($this->saveAll($registration)) {
-    			$status['flash'] = "Tack för din anmälan";
-    			$status['code'] = 2;
-    		} else {
-    			$status['flash'] = "Det blev fel";
-    			$status['code'] = 4;
-    		}
-    		return $status;
-    		*/
-    	}
-    	
+	)
+	);
+
+
+
+	/**
+	 * Check and kreates unique number obs don't save just check if exists
+	 * @param $length = 6
+	 * @param $possible = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+	 * @param $field = numbers
+	 */
+	function generateUniqueNumber ($length = 6, $possible = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ', $field = 'number'){
+		// initialize variables
+		$string = "";
+		$i = 0;
+
+		// add random characters to $string until $length is reached
+		do {
+			while ($i < $length) {
+				// pick a random character from the possible ones
+				$char = substr($possible, mt_rand(0, strlen($possible)-1), 1);
+
+				// we don't want this character if it's already in the string
+				if (!strstr($string, $char)) {
+					$string .= $char;
+					$i++;
+				}
+			}
+		}while($this->findByNumber($string));
+		return $string;
 	}
-	
-	
-	
-	
-	
-	
-	
+}
+
+
