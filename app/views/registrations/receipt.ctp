@@ -43,24 +43,28 @@
 
 <div id="entrants" class="grid_8">
 	<div class="grid_full">
-	<h3>Anmälda personer</h3>
-		<ol>
-			<li>
-				<p>Markus</p>
-				<p>Nordin</p>
-				<p>Värd</p>
-			</li>
-			<li>
-				<p>Tim</p>
-				<p>Jakobsson</p>
-				<p>Programledare</p>
-			</li>
-			<li>
-				<p>Olle</p>
-				<p>Svensson</p>
-				<p>Stenhuggare</p>
-			</li>
-		</ol>
+	
+		<table id="receipt_entrants">
+			<tr>
+				<th><h3>Anmälda personer</h3></th>
+			</tr>
+			<tr>
+				<td><p>Markus</p></td>
+				<td><p>Nordin</p></td>
+				<td><p>Värd</p></td>
+			</tr>
+			<tr>
+				<td><p>Tim</p></td>
+				<td><p>Jakobsson</p></td>
+				<td><p>Programledare</p></td>
+			</tr>
+			<tr>
+				<td><p>Olle</p></td>
+				<td><p>Svensson</p></td>
+				<td><p>Stenhuggare</p></td>
+			</tr>
+		</table>
+			
 	</div>
 </div>
 
