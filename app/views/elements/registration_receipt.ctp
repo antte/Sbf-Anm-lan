@@ -1,0 +1,1 @@
+<p class="booking_nr">Bokningsnummer: xxxxx</p>

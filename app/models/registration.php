@@ -12,7 +12,7 @@ Class Registration extends AppModel {
 				'required'  => true,
         		'allowEmpty'=> false,
 				'rule'		=> 'numeric',
-	)
+		)
 	);
 
 
