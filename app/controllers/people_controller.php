@@ -8,6 +8,7 @@ class PeopleController extends AppController {
 	}
 
 	function create($amountOfPeople = 1){
+		//debug($this->Session->read());
 		if (!is_numeric($amountOfPeople) || $amountOfPeople < 1) {
 			$this->Session->setFlash('Skriv hur många personer du vill anmäla. Du måste anmäla minst en person.');
 			$this->redirect(array('action' => 'create'));
@@ -43,14 +44,11 @@ class PeopleController extends AppController {
 	}
 	
 	function receipt(){
-	 	
 		$people = $this->Session->read('Registration.Person');
-		
 		foreach ($people as &$person){
 			$person['role_name'] = $this->Person->Role->field('name',array ('id'=> $person['role_id'] )); 
-			//debug($result);
 		}
-		//debug($people);
+//		debug($people);
 		return $people;
 	}
 	
