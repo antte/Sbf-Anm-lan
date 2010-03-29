@@ -39,9 +39,10 @@ class RegistrationsController extends AppController {
 		
 		$this->Email->delivery 	= 'smtp';
 		
-		$this->Email->from		= 'Svenska bilsportförbundet Anmälan <anmalan@sbf.se>';
+		$this->Email->from		= 'noreply@sbf.se';
 		$this->Email->to		= "{$registrator['first_name']} {$registrator['last_name']} <{$registrator['email']}>";
 		$this->Email->bcc		= "it sbf <it@sbf.se>";
+		$this->Email->replyTo	= 'it@sbf.se';
 		
 		$event = $this->Registration->Event->findById($registration['event_id'], array('fields' => 'name'));
 		
