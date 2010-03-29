@@ -11,7 +11,7 @@ class RegistrationsController extends AppController {
 		
 		// The only thing registration needs right now is an event id
 		$Registration['Registration']['event_id'] = $this->Session->read('Registration.Registration.event_id');
-		$kolla = $Registration['Registration']['number'] = $this->Registration->generateUniqueNumber();
+		$Registration['Registration']['number'] = $this->Registration->generateUniqueNumber();
 		$this->saveModelDataToSession('Registration', $Registration);		
 		$registration = $this->Session->read('Registration');
 		//debug($registration);
@@ -20,28 +20,37 @@ class RegistrationsController extends AppController {
 			$this->Session->setFlash('Vi ber om ursäkt, din registrering kunde inte slutföras. Kontakta support.');
 			$this->redirect(array('controller' => 'events', 'action' => 'index'));
 		} else {
-		
-			$this->Email->smtpOptions = array(
-				'port'			=> '25', 
-				'timeout'		=> '30',
-				'host' 			=> 'localhost'
-			);
 			
-			$this->Email->delivery 	= 'smtp';
-			
-			$this->Email->from		= 'Svenska bilsportförbundet Anmälan <anmalan@sbf.se>';
-			$this->Email->to		= "{$registration['Registrator']['first_name']} {$registration['Registrator']['last_name']} <{$registration['Registrator']['email']}>";
-			$this->Email->bcc		= "it sbf <it@sbf.se>";
-			
-			$event = $this->Registration->Event->findById($registration['Registration']['event_id'], array('fields' => 'name'));
-			
-			$this->Email->subject	= "Kvitto för din anmälan till {$event['Event']['name']}";
-			$this->Email->template	= 'receipt';
-			$this->Email->sendAs	= 'both'; //both text and html
-			$this->set('Registration', $registration);
-			$this->Email->send();
+			$this->sendRegistrationComfirmMail($registration['Registrator'], $registration['Registration']);
+//			$this->set('Registration', $registration);
 			$this->redirect(array ('action' => 'receipt'));
 		}
+	}
+
+	/**
+	 * Sending a comfirmmail using the reciept view for layout
+	 * @param unknown_type $registrator --session array for the registration module 
+	 * @param unknown_type $registration -- session array for the registration module
+	 */
+	private function sendRegistrationComfirmMail($registrator,$registration){
+		$this->Email->smtpOptions = array(
+			'port'			=> '25', 
+			'timeout'		=> '30',
+			'host' 			=> 'localhost'
+		);
+		
+		$this->Email->delivery 	= 'smtp';
+		
+		$this->Email->from		= 'Svenska bilsportförbundet Anmälan <anmalan@sbf.se>';
+		$this->Email->to		= "{$registrator['first_name']} {$registrator['last_name']} <{$registrator['email']}>";
+		$this->Email->bcc		= "it sbf <it@sbf.se>";
+		
+		$event = $this->Registration->Event->findById($registration['event_id'], array('fields' => 'name'));
+		
+		$this->Email->subject	= "Kvitto för din anmälan till {$event['Event']['name']}";
+		$this->Email->template	= 'receipt';
+		$this->Email->sendAs	= 'both'; //both text and html
+		$this->Email->send();
 	}
 	
 	/**
@@ -65,5 +74,7 @@ class RegistrationsController extends AppController {
 		return $registration;
 		
 	}
+
+	
 }
 
