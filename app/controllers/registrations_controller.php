@@ -32,7 +32,7 @@ class RegistrationsController extends AppController {
 	 * @param unknown_type $registrator --session array for the registration module 
 	 * @param unknown_type $registration -- session array for the registration module
 	 */
-	private function sendRegistrationComfirmMail($registrator,$registration){
+	private function sendRegistrationConfirmMail($registrator,$registration){
 		$this->Email->smtpOptions = array(
 			'port'			=> '25', 
 			'timeout'		=> '30',
