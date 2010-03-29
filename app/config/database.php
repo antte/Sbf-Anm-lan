@@ -82,12 +82,11 @@ class DATABASE_CONFIG {
 		'driver' => 'mysql',
 		'persistent' => false,
 		'host' => 'localhost',
-		'login' => 'Sbf',
-		'password' => 'anm-lan',
-		'database' => 'sbfanmalan',
+		'login' => 'root',
+		'password' => '',
+		'database' => 'sbf-anmalan',
 		'encoding' => 'utf8',
 		'prefix' => '',
-		'encoding' => 'utf8'
 	);
 
 	var $test = array(
