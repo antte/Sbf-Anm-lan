@@ -4,6 +4,7 @@
 	echo $javascript->link('jquery.validate', $inline = false);
 	echo $javascript->link('jq.form.conf/messages_se', $inline = false);
 	echo $javascript->link('jq.form.conf/jq.validate.registration', $inline = false);
+	echo $javascript->link('disableSubmit', $inline = false);
 ?>
 <?php $html->link('Töm Model session array', array('action' => 'clearSession', 'Registration'));?>
 
@@ -51,7 +52,7 @@
 			?>						
 		</fieldset>
 		<fieldset class="contact grid_8 alpha">
-			<?php echo $form->submit('Skicka anmälan')?>
+			<?php echo $form->submit('Skicka anmälan', array('id' => 'registratorSubmit'))?>
 		
 		</fieldset>
 		
