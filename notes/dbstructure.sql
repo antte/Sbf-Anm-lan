@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.2.4
+-- version 3.2.0.1
 -- http://www.phpmyadmin.net
 --
 -- Värd: localhost
--- Skapad: 26 mars 2010 kl 11:24
--- Serverversion: 5.1.37
--- PHP-version: 5.2.11
+-- Skapad: 29 mars 2010 kl 10:47
+-- Serverversion: 5.1.36
+-- PHP-version: 5.3.0
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
@@ -25,8 +25,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- Struktur för tabell `events`
 --
 
-DROP TABLE IF EXISTS `events`;
-CREATE TABLE `events` (
+CREATE TABLE IF NOT EXISTS `events` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(127) COLLATE utf8_bin NOT NULL,
   `is_active` int(1) DEFAULT '0',
@@ -39,8 +38,7 @@ CREATE TABLE `events` (
 -- Struktur för tabell `people`
 --
 
-DROP TABLE IF EXISTS `people`;
-CREATE TABLE `people` (
+CREATE TABLE IF NOT EXISTS `people` (
   `registration_id` int(11) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `role_id` int(11) DEFAULT NULL,
@@ -48,7 +46,7 @@ CREATE TABLE `people` (
   `last_name` varchar(127) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`),
   KEY `registration_id` (`registration_id`,`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=14 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=17 ;
 
 -- --------------------------------------------------------
 
@@ -56,14 +54,15 @@ CREATE TABLE `people` (
 -- Struktur för tabell `registrations`
 --
 
-DROP TABLE IF EXISTS `registrations`;
-CREATE TABLE `registrations` (
+CREATE TABLE IF NOT EXISTS `registrations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `event_id` int(11) NOT NULL,
   `number` varchar(6) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `number` (`number`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=51 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=54 ;
 
 -- --------------------------------------------------------
 
@@ -71,8 +70,7 @@ CREATE TABLE `registrations` (
 -- Struktur för tabell `registrators`
 --
 
-DROP TABLE IF EXISTS `registrators`;
-CREATE TABLE `registrators` (
+CREATE TABLE IF NOT EXISTS `registrators` (
   `registration_id` int(11) NOT NULL AUTO_INCREMENT,
   `first_name` varchar(127) COLLATE utf8_bin NOT NULL,
   `last_name` varchar(127) COLLATE utf8_bin NOT NULL,
@@ -82,7 +80,7 @@ CREATE TABLE `registrators` (
   `city` varchar(127) COLLATE utf8_bin DEFAULT NULL,
   `postal_code` varchar(127) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`registration_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=51 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=54 ;
 
 -- --------------------------------------------------------
 
@@ -90,8 +88,7 @@ CREATE TABLE `registrators` (
 -- Struktur för tabell `roles`
 --
 
-DROP TABLE IF EXISTS `roles`;
-CREATE TABLE `roles` (
+CREATE TABLE IF NOT EXISTS `roles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(127) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)

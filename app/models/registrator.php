@@ -72,15 +72,14 @@
 	 			'message' 	=> 'Vi behöver veta din postort.'
 	 		)
     	);
-    //TODO Är den här funktioen nödvändig?	
-    /**
-     * Matches one field against data (another field)
-     * @param $data to match with
-     * @param $field a field to match against
-     */
-	function verifies($data, $field) {
-		$value = Set::extract($data, "{s}");
-		return ($value[0] == $this->data[$this->name][$field]);
-	}
-	
+    
+	    /**
+	     * Matches one field against data (another field)
+	     * @param $data to match with
+	     * @param $field a field to match against
+	     */
+		function verifies($data, $field) {
+			$value = Set::extract($data, "{s}");
+			return ($value[0] == $this->data[$this->name][$field]);
+		}	
 	}
