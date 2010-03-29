@@ -21,6 +21,7 @@ class RegistrationsController extends AppController {
 			$this->redirect(array('controller' => 'events', 'action' => 'index'));
 		} else {
 			$this->Session->write('registrationId', $this->Registration->id);
+			$this->sendRegistrationConfirmMail($registration['Registrator'], $registration['Registration']);
 			$this->Session->del('Registration');
 			$this->redirect(array ('action' => 'receipt'));
 		}
