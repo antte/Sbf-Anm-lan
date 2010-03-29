@@ -39,8 +39,10 @@ class RegistrationsController extends AppController {
 			$this->Email->replyTo	= 'it@sbf.se';
 			$this->Email->template	= 'receipt';
 			$this->Email->sendAs	= 'both'; //both text and html
-			$this->set('Registration', $registration);
 			$this->Email->send();
+			$this->Session->write('registrationId', $this->Registration->id);
+			// When the registration is finished we clear the session.
+			$this->Session->del('Registration');
 			$this->redirect(array ('action' => 'receipt'));
 		}
 	}
@@ -60,9 +62,9 @@ class RegistrationsController extends AppController {
 	 * return $registration array of registration information 
 	 */
 	function receipt() {
-		$registration['number'] = $this->Session->read('Registration.Registration.number');
-		$registration['event_name'] = $this->Registration->Event->field('name',array('id'=> $this->Session->read('Registration.Registration.event_id')));
-		//debug($registration);
+		$registrationData = $this->Registration->findById($this->Session->read('registrationId'));
+		$registration['number'] = $registrationData['Registration']['number'];
+		$registration['event_name'] = $registrationData['Event']['name'];
 		return $registration;
 		
 	}

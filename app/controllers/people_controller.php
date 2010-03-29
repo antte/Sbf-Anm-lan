@@ -53,7 +53,8 @@ class PeopleController extends AppController {
 	 * return $registrator array of people connected to the registration
 	 */
 	function receipt(){
-		$people = $this->Session->read('Registration.Person');
+		$registrationData = $this->Person->Registration->findById($this->Session->read('registrationId'));
+		$people = $registrationData['Person'];
 		foreach ($people as &$person){
 			$person['role_name'] = $this->Person->Role->field('name',array ('id'=> $person['role_id'] )); 
 		}
