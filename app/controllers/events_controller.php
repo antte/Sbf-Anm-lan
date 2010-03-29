@@ -19,7 +19,7 @@
 			if (is_numeric($eventId)) $this->set('event', $this->Event->findById($eventId));
 			if (is_string($eventId)) $this->set('event', $this->Event->findByName($eventId));
 		}
-		
+
 		/**
 		 * Save the selected event in session and redirekt to next step
 		 * @param $eventId
@@ -29,4 +29,15 @@
 			$this->redirect(array('controller' => 'people', 'action' => 'create'));
 			
 		}
-	}
+		
+		/*function receipt(){
+	 	
+			$eventId = $this->Session->read('Registration.Registrator');
+			//debug($eventId);
+			return $eventId;
+		
+		}*/
+		
+		
+}
+	

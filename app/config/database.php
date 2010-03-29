@@ -83,8 +83,8 @@ class DATABASE_CONFIG {
 		'persistent' => false,
 		'host' => 'localhost',
 		'login' => 'Sbf',
-		'password' => 'Anm-lan',
-		'database' => 'sbf-anmalan',
+		'password' => 'anm-lan',
+		'database' => 'sbfanmalan',
 		'encoding' => 'utf8',
 		'prefix' => '',
 		'encoding' => 'utf8'
