@@ -72,6 +72,7 @@
 	 			'message' 	=> 'Vi behöver veta din postort.'
 	 		)
     	);
+    	
     //TODO Är den här funktioen nödvändig?	
     /**
      * Matches one field against data (another field)

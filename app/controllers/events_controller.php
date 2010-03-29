@@ -12,9 +12,18 @@
 			if (is_numeric($eventId)) $this->set('event', $this->Event->findById($eventId));
 			if (is_string($eventId)) $this->set('event', $this->Event->findByName($eventId));
 		}
-		
+	
 		function next($eventId) {
 			$this->Session->write('eventId', $eventId);
 			$this->redirect(array('controller' => 'people', 'action' => 'create'));
 		}
+		
+		function receipt(){
+	 	
+		$eventId = $this->Session->read('Registration.Registrator');
+		
+		//debug($eventId);
+		return $eventId;
 	}
+	}
+	
