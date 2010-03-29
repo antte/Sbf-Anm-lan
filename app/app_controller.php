@@ -3,7 +3,6 @@
 	App::import('Sanitize');
 	
 	class AppController extends Controller {
-		//var $components = array('Security'); TODO kolla hur funkar
 		
 		/**
 		 * Takes data from controllers and puts in in the sesssion so that we can save it later
