@@ -1,28 +1,34 @@
-﻿-- phpMyAdmin SQL Dump
+-- phpMyAdmin SQL Dump
 -- version 3.2.0.1
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Mar 29, 2010 at 11:00 AM
--- Server version: 5.1.36
--- PHP Version: 5.3.0
+-- Värd: localhost
+-- Skapad: 29 mars 2010 kl 14:25
+-- Serverversion: 5.1.36
+-- PHP-version: 5.3.0
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
 --
--- Database: `sbf-anmalan`
+-- Databas: `sbf-anmalan`
 --
 
 --
--- Dumping data for table `events`
+-- Data i tabell `events`
 --
 
-INSERT INTO `events` (`id`, `name`, `is_active`) VALUES
-(7, 'Gala', 1),
-(8, 'Konferens', 0);
+INSERT INTO `events` (`id`, `name`, `is_active`, `confirmation_message`) VALUES
+(7, 'Gala', 1, 'Du är välkommen att ta med dig egen mat till detta event.'),
+(8, 'Konferens', 0, NULL);
 
 --
--- Dumping data for table `roles`
+-- Data i tabell `roles`
 --
 
 INSERT INTO `roles` (`id`, `name`) VALUES
