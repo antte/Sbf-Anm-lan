@@ -21,10 +21,12 @@
 		
 		function receipt(){
 	 	
-		$eventId = $this->Session->read('Registration.Registrator');
+			$eventId = $this->Session->read('Registration.Registrator');
+			//debug($eventId);
+			return $eventId;
 		
-		//debug($eventId);
-		return $eventId;
-	}
-	}
+		}
+		
+		
+}
 	

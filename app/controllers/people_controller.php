@@ -52,4 +52,9 @@ class PeopleController extends AppController {
 		return $people;
 	}
 	
+	function edit() {
+		$people = $this->Session->read('Registration.Person');
+		$this->set('amountOfPeople' , $this->Session->read(''));
+		debug($people);
+	}
 }

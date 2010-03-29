@@ -21,20 +21,6 @@ class RegistrationsController extends AppController {
 			$this->redirect(array('controller' => 'events', 'action' => 'index'));
 		} else {
 		
-
-		$this->Email->from		= 'Svenska bilsportförbundet Anmälan <anmalan@sbf.se>';
-		$this->Email->to		= "{$registration['Registrator']['first_name']} {$registration['Registrator']['last_name']} <{$registration['Registrator']['email']}>";
-		
-		$eventName = $this->Registration->Event->findById($registration['Registration']['event_id'], array('fields' => 'name'));
-		
-		$this->Email->subject	= "Kvitto för din anmälan till $eventName";
-		$this->Email->template	= 'receipt';
-		$this->Email->sendAs	= 'both'; //both text and html
-		$this->set('Registration', $registration);
-		$this->Session->del('Registration');
-		$this->Email->send();
-		debug($this->Email->smtpError);
-		
 			$this->Email->smtpOptions = array(
 				'port'			=> '25', 
 				'timeout'		=> '30',
@@ -58,7 +44,6 @@ class RegistrationsController extends AppController {
 			$this->Email->send();
 			$this->redirect(array ('action' => 'receipt'));
 		}
-		
 	}
 	
 	function clearSession() {
