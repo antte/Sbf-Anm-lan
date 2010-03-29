@@ -43,12 +43,19 @@ class RegistrationsController extends AppController {
 		}
 	}
 	
+	/**
+	 * Clear the session from data regardin Registration   
+	 */
 	function clearSession() {
 		$this->Session->del('Registration');
 		$this->Session->setFlash('Session rensad');
 		$this->redirect(array ('action' => 'create', 'controller' =>'registrator'));
 	}
 	
+	/**
+	 * Get information about a registration suitet for use in element
+	 * return $registration array of registration information 
+	 */
 	function receipt() {
 		$registration['number'] = $this->Session->read('Registration.Registration.number');
 		$registration['event_name'] = $this->Registration->Event->field('name',array('id'=> $this->Session->read('Registration.Registration.event_id')));
@@ -56,9 +63,5 @@ class RegistrationsController extends AppController {
 		return $registration;
 		
 	}
-	
-	function getModuleReceipt(){
-		
-	}
-	
 }
+
