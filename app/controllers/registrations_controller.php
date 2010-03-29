@@ -50,6 +50,10 @@ class RegistrationsController extends AppController {
 	}
 	
 	function receipt() {
+		$registration = $this->Session->Read('Registration.Registration');
+		$registration['event_name'] = $this->Registration->Event->field('name',array('id'=> $registration['event_id'] ));
+		//debug($registration);
+		return $registration;
 		
 	}
 	

@@ -1,47 +1,81 @@
 -- phpMyAdmin SQL Dump
--- version 3.2.0.1
+-- version 3.2.4
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Mar 25, 2010 at 11:02 AM
--- Server version: 5.1.36
--- PHP Version: 5.3.0
+-- VÃ¤rd: localhost
+-- Skapad: 26 mars 2010 kl 11:28
+-- Serverversion: 5.1.37
+-- PHP-version: 5.2.11
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
 --
--- Database: `sbf-anmalan`
+-- Databas: `sbf-anmalan`
 --
 
 --
--- Dumping data for table `events`
+-- Data i tabell `events`
 --
 
-INSERT INTO `events` (`id`, `name`, `is_active`) VALUES
-(7, 'Årsmöte Svenska Bilsportförbundet 2010', 1),
-(8, 'Årsmöte Svenska Bilsportförbundet 2009', 0);
+INSERT INTO `events` VALUES(7, 'Gala', 1);
+INSERT INTO `events` VALUES(8, 'Konferens', 0);
 
 --
--- Dumping data for table `people`
+-- Data i tabell `people`
 --
 
+INSERT INTO `people` VALUES(30, 8, 12, 'sdfg', 'dfghj');
+INSERT INTO `people` VALUES(46, 9, 10, ',mn', 'vbnm,');
+INSERT INTO `people` VALUES(47, 10, 12, 'fgf', 'sdfgfds');
+INSERT INTO `people` VALUES(48, 11, 10, 'xzcxvb', 'dfb');
+INSERT INTO `people` VALUES(49, 12, 10, 'Ã¶k', 'plk');
+INSERT INTO `people` VALUES(50, 13, 11, 'zcv', 'xcvb');
 
 --
--- Dumping data for table `registrations`
+-- Data i tabell `registrations`
 --
 
+INSERT INTO `registrations` VALUES(50, 7, '78FQSR');
+INSERT INTO `registrations` VALUES(49, 7, 'IYHPCZ');
+INSERT INTO `registrations` VALUES(48, 7, '13');
+INSERT INTO `registrations` VALUES(47, 7, '1');
 
 --
--- Dumping data for table `registrators`
+-- Data i tabell `registrators`
 --
 
+INSERT INTO `registrators` VALUES(30, 'sdfghj', 'dfghjk', 'olle@kompis.se', '', 'sdfgh', 'sdfghjk', '12345');
+INSERT INTO `registrators` VALUES(32, 'a', 'a', 'olle@kompis.se', '', '12232rte', 'sdfgh', '12345');
+INSERT INTO `registrators` VALUES(33, 'a', 'a', 'olle@kompis.se', '', '12232rte', 'sdfgh', '12345');
+INSERT INTO `registrators` VALUES(34, 'a', 'a', 'olle@kompis.se', '', '12232rte', 'sdfgh', '12345');
+INSERT INTO `registrators` VALUES(35, 'a', 'a', 'olle@kompis.se', '', '12232rte', 'sdfgh', '12345');
+INSERT INTO `registrators` VALUES(36, 'a', 'a', 'olle@kompis.se', '', '12232rte', 'sdfgh', '12345');
+INSERT INTO `registrators` VALUES(37, 'a', 'a', 'olle@kompis.se', '', '12232rte', 'sdfgh', '12345');
+INSERT INTO `registrators` VALUES(38, 'a', 'a', 'olle@kompis.se', '', '12232rte', 'sdfgh', '12345');
+INSERT INTO `registrators` VALUES(39, 'a', 'a', 'olle@kompis.se', '', '12232rte', 'sdfgh', '12345');
+INSERT INTO `registrators` VALUES(40, 'a', 'a', 'olle@kompis.se', '', '12232rte', 'sdfgh', '12345');
+INSERT INTO `registrators` VALUES(41, 'a', 'a', 'olle@kompis.se', '', '12232rte', 'sdfgh', '12345');
+INSERT INTO `registrators` VALUES(42, 'a', 'a', 'olle@kompis.se', '', '12232rte', 'sdfgh', '12345');
+INSERT INTO `registrators` VALUES(43, 'a', 'a', 'olle@kompis.se', '', '12232rte', 'sdfgh', '12345');
+INSERT INTO `registrators` VALUES(44, 'a', 'a', 'olle@kompis.se', '', '12232rte', 'sdfgh', '12345');
+INSERT INTO `registrators` VALUES(45, 'a', 'a', 'olle@kompis.se', '', '12232rte', 'sdfgh', '12345');
+INSERT INTO `registrators` VALUES(46, 'ljld', 'sdfghjk', 'olle@kompis.se', 'llll', 'dfghjk', 'fghjklÃ¶', '12345');
+INSERT INTO `registrators` VALUES(47, 'olll', 'oooo', 'olle@kompis.se', '', 'dfgh', 'ddddddd', '12345');
+INSERT INTO `registrators` VALUES(48, 'ssss', 'sc', 'olle@kompis.se', '', 'sdfg', 'cf', '12345');
+INSERT INTO `registrators` VALUES(49, 'olll', 'oooo', 'olle@kompis.se', '', 'o', 'sdfghjk', '12345');
+INSERT INTO `registrators` VALUES(50, 'dfgh', 'sdfgh', 'olle@kompis.se', '', 'dvbnm', 'sdfghj', '12345');
 
 --
--- Dumping data for table `roles`
+-- Data i tabell `roles`
 --
 
-INSERT INTO `roles` (`id`, `name`) VALUES
-(11, 'Åhörare'),
-(10, 'VIP'),
-(12, 'Ordförande'),
-(13, 'Styrelsemedlem');
+INSERT INTO `roles` VALUES(11, 'BesÃ¶kare');
+INSERT INTO `roles` VALUES(10, 'VIP');
+INSERT INTO `roles` VALUES(12, 'Ordf');
+INSERT INTO `roles` VALUES(13, 'Styrelsemedlem');
