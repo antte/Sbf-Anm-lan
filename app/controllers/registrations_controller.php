@@ -40,7 +40,7 @@ class RegistrationsController extends AppController {
 			$this->set('Registration', $registration);
 			//Save boockingnumber delete everything else 
 			$this->Session->write('booking_number',$registration['Registration']['number']);
-			$this->Session->del('Registration');
+			//$this->Session->del('Registration');
 			$this->Email->send();
 			$this->redirect(array ('action' => 'receipt'));
 		}
@@ -53,8 +53,8 @@ class RegistrationsController extends AppController {
 	}
 	
 	function receipt() {
-		$registration = $this->Session->read('booking_number');
-		$registration['event_name'] = $this->Registration->Event->field('name',array('id'=> $registration['event_id'] ));
+		$registration['number'] = $this->Session->read('Registration.Registration.number');
+		$registration['event_name'] = $this->Registration->Event->field('name',array('id'=> $this->Session->read('Registration.Registration.event_id')));
 		//debug($registration);
 		return $registration;
 		
