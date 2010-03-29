@@ -19,7 +19,7 @@ $(document).ready(function(){
 		    	email: true
 	 		},
 	 		'data[Registrator][retype_email]': {
-		    	equalTo: "#RegistrationEmail",
+		    	equalTo: "#RegistratorEmail",
 		    	email: true
 	 		},
 	 		'data[Registrator][phone]': {		
