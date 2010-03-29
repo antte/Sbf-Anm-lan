@@ -20,7 +20,8 @@ class RegistrationsController extends AppController {
 			$this->Session->setFlash('Vi ber om ursäkt, din registrering kunde inte slutföras. Kontakta support.');
 			$this->redirect(array('controller' => 'events', 'action' => 'index'));
 		} else {
-			
+			$this->Session->write('registrationId', $this->Registration->id);
+			$this->Session->del('Registration');
 			$this->redirect(array ('action' => 'receipt'));
 		}
 	}
