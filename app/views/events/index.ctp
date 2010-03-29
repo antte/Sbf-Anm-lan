@@ -1,6 +1,7 @@
 <h2>SBF events</h2>
 <ul>
 <?php 
+	//Loops events send to this view
 	foreach( $events as $event ){
 		
 		echo "<li>";

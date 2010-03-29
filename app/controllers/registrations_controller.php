@@ -36,7 +36,7 @@ class RegistrationsController extends AppController {
 			
 			$this->Email->subject	= "Kvitto för din anmälan till {$event['Event']['name']}";
 			$this->Email->template	= 'receipt';
-			$this->Email->sendAs	= 'both'; //both text and html
+			$this->Email->sendAs	= 'text'; //both text and html
 			$this->set('Registration', $registration);
 			$this->Email->send();
 			$this->redirect(array ('action' => 'receipt'));
@@ -60,5 +60,4 @@ class RegistrationsController extends AppController {
 	function getModuleReceipt(){
 		
 	}
-
 }

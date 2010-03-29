@@ -6,9 +6,12 @@ class PeopleController extends AppController {
 	function index(){
 		
 	}
-
+	/**
+	 * Controlles the amount of person input fields rows
+	 * @param unknown_type $amountOfPeople
+	 */
 	function create($amountOfPeople = 1){
-		//debug($this->Session->read());
+	
 		if (!is_numeric($amountOfPeople) || $amountOfPeople < 1) {
 			$this->Session->setFlash('Skriv hur många personer du vill anmäla. Du måste anmäla minst en person.');
 			$this->redirect(array('action' => 'create'));
@@ -17,12 +20,14 @@ class PeopleController extends AppController {
 		$this->set('amountOfPeople' , Sanitize::clean($amountOfPeople));
 		$event = $this->Person->Registration->Event->find('first', array('conditions' => array('id' => $this->Session->read('eventId')), 'fields' => array('Event.id', 'Event.name')));
 		$this->set('event' , $event['Event']);
-			
 		$this->set('roles',$this->Person->Role->find('list'));
-
 		$this->set('errors', $this->Session->read('errors'));
 	}
 
+	/**
+	 * 
+	 * Controling the data from views and if valid redirekt to next step other redirekt to previous view  
+	 */
 	function add(){
 		if(isset($this->data['Person']['amount'])){
 			$this->Session->del('errors');
@@ -43,13 +48,21 @@ class PeopleController extends AppController {
 		}
 	}
 	
+	/**
+	 * Fetch and return data from in acociate with this controler for use in elements
+	 * return $registrator array of people connected to the registration
+	 */
 	function receipt(){
 		$people = $this->Session->read('Registration.Person');
 		foreach ($people as &$person){
 			$person['role_name'] = $this->Person->Role->field('name',array ('id'=> $person['role_id'] )); 
 		}
-//		debug($people);
 		return $people;
 	}
 	
+	function edit() {
+		$people = $this->Session->read('Registration.Person');
+		$this->set('amountOfPeople' , $this->Session->read(''));
+		debug($people);
+	}
 }
