@@ -4,7 +4,6 @@
 	echo $javascript->link('jquery.validate', $inline = false);
 	echo $javascript->link('jq.form.conf/messages_se', $inline = false);
 	echo $javascript->link('jq.form.conf/jq.validate.registration', $inline = false);
-	echo $javascript->link('disableSubmit', $inline = false);
 ?>
 <?php $html->link('Töm Model session array', array('action' => 'clearSession', 'Registration'));?>
 
