@@ -29,6 +29,7 @@ CREATE TABLE IF NOT EXISTS `events` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(127) COLLATE utf8_bin NOT NULL,
   `is_active` int(1) DEFAULT '0',
+  `confirmation_message` varchar(1023) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=9 ;
 
