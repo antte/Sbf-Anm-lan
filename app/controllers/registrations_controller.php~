@@ -46,7 +46,7 @@ class RegistrationsController extends AppController {
 	
 	/**
 	 * Clear the session from data regardin Registration   
-	 * TODO remove at deploy
+		TODO remove at deploy
 	 */
 	function clearSession() {
 		$this->Session->del('Registration');

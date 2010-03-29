@@ -32,7 +32,9 @@
 		
 		function receipt(){
 	 	
-			return $this->Event->findById($this->Session->read('Registration.Registration.event_id'));
+			$event = $this->Event->findById($this->Session->read('Registration.Registration.event_id'));
+			//debug($eventId);
+			return $event;
 		
 		}
 		
