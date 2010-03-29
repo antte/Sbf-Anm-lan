@@ -21,8 +21,6 @@ class RegistrationsController extends AppController {
 			$this->redirect(array('controller' => 'events', 'action' => 'index'));
 		} else {
 			
-			$this->sendRegistrationComfirmMail($registration['Registrator'], $registration['Registration']);
-//			$this->set('Registration', $registration);
 			$this->redirect(array ('action' => 'receipt'));
 		}
 	}
@@ -68,9 +66,9 @@ class RegistrationsController extends AppController {
 	 * return $registration array of registration information 
 	 */
 	function receipt() {
-		$registration['number'] = $this->Session->read('Registration.Registration.number');
-		$registration['event_name'] = $this->Registration->Event->field('name',array('id'=> $this->Session->read('Registration.Registration.event_id')));
-		//debug($registration);
+		$registrationData = $this->Registration->findById($this->Session->read('registrationId'));
+		$registration['number'] = $registrationData['Registration']['number'];
+		$registration['event_name'] = $registrationData['Event']['name'];
 		return $registration;
 		
 	}
