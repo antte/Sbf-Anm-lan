@@ -1,6 +1,5 @@
 app/tmp
-app/config/database
-.php
+app/config/database.php
 vendors
 /
 .buildpath
