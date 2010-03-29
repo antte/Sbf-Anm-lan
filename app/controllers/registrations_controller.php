@@ -41,8 +41,8 @@ class RegistrationsController extends AppController {
 			//Save boockingnumber delete everything else 
 			$this->Session->write('booking_number',$registration['Registration']['number']);
 			//$this->Session->del('Registration');
-			//--$this->Email->send();
-			//--$this->redirect(array ('action' => 'receipt'));
+			$this->Email->send();
+			$this->redirect(array ('action' => 'receipt'));
 		}
 	}
 	
