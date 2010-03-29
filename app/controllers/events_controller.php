@@ -14,8 +14,9 @@
 		}
 	
 		function next($eventId) {
-			$this->Session->write('eventId', $eventId);
+			$this->Session->write('Registration.Registration.event_id', $eventId);
 			$this->redirect(array('controller' => 'people', 'action' => 'create'));
+			
 		}
 		
 		function receipt(){

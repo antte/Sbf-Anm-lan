@@ -167,7 +167,7 @@ label.error {
 	background: url(../img/warning.png) no-repeat 0 0;
 }
 
-#booking_nr, #registrator, #entrants, #event {
+#booking_nr, #registrator, #entrants, #event, #fourofour {
 	background: #eee;
 	margin-bottom: 20px;
 }
@@ -198,6 +198,11 @@ p.email {
 p.phone {
 	text-indent: 20px;
 	background: url(../img/phone.png) no-repeat 0 0;
+}
+
+h2.fourofour {
+	text-indent: 20px;
+	background: url(../img/error.png) no-repeat 0 8px;
 }
 
 table#receipt_entrants {

@@ -13,7 +13,7 @@ class RegistratorsController extends AppController {
 	 * @param $event_id Id of an event for which the registration is created.
 	 */
 	function create() {
-		
+	debug($this->Session->read());
 		$eventId = $this->Session->read('eventId');
 				
 		//can't create registration without event
