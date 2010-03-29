@@ -38,9 +38,6 @@ class RegistrationsController extends AppController {
 			$this->Email->template	= 'receipt';
 			$this->Email->sendAs	= 'text'; //both text and html
 			$this->set('Registration', $registration);
-			//Save boockingnumber delete everything else 
-			$this->Session->write('booking_number',$registration['Registration']['number']);
-			//$this->Session->del('Registration');
 			$this->Email->send();
 			$this->redirect(array ('action' => 'receipt'));
 		}
