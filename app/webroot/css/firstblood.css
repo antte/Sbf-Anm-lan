@@ -222,8 +222,3 @@ table td {
 	border: 1px solid #444;
 	padding: 5px;
 }
-
-table tbody tr:hover {
-	background: #666;
-	color: #fff;
-}
