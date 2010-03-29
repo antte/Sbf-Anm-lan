@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Värd: localhost
--- Skapad: 29 mars 2010 kl 10:47
+-- Skapad: 29 mars 2010 kl 14:24
 -- Serverversion: 5.1.36
 -- PHP-version: 5.3.0
 
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `events` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(127) COLLATE utf8_bin NOT NULL,
   `is_active` int(1) DEFAULT '0',
-  `confirmation_message` varchar(1023) COLLATE utf8_bin DEFAULT NULL,
+  `confirmation_message` text COLLATE utf8_bin,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=9 ;
 
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `people` (
   `last_name` varchar(127) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`),
   KEY `registration_id` (`registration_id`,`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=17 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=18 ;
 
 -- --------------------------------------------------------
 
@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `registrations` (
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `number` (`number`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=54 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=55 ;
 
 -- --------------------------------------------------------
 
@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `registrators` (
   `city` varchar(127) COLLATE utf8_bin DEFAULT NULL,
   `postal_code` varchar(127) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`registration_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=54 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=55 ;
 
 -- --------------------------------------------------------
 
@@ -93,4 +93,4 @@ CREATE TABLE IF NOT EXISTS `roles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(127) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=14 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=18 ;

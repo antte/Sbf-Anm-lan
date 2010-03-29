@@ -182,7 +182,10 @@ label.error {
 	background: #eee;
 	font-size: 16px;
 	font-weight: bold;
-} 
+}
+.general_info {
+	margin-top: 30px;
+}
 
 a.print {
 	padding-left: 20px;
@@ -221,9 +224,4 @@ table#receipt_entrants th {
 table td {
 	border: 1px solid #444;
 	padding: 5px;
-}
-
-table tbody tr:hover {
-	background: #666;
-	color: #fff;
 }

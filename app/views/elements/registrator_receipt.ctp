@@ -15,8 +15,7 @@
 			<h4>Adress</h4>
 			<p><?php echo $registrator['c_o']?></p>
 			<p><?php echo $registrator['street_address']?></p>
-			<p><?php echo $registrator['postal_code']?></p>
-			<p><?php echo $registrator['city']?></p>
+			<p><?php echo $registrator['postal_code'] . " " . $registrator['city']?></p>
 		</div>
 		
 		<div class="grid_7 alpha">
