@@ -1,9 +1,6 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html>
-	<body>
-		<?php echo $content_for_layout; ?>
-		
-		 <h1>HEJ!</h1>
-		
-	</body>
-</html>
+<h1>Bilsportförbundet </h1>
+<h2>Kvitto för bokning</h2>
+<?php echo $this->renderElement('registration_receipt')?>
+<?php echo $this->renderElement('person_receipt')?>
+<?php echo $this->renderElement('registrator_receipt')?>
+

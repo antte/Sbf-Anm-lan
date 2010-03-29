@@ -84,4 +84,4 @@
 		return ($value[0] == $this->data[$this->name][$field]);
 	}
 	
-	}
+}

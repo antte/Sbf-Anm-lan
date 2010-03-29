@@ -1,3 +1,7 @@
-<?php echo $content_for_layout; ?>
+Bilsportförbundet
+Kvitto för bokning
+<?php echo $this->renderElement('registration_receipt')?>
+<?php echo $this->renderElement('person_receipt')?>
+<?php echo $this->renderElement('registrator_receipt')?>
 
-HEJ!
+
