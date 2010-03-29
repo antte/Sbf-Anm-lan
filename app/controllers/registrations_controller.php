@@ -20,7 +20,9 @@ class RegistrationsController extends AppController {
 			$this->Session->setFlash('Vi ber om ursäkt, din registrering kunde inte slutföras. Kontakta support.');
 			$this->redirect(array('controller' => 'events', 'action' => 'index'));
 		} else {
-			
+			$this->Session->write('registrationId', $this->Registration->id);
+			$this->sendRegistrationConfirmMail($registration['Registrator'], $registration['Registration']);
+			$this->Session->del('Registration');
 			$this->redirect(array ('action' => 'receipt'));
 		}
 	}
@@ -30,7 +32,7 @@ class RegistrationsController extends AppController {
 	 * @param unknown_type $registrator --session array for the registration module 
 	 * @param unknown_type $registration -- session array for the registration module
 	 */
-	private function sendRegistrationComfirmMail($registrator,$registration){
+	private function sendRegistrationConfirmMail($registrator,$registration){
 		$this->Email->smtpOptions = array(
 			'port'			=> '25', 
 			'timeout'		=> '30',

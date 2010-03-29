@@ -1,5 +1,4 @@
 <?php $people = $this->requestAction('people/receipt');
-//debug($people);
 ?> 
 <div id="entrants" class="grid_8">
 	<div class="grid_full">
