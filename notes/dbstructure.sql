@@ -77,6 +77,7 @@ CREATE TABLE IF NOT EXISTS `registrators` (
   `last_name` varchar(127) COLLATE utf8_bin NOT NULL,
   `email` varchar(127) COLLATE utf8_bin NOT NULL,
   `phone` varchar(127) COLLATE utf8_bin DEFAULT NULL,
+  `c_o` varchar(127) COLLATE utf8_bin DEFAULT NULL,
   `street_address` varchar(127) COLLATE utf8_bin DEFAULT NULL,
   `city` varchar(127) COLLATE utf8_bin DEFAULT NULL,
   `postal_code` varchar(127) COLLATE utf8_bin DEFAULT NULL,
