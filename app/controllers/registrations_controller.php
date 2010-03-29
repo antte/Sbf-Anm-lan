@@ -29,13 +29,14 @@ class RegistrationsController extends AppController {
 			
 			$this->Email->delivery 	= 'smtp';
 			
-			$this->Email->from		= 'Svenska bilsportförbundet Anmälan <anmalan@sbf.se>';
+			$this->Email->from		= 'noreply@sbf.se';
 			$this->Email->to		= "{$registration['Registrator']['first_name']} {$registration['Registrator']['last_name']} <{$registration['Registrator']['email']}>";
 			$this->Email->bcc		= "it sbf <it@sbf.se>";
 			
 			$event = $this->Registration->Event->findById($registration['Registration']['event_id'], array('fields' => 'name'));
 			
 			$this->Email->subject	= "Kvitto för din anmälan till {$event['Event']['name']}";
+			$this->Email->replyTo	= 'it@sbf.se';
 			$this->Email->template	= 'receipt';
 			$this->Email->sendAs	= 'both'; //both text and html
 			$this->set('Registration', $registration);

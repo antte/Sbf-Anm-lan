@@ -1,5 +1,5 @@
 * {
-	background: none;
+	background: #000;
 }
 
 html {
@@ -9,8 +9,14 @@ html {
 
 h1, h2, h3, h4, h5, h6 {
 	font-family: arial, helvetica, verdana, sans-serif;
+	color: #fff;
 }
 
 table {
 	border: 1px solid #fff;
+}
+
+div {
+	width: 100%;
+	clear: both;
 }

@@ -2,13 +2,13 @@
 //debug($registrator);
 ?> 
 
-<?php echo $registrator['first_name'] . ' '; ?>
-		<?php echo $registrator['last_name']?>
-		<?php echo $registrator['c_o']?>
-		<?php echo $registrator['street_address']?>
-		<?php echo $registrator['postal_code']?>
-		<?php echo $registrator['city']?>
-		Kontakt:
-		<?php echo $registrator['email']?>
-		<?php echo $registrator['phone']?>
+<?php echo $registrator['first_name'] . " "; 
+		 echo $registrator['last_name'] . "\n";
+		 echo $registrator['c_o'] . "\n";
+		 echo $registrator['street_address'] . "\n";
+		 echo $registrator['postal_code'] . " ";
+		 echo $registrator['city'] . "\n\n";
+		 echo "Kontakt: \n";
+		 echo $registrator['email']. "\n";
+		 echo $registrator['phone']?>
 		

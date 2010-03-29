@@ -83,11 +83,10 @@ class DATABASE_CONFIG {
 		'persistent' => false,
 		'host' => 'localhost',
 		'login' => 'Sbf',
-		'password' => 'anm-lan',
-		'database' => 'sbfanmalan',
+		'password' => 'Anm-lan',
+		'database' => 'sbf-anmalan',
 		'encoding' => 'utf8',
 		'prefix' => '',
-		'encoding' => 'utf8'
 	);
 
 	var $test = array(
