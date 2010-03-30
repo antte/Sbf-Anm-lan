@@ -10,7 +10,7 @@
 	 * fält ska vara färdigifyllda (vyn behöver en in_review_mode + den behöver tillgång till registrator ifrån registration i session)
 	 * och när man trycker submit ska man komma tillbaka till review sidan och inte till "nästa" steg
 	 */
-	/* TODO REMOVE comments when done
+
 	$in_review_mode = true;
 	$registrator = array(
 				   array(
@@ -24,7 +24,7 @@
 			 		'postal_code' => '12345',
 			 		'city' =>	'Stockholm'
 			 		)
-			 		);*/
+			 		);
 ?>
 
 <?php $html->link('Töm Model session array', array('action' => 'clearSession', 'Registration'));?>
