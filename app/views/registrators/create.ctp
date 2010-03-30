@@ -5,7 +5,22 @@
 	echo $javascript->link('jq.form.conf/messages_se', $inline = false);
 	echo $javascript->link('jq.form.conf/jq.validate.registration', $inline = false);
 ?>
+
 <?php $html->link('Töm Model session array', array('action' => 'clearSession', 'Registration'));?>
+
+<?php $in_review_mode = true;
+	  $registrator = array(
+			 array('first_name'=>  'kalle',
+		 	 'last_name'=>	 'olsson',
+			 'email'	=> 	 'peace@nu.nu',
+			 'retype_email' => 'peace@nu.nu',
+			 'phone'	=> '07463722',
+			 'c_o'	=>	'',
+			 'street_address' => 'anderssonsgata',
+			 'postal_code' => '12345',
+			 'city' =>	'Stockholm'));
+
+?>
 
 <h2><?php echo "Kontaktuppgifter för anmälan till $eventName"; ?></h2>
 
@@ -19,7 +34,7 @@
 					<li>
 						<?php echo $error; ?>
 					</li>
-				<?php endforeach;
+				<?php endforeach;	
 			echo '</ul>';
 		}
 	?>
@@ -58,6 +73,7 @@
 	<!--  Form helper - end form-->
 	<?php echo $form->end(); ?>	
 </div> 
+
 
 <div id="javascript_info" class="grid_4" >
 	<noscript>
