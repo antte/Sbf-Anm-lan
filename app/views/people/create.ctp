@@ -56,7 +56,7 @@
 		<p class="requiredinfo">Fält markerade med * är obligatoriska uppgifter!</p>
 		
 		
-		<?php if($in_review_mode) { ?>
+		<?php if( isset($in_review_mode) && $in_review_mode) { ?>
 		<ol>
 			<?php foreach( $people as $key => $person ): ?>
 				<li>

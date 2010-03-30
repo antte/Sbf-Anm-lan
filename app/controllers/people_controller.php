@@ -12,6 +12,8 @@ class PeopleController extends AppController {
 	 */
 	function create($amountOfPeople = 1){
 		
+		if (!$this->Session->read('Registration.Registration.event_id')) $this->redirect(array('controller' => 'events', 'action' => 'index'));
+		
 		//people/create/in_review_mode:1
 		if(isset($this->params['in_review_mode'])) {
 			if($this->params['in_review_mode']) {
