@@ -1,3 +1,4 @@
+
 <div class="grid_4" id="receipt_info">
 	<div class="grid_full">
 		<h2>Granskning</h2>
