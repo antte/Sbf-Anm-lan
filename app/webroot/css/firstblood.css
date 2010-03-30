@@ -250,3 +250,7 @@ table td {
 .odd {
 	 background:#bbb;
 }
+
+#main div.hover {
+	background: #ffec8b;
+}
