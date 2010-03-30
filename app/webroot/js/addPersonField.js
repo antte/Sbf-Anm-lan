@@ -13,8 +13,9 @@ $(document).ready(function(){
 		
 		// Inserts HTML-code for a new person field and fades it in
 		$('#choosepeopleamount ol li:last').after('<li>' + $('#choosepeopleamount ol li:first').html() + '</li>');
+		$('#choosepeopleamount ol li:last').hide();
 		fieldValue(i);
-		$('#choosepeopleamount ol li:last').hide().fadeIn('slow');
+		$('#choosepeopleamount ol li:last').fadeIn('slow');
 		
 		// Removes a person field
 		$('#choosepeopleamount ol li:last .removeField').click(function(){
@@ -39,46 +40,22 @@ $(document).ready(function(){
 function fieldValue(i) {
 	
 	// First name
+	$('#choosepeopleamount ol li:last').find('.first_name input').attr('value', '');
 	$('#choosepeopleamount ol li:last').find('.first_name label').attr('for', 'Person' + i + 'FirstName');
 	$('#choosepeopleamount ol li:last').find('.first_name input').attr('id', 'Person' + i + 'FirstName');
 	$('#choosepeopleamount ol li:last').find('.first_name input').attr('name', 'data[Person][' + i + '][first_name]');
 	
 	// Last name
+	$('#choosepeopleamount ol li:last').find('.last_name input').attr('value', '');
 	$('#choosepeopleamount ol li:last').find('.last_name label').attr('for', 'Person' + i + 'LastName');
 	$('#choosepeopleamount ol li:last').find('.last_name input').attr('id', 'Person' + i + 'LastName');
 	$('#choosepeopleamount ol li:last').find('.last_name input').attr('name', 'data[Person][' + i + '][last_name]');
 	
 	// Roles
+	$('#choosepeopleamount ol li:last').find('.role select').attr('value', '');
 	$('#choosepeopleamount ol li:last').find('.role label').attr('for', 'Person' + i + 'RoleId');
 	$('#choosepeopleamount ol li:last').find('.role select').attr('id', 'data[Person][' + i + '][role_id]');
 	$('#choosepeopleamount ol li:last').find('.role select').attr('name', 'data[Person][' + i + '][role_id]');
 
 	$('#choosepeopleamount ol li:last div:last').after("<a href='#' class='removeField'>Ta bort</a>");
 }
-
-/*
-TODO Denna funktion körs för att uppdatera namnvärdena, dock inte fungerande!
-
-function updateFieldIds() {
-	
-	var numberOfLi = $('#choosepeopleamount li').length;
-	console.log("updating your stuff");
-	
-	//gör nånting på alla li
-	for( var i = 0; i < numberOfLi - 1; i++ ){
-		$('#choosepeopleamount li').each(function(){
-			
-			// firstname
-			$(this).find('.first_name input').attr('name', 'data[People][' + i + '][first_name]');
-			
-			// lastname
-			$(this).find('.last_name input').attr('name', 'data[People][' + i + '][last_name]');
-			
-			// role
-			$(this).find('.role select').attr('name', 'data[People][' + i + '][role_id]');
-		});
-	}
-	
-	clearTimeout(updateTimer);
-}
-*/

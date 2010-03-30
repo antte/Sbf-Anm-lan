@@ -1,20 +1,15 @@
 app/tmp
+
 app/config
 vendors
 
+
 /.buildpath
+
 /.project
 /.settings
+
 /.metadata
+
 /.DS_Storep 
-=======
-/
-.buildpath
-/
-.project
-/
-.settings
-/
-.metadata
-/
-.DS_Storep 
+
