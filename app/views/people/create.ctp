@@ -65,7 +65,6 @@
 							echo $form->input("Person.$key.first_name", array('type' => 'text', 'label' => 'Förnamn *', 'div' => 'first_name grid_2', 'class' => 'required', 'default' => $person['first_name']));
 							echo $form->input("Person.$key.last_name", array('type' => 'text', 'label' => 'Efternamn *', 'div' => 'last_name grid_2', 'class' => 'required', 'default' => $person['last_name']));
 							echo $form->input("Person.$key.role_id", array('options' => array($roles), 'label' => 'Anmäl dig som *', 'empty' => '(välj en)', 'div' => 'role grid_3', 'class' => 'required role', 'default' => $person['role_id']));
-							echo $form->input("in_review_mode", array('type' => 'hidden', 'default' => 1));
 						?>
 					</fieldset>
 				</li>
