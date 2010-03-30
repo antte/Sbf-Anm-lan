@@ -77,7 +77,20 @@ class RegistrationsController extends AppController {
 	}
 
 	function review(){
-		
+		// om session inte finns?
+		// då är det edit mode
+		// hämta från db
+		// OBS! Framtida story, men koden finns kvar så länge. 
+		// TODO epic refactoring och Markus ska lära sig agile
+		/*
+		if(!$this->Session->read('Registration')) {
+			if($id > 0){
+				// id har vi, hämta från databasen!
+			} else {
+				// vi är i edit mode och vi vet inte vilken registration vi ska hämta, fail!
+			}
+		}
+		*/
 	}	
 }
 
