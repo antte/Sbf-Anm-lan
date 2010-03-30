@@ -4,23 +4,32 @@
 	echo $javascript->link('jquery.validate', $inline = false);
 	echo $javascript->link('jq.form.conf/messages_se', $inline = false);
 	echo $javascript->link('jq.form.conf/jq.validate.registration', $inline = false);
+	/**
+	 * TODO
+	 * edit mode:
+	 * fält ska vara färdigifyllda (vyn behöver en in_review_mode + den behöver tillgång till registrator ifrån registration i session)
+	 * och när man trycker submit ska man komma tillbaka till review sidan och inte till "nästa" steg
+	 */
+	/* TODO REMOVE comments when done
+	$in_review_mode = true;
+	$registrator = array(
+				   array(
+			 		'first_name'=>  'kalle',
+		 	 		'last_name'=>	 'olsson',
+			 		'email'	=> 	 'peace@nu.nu',
+			 		'retype_email' => 'peace@nu.nu',
+			 		'phone'	=> '07463722',
+			 		'c_o'	=>	'',
+			 		'street_address' => 'anderssonsgata',
+			 		'postal_code' => '12345',
+			 		'city' =>	'Stockholm'
+			 		)
+			 		);*/
 ?>
 
 <?php $html->link('Töm Model session array', array('action' => 'clearSession', 'Registration'));?>
 
-<?php $in_review_mode = true;
-	  $registrator = array(
-			 array('first_name'=>  'kalle',
-		 	 'last_name'=>	 'olsson',
-			 'email'	=> 	 'peace@nu.nu',
-			 'retype_email' => 'peace@nu.nu',
-			 'phone'	=> '07463722',
-			 'c_o'	=>	'',
-			 'street_address' => 'anderssonsgata',
-			 'postal_code' => '12345',
-			 'city' =>	'Stockholm'));
-
-?>
+ 
 
 <h2><?php echo "Kontaktuppgifter för anmälan till $eventName"; ?></h2>
 
