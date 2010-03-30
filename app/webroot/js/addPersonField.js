@@ -23,13 +23,22 @@ $(document).ready(function(){
 			$(this).parents('li').fadeOut('500', function(){
 				$(this).remove();
 			});
-			
-			// TODO kolla om cake hanterar array med "fel" id:n, om inte behöver nedanstående funktion köras.
-			//updateTimer = window.setTimeout("updateFieldIds()", 1000);
 			return false;
 		});
 		
 		return false;
+	});
+	
+	
+	// Appends a delete button on all the li:s (except the first one) in edit mode
+	$('#PersonAddForm.edit li:nth-child(1n+2) fieldset').each(function(){
+		$(this).append('<a class="removeField" href="#">Ta bort</a>');
+		$(this).find('a.removeField').click(function(){
+			$(this).parents('li').fadeOut('500', function(){
+				$(this).remove();
+			});
+			return false;
+		});
 	});
 	
 });
