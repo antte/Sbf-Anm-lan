@@ -45,6 +45,19 @@ fieldset {
 	position: relative;
 }
 
+.edit_link {
+	margin-top:-20px;
+	margin-bottom:20px;
+	text-align:right;
+	background:#eee;
+	font-size:150%;
+}
+
+.edit_link a {
+	display:block;
+	margin:10px;
+}
+
 .city input {
 	width: 200px;
 	display: inline;
