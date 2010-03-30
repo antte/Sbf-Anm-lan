@@ -5,10 +5,11 @@ $(document).ready(function(){
 	$('#choosepeopleamount ol').after("<div class='grid_3'><a href='#' id='addField'>Lägg till fler personer</a></div>");
 	
 	//TODO check how many people fields already exists (only a problem when the user disables and then allows javascript in the middle of failure)
-	var i = 0;
-	
+	//var i = 0;
+	var i = $('#PersonAddForm ol li').length - 1;
 	
 	$('#addField').click(function(){
+		
 		i++;
 		
 		// Inserts HTML-code for a new person field and fades it in
@@ -52,7 +53,7 @@ function fieldValue(i) {
 	$('#choosepeopleamount ol li:last').find('.last_name input').attr('name', 'data[Person][' + i + '][last_name]');
 	
 	// Roles
-	$('#choosepeopleamount ol li:last').find('.role select').attr('value', '');
+	$('#choosepeopleamount ol li:last').find('.role option:first').attr('selected', 'selected');
 	$('#choosepeopleamount ol li:last').find('.role label').attr('for', 'Person' + i + 'RoleId');
 	$('#choosepeopleamount ol li:last').find('.role select').attr('id', 'data[Person][' + i + '][role_id]');
 	$('#choosepeopleamount ol li:last').find('.role select').attr('name', 'data[Person][' + i + '][role_id]');
