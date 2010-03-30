@@ -80,7 +80,7 @@ class RegistrationsController extends AppController {
 
 	function review(){
 		if (isset($this->params['requested'])) {
-			return $this->Session->read('Registration.Registration');
+			return $this->Registration->Event->field('name', array('id' => $this->Session->read('Registration.Registration.event_id')));
 		}
 	}	
 }

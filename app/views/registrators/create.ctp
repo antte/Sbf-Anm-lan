@@ -68,10 +68,11 @@
 			<fieldset class="contact grid_8 alpha">
 				<?php
 					echo $form->input('phone', array('type' => 'text', 'label' => 'Telefon', 'div' => 'phone grid_3', 'default' => $registrator['phone']));
-					echo $form->input('c_o', array('type' => 'text', 'label' => 'C/O', 'div' => 'c_o grid_3', 'default' => $registrator[0]['c_o']));
+					echo $form->input('c_o', array('type' => 'text', 'label' => 'C/O', 'div' => 'c_o grid_3', 'default' => $registrator['c_o']));
 					echo $form->input('street_address', array('type' => 'text', 'label' => 'Adress *', 'div' => 'address grid_3', 'default' => $registrator['street_address']));
 					echo $form->input('postal_code', array('type' => 'text', 'label' => 'Postnr *', 'div' => 'postcode grid_2', 'default' => $registrator['postal_code'] ));
 					echo $form->input('city', array('type' => 'text', 'label' => 'Stad *', 'div' => 'city grid_3', 'default' => $registrator['city'])); 
+					echo $form->input("in_review_mode", array('type' => 'hidden', 'default' => 1));
 				?>						
 			</fieldset>
 			<fieldset class="contact grid_8 alpha">

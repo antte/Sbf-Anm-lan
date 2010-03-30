@@ -69,6 +69,7 @@
 					</fieldset>
 				</li>
 			<?php endforeach; ?>
+			<?php echo $form->input("in_review_mode", array('type' => 'hidden', 'default' => 1)); ?>
 		</ol>
 		<fieldset class="submit grid_8 alpha">
 			<?php echo $form->submit('Ändra')?>

@@ -15,8 +15,8 @@ class RegistratorsController extends AppController {
 	function create() {
 		
 		//people/create/in_review_mode:1
-		if(isset($this->params['named']['in_review_mode'])) {
-			if($this->params['named']['in_review_mode']) {
+		if(isset($this->params['in_review_mode'])) {
+			if($this->params['in_review_mode']) {
 				$this->set('in_review_mode', true);
 				$this->set('registrator', $this->Session->read('Registration.Registrator'));
 			}
@@ -53,13 +53,7 @@ class RegistratorsController extends AppController {
 			//if we dont have errors all was successful and we continue with the registration
 			
 			$this->saveModelDataToSession('Registrator', Sanitize::clean($this->data));
-			if( isset($this->data['Registrator']['in_review_mode']) && $this->data['Registrator']['in_review_mode'] ) {
-				//we dont want that hidden input in_review_mode to be in our session
-				$this->Session->del('Registration.Registrator.in_review_mode');
-				$this->redirect(array('controller' => 'registrations', 'action'=>'review'));	
-			} else {
-				$this->redirect(array('controller' => 'registrations', 'action' => 'review'));
-			}
+			$this->redirect(array('controller' => 'registrations' , 'action' => 'review'));
 		} else {
 			$this->Session->write('errors', $this->Registrator->validationErrors);
 			

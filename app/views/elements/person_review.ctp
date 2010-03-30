@@ -16,7 +16,8 @@
 			<tbody>			
 			<?php 
 				$i=0;
-				foreach($people as $person):	?>
+				foreach($people as $key => $person):	?>
+				<?php if (!is_numeric($key)) continue; ?>
 				<tr class ="<?php if($i%2) echo 'even'; else echo 'odd';?>" >
 					<td><?php echo $person['first_name'];?></td>
 					<td><?php echo $person['last_name'];?></td>

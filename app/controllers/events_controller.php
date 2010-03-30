@@ -38,9 +38,8 @@
 		}
 
 		function review() {
-			if (isset($this->params['requested'])) {
-				return $this->Session->read('Registration.Event');
-			}
+			$registrationData = $this->Event->Registration->findById($this->Session->read('registrationId'));
+			return $registrationData['Event'];
 		}
 		
 		

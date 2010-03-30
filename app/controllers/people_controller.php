@@ -15,8 +15,8 @@ class PeopleController extends AppController {
 		if (!$this->Session->read('Registration.Registration.event_id')) $this->redirect(array('controller' => 'events', 'action' => 'index'));
 		
 		//people/create/in_review_mode:1
-		if(isset($this->params['in_review_mode'])) {
-			if($this->params['in_review_mode']) {
+		if(isset($this->params['named']['in_review_mode'])) {
+			if($this->params['named']['in_review_mode']) {
 				$this->set('in_review_mode', true);
 				$this->set('people', $this->Session->read('Registration.Person'));
 			}
@@ -50,7 +50,13 @@ class PeopleController extends AppController {
 			if(empty($errors)) {
 				//if we dont have errors all was successful and we continue with the registration
 				$this->saveModelDataToSession('Person', Sanitize::clean($this->data));
-				$this->redirect(array('controller' => 'registrators', 'action'=>'create'));			
+				if( isset($this->data['Person']['in_review_mode']) && $this->data['Person']['in_review_mode'] ) {
+					//we dont want that hidden input in_review_mode to be in our session
+					$this->Session->del('Registration.Person.in_review_mode');
+					$this->redirect(array('controller' => 'registrations', 'action'=>'review'));	
+				} else {
+					$this->redirect(array('controller' => 'registrators', 'action'=>'create'));
+				}
 			} else {
 				$this->Session->write('errors', $errors);
 				$this->redirect(array('action' => 'create', sizeof($this->data['Person'])));
