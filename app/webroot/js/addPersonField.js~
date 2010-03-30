@@ -26,7 +26,7 @@ $(document).ready(function(){
 			return false;
 		});
 
-		i++;
+		
 		return false;
 	});
 	
@@ -72,4 +72,5 @@ function fieldValue(i) {
 
 	sel.find('fieldset').append("<a href='#' class='removeField'>Ta bort</a>");
 
+	i++;
 }

@@ -67,8 +67,8 @@ class RegistrationsController extends AppController {
 	}
 	
 	/**
-	 * Get information about a registration suitet for use in element
-	 * return $registration array of registration information 
+	 * Get information about a registration suited for use in element
+	 * @return array of registration information 
 	 */
 	function receipt() {
 		$registrationData = $this->Registration->findById($this->Session->read('registrationId'));
@@ -77,7 +77,10 @@ class RegistrationsController extends AppController {
 		return $registration;
 		
 	}
-
+	/**
+	* Is called from the registration review element
+	* @return array review information
+	*/
 	function review(){
 		if (isset($this->params['requested'])) {
 			return $this->Registration->Event->field('name', array('id' => $this->Session->read('Registration.Registration.event_id')));
