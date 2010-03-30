@@ -76,4 +76,14 @@ class PeopleController extends AppController {
 		$this->set('amountOfPeople' , $this->Session->read(''));
 		debug($people);
 	}
+	
+	function review() {
+		if (isset($this->params['requested'])) {
+			$people = $this->Session->read('Registration.Person');
+			foreach ($people as &$person){
+				$person['role_name'] = $this->Person->Role->field('name',array ('id'=> $person['role_id'] )); 
+			}
+			return $people;
+		}
+	}
 }

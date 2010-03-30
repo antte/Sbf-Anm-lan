@@ -68,9 +68,13 @@ class RegistratorsController extends AppController {
 	function receipt(){
 	 	
 		$registrationData = $this->Registrator->Registration->findById($this->Session->read('registrationId'));
-		$registrator = $registrationData['Registrator'];
+		return $registrationData['Registrator'];
 		
-		//debug($registrator);
-		return $registrator;
+	}
+	
+	function review() {
+		if (isset($this->params['requested'])) {
+			return $this->Session->read('Registration.Registrator');
+		}
 	}
 }

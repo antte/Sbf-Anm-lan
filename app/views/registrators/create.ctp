@@ -10,7 +10,7 @@
 	 * fält ska vara färdigifyllda (vyn behöver en in_review_mode + den behöver tillgång till registrator ifrån registration i session)
 	 * och när man trycker submit ska man komma tillbaka till review sidan och inte till "nästa" steg
 	 */
-
+	/*
 	$in_review_mode = true;
 	$registrator = array(
 				 		'first_name'=>  'kalle',
@@ -23,6 +23,7 @@
 				 		'postal_code' => '12345',
 				 		'city' =>	'Stockholm'
 			 		);
+			 		*/
 ?>
 
 <?php $html->link('Töm Model session array', array('action' => 'clearSession', 'Registration'));?>
@@ -49,7 +50,7 @@
 	<!--  Form helper - sets action post - parse form to the registration model class-->
 	<?php echo $form->create('Registrator'); ?> 
 		
-		<?php if ($in_review_mode) { ?>		
+		<?php if (isset($in_review_mode) && $in_review_mode) { ?>		
 			<!--  Form helper - create input with label  -->
 			<fieldset class="name grid_8 alpha" >
 				<p class="requiredinfo">Fält markerade med * är obligatoriska uppgifter!</p>
