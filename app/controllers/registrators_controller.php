@@ -15,11 +15,9 @@ class RegistratorsController extends AppController {
 	function create() {
 		
 		//people/create/in_review_mode:1
-		if(isset($this->params['named']['in_review_mode'])) {
-			if($this->params['named']['in_review_mode']) {
-				$this->set('in_review_mode', true);
-				$this->set('registrator', $this->Session->read('Registration.Registrator'));
-			}
+		if(isset($this->params['named']['in_review_mode']) && $this->params['named']['in_review_mode']) {
+			$this->set('in_review_mode', true);
+			$this->set('registrator', $this->Session->read('Registration.Registrator'));
 		}
 		
 	//debug($this->Session->read());
@@ -71,11 +69,11 @@ class RegistratorsController extends AppController {
 		
 	}
 
-	function receipt(){
-	 	
-		$registrationData = $this->Registrator->Registration->findById($this->Session->read('registrationId'));
-		return $registrationData['Registrator'];
-		
+	function receipt(){	 	
+		if (isset($this->params['requested'])) {
+			$registrationData = $this->Registrator->Registration->findById($this->Session->read('registrationId'));
+			return $registrationData['Registrator'];
+		}
 	}
 	
 	function review() {
