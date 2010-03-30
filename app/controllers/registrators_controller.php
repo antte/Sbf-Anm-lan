@@ -13,6 +13,15 @@ class RegistratorsController extends AppController {
 	 * @param $event_id Id of an event for which the registration is created.
 	 */
 	function create() {
+		
+		//people/create/in_review_mode:1
+		if(isset($this->params['in_review_mode'])) {
+			if($this->params['in_review_mode']) {
+				$this->set('in_review_mode', true);
+				$this->set('registrator', $this->Session->read('Registration.Registrator'));
+			}
+		}
+		
 	//debug($this->Session->read());
 		$eventId = $this->Session->read('Registration.Registration.event_id');
 				

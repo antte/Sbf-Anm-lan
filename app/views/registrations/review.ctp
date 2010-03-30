@@ -1,4 +1,7 @@
-
+<?php 
+	echo $javascript->link('jquery.1.4.2-min', $inline = false);
+	echo $javascript->link('editHover', $inline = false);
+?>
 <div class="grid_4" id="receipt_info">
 	<div class="grid_full">
 		<h2>Granskning</h2>
