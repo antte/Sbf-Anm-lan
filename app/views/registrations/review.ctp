@@ -10,12 +10,12 @@
 
 </div>
 <?php //echo $this->renderElement('event_receipt')?>
-<?php echo $this->renderElement('registration_receipt')?>
-<?php echo $this->renderElement('person_receipt');?>
+<?php echo $this->renderElement('registration_review')?>
+<?php echo $this->renderElement('person_review');?>
 <div class="edit_link grid_8">
 	<?php echo $html->link( 'Redigera',array('controller'=>'People', 'action'=>'create','in_review_mode:1'));?>
 </div>
-<?php echo $this->renderElement('registrator_receipt');?>
+<?php echo $this->renderElement('registrator_review');?>
 <div class="edit_link grid_8">
 	<?php echo $html->link( 'Redigera',array('controller'=>'Registrators', 'action'=>'create','in_review_mode:1'));?>
 </div>
