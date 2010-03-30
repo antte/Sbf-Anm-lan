@@ -2,6 +2,8 @@
 
 class RegistrationsController extends AppController {
 	
+	var $helpers = array('Form', 'Html', 'Javascript');
+	
 	var $components = array('Email');
 	
 	/**

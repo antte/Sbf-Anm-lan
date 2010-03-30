@@ -50,12 +50,16 @@ fieldset {
 	margin-bottom:20px;
 	text-align:right;
 	background:#eee;
-	font-size:150%;
+	font-size:130%;
+	font-weight: bold;
 }
 
 .edit_link a {
 	display:block;
+	float: right;
 	margin:10px;
+	padding-left: 20px;
+	background: url(../img/edit.png) no-repeat 0 0;
 }
 
 .city input {
