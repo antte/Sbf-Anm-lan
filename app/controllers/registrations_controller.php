@@ -76,6 +76,8 @@ class RegistrationsController extends AppController {
 		
 	}
 
-	
+	function review(){
+		
+	}	
 }
 
