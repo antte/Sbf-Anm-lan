@@ -11,6 +11,14 @@ class PeopleController extends AppController {
 	 * @param unknown_type $amountOfPeople
 	 */
 	function create($amountOfPeople = 1){
+		
+		//people/create/in_review_mode:1
+		if(isset($this->params['in_review_mode'])) {
+			if($this->params['in_review_mode']) {
+				$this->set('in_review_mode', true);
+				$this->set('people', $this->Session->read('Registration.Person'));
+			}
+		}
 	
 		if (!is_numeric($amountOfPeople) || $amountOfPeople < 1) {
 			$this->Session->setFlash('Skriv hur många personer du vill anmäla. Du måste anmäla minst en person.');
