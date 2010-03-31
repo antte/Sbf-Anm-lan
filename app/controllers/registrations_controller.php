@@ -60,6 +60,14 @@ class RegistrationsController extends AppController {
 		$this->Email->send();
 	}
 	
+	function review(){
+		
+	}
+	
+	function receipt() {
+		
+	}
+	
 	/**
 	 * Clear the session from data regarding Registration   
 	 * TODO remove at deploy
