@@ -2,7 +2,13 @@
 
 class RegistrationsController extends AppController {
 	
+	var $helpers = array('Form', 'Html', 'Javascript');
+	
 	var $components = array('Email');
+	
+	function index() {
+		if (isset($this->params['requested'])) return $this->getRegistration();
+	}
 	
 	/**
 	 * Finalizes the registration saving it and emailing it to the registrator
@@ -54,8 +60,16 @@ class RegistrationsController extends AppController {
 		$this->Email->send();
 	}
 	
+	function review(){
+		
+	}
+	
+	function receipt() {
+		
+	}
+	
 	/**
-	 * Clear the session from data regardin Registration   
+	 * Clear the session from data regarding Registration   
 	 * TODO remove at deploy
 	 */
 	function clearSession() {
@@ -65,17 +79,31 @@ class RegistrationsController extends AppController {
 	}
 	
 	/**
-	 * Get information about a registration suitet for use in element
-	 * return $registration array of registration information 
+	 * 
 	 */
-	function receipt() {
-		$registrationData = $this->Registration->findById($this->Session->read('registrationId'));
-		$registration['number'] = $registrationData['Registration']['number'];
-		$registration['event_name'] = $registrationData['Event']['name'];
-		return $registration;
+	private function getRegistration() {
+		/* if a registration has been made recently we return it
+		 * we need to take into account that this action can be requested both before and after a registration has been saved
+		 */
 		
+		// if Registration exists the registration hasn't been saved yet and the user is reviewing his registration
+		$registration = $this->Session->read('Registration');
+		
+		//if it isnt in session we try to find it in db
+		// registrationId is set when saving the registration so we take that as indication its saved in db already
+		if(!$registration && $this->Session->read('registrationId')) {
+			$registration = $this->Registration->findById($this->Session->read('registrationId'));
+		}
+		
+		if ($registration) {
+			//something has been added (we have either collected registration from session or from db)
+			$eventData = $this->Registration->Event->find('first', array('conditions' => array('id' => $registration['Registration']['event_id'])));
+			$registration['Event'] = $eventData['Event'];
+			return $registration;
+		}
+		
+		//the user isn't making a registration so we send the requester all registrations
+		return $this->Registration->find('all');
 	}
-
-	
 }
 
