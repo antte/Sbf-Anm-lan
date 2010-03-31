@@ -24,7 +24,6 @@
 			/*
 			 * if a registration has been made recently we return it
 			 * we need to take into account that this action can be requested both before and after a registration has been saved
-			 * TODO replace the modelname with the calling controllers associated model
 			 */
 			if ($this->Session->read('Registration')) { 
 				// if Registration exists the registration hasn't been saved yet and the user is reviewing his registration
