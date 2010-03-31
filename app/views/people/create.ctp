@@ -28,7 +28,7 @@
 	*/
 ?>
 
-<h2>Fyll i vilka som ska komma till <?php echo $event;?></h2>
+<h2>Fyll i vilka som ska komma till <?php echo $eventName;?></h2>
 
 
 <div id="choosepeopleamount" class="grid_8">

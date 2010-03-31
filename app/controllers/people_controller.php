@@ -25,7 +25,8 @@ class PeopleController extends AppController {
 
 		$this->set('amountOfPeople' , Sanitize::clean($amountOfPeople));
 		$event = $this->Person->Registration->Event->find('first', array('conditions' => array('id' => $this->Session->read('eventId')), 'fields' => array('Event.id', 'Event.name')));
-		$this->set('event' , $event['Event']);
+		$eventId = $this->Session->read('Registration.Registration.event_id');
+		$this->set('eventName' , $this->Person->Registration->Event->field('name', array('id' => $eventId)));
 		$this->set('people', $this->Session->read('Registration.Person'));
 		$this->set('roles',$this->Person->Role->find('list'));
 		$this->set('errors', $this->Session->read('errors'));
