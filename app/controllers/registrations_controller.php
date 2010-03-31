@@ -77,5 +77,24 @@ class RegistrationsController extends AppController {
 		$this->Session->setFlash('Session rensad');
 		$this->redirect(array ('action' => 'create', 'controller' =>'registrator'));
 	}
+	
+	/**
+	 * 
+	 */
+	private function getRegistration() {
+		/* if a registration has been made recently we return it
+		 * we need to take into account that this action can be requested both before and after a registration has been saved
+		 */
+		if ($this->Session->read('Registration')) { 
+			// if Registration exists the registration hasn't been saved yet and the user is reviewing his registration
+			return $this->Session->read('Registration');
+		} else if ($this->Session->read('registrationId')) {
+			// registrationId is set when saving the registration so we take that as indication its saved already
+			return $this->Registration->findById($this->Session->read('registrationId'));
+		} else {
+			//the user isn't making a registration so we send the requester all registrations
+			return $this->Registration->find('all');
+		}
+	}
 }
 
