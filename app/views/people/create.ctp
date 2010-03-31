@@ -52,7 +52,7 @@
 	
 	<!--  Form helper - sets action post - parse form to the registration model class-->
 	<?php if( isset($in_review_mode) && $in_review_mode) {
-		echo $form->create('Person', array('class' => 'edit'));
+		echo $form->create('Person', array('class' => 'edit', 'id' => 'PersonAddForm', 'url' => '/people/add/in_review_mode:1'));
 	} else {
 		echo $form->create('Person'); 
 	}
@@ -75,7 +75,7 @@
 					</fieldset>
 				</li>
 			<?php endforeach; ?>
-			<?php echo $form->input("in_review_mode", array('type' => 'hidden', 'default' => 1)); ?>
+			<?php //echo $form->input("in_review_mode", array('type' => 'hidden', 'default' => 1)); ?>
 		</ol>
 		<fieldset class="submit grid_8 alpha">
 			<?php echo $form->submit('Ändra')?>

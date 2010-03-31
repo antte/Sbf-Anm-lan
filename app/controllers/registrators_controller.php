@@ -51,11 +51,10 @@ class RegistratorsController extends AppController {
 			//if we dont have errors all was successful and we continue with the registration
 			
 			$this->saveModelDataToSession('Registrator', Sanitize::clean($this->data));
-			if( isset($this->data['Registrator']['in_review_mode']) && $this->data['Registrator']['in_review_mode'] ) {
-				//we dont want that hidden input in_review_mode to be in our session
-				$this->Session->del('Registration.Registrator.in_review_mode');
+			if( isset($this->params['named']['in_review_mode']) ) {
 				$this->redirect(array('controller' => 'registrations', 'action'=>'review'));	
 			} else {
+				//redirect to next step
 				$this->redirect(array('controller' => 'registrations', 'action' => 'review'));
 			}
 		} else {

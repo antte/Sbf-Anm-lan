@@ -3,9 +3,6 @@
 class PeopleController extends AppController {
 	var $helpers = array('Html','Form','Javascript');
 
-	function index(){
-		
-	}
 	/**
 	 * Controlles the amount of person input fields rows
 	 * @param unknown_type $amountOfPeople
@@ -47,9 +44,7 @@ class PeopleController extends AppController {
 			if(empty($errors)) {
 				//if we dont have errors all was successful and we continue with the registration
 				$this->saveModelDataToSession('Person', Sanitize::clean($this->data));
-				if( isset($this->data['Person']['in_review_mode']) ) {
-					//we dont want that hidden input "in_review_mode" to be in our session
-					$this->Session->del('Registration.Person.in_review_mode');
+				if( isset($this->params['named']['in_review_mode']) ){ 
 					//in review mode continue to review page
 					$this->redirect(array('controller' => 'registrations', 'action'=>'review'));	
 				} else {
