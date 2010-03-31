@@ -5,7 +5,8 @@
 <div class="grid_4" id="receipt_info">
 	<div class="grid_full">
 		<h2>Granskning</h2>
-		<p>Nu har du kommit till granskningssteget kolla noga igenom informationen och redigera vid behov</p>
+		<p>Var vänlig och kontrollera alla dina uppgifter innan du bekräftar din anmälan. För att ändra i någon uppgift, använd Redigera-länkarna under respektive del.</p>
+		<p>Du kommer även att ha möjlighet att ändra i din order efter bekräftelse.</p>
 	</div>
 
 </div>

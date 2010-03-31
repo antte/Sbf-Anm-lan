@@ -1,4 +1,4 @@
-<?php $registration = $this->requestAction('registration');
+<?php $registration = $this->requestAction('registrations');
 //debug($registrator);
 ?> 
 <div id="registrator" class="grid_8">
