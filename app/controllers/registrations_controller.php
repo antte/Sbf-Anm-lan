@@ -97,7 +97,7 @@ class RegistrationsController extends AppController {
 		
 		if ($registration) {
 			//something has been added (we have either collected registration from session or from db)
-			$registration['Event'] = $this->Registration->Event->find('first', array('conditions' => array('id' => $registration['Registration']['event_id'])));
+			$registration[] = $this->Registration->Event->find('first', array('conditions' => array('id' => $registration['Registration']['event_id'])));
 			return $registration;
 		}
 		
