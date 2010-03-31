@@ -244,13 +244,13 @@ table td {
 }
 
 .even {
-	background:#fff;
+	background:#ddd;
 }
 
 .odd {
-	 background:#eee;
+	 background:#bbb;
 }
 
 #main div.hover {
-	background: #fffcbb;
+	background: #ffecab;
 }

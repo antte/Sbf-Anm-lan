@@ -13,10 +13,13 @@ $(document).ready(function(){
 		
 		
 		// Inserts HTML-code for a new person field and fades it in
-		$('#choosepeopleamount ol li:last').after('<li>' + $('#choosepeopleamount ol li:first').html() + '</li>');
-		$('#choosepeopleamount ol li:last').hide();
+		var lastLi = $('#choosepeopleamount ol li:last');
+		var newLi = lastLi.clone().insertAfter(lastLi);
+		
+		//('<li>' + $('#choosepeopleamount ol li:first').html() + '</li>');
+		newLi.hide();
 		fieldValue(i);
-		$('#choosepeopleamount ol li:last').fadeIn('slow');
+		newLi.fadeIn('slow');
 		
 		// Removes a person field
 		$('#choosepeopleamount ol li:last .removeField').click(function(){
@@ -69,7 +72,9 @@ function fieldValue(i) {
 	sel.find('.role label').attr('for', 'Person' + i + 'RoleId');
 	sel.find('.role select').attr('id', 'data[Person][' + i + '][role_id]');
 	sel.find('.role select').attr('name', 'data[Person][' + i + '][role_id]');
-
-	sel.find('fieldset').append("<a href='#' class='removeField'>Ta bort</a>");
+	
+	if(sel.find('a.removeField').length == 0) {
+		sel.find('fieldset').append("<a href='#' class='removeField'>Ta bort</a>");
+	}
 
 }

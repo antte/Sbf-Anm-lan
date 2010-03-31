@@ -1,5 +1,4 @@
 <?php $event = $this->requestAction('events/receipt');?>
-
 <div id="receipt_info" class="grid_4">
 	<div class="grid_full">
 		<h2>Tack för din anmälan!</h2>
