@@ -23,9 +23,8 @@
 				<tr class ="<?php if($i%2) echo 'even'; else echo 'odd';?>" >
 					<td><?php echo $person['first_name'];?></td>
 					<td><?php echo $person['last_name'];?></td>
-					<td><?php 
-						foreach($roles as $role) {
-							if($role['id'] == $person['role_id']) echo $role['name'];
+					<td><?php foreach($roles as $id => $name) {
+							if($id == $person['role_id']) echo $name;
 						} ?>
 					</td>
 				</tr>

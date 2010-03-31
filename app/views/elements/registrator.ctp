@@ -1,6 +1,4 @@
-<?php $registration = $this->requestAction('registrations');
-//debug($registrator);
-?> 
+<?php $registration = $this->requestAction('registrations');?> 
 <div id="registrator" class="grid_8">
 	<div class="grid_full">
 		<h3>Bokningsinformation</h3>

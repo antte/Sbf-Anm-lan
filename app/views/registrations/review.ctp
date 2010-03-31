@@ -10,7 +10,6 @@
 	</div>
 
 </div>
-<?php //echo $this->renderElement('event_receipt')?>
 <?php echo $this->renderElement('registration')?>
 <?php echo $this->renderElement('person');?>
 <div class="edit_link grid_8">
