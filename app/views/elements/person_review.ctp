@@ -1,4 +1,4 @@
-<?php $people = $this->requestAction('people/receipt');
+<?php $people = $this->requestAction('people/review');
 ?> 
 <div id="entrants" class="grid_8">
 	<div class="grid_full">
@@ -10,13 +10,14 @@
 				<tr>
 					<th>Förnamn</th>
 					<th>Efternamn</th>
-					<th>Anmäld som</th>
+					<th>Roll</th>
 				</tr>
 			</thead>
 			<tbody>			
 			<?php 
 				$i=0;
-				foreach($people as $person):	?>
+				foreach($people as $key => $person):	?>
+				<?php if (!is_numeric($key)) continue; ?>
 				<tr class ="<?php if($i%2) echo 'even'; else echo 'odd';?>" >
 					<td><?php echo $person['first_name'];?></td>
 					<td><?php echo $person['last_name'];?></td>

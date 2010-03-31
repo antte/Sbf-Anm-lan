@@ -15,9 +15,11 @@ class RegistratorsController extends AppController {
 	function create() {
 		
 		//people/create/in_review_mode:1
-		if(isset($this->params['named']['in_review_mode']) && $this->params['named']['in_review_mode']) {
-			$this->set('in_review_mode', true);
-			$this->set('registrator', $this->Session->read('Registration.Registrator'));
+		if(isset($this->params['in_review_mode'])) {
+			if($this->params['in_review_mode']) {
+				$this->set('in_review_mode', true);
+				$this->set('registrator', $this->Session->read('Registration.Registrator'));
+			}
 		}
 		
 	//debug($this->Session->read());
@@ -51,12 +53,7 @@ class RegistratorsController extends AppController {
 			//if we dont have errors all was successful and we continue with the registration
 			
 			$this->saveModelDataToSession('Registrator', Sanitize::clean($this->data));
-			if( isset($this->params['named']['in_review_mode']) ) {
-				$this->redirect(array('controller' => 'registrations', 'action'=>'review'));	
-			} else {
-				//redirect to next step
-				$this->redirect(array('controller' => 'registrations', 'action' => 'review'));
-			}
+			$this->redirect(array('controller' => 'registrations' , 'action' => 'review'));
 		} else {
 			$this->Session->write('errors', $this->Registrator->validationErrors);
 			
@@ -68,11 +65,11 @@ class RegistratorsController extends AppController {
 		
 	}
 
-	function receipt(){	 	
-		if (isset($this->params['requested'])) {
-			$registrationData = $this->Registrator->Registration->findById($this->Session->read('registrationId'));
-			return $registrationData['Registrator'];
-		}
+	function receipt(){
+	 	
+		$registrationData = $this->Registrator->Registration->findById($this->Session->read('registrationId'));
+		return $registrationData['Registrator'];
+		
 	}
 	
 	function review() {

@@ -30,13 +30,5 @@
 			
 		}
 		
-		function receipt(){
-	 	
-			$registrationData = $this->Event->Registration->findById($this->Session->read('registrationId'));
-			return $registrationData['Event'];
-			
-		}
-		
-		
 }
 	

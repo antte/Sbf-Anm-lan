@@ -2,7 +2,13 @@
 
 class RegistrationsController extends AppController {
 	
+	var $helpers = array('Form', 'Html', 'Javascript');
+	
 	var $components = array('Email');
+	
+	function index() {
+		if (isset($this->params['requested'])) return $this->getRegistration();
+	}
 	
 	/**
 	 * Finalizes the registration saving it and emailing it to the registrator
@@ -41,9 +47,10 @@ class RegistrationsController extends AppController {
 		
 		$this->Email->delivery 	= 'smtp';
 		
-		$this->Email->from		= 'Svenska bilsportförbundet Anmälan <anmalan@sbf.se>';
+		$this->Email->from		= 'noreply@sbf.se';
 		$this->Email->to		= "{$registrator['first_name']} {$registrator['last_name']} <{$registrator['email']}>";
 		$this->Email->bcc		= "it sbf <it@sbf.se>";
+		$this->Email->replyTo	= 'it@sbf.se';
 		
 		$event = $this->Registration->Event->findById($registration['event_id'], array('fields' => 'name'));
 		
@@ -54,7 +61,7 @@ class RegistrationsController extends AppController {
 	}
 	
 	/**
-	 * Clear the session from data regardin Registration   
+	 * Clear the session from data regarding Registration   
 	 * TODO remove at deploy
 	 */
 	function clearSession() {
@@ -62,19 +69,5 @@ class RegistrationsController extends AppController {
 		$this->Session->setFlash('Session rensad');
 		$this->redirect(array ('action' => 'create', 'controller' =>'registrator'));
 	}
-	
-	/**
-	 * Get information about a registration suitet for use in element
-	 * return $registration array of registration information 
-	 */
-	function receipt() {
-		$registrationData = $this->Registration->findById($this->Session->read('registrationId'));
-		$registration['number'] = $registrationData['Registration']['number'];
-		$registration['event_name'] = $registrationData['Event']['name'];
-		return $registration;
-		
-	}
-
-	
 }
 

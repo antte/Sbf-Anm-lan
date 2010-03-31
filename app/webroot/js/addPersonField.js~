@@ -54,6 +54,7 @@ $(document).ready(function(){
 function fieldValue(i) {
 
 	var sel = $('#choosepeopleamount ol li:last');
+console.log(sel); 	
 	
 	// First name
 	sel.find('.first_name input').attr('value', '');
@@ -77,4 +78,5 @@ function fieldValue(i) {
 		sel.find('fieldset').append("<a href='#' class='removeField'>Ta bort</a>");
 	}
 
+console.log(sel.find('fieldset'));
 }
