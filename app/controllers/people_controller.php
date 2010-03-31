@@ -3,9 +3,6 @@
 class PeopleController extends AppController {
 	var $helpers = array('Html','Form','Javascript');
 
-	function index(){
-		
-	}
 	/**
 	 * Controlles the amount of person input fields rows
 	 * @param unknown_type $amountOfPeople

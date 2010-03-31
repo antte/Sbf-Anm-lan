@@ -30,24 +30,5 @@
 			
 		}
 		
-		/**
-		* Is called from the event receipt element
-		* @return array event information
-		*/
-		function receipt(){
-			$registrationData = $this->Event->Registration->findById($this->Session->read('registrationId'));
-			return $registrationData['Event'];
-		}
-
-		/**
-		* Is called from the event review element
-		* @return array event information
-		*/
-		function review() {
-			$registrationData = $this->Event->Registration->findById($this->Session->read('registrationId'));
-			return $registrationData['Event'];
-		}
-		
-		
 }
 	
