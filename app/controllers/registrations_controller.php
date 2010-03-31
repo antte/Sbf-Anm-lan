@@ -77,16 +77,24 @@ class RegistrationsController extends AppController {
 		/* if a registration has been made recently we return it
 		 * we need to take into account that this action can be requested both before and after a registration has been saved
 		 */
-		if ($this->Session->read('Registration')) { 
-			// if Registration exists the registration hasn't been saved yet and the user is reviewing his registration
-			return $this->Session->read('Registration');
-		} else if ($this->Session->read('registrationId')) {
-			// registrationId is set when saving the registration so we take that as indication its saved already
-			return $this->Registration->findById($this->Session->read('registrationId'));
-		} else {
-			//the user isn't making a registration so we send the requester all registrations
-			return $this->Registration->find('all');
+		
+		// if Registration exists the registration hasn't been saved yet and the user is reviewing his registration
+		$registration = $this->Session->read('Registration');
+		
+		//if it isnt in session we try to find it in db
+		// registrationId is set when saving the registration so we take that as indication its saved in db already
+		if(!$registration && $this->Session->read('registrationId')) {
+			$registration = $this->Registration->findById($this->Session->read('registrationId'));
 		}
+		
+		if ($registration) {
+			//something has been added (we have either collected registration from session or from db)
+			$registration['Event'] = $this->Registration->Event->find('first', array('conditions' => array('id' => $registration['Registration']['event_id'])));
+			return $registration;
+		}
+		
+		//the user isn't making a registration so we send the requester all registrations
+		return $this->Registration->find('all');
 	}
 }
 
