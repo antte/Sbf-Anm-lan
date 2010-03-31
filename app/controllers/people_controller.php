@@ -22,7 +22,8 @@ class PeopleController extends AppController {
 
 		$this->set('amountOfPeople' , Sanitize::clean($amountOfPeople));
 		$event = $this->Person->Registration->Event->find('first', array('conditions' => array('id' => $this->Session->read('eventId')), 'fields' => array('Event.id', 'Event.name')));
-		$this->set('event' , $event['Event']);
+		$eventId = $this->Session->read('Registration.Registration.event_id');
+		$this->set('eventName' , $this->Person->Registration->Event->field('name', array('id' => $eventId)));
 		$this->set('people', $this->Session->read('Registration.Person'));
 		$this->set('roles',$this->Person->Role->find('list'));
 		$this->set('errors', $this->Session->read('errors'));
@@ -43,9 +44,7 @@ class PeopleController extends AppController {
 			if(empty($errors)) {
 				//if we dont have errors all was successful and we continue with the registration
 				$this->saveModelDataToSession('Person', Sanitize::clean($this->data));
-				if( isset($this->data['Person']['in_review_mode']) ) {
-					//we dont want that hidden input "in_review_mode" to be in our session
-					$this->Session->del('Registration.Person.in_review_mode');
+				if( isset($this->params['named']['in_review_mode']) ){ 
 					//in review mode continue to review page
 					$this->redirect(array('controller' => 'registrations', 'action'=>'review'));	
 				} else {

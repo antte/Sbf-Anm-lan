@@ -48,7 +48,7 @@
 	?>
 	
 	<!--  Form helper - sets action post - parse form to the registration model class-->
-	<?php echo $form->create('Registrator'); ?> 
+	<?php echo $form->create( array ('id' => 'RegistratorAddForm', 'url' => '/Registrators/add/in_review_mode:1')); ?> 
 		
 		<?php if (isset($in_review_mode) && $in_review_mode) { ?>		
 			<!--  Form helper - create input with label  -->
