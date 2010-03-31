@@ -82,7 +82,6 @@ class RegistrationsController extends AppController {
 			return $this->Session->read('Registration');
 		} else if ($this->Session->read('registrationId')) {
 			// registrationId is set when saving the registration so we take that as indication its saved already
-			$this->loadModel('Registration');
 			return $this->Registration->findById($this->Session->read('registrationId'));
 		} else {
 			//the user isn't making a registration so we send the requester all registrations
