@@ -10,7 +10,7 @@
 				<tr>
 					<th>Förnamn</th>
 					<th>Efternamn</th>
-					<th>Roll</th>
+					<th>Anmäld som</th>
 				</tr>
 			</thead>
 			<tbody>			

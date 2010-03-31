@@ -3,9 +3,6 @@
 class PeopleController extends AppController {
 	var $helpers = array('Html','Form','Javascript');
 
-	function index(){
-		
-	}
 	/**
 	 * Controlles the amount of person input fields rows
 	 * @param unknown_type $amountOfPeople
@@ -22,6 +19,7 @@ class PeopleController extends AppController {
 			$this->redirect(array('action' => 'create'));
 		}
 		
+
 		$this->set('amountOfPeople' , Sanitize::clean($amountOfPeople));
 		$event = $this->Person->Registration->Event->find('first', array('conditions' => array('id' => $this->Session->read('eventId')), 'fields' => array('Event.id', 'Event.name')));
 		$this->set('event' , $event['Event']);

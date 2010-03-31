@@ -6,6 +6,10 @@ class RegistrationsController extends AppController {
 	
 	var $components = array('Email');
 	
+	function index() {
+		if (isset($this->params['requested'])) return $this->getRegistration();
+	}
+	
 	/**
 	 * Finalizes the registration saving it and emailing it to the registrator
 	 */
@@ -57,7 +61,7 @@ class RegistrationsController extends AppController {
 	}
 	
 	/**
-	 * Clear the session from data regardin Registration   
+	 * Clear the session from data regarding Registration   
 	 * TODO remove at deploy
 	 */
 	function clearSession() {
@@ -65,26 +69,5 @@ class RegistrationsController extends AppController {
 		$this->Session->setFlash('Session rensad');
 		$this->redirect(array ('action' => 'create', 'controller' =>'registrator'));
 	}
-	
-	/**
-	 * Get information about a registration suited for use in element
-	 * @return array of registration information 
-	 */
-	function receipt() {
-		$registrationData = $this->Registration->findById($this->Session->read('registrationId'));
-		$registration['number'] = $registrationData['Registration']['number'];
-		$registration['event_name'] = $registrationData['Event']['name'];
-		return $registration;
-		
-	}
-	/**
-	* Is called from the registration review element
-	* @return array review information
-	*/
-	function review(){
-		if (isset($this->params['requested'])) {
-			return $this->Registration->Event->field('name', array('id' => $this->Session->read('Registration.Registration.event_id')));
-		}
-	}	
 }
 
