@@ -5,17 +5,17 @@
 <div class="grid_4" id="receipt_info">
 	<div class="grid_full">
 		<h2>Granskning</h2>
-		<p>Nu har du kommit till granskningssteget kolla noga igenom informationen och redigera vid behov</p>
+		<p>Var vänlig och kontrollera alla dina uppgifter innan du bekräftar din anmälan. För att ändra i någon uppgift, använd Redigera-länkarna under respektive del.</p>
+		<p>Du kommer även att ha möjlighet att ändra i din order efter bekräftelse.</p>
 	</div>
 
 </div>
-<?php //echo $this->renderElement('event_receipt')?>
-<?php echo $this->renderElement('registration_review')?>
-<?php echo $this->renderElement('person_review');?>
+<?php echo $this->renderElement('registration')?>
+<?php echo $this->renderElement('person');?>
 <div class="edit_link grid_8">
 	<?php echo $html->link( 'Redigera',array('controller'=>'People', 'action'=>'create','in_review_mode:1'));?>
 </div>
-<?php echo $this->renderElement('registrator_review');?>
+<?php echo $this->renderElement('registrator');?>
 <div class="edit_link grid_8">
 	<?php echo $html->link( 'Redigera',array('controller'=>'Registrators', 'action'=>'create','in_review_mode:1'));?>
 </div>

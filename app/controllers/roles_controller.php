@@ -3,7 +3,8 @@
 		
 		function index() {
 			if($this->params['requested']) {
-				return $this->Role->find('all');
+				$rolesData = $this->Role->find('list');
+				return $rolesData;
 			} else {
 				$this->redirect(array('controller' => 'events', 'action' => 'index'));
 			}
