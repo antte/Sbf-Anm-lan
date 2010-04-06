@@ -14,21 +14,21 @@ class RegistrationsController extends AppController {
 	 * Finalizes the registration saving it and emailing it to the registrator
 	 */
 	function finalize() {
-		$this->layout='registration';
+		//$this->layout='registration';
 		// The only thing registration needs right now is an event id
 		$Registration['Registration']['event_id'] = $this->Session->read('Registration.Registration.event_id');
 		$Registration['Registration']['number'] = $this->Registration->generateUniqueNumber();
 		$this->saveModelDataToSession('Registration', $Registration);		
 		$registration = $this->Session->read('Registration');
-		//debug($registration);
 		if(!$this->Registration->saveAll($registration)) {
 			//$this->Session->del('Registration');
 			$this->Session->setFlash('Vi ber om ursäkt, din registrering kunde inte slutföras. Kontakta support.');
-			debug($this->Registration->validationErrors);
-			//$this->redirect(array('controller' => 'events', 'action' => 'index'));
+			$this->redirect(array('controller' => 'events', 'action' => 'index'));
 		} else {
-			$this->Session->write('registrationId', $this->Registration->id);
+			$this->Session->write('Event.registrationId', $this->Registration->id);
+			
 			$this->sendRegistrationConfirmMail($registration['Registrator'], $registration['Registration']);
+		    
 			$steps = $this->Session->read('Event.steps');
 			foreach($steps as &$step) {
 				$step['current_step'] = false;
@@ -36,7 +36,7 @@ class RegistrationsController extends AppController {
 			$steps['Receipt']['current_step'] = true;
 			$this->Session->write('Event.steps', $steps);
 			$this->Session->del('Registration');
-			$this->redirect(array ('action' => 'receipt'));
+			$this->redirect(array ('controller'=> 'registrations' , 'action' => 'receipt'));
 		}
 	}
 
@@ -80,10 +80,9 @@ class RegistrationsController extends AppController {
 		$this->Email->bcc		= "it sbf <it@sbf.se>";
 		$this->Email->replyTo	= 'it@sbf.se';
 		
-		$event = $this->Registration->Event->findById($registration['event_id'], array('fields' => 'name'));
-		
-		$this->Email->subject	= "Kvitto för din anmälan till {$event['Event']['name']}";
-		$this->Email->template	= 'receipt';
+		$event = $this->Session->read('Event');
+		$this->Email->subject	= "Kvitto för din anmälan till {$event['name']}";
+		//$this->Email->template	= 'default';
 		$this->Email->sendAs	= 'both'; //both text and html
 		$this->Email->send();
 	}
