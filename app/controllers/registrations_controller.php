@@ -56,7 +56,7 @@ class RegistrationsController extends AppController {
 		
 		$this->Email->subject	= "Kvitto för din anmälan till {$event['Event']['name']}";
 		$this->Email->template	= 'receipt';
-		$this->Email->sendAs	= 'text'; //both text and html
+		$this->Email->sendAs	= 'both'; //both text and html
 		$this->Email->send();
 	}
 	
@@ -105,5 +105,9 @@ class RegistrationsController extends AppController {
 		//the user isn't making a registration so we send the requester all registrations
 		return $this->Registration->find('all');
 	}
+
+	function testemail(){
+	}
 }
+
 
