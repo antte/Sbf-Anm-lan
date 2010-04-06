@@ -8,8 +8,8 @@ class PeopleController extends AppController {
 	 * @param unknown_type $amountOfPeople
 	 */
 	function create($amountOfPeople = 1){
-		debug($this->Session->read('Registration'));
-		
+		$this->layout='registration';		
+		debug($this->Session->read('Registration'));	
 		if (!$this->Session->read('Registration.Registration.event_id')) $this->redirect(array('controller' => 'events', 'action' => 'index'));
 		
 		//people/create/in_review_mode:1
@@ -45,18 +45,18 @@ class PeopleController extends AppController {
 			if(empty($errors)) {
 				//if we dont have errors all was successful and we continue with the registration
 				$this->saveModelDataToSession('Person', Sanitize::clean($this->data));
-				$steps = $this->Session->read('Registration.Event.steps');
+				$steps = $this->Session->read('Event.steps');
 					foreach($steps as &$step) {
 						$step['current_step'] = false;
 					}
 				if( isset($this->params['named']['in_review_mode']) ){ 
 					//in review mode continue to review page
 					$steps['Review']['current_step'] = true;
-					$this->Session->write('Registration.Event.steps', $steps);
+					$this->Session->write('Event.steps', $steps);
 					$this->redirect(array('controller' => 'registrations', 'action'=>'review'));	
 				} else {
 					$steps['Registrator']['current_step'] = true;
-					$this->Session->write('Registration.Event.steps', $steps);
+					$this->Session->write('Event.steps', $steps);
 					$this->redirect(array('controller' => 'registrators', 'action'=>'create'));
 				}
 			} else {
@@ -65,31 +65,4 @@ class PeopleController extends AppController {
 			}
 		}
 	}
-	
-	/**
-	 * Is called from the people receipt element
-	 * @return array of people connected to the registration
-	 */
-	function receipt(){
-		$registrationData = $this->Person->Registration->findById($this->Session->read('registrationId'));
-		$people = $registrationData['Person'];
-		foreach ($people as &$person){
-			$person['role_name'] = $this->Person->Role->field('name',array ('id'=> $person['role_id'] )); 
-		}
-		return $people;
-	}
-	
-	/**
-	* Is called from the people review element
-	* @return array of people connected to the registration
-	*/
-	function review() {
-		if (isset($this->params['requested'])) {
-			$people = $this->Session->read('Registration.Person');
-			foreach ($people as &$person){
-				$person['role_name'] = $this->Person->Role->field('name',array ('id'=> $person['role_id'] )); 
-			}
-			return $people;
-		}
-	}
-}
+}	

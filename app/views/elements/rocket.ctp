@@ -1,5 +1,4 @@
-<?php $registration = $this->requestAction('Registrations');?>
-<?php debug($registration);?>
+<?php $event = $this->requestAction('Registrations/getEvent');?>
 
 <?php 
 //while its being implemented i pretend to get steps
@@ -25,7 +24,7 @@ $currentStepFound = false;
 ?>
 
 <ol id="rocket" class="grid_full">
-	<?php foreach($registration['Event']['steps'] as $step):?>
+	<?php foreach($event['steps'] as $step):?>
 		<?php 
 		//stepStatus can be current previous or coming
 		if ($step['current_step']) {
