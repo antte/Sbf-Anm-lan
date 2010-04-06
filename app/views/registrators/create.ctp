@@ -53,62 +53,60 @@
 	<!--  Form helper - sets action post - parse form to the registration model class-->
 	<?php echo $form->create( array ('id' => 'RegistratorAddForm', 'url' => '/Registrators/add/in_review_mode:1')); ?> 
 		
-		<?php if (isset($in_review_mode) && $in_review_mode) { ?>		
+		<?php 
+		if (!$in_review_mode) { 
+			/* 
+			 * if we're not in review mode we do not have access to registrator values so we set them to nothing so nothing is shown in the form
+			 * 
+			 */
+			if(!empty($registration['Person'])) {
+				foreach($registration['Person'] as $person) {
+					//didn't find a better way to get the first person (since the first person isn't nessesarily on index 0)
+					$registration['Registrator']['first_name'] = $person['first_name'];
+					$registration['Registrator']['last_name'] = $person['last_name'];
+					break;
+				}
+			} else {
+				$registration['Registrator']['first_name'] = '';
+				$registration['Registrator']['last_name'] = '';
+			}
+						
+			$registration['Registrator']['email'] = '';
+			$registration['Registrator']['retype_email'] = '';
+			$registration['Registrator']['phone'] = '';
+			$registration['Registrator']['c_o'] = '';
+			$registration['Registrator']['street_address'] = '';
+			$registration['Registrator']['postal_code'] = '';
+			$registration['Registrator']['city'] = '';
+		}
+		?>		
 			<!--  Form helper - create input with label  -->
 			<fieldset class="name grid_8 alpha" >
 				<p class="requiredinfo">Fält markerade med * är obligatoriska uppgifter!</p>
 				<?php
-					echo $form->input('first_name', array('type' => 'text', 'label' => 'Förnamn *', 'div' => 'first_name grid_3', 'default' => $registrator['first_name']));
-					echo $form->input('last_name', array('type' => 'text', 'label' => 'Efternamn *', 'div' => 'last_name grid_3', 'default' => $registrator['last_name']));
+					echo $form->input('first_name', array('type' => 'text', 'label' => 'Förnamn *', 'div' => 'first_name grid_3', 'default' => $registration['Registrator']['first_name']));
+					echo $form->input('last_name', array('type' => 'text', 'label' => 'Efternamn *', 'div' => 'last_name grid_3', 'default' => $registration['Registrator']['last_name']));
 				?>
 			</fieldset>
 			<fieldset class="email grid_8 alpha">
 				<?php
-					echo $form->input('email', array('type' => 'text', 'label' => 'E-post *', 'div' => 'email grid_3', 'default' => $registrator['email'] ));
-					echo $form->input('retype_email', array('type' => 'text', 'label' => 'Bekräfta e-post *', 'div' => 'retype_email grid_3', 'default' => $registrator['retype_email']));
+					echo $form->input('email', array('type' => 'text', 'label' => 'E-post *', 'div' => 'email grid_3', 'default' => $registration['Registrator']['email'] ));
+					echo $form->input('retype_email', array('type' => 'text', 'label' => 'Bekräfta e-post *', 'div' => 'retype_email grid_3', 'default' => $registration['Registrator']['retype_email']));
 				?>
 			</fieldset>
 			<fieldset class="contact grid_8 alpha">
 				<?php
-					echo $form->input('phone', array('type' => 'text', 'label' => 'Telefon *', 'div' => 'phone grid_3', 'default' => $registrator['phone']));
-					echo $form->input('c_o', array('type' => 'text', 'label' => 'C/O', 'div' => 'c_o grid_3', 'default' => $registrator['c_o']));
-					echo $form->input('street_address', array('type' => 'text', 'label' => 'Adress *', 'div' => 'address grid_3', 'default' => $registrator['street_address']));
-					echo $form->input('postal_code', array('type' => 'text', 'label' => 'Postnr *', 'div' => 'postcode grid_2', 'default' => $registrator['postal_code'] ));
-					echo $form->input('city', array('type' => 'text', 'label' => 'Stad *', 'div' => 'city grid_3', 'default' => $registrator['city'])); 
+					echo $form->input('phone', array('type' => 'text', 'label' => 'Telefon *', 'div' => 'phone grid_3', 'default' => $registration['Registrator']['phone']));
+					echo $form->input('c_o', array('type' => 'text', 'label' => 'C/O', 'div' => 'c_o grid_3', 'default' => $registration['Registrator']['c_o']));
+					echo $form->input('street_address', array('type' => 'text', 'label' => 'Adress *', 'div' => 'address grid_3', 'default' => $registration['Registrator']['street_address']));
+					echo $form->input('postal_code', array('type' => 'text', 'label' => 'Postnr *', 'div' => 'postcode grid_2', 'default' => $registration['Registrator']['postal_code'] ));
+					echo $form->input('city', array('type' => 'text', 'label' => 'Stad *', 'div' => 'city grid_3', 'default' => $registration['Registrator']['city'])); 
 					echo $form->input("in_review_mode", array('type' => 'hidden', 'default' => 1));
 				?>						
 			</fieldset>
 			<fieldset class="contact grid_8 alpha">
 				<?php echo $form->submit('Ändra', array('id' => 'registratorSubmit'))?>
-			</fieldset>		
-		<?php } else { ?>
-			<!--  Form helper - create input with label  -->
-			<fieldset class="name grid_8 alpha" >
-				<p class="requiredinfo">Fält markerade med * är obligatoriska uppgifter!</p>
-				<?php
-					echo $form->input('first_name', array('type' => 'text', 'label' => 'Förnamn *', 'div' => 'first_name grid_3'));
-					echo $form->input('last_name', array('type' => 'text', 'label' => 'Efternamn *', 'div' => 'last_name grid_3'));
-				?>
-			</fieldset>
-			<fieldset class="email grid_8 alpha">
-				<?php
-					echo $form->input('email', array('type' => 'text', 'label' => 'E-post *', 'div' => 'email grid_3' ));
-					echo $form->input('retype_email', array('type' => 'text', 'label' => 'Bekräfta e-post *', 'div' => 'retype_email grid_3'));
-				?>
-			</fieldset>
-			<fieldset class="contact grid_8 alpha">
-				<?php
-					echo $form->input('phone', array('type' => 'text', 'label' => 'Telefon *', 'div' => 'phone grid_3'));
-					echo $form->input('c_o', array('type' => 'text', 'label' => 'C/O', 'div' => 'c_o grid_3'));
-					echo $form->input('street_address', array('type' => 'text', 'label' => 'Adress *', 'div' => 'address grid_3'));
-					echo $form->input('postal_code', array('type' => 'text', 'label' => 'Postnr *', 'div' => 'postcode grid_2' ));
-					echo $form->input('city', array('type' => 'text', 'label' => 'Stad *', 'div' => 'city grid_3')); 
-				?>						
-			</fieldset>
-			<fieldset class="contact grid_8 alpha">
-				<?php echo $form->submit('Skicka anmälan', array('id' => 'registratorSubmit'))?>
-			</fieldset>		
-		<?php } ?>
+			</fieldset>	
 	<!--  Form helper - end form-->
 	<?php echo $form->end(); ?>	
 </div> 
