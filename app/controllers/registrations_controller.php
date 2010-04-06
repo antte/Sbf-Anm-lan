@@ -26,7 +26,7 @@ class RegistrationsController extends AppController {
 			$this->redirect(array('controller' => 'events', 'action' => 'index'));
 		} else {
 			$this->Session->write('Event.registrationId', $this->Registration->id);
-			//$this->sendRegistrationConfirmMail($registration['Registrator'], $registration['Registration']);
+			$this->sendRegistrationConfirmMail($registration['Registrator'], $registration['Registration']);
 		    
 			$steps = $this->Session->read('Event.steps');
 			foreach($steps as &$step) {
@@ -82,7 +82,7 @@ class RegistrationsController extends AppController {
 		
 		$event = $this->Session->read('Event');
 		$this->Email->subject	= "Kvitto för din anmälan till {$event['name']}";
-		//$this->Email->template	= 'default';
+		$this->Email->template	= 'default';
 		$this->Email->sendAs	= 'both'; //both text and html
 		$this->Email->send();
 	}
