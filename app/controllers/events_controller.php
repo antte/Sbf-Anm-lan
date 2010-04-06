@@ -45,7 +45,9 @@
 			);
 			
 			$this->Session->write('Registration.Registration.event_id', $eventId);
-			$this->Session->write('Registration.Event.steps', $steps);
+			$this->Session->write('Event.steps', $steps);
+			$this->Session->write('Event.name', $this->Event->field('name', $eventId));
+			$this->Session->write('Event.id', $this->Event->field('id', $eventId));
 			$this->redirect(array('controller' => 'people', 'action' => 'create'));
 			
 			

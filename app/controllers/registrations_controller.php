@@ -7,40 +7,60 @@ class RegistrationsController extends AppController {
 	var $components = array('Email');
 	
 	function index() {
-		if (isset($this->params['requested'])) return $this->getRegistration();
+		if (isset($this->params['requested'])) return $this->getRegistration();		
 	}
 	
 	/**
 	 * Finalizes the registration saving it and emailing it to the registrator
 	 */
 	function finalize() {
-		
+		//$this->layout='registration';
 		// The only thing registration needs right now is an event id
 		$Registration['Registration']['event_id'] = $this->Session->read('Registration.Registration.event_id');
 		$Registration['Registration']['number'] = $this->Registration->generateUniqueNumber();
 		$this->saveModelDataToSession('Registration', $Registration);		
 		$registration = $this->Session->read('Registration');
-		unset($registration['Event']);
-		//debug($registration);
 		if(!$this->Registration->saveAll($registration)) {
 			//$this->Session->del('Registration');
 			$this->Session->setFlash('Vi ber om ursäkt, din registrering kunde inte slutföras. Kontakta support.');
-			debug($this->Registration->validationErrors);
-			//$this->redirect(array('controller' => 'events', 'action' => 'index'));
+			$this->redirect(array('controller' => 'events', 'action' => 'index'));
 		} else {
-			$this->Session->write('registrationId', $this->Registration->id);
+			$this->Session->write('Event.registrationId', $this->Registration->id);
+			
 			$this->sendRegistrationConfirmMail($registration['Registrator'], $registration['Registration']);
-			$this->Session->del('Registration');
-			$steps = $this->Session->read('Registration.Event.steps');
+		    
+			$steps = $this->Session->read('Event.steps');
 			foreach($steps as &$step) {
 				$step['current_step'] = false;
 			}
 			$steps['Receipt']['current_step'] = true;
-			$this->Session->write('Registration.Event.steps', $steps);
-			$this->redirect(array ('action' => 'receipt'));
+			$this->Session->write('Event.steps', $steps);
+			$this->Session->del('Registration');
+			$this->redirect(array ('controller'=> 'registrations' , 'action' => 'receipt'));
 		}
 	}
 
+	function review(){
+		$this->layout='registration';
+	}
+	
+	function receipt() {
+	}
+	
+	function testemail(){
+	}
+	
+	/**
+	 * Clear the session from data regarding Registration   
+	 * TODO remove at deploy
+	 */
+	function clearSession() {
+		$this->Session->del('Registration');
+		$this->Session->del('Event');
+		$this->Session->setFlash('Session rensad');
+		$this->redirect(array ('action' => 'create', 'controller' =>'registrator'));
+	}
+	
 	/**
 	 * Sending a comfirmmail using the reciept view for layout
 	 * @param unknown_type $registrator --session array for the registration module 
@@ -60,32 +80,13 @@ class RegistrationsController extends AppController {
 		$this->Email->bcc		= "it sbf <it@sbf.se>";
 		$this->Email->replyTo	= 'it@sbf.se';
 		
-		$event = $this->Registration->Event->findById($registration['event_id'], array('fields' => 'name'));
-		
-		$this->Email->subject	= "Kvitto för din anmälan till {$event['Event']['name']}";
-		$this->Email->template	= 'receipt';
+		$event = $this->Session->read('Event');
+		$this->Email->subject	= "Kvitto för din anmälan till {$event['name']}";
+		//$this->Email->template	= 'default';
 		$this->Email->sendAs	= 'both'; //both text and html
 		$this->Email->send();
 	}
 	
-	function review(){
-		
-	}
-	
-	function receipt() {
-		
-	}
-	
-	
-	/**
-	 * Clear the session from data regarding Registration   
-	 * TODO remove at deploy
-	 */
-	function clearSession() {
-		$this->Session->del('Registration');
-		$this->Session->setFlash('Session rensad');
-		$this->redirect(array ('action' => 'create', 'controller' =>'registrator'));
-	}
 	
 	/**
 	 * 
@@ -116,7 +117,10 @@ class RegistrationsController extends AppController {
 		return $this->Registration->find('all');
 	}
 
-	function testemail(){
+	function getEvent(){
+		if (isset($this->params['requested'])) {
+			return $this->Session->read('Event');
+			}
 	}
 }
 

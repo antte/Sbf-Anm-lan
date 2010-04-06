@@ -29,7 +29,6 @@
 ?>
 
 <h2>Fyll i vilka som ska komma till <?php echo $eventName;?></h2>
-<?php echo $this->renderElement('rocket');?>
 
 <div id="choosepeopleamount" class="grid_8">
 	
