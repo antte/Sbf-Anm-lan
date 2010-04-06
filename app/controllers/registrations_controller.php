@@ -21,13 +21,12 @@ class RegistrationsController extends AppController {
 		$this->saveModelDataToSession('Registration', $Registration);		
 		$registration = $this->Session->read('Registration');
 		if(!$this->Registration->saveAll($registration)) {
-			//$this->Session->del('Registration');
+			$this->Session->del('Registration');
 			$this->Session->setFlash('Vi ber om ursäkt, din registrering kunde inte slutföras. Kontakta support.');
 			$this->redirect(array('controller' => 'events', 'action' => 'index'));
 		} else {
 			$this->Session->write('Event.registrationId', $this->Registration->id);
-			
-			$this->sendRegistrationConfirmMail($registration['Registrator'], $registration['Registration']);
+			//$this->sendRegistrationConfirmMail($registration['Registrator'], $registration['Registration']);
 		    
 			$steps = $this->Session->read('Event.steps');
 			foreach($steps as &$step) {
@@ -45,6 +44,7 @@ class RegistrationsController extends AppController {
 	}
 	
 	function receipt() {
+		$this->layout='registration';
 	}
 	
 	function testemail(){
@@ -58,7 +58,7 @@ class RegistrationsController extends AppController {
 		$this->Session->del('Registration');
 		$this->Session->del('Event');
 		$this->Session->setFlash('Session rensad');
-		$this->redirect(array ('action' => 'create', 'controller' =>'registrator'));
+		$this->redirect(array ('controller' =>'events', 'action' => 'index'));
 	}
 	
 	/**
@@ -89,21 +89,18 @@ class RegistrationsController extends AppController {
 	
 	
 	/**
-	 * 
+	 * if a registration has been made recently we return it
+	 * we need to take into account that this action can be requested both before and after a registration has been saved
 	 */
 	private function getRegistration() {
-		/* if a registration has been made recently we return it
-		 * we need to take into account that this action can be requested both before and after a registration has been saved
-		 */
 		
 		// if Registration exists the registration hasn't been saved yet and the user is reviewing his registration
 		$registration = $this->Session->read('Registration');
-		//$current_step = $this-Session-write('current_step', 'true');//
 		
-		//if it isnt in session we try to find it in db
+		// if it isnt in session we try to find it in db
 		// registrationId is set when saving the registration so we take that as indication its saved in db already
-		if(!$registration && $this->Session->read('registrationId')) {
-			$registration = $this->Registration->findById($this->Session->read('registrationId'));
+		if(!$registration && $this->Session->read('Event.registrationId')) {
+			$registration = $this->Registration->findById($this->Session->read('Event.registrationId'));
 			$eventData = $this->Registration->Event->find('first', array('conditions' => array('id' => $registration['Registration']['event_id'])));
 			$registration['Event'] = $eventData['Event'];
 		}
