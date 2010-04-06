@@ -70,7 +70,7 @@
 			</fieldset>
 			<fieldset class="contact grid_8 alpha">
 				<?php
-					echo $form->input('phone', array('type' => 'text', 'label' => 'Telefon', 'div' => 'phone grid_3', 'default' => $registrator['phone']));
+					echo $form->input('phone', array('type' => 'text', 'label' => 'Telefon *', 'div' => 'phone grid_3', 'default' => $registrator['phone']));
 					echo $form->input('c_o', array('type' => 'text', 'label' => 'C/O', 'div' => 'c_o grid_3', 'default' => $registrator['c_o']));
 					echo $form->input('street_address', array('type' => 'text', 'label' => 'Adress *', 'div' => 'address grid_3', 'default' => $registrator['street_address']));
 					echo $form->input('postal_code', array('type' => 'text', 'label' => 'Postnr *', 'div' => 'postcode grid_2', 'default' => $registrator['postal_code'] ));
@@ -98,7 +98,7 @@
 			</fieldset>
 			<fieldset class="contact grid_8 alpha">
 				<?php
-					echo $form->input('phone', array('type' => 'text', 'label' => 'Telefon', 'div' => 'phone grid_3'));
+					echo $form->input('phone', array('type' => 'text', 'label' => 'Telefon *', 'div' => 'phone grid_3'));
 					echo $form->input('c_o', array('type' => 'text', 'label' => 'C/O', 'div' => 'c_o grid_3'));
 					echo $form->input('street_address', array('type' => 'text', 'label' => 'Adress *', 'div' => 'address grid_3'));
 					echo $form->input('postal_code', array('type' => 'text', 'label' => 'Postnr *', 'div' => 'postcode grid_2' ));
