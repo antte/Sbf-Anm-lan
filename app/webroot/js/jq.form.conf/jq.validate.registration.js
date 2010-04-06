@@ -22,7 +22,8 @@ $(document).ready(function(){
 		    	equalTo: "#RegistratorEmail",
 		    	email: true
 	 		},
-	 		'data[Registrator][phone]': {		
+	 		'data[Registrator][phone]': {	
+	 			required: true,
 				minlength: 7 
 			},
 			'data[Registrator][c_o]': {

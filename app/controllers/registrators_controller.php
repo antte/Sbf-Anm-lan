@@ -20,7 +20,8 @@ class RegistratorsController extends AppController {
 		//people/create/in_review_mode:1
 		if(isset($this->params['named']['in_review_mode']) && $this->params['named']['in_review_mode']) {
 			$this->set('in_review_mode', true);
-			$this->set('registrator', $this->Session->read('Registration.Registrator'));
+		} else {
+			$this->set('in_review_mode', false);
 		}
 		
 	//debug($this->Session->read());

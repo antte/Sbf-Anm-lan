@@ -13,7 +13,11 @@ class PeopleController extends AppController {
 		if (!$this->Session->read('Registration.Registration.event_id')) $this->redirect(array('controller' => 'events', 'action' => 'index'));
 		
 		//people/create/in_review_mode:1
-		if(isset($this->params['named']['in_review_mode'])) $this->set('in_review_mode', true);
+		if(isset($this->params['named']['in_review_mode'])) {
+			$this->set('in_review_mode', true);
+		} else {
+			$this->set('in_review_mode', false);			
+		}
 	
 		if (!is_numeric($amountOfPeople) || $amountOfPeople < 1) {
 			$this->Session->setFlash('Skriv hur många personer du vill anmäla. Du måste anmäla minst en person.');
