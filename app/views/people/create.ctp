@@ -62,7 +62,7 @@
 		<p class="requiredinfo">Fält markerade med * är obligatoriska uppgifter!</p>
 		
 		
-		<?php if( isset($in_review_mode) && $in_review_mode) { ?>
+		<?php if($in_review_mode) { ?>
 		<ol>
 			<?php foreach( $people as $key => $person ): ?>
 				<li>
@@ -81,7 +81,7 @@
 			<?php echo $form->submit('Ändra')?>
 		
 		</fieldset>
-		<?php } else { ?>
+		<?php } else { //not in review mode ?>
 		<ol>
 			<?php for( $i = 0; $i < $amountOfPeople; $i++ ): ?>
 				<li>
