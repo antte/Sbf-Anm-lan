@@ -68,6 +68,7 @@ class RegistrationsController extends AppController {
 		
 	}
 	
+	
 	/**
 	 * Clear the session from data regarding Registration   
 	 * TODO remove at deploy
@@ -88,17 +89,18 @@ class RegistrationsController extends AppController {
 		
 		// if Registration exists the registration hasn't been saved yet and the user is reviewing his registration
 		$registration = $this->Session->read('Registration');
+		$current_step = $this-Session-write('current_step', 'true');
 		
 		//if it isnt in session we try to find it in db
 		// registrationId is set when saving the registration so we take that as indication its saved in db already
 		if(!$registration && $this->Session->read('registrationId')) {
 			$registration = $this->Registration->findById($this->Session->read('registrationId'));
+			$eventData = $this->Registration->Event->find('first', array('conditions' => array('id' => $registration['Registration']['event_id'])));
+			$registration['Event'] = $eventData['Event'];
 		}
 		
 		if ($registration) {
 			//something has been added (we have either collected registration from session or from db)
-			$eventData = $this->Registration->Event->find('first', array('conditions' => array('id' => $registration['Registration']['event_id'])));
-			$registration['Event'] = $eventData['Event'];
 			return $registration;
 		}
 		

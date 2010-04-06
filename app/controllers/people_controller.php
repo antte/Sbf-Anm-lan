@@ -8,6 +8,7 @@ class PeopleController extends AppController {
 	 * @param unknown_type $amountOfPeople
 	 */
 	function create($amountOfPeople = 1){
+		debug($this->Session->read('Registration'));
 		
 		if (!$this->Session->read('Registration.Registration.event_id')) $this->redirect(array('controller' => 'events', 'action' => 'index'));
 		
