@@ -20,15 +20,23 @@ class RegistrationsController extends AppController {
 		$Registration['Registration']['number'] = $this->Registration->generateUniqueNumber();
 		$this->saveModelDataToSession('Registration', $Registration);		
 		$registration = $this->Session->read('Registration');
+		unset($registration['Event']);
 		//debug($registration);
 		if(!$this->Registration->saveAll($registration)) {
-			$this->Session->del('Registration');
+			//$this->Session->del('Registration');
 			$this->Session->setFlash('Vi ber om ursäkt, din registrering kunde inte slutföras. Kontakta support.');
-			$this->redirect(array('controller' => 'events', 'action' => 'index'));
+			debug($this->Registration->validationErrors);
+			//$this->redirect(array('controller' => 'events', 'action' => 'index'));
 		} else {
 			$this->Session->write('registrationId', $this->Registration->id);
 			$this->sendRegistrationConfirmMail($registration['Registrator'], $registration['Registration']);
 			$this->Session->del('Registration');
+			$steps = $this->Session->read('Registration.Event.steps');
+			foreach($steps as &$step) {
+				$step['current_step'] = false;
+			}
+			$steps['Receipt']['current_step'] = true;
+			$this->Session->write('Registration.Event.steps', $steps);
 			$this->redirect(array ('action' => 'receipt'));
 		}
 	}
@@ -89,7 +97,7 @@ class RegistrationsController extends AppController {
 		
 		// if Registration exists the registration hasn't been saved yet and the user is reviewing his registration
 		$registration = $this->Session->read('Registration');
-		$current_step = $this-Session-write('current_step', 'true');
+		//$current_step = $this-Session-write('current_step', 'true');//
 		
 		//if it isnt in session we try to find it in db
 		// registrationId is set when saving the registration so we take that as indication its saved in db already

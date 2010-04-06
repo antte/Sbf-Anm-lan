@@ -1,8 +1,9 @@
 <?php $registration = $this->requestAction('Registrations');?>
+<?php debug($registration);?>
 
 <?php 
 //while its being implemented i pretend to get steps
-$registration['Event']['steps'] = array(
+/*$registration['Event']['steps'] = array(
 	'People' => array(
 		'label' => 'Sällskap',
 		'current_step' => false
@@ -19,7 +20,7 @@ $registration['Event']['steps'] = array(
 		'label' => 'Bekräfta',
 		'current_step' => false
 	)
-);
+);*/
 $currentStepFound = false;
 ?>
 

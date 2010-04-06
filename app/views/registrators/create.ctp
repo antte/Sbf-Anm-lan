@@ -31,6 +31,7 @@
  
 
 <h2><?php echo "Kontaktuppgifter för anmälan till $eventName"; ?></h2>
+<?php debug($registration);?>
 
 <?php echo $this->renderElement('rocket');?>
 

@@ -10,6 +10,7 @@
 	</div>
 
 </div>
+<?php echo $this->renderElement('rocket')?>
 <?php echo $this->renderElement('registration')?>
 <?php echo $this->renderElement('person');?>
 <div class="edit_link grid_8">

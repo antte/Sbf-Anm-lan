@@ -45,10 +45,18 @@ class PeopleController extends AppController {
 			if(empty($errors)) {
 				//if we dont have errors all was successful and we continue with the registration
 				$this->saveModelDataToSession('Person', Sanitize::clean($this->data));
+				$steps = $this->Session->read('Registration.Event.steps');
+					foreach($steps as &$step) {
+						$step['current_step'] = false;
+					}
 				if( isset($this->params['named']['in_review_mode']) ){ 
 					//in review mode continue to review page
+					$steps['Review']['current_step'] = true;
+					$this->Session->write('Registration.Event.steps', $steps);
 					$this->redirect(array('controller' => 'registrations', 'action'=>'review'));	
 				} else {
+					$steps['Registrator']['current_step'] = true;
+					$this->Session->write('Registration.Event.steps', $steps);
 					$this->redirect(array('controller' => 'registrators', 'action'=>'create'));
 				}
 			} else {
