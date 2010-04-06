@@ -105,7 +105,14 @@
 				?>						
 			</fieldset>
 			<fieldset class="contact grid_8 alpha">
-				<?php echo $form->submit('Ändra', array('id' => 'registratorSubmit'))?>
+				<?php 
+					if($in_review_mode) {
+						$submitName = "Ändra";
+					} else {
+						$submitName = "Nästa";
+					}
+					echo $form->submit($submitName, array('id' => 'registratorSubmit'));
+				?>
 			</fieldset>	
 	<!--  Form helper - end form-->
 	<?php echo $form->end(); ?>	
