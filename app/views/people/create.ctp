@@ -50,18 +50,15 @@
 			?>
 	
 	<!--  Form helper - sets action post - parse form to the registration model class-->
-	<?php if( isset($in_review_mode) && $in_review_mode) {
-		echo $form->create('Person', array('class' => 'edit', 'id' => 'PersonAddForm', 'url' => '/people/add/in_review_mode:1'));
-	} else {
-		echo $form->create('Person'); 
-	}
-	?>
+		<?php echo $form->create('Person', array('id' => 'PersonAddForm'));?>
+
+	
 		
 		<!--  Form helper - create input with label  -->
 		<p class="requiredinfo">Fält markerade med * är obligatoriska uppgifter!</p>
 		
 		
-		<?php if($in_review_mode) { ?>
+		<?php if(isset($people)) { ?>
 		<ol>
 			<?php foreach( $people as $key => $person ): ?>
 				<li>
