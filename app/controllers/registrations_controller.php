@@ -47,7 +47,9 @@ class RegistrationsController extends AppController {
 		$this->layout='registration';
 	}
 	
-	function testemail(){
+	//recieve and process login credentials
+	function login() {
+		
 	}
 	
 	/**
