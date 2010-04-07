@@ -21,7 +21,7 @@
 		}
 
 		/**
-		 * Save the selected event in session and redirekt to next step
+		 * Save the selected event in session and redirect to next step
 		 * @param $eventId
 		 */
 		function next($eventId) {
