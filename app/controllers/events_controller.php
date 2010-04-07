@@ -7,6 +7,18 @@
 		 * Send array of all events in the database to the index view
 		 */
 		function index() {
+			if(isset($this->params['requested'])) {
+				//the requester wants either ALL events or the ONE event the user is making a registration for right now
+				
+				if ($this->Session->read('Event.id')) {
+					
+					$event = $this->Event->findById($this->Session->read('Event.id'));
+					unset($event['Registration']);
+					return $event;
+				}
+				
+				return $this->Event->find('all'); 
+			}
 			$this->set('events', $this->Event->find('all'));	
 		}
 		

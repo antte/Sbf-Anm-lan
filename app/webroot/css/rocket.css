@@ -1,0 +1,47 @@
+#rocket {
+	overflow: hidden;
+	background-color: #eee;
+}
+
+#rocket li {
+	line-height:35px;
+	font-size:150%;
+	display: inline;
+	float: left;
+	list-style-type: none;
+	margin: 0px;
+	text-align: center;
+	background-repeat:no-repeat;
+	background-position:right;
+	padding-left: 10px;
+	padding-right: 40px;
+}
+/*byt ut last-child till class last (.last) */
+#rocket li:last-child {
+	background-image: none;
+}
+
+#rocket li.previous_to_previous {
+	background-color: #ccc;
+	background-image: url(../img/previous_to_previous.jpg);
+}
+#rocket li.previous_to_current {
+	background-color: #ccc;
+	background-image: url(../img/previous_to_current.jpg);
+}
+#rocket li.previous_to_coming {
+	background-color: #ccc;
+	background-image: url(../img/previous_to_coming.jpg);
+}
+#rocket li.current_to_coming {
+	background-color: #ffe84c;
+	background-image: url(../img/current_to_coming.jpg);
+}
+#rocket li.current_to_previous {
+	background-color: #ffe84c;
+	background-image: url(../img/current_to_previous.jpg);
+}
+#rocket li.coming_to_coming {
+	color: #777;
+	background-image: url(../img/coming_to_coming.jpg);
+}
