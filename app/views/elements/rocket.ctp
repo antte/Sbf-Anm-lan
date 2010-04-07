@@ -1,25 +1,21 @@
-<?php $event = $this->requestAction('Registrations/getEvent');?>
+<?php 
+$event = $this->requestAction("events");
+debug($event);
+$registration = $this->requestAction("registrations");
+debug($registration);
+$controller = $this->params['controller'];
+debug($controller);
+$action = $this->params['action'];
+debug($action);
+?>
 
 <?php 
-//while its being implemented i pretend to get steps
-/*$registration['Event']['steps'] = array(
-	'People' => array(
-		'label' => 'Sällskap',
-		'current_step' => false
-	),
-	'Registrator' => array(
-		'label' => 'Kontaktuppgifter',
-		'current_step' => true
-	),
-	'Review' => array(
-		'label' => 'Granska',
-		'current_step' => false
-	),
-	'Receipt' => array(
-		'label' => 'Bekräfta',
-		'current_step' => false
-	)
-);*/
+/*
+ * raketen behöver veta:
+ * vilka steps som finns
+ * vilka steg har data
+ * vilket är nuvarande steg (url:en)
+ */
 $currentStepFound = false;
 ?>
 
@@ -39,7 +35,7 @@ $currentStepFound = false;
 		}
 		
 		?>
-		<li class="<?php echo $stepStatus; ?> grid_3" >
+		<li class="<?php echo $stepStatus; ?>" >
 			<?php echo $step['label'];?>
 		</li>
 	<?php endforeach;?>
