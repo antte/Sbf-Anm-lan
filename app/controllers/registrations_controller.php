@@ -41,7 +41,9 @@ class RegistrationsController extends AppController {
 
 	function review(){
 		//If you haven't finished the previous steps you shouldn't be here
-		if( empty($this->Session->read('Registration.Person')) || empty($this->Session->read('Registration.Registrator')) ) {
+		$person = $this->Session->read('Registration.Person');
+		$registrator = $this->Session->read('Registration.Registrator');
+		if( empty($person) || empty($registrator) ) {
 			$this->redirect(array('controller' => 'events', 'action' => 'index'));
 		}
 		

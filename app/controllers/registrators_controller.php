@@ -20,7 +20,8 @@ class RegistratorsController extends AppController {
 		if (!$eventId) $this->redirect(array('action' => 'index'));
 		
 		//If you haven't finished people(sällskap) module you shouldn't be here
-		if(empty($this->Session->read('Registration.Person'))) {
+		$person = $this->Session->read('Registration.Person');
+		if(empty($person)) {
 			$this->redirect(array('controller' => 'events', 'action' => 'index'));
 		}
 		
