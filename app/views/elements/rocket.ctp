@@ -1,46 +1,54 @@
-<?php $event = $this->requestAction('Registrations/getEvent');?>
-
 <?php 
-//while its being implemented i pretend to get steps
-/*$registration['Event']['steps'] = array(
-	'People' => array(
-		'label' => 'Sällskap',
-		'current_step' => false
+$steps = $this->requestAction("steps");
+/*vi låstas få data här TODO ta bort när implementation är klar*/
+/*
+$steps = array(
+	'hej' => array(
+		'label' 		=> 'Sällskap',
+		'state' 		=> 'previous',
+		'controller' 	=> 'people',
+		'action' 		=> 'create'
 	),
-	'Registrator' => array(
-		'label' => 'Kontaktuppgifter',
-		'current_step' => true
+	'nisse' => array(
+		'label' 		=> 'Kontaktuppgifter',
+		'state' 		=> 'current',
+		'controller' 	=> 'registrators',
+		'action' 		=> 'create'
 	),
-	'Review' => array(
-		'label' => 'Granska',
-		'current_step' => false
+	'nej' => array(
+		'label' 		=> 'Granska & Bekräfta',
+		'state' 		=> 'coming',
+		'controller' 	=> 'registrations',
+		'action' 		=> 'review'
 	),
-	'Receipt' => array(
-		'label' => 'Bekräfta',
-		'current_step' => false
+	'tjej' => array(
+		'label' 		=> 'Kvitto',
+		'state' 		=> 'coming',
+		'controller' 	=> 'registrations',
+		'action' 		=> 'receipt'
 	)
 );*/
-$currentStepFound = false;
 ?>
 
 <ol id="rocket" class="grid_full">
-	<?php foreach($event['steps'] as $step):?>
-		<?php 
-		//stepStatus can be current previous or coming
-		if ($step['current_step']) {
-			$currentStepFound = true;
-			$stepStatus = "current";
-		} else {
-			if($currentStepFound) {
-				$stepStatus = "coming";
-			} else {
-				$stepStatus = "previous";
+	<?php $i = 0;?>
+	<?php foreach($steps as $step): ?>
+		<li class="<?php echo $step['state'];
+			if($i === 0) {
+				echo " first";
+			} else if ($i === (sizeof($steps) -1) ){
+				echo " last";
 			}
-		}
-		
-		?>
-		<li class="<?php echo $stepStatus; ?> grid_3" >
-			<?php echo $step['label'];?>
+			?>">
+			<span class="leftArrow"></span>
+			<?php if (!preg_match('/^coming/', $step['state'])){
+				echo $html->link($step['label'], array('controller' => $step['controller'], 'action' => $step['action']));
+			} else { 
+				echo '<span class="expander">';
+				echo $step['label'];
+				echo '</span>'; 
+			}?>
 		</li>
-	<?php endforeach;?>
+		<?php $i++;?>
+	<?php endforeach; ?>
 </ol>

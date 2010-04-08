@@ -1,0 +1,72 @@
+/*
+	Colors for rocket:
+	light gray: ccc
+	dark gray: eee
+	yellow: ffe84c
+*/
+
+#rocket {
+	overflow: hidden;
+	background-color: #eee;
+	font-size: 18px;
+	margin:0px;
+	height: 35px;
+	list-style-type: none;
+}
+
+#rocket .leftArrow {
+	background-image:url(../img/rocketArrowLeft.gif);
+	background-position:left center;
+	background-repeat: no-repeat;
+	height: 35px;
+	width: 18px;
+	display: block;
+	float: left;
+	
+}
+
+#rocket li {
+	margin:0px;
+	float:left;
+	height: 35px;
+	line-height: 35px;
+	padding:0 18px 0 0;
+	background-image: url(../img/rocketArrowRight.gif);
+	background-position:right center;
+	background-repeat:no-repeat;
+	vertical-align: middle;	
+}
+
+#rocket li a, #rocket li span.expander {
+	height: 35px;
+	display: inline-block;
+	text-decoration: none;
+	color: black;
+	padding:0 7px;
+}
+#rocket li a:hover {
+	color: #333;
+}
+
+#rocket .first .leftArrow {
+	background-image: none;
+}
+
+#rocket .last {
+	background-image: none;
+}
+
+#rocket .previous {
+	background-color: #ccc;	
+}
+#rocket .current {
+	background-color: #ffe84c;	
+}
+#rocket .coming {
+	background-color: #eee;
+	color:#333;
+}
+
+#rocket .coming span.expander {
+	color:#555;
+}

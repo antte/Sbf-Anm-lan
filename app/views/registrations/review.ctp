@@ -13,11 +13,11 @@
 <?php echo $this->renderElement('registration')?>
 <?php echo $this->renderElement('person');?>
 <div class="edit_link grid_8">
-	<?php echo $html->link( 'Redigera',array('controller'=>'People', 'action'=>'create','in_review_mode:1'));?>
+	<?php echo $html->link( 'Redigera',array('controller'=>'People', 'action'=>'create'));?>
 </div>
 <?php echo $this->renderElement('registrator');?>
 <div class="edit_link grid_8">
-	<?php echo $html->link( 'Redigera',array('controller'=>'Registrators', 'action'=>'create','in_review_mode:1'));?>
+	<?php echo $html->link( 'Redigera',array('controller'=>'Registrators', 'action'=>'create'));?>
 </div>
 <div class="grid_8">
 	<?php 
