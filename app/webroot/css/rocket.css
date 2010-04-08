@@ -1,47 +1,72 @@
+/*
+	Colors for rocket:
+	light gray: ccc
+	dark gray: eee
+	yellow: ffe84c
+*/
+
 #rocket {
 	overflow: hidden;
 	background-color: #eee;
+	font-size: 18px;
+	margin:0px;
+	height: 35px;
+	list-style-type: none;
+}
+
+#rocket .leftArrow {
+	background-image:url(../img/rocketArrowLeft.gif);
+	background-position:left center;
+	background-repeat: no-repeat;
+	height: 35px;
+	width: 18px;
+	display: block;
+	float: left;
+	
 }
 
 #rocket li {
-	line-height:35px;
-	font-size:150%;
-	display: inline;
-	float: left;
-	list-style-type: none;
-	margin: 0px;
-	text-align: center;
+	margin:0px;
+	float:left;
+	height: 35px;
+	line-height: 35px;
+	padding:0 18px 0 0;
+	background-image: url(../img/rocketArrowRight.gif);
+	background-position:right center;
 	background-repeat:no-repeat;
-	background-position:right;
-	padding-left: 10px;
-	padding-right: 40px;
+	vertical-align: middle;	
 }
-/*byt ut last-child till class last (.last) */
-#rocket li:last-child {
+
+#rocket li a, #rocket li span.expander {
+	height: 35px;
+	display: inline-block;
+	text-decoration: none;
+	color: black;
+	padding:0 7px;
+}
+#rocket li a:hover {
+	color: #333;
+}
+
+#rocket .first .leftArrow {
 	background-image: none;
 }
 
-#rocket li.previous_to_previous {
-	background-color: #ccc;
-	background-image: url(../img/previous_to_previous.jpg);
+#rocket .last {
+	background-image: none;
 }
-#rocket li.previous_to_current {
-	background-color: #ccc;
-	background-image: url(../img/previous_to_current.jpg);
+
+#rocket .previous {
+	background-color: #ccc;	
 }
-#rocket li.previous_to_coming {
-	background-color: #ccc;
-	background-image: url(../img/previous_to_coming.jpg);
+#rocket .current {
+	background-color: #ffe84c;	
 }
-#rocket li.current_to_coming {
-	background-color: #ffe84c;
-	background-image: url(../img/current_to_coming.jpg);
+#rocket .coming {
+	background-color: #eee;
+	color:#333;
 }
-#rocket li.current_to_previous {
-	background-color: #ffe84c;
-	background-image: url(../img/current_to_previous.jpg);
-}
-#rocket li.coming_to_coming {
-	color: #777;
-	background-image: url(../img/coming_to_coming.jpg);
+
+#rocket .coming span.expander {
+	color:#555;
 }
