@@ -13,8 +13,20 @@ class RegistratorsController extends AppController {
 	 * @param $event_id Id of an event for which the registration is created.
 	 */
 	function create() {
+		
+		
+		//Can't create registration without event
+		$eventId = $this->Session->read('Registration.Registration.event_id');
+		if (!$eventId) $this->redirect(array('action' => 'index'));
+		
+		//If you haven't finished people(sällskap) module you shouldn't be here
+		$person = $this->Session->read('Registration.Person');
+		if(empty($person)) {
+			$this->redirect(array('controller' => 'events', 'action' => 'index'));
+		}
+		
 		//change to registration layout so that the rocket will be precent on all steps.
-		echo $this->layout ='registration';
+		echo $this->layout = 'registration';
 		
 		//$this->set('registration', $this->Session->read('Registration'));
 		//people/create/in_review_mode:1
@@ -24,6 +36,8 @@ class RegistratorsController extends AppController {
 			$this->set('registrator', $this->Session->read('Registration.Registrator'));
 		}
 		
+		
+		
 		/*
 		if(isset($this->params['named']['in_review_mode']) && $this->params['named']['in_review_mode']) {
 			$this->set('in_review_mode', true);
@@ -32,11 +46,6 @@ class RegistratorsController extends AppController {
 		}
 		*/
 		
-		debug($this->Session->read());
-		$eventId = $this->Session->read('Registration.Registration.event_id');
-				
-		//can't create registration without event
-		if (!$eventId) $this->redirect(array('action' => 'index'));
 		
 		
 		//get person from session to set the name by default to the first person from the people form

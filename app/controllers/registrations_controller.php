@@ -7,7 +7,7 @@ class RegistrationsController extends AppController {
 	var $components = array('Email');
 	
 	function index() {
-		if (isset($this->params['requested'])) return $this->getRegistration();		
+		if (isset($this->params['requested'])) return $this->getRegistration();
 	}
 	
 	/**
@@ -40,10 +40,21 @@ class RegistrationsController extends AppController {
 	}
 
 	function review(){
+		//If you haven't finished the previous steps you shouldn't be here
+		$person = $this->Session->read('Registration.Person');
+		$registrator = $this->Session->read('Registration.Registrator');
+		if( empty($person) || empty($registrator) ) {
+			$this->redirect(array('controller' => 'events', 'action' => 'index'));
+		}
+		
 		$this->layout='registration';
 	}
 	
 	function receipt() {
+		//If you haven't finished the previous steps you shouldn't be here
+		if( empty($this->Session->read('Registration.Person')) || empty($this->Session->read('Registration.Registrator')) ) {
+			$this->redirect(array('controller' => 'events', 'action' => 'index'));
+		}
 		$this->layout='registration';
 	}
 	
