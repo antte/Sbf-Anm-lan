@@ -43,14 +43,17 @@ $steps = array(
 			}
 			?>">
 			<span class="leftArrow"></span>
-			<?php if (!preg_match('/^coming/', $step['state'])){
-				echo $html->link($step['label'], array('controller' => $step['controller'], 'action' => $step['action']));
-			} else { 
+			<?php $hejhopp['coming'][] = !preg_match('/^coming/', $step['state']);?>
+			<?php $hejhopp['current'][] = !preg_match('/^current/', $step['state']);?>
+			<?php if ( preg_match('/^coming/', $step['state']) || preg_match('/^current/', $step['state']) ){
 				echo '<span class="expander">';
 				echo $step['label'];
 				echo '</span>'; 
+			} else { 
+				echo $html->link($step['label'], array('controller' => $step['controller'], 'action' => $step['action']));
 			}?>
 		</li>
 		<?php $i++;?>
 	<?php endforeach; ?>
 </ol>
+<?php debug($hejhopp);?>

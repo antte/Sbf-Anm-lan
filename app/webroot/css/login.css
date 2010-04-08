@@ -1,3 +1,39 @@
-body {
-	background: pink;
+form#login {
+	background: #eee;
+	padding-bottom: 20px;
+}
+
+form#login .input.text, form#login .submit {
+	width: 490px;
+	margin: 10px auto 0 auto;
+	clear: both;
+}
+
+form#login .input.text input, form#login .submit input {
+	width: 470px;
+}
+
+form#login .submit {
+	margin-top: 20px;
+	float: none;
+	width: 470px;
+}
+
+form#login label {
+	margin-top: 20px;
+}
+
+form#login .input input {
+	font-size: 250%;
+	padding: 10px;
+}
+
+form#login .submit input {
+	font-size: 150%;
+	font-weight: bold;
+	padding: 10px 10px;
+}
+
+form#login .input.text #RegistratorEmail {
+	margin-bottom: 30px;
 }
