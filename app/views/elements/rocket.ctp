@@ -1,5 +1,6 @@
 <?php 
-$steps = $this->requestAction("steps");
+$steps = $this->requestAction("steps/stepRocket/" . $this->params['url']['url']);
+
 /*vi låstas få data här TODO ta bort när implementation är klar*/
 /*
 $steps = array(
@@ -28,6 +29,7 @@ $steps = array(
 		'action' 		=> 'receipt'
 	)
 );*/
+
 ?>
 
 <ol id="rocket" class="grid_full">

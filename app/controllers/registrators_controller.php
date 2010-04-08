@@ -46,7 +46,13 @@ class RegistratorsController extends AppController {
 		}
 		*/
 		
-		
+
+		//debug($this->Session->read());
+		$eventId = $this->Session->read('Registration.Registration.event_id');
+				
+		//can't create registration without event
+		if (!$eventId) $this->redirect(array('action' => 'index'));
+
 		
 		//get person from session to set the name by default to the first person from the people form
 		$first_person = $this->Session->read('Registration.Person');
