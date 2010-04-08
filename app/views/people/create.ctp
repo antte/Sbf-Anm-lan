@@ -26,6 +26,7 @@
 		)
 	);
 	*/
+	$this->requestAction('steps');
 ?>
 
 <h2>Fyll i vilka som ska komma till <?php echo $eventName;?></h2>

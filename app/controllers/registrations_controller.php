@@ -117,9 +117,12 @@ class RegistrationsController extends AppController {
 	}
 
 	function getEvent(){
+		
 		if (isset($this->params['requested'])) {
 			return $this->Session->read('Event');
-			}
+		}
+		
+		
 	}
 }
 

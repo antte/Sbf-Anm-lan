@@ -2,7 +2,9 @@
 	class Step extends AppModel {
 		var $hasAndBelongsToMany = "Event";
 		
-		var $steps = array(
+		
+			
+			/*$steps = array(
 			'Person' => array(
 				'current_step' => true,
 				'label' => 'Sällskap',
@@ -20,6 +22,6 @@
 				'label' => 'Kvitto',
 			)
 		);
-		
-		
+		}
+		*/
 	}

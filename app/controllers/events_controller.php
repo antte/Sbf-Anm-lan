@@ -19,6 +19,7 @@
 				
 				return $this->Event->find('all'); 
 			}
+			
 			$this->set('events', $this->Event->find('all'));	
 		}
 		
@@ -28,12 +29,32 @@
 		 */
 		function view($eventId = null) {
 			if (!isset($eventId)) $this->redirect(array('action' => 'index'));
-			if (is_numeric($eventId)) $this->set('event', $this->Event->findById($eventId));
-			if (is_string($eventId)) $this->set('event', $this->Event->findByName($eventId));
+			
+			//TODO delete the rows because we only want to select an event by id, not name
+			//if (is_numeric($eventId)) $this->set('event', $this->Event->findById($eventId));
+			//if (is_string($eventId)) $this->set('event', $this->Event->findByName($eventId));
+			
+			$this->set('event', $this->Event->findById($eventId));
+			
+			$this->Session->write('Event', $this->Event->findById($eventId));
 			$this->Session->write('Registration.Registration.event_id', $eventId);
-			$this->Session->write('Event.steps', $steps);
-			$this->Session->write('Event.name', $this->Event->field('name', $eventId));
-			$this->Session->write('Event.id', $this->Event->field('id', $eventId));
+			
+			//TODO trassel med eventid som tillåts vara namnet på eventet, borde fixa en bättre lösning än denna?
+			//$eventId = $this->Event->find('first', array('conditions' => array('name' => $eventId)));
+			//$eventId = $eventId['Event']['id'];
+			
+			
+			//$this->Session->write('Registration.Registration.event_id', $eventId);
+			
+			//TODO fetch step from stepcontroller
+			//$this->Session->write('Event.steps', $steps);
+			//$this->Session->write('Event.steps', $this->Event->Step->findById($eventId));
+
+			
+			
+			
+			//$this->Session->write('Event.name', $this->Event->field('name', $eventId));
+			//$this->Session->write('Event.id', $this->Event->field('id', $eventId));
 			//$this->redirect(array('controller' => 'people', 'action' => 'create'));
 		}
 
@@ -43,6 +64,4 @@
 		 */
 		
 		
-
-
-	
+	}

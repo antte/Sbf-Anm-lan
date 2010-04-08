@@ -14,7 +14,7 @@ class RegistratorsController extends AppController {
 	 */
 	function create() {
 		//change to registration layout so that the rocket will be precent on all steps.
-		echo $this->layout ='registration';
+		echo $this->layout = 'registration';
 		
 		//$this->set('registration', $this->Session->read('Registration'));
 		//people/create/in_review_mode:1
@@ -32,7 +32,7 @@ class RegistratorsController extends AppController {
 		}
 		*/
 		
-		debug($this->Session->read());
+		//debug($this->Session->read());
 		$eventId = $this->Session->read('Registration.Registration.event_id');
 				
 		//can't create registration without event
