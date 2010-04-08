@@ -17,7 +17,7 @@ $steps = array(
 	),
 	'nej' => array(
 		'label' 		=> 'Granska & Bekräfta',
-		'state' 		=> 'previous',
+		'state' 		=> 'coming',
 		'controller' 	=> 'registrations',
 		'action' 		=> 'review'
 	),
