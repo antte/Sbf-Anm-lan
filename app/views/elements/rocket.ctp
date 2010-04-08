@@ -1,5 +1,35 @@
 <?php 
-$steps = $this->requestAction("steps");
+$steps = $this->requestAction("steps/stepRocket/" . $this->params['url']['url']);
+
+/*vi låstas få data här TODO ta bort när implementation är klar*/
+/*
+$steps = array(
+	'hej' => array(
+		'label' 		=> 'Sällskap',
+		'state' 		=> 'previous',
+		'controller' 	=> 'people',
+		'action' 		=> 'create'
+	),
+	'nisse' => array(
+		'label' 		=> 'Kontaktuppgifter',
+		'state' 		=> 'current',
+		'controller' 	=> 'registrators',
+		'action' 		=> 'create'
+	),
+	'nej' => array(
+		'label' 		=> 'Granska & Bekräfta',
+		'state' 		=> 'coming',
+		'controller' 	=> 'registrations',
+		'action' 		=> 'review'
+	),
+	'tjej' => array(
+		'label' 		=> 'Kvitto',
+		'state' 		=> 'coming',
+		'controller' 	=> 'registrations',
+		'action' 		=> 'receipt'
+	)
+);*/
+
 ?>
 
 <ol id="rocket" class="grid_full">
