@@ -1,42 +1,54 @@
 <?php 
-$event = $this->requestAction("events");
-debug($event);
-$registration = $this->requestAction("registrations");
-debug($registration);
-$controller = $this->params['controller'];
-debug($controller);
-$action = $this->params['action'];
-debug($action);
-?>
-
-<?php 
+$steps = $this->requestAction("steps");
+/*vi låstas få data här TODO ta bort när implementation är klar*/
 /*
- * raketen behöver veta:
- * vilka steps som finns
- * vilka steg har data
- * vilket är nuvarande steg (url:en)
- */
-$currentStepFound = false;
+$steps = array(
+	'hej' => array(
+		'label' 		=> 'Sällskap',
+		'state' 		=> 'previous',
+		'controller' 	=> 'people',
+		'action' 		=> 'create'
+	),
+	'nisse' => array(
+		'label' 		=> 'Kontaktuppgifter',
+		'state' 		=> 'current',
+		'controller' 	=> 'registrators',
+		'action' 		=> 'create'
+	),
+	'nej' => array(
+		'label' 		=> 'Granska & Bekräfta',
+		'state' 		=> 'previous',
+		'controller' 	=> 'registrations',
+		'action' 		=> 'review'
+	),
+	'tjej' => array(
+		'label' 		=> 'Kvitto',
+		'state' 		=> 'coming',
+		'controller' 	=> 'registrations',
+		'action' 		=> 'receipt'
+	)
+);*/
 ?>
 
 <ol id="rocket" class="grid_full">
-	<?php foreach($event['steps'] as $step):?>
-		<?php 
-		//stepStatus can be current previous or coming
-		if ($step['current_step']) {
-			$currentStepFound = true;
-			$stepStatus = "current";
-		} else {
-			if($currentStepFound) {
-				$stepStatus = "coming";
-			} else {
-				$stepStatus = "previous";
+	<?php $i = 0;?>
+	<?php foreach($steps as $step): ?>
+		<li class="<?php echo $step['state'];
+			if($i === 0) {
+				echo " first";
+			} else if ($i === (sizeof($steps) -1) ){
+				echo " last";
 			}
-		}
-		
-		?>
-		<li class="<?php echo $stepStatus; ?>" >
-			<?php echo $step['label'];?>
+			?>">
+			<span class="leftArrow"></span>
+			<?php if (!preg_match('/^coming/', $step['state'])){
+				echo $html->link($step['label'], array('controller' => $step['controller'], 'action' => $step['action']));
+			} else { 
+				echo '<span class="expander">';
+				echo $step['label'];
+				echo '</span>'; 
+			}?>
 		</li>
-	<?php endforeach;?>
+		<?php $i++;?>
+	<?php endforeach; ?>
 </ol>
