@@ -24,13 +24,13 @@
 				 		'city' =>	'Stockholm'
 			 		);
 			 		*/
-?>
+?> 
 
-<?php $html->link('Töm Model session array', array('action' => 'clearSession', 'Registration'));?>
-
- 
-
-<h2><?php echo "Kontaktuppgifter för anmälan till $eventName"; ?></h2>
+<div class="grid_12">
+	<div class="grid_full">
+		<h2><?php echo "Kontaktuppgifter för anmälan till $eventName"; ?></h2>
+	</div>
+</div>
 
 <div id="registration" class="grid_8">
 	
@@ -55,23 +55,23 @@
 			<fieldset class="name grid_8 alpha" >
 				<p class="requiredinfo">Fält markerade med * är obligatoriska uppgifter!</p>
 				<?php
-					echo $form->input('first_name', array('type' => 'text', 'label' => 'Förnamn *', 'div' => 'first_name grid_3', 'default' => $registrator['first_name']));
-					echo $form->input('last_name', array('type' => 'text', 'label' => 'Efternamn *', 'div' => 'last_name grid_3', 'default' => $registrator['last_name']));
+					echo $form->input('first_name', array('type' => 'text', 'label' => 'Förnamn *', 'div' => 'first_name grid_3', 'maxLength' => '127', 'default' => $registrator['first_name']));
+					echo $form->input('last_name', array('type' => 'text', 'label' => 'Efternamn *', 'div' => 'last_name grid_3', 'maxLength' => '127', 'default' => $registrator['last_name']));
 				?>
 			</fieldset>
 			<fieldset class="email grid_8 alpha">
 				<?php
-					echo $form->input('email', array('type' => 'text', 'label' => 'E-post *', 'div' => 'email grid_3', 'default' => $registrator['email'] ));
-					echo $form->input('retype_email', array('type' => 'text', 'label' => 'Bekräfta e-post *', 'div' => 'retype_email grid_3', 'default' => $registrator['retype_email']));
+					echo $form->input('email', array('type' => 'text', 'label' => 'E-post *', 'div' => 'email grid_3', 'maxLength' => '127', 'default' => $registrator['email'] ));
+					echo $form->input('retype_email', array('type' => 'text', 'label' => 'Bekräfta e-post *', 'div' => 'retype_email grid_3', 'maxLength' => '127', 'default' => $registrator['retype_email']));
 				?>
 			</fieldset>
 			<fieldset class="contact grid_8 alpha">
 				<?php
-					echo $form->input('phone', array('type' => 'text', 'label' => 'Telefon *', 'div' => 'phone grid_3', 'default' => $registrator['phone']));
-					echo $form->input('c_o', array('type' => 'text', 'label' => 'C/O', 'div' => 'c_o grid_3', 'default' => $registrator['c_o']));
-					echo $form->input('street_address', array('type' => 'text', 'label' => 'Adress *', 'div' => 'address grid_3', 'default' => $registrator['street_address']));
-					echo $form->input('postal_code', array('type' => 'text', 'label' => 'Postnr *', 'div' => 'postcode grid_2', 'default' => $registrator['postal_code'] ));
-					echo $form->input('city', array('type' => 'text', 'label' => 'Stad *', 'div' => 'city grid_3', 'default' => $registrator['city'])); 
+					echo $form->input('phone', array('type' => 'text', 'label' => 'Telefon *', 'div' => 'phone grid_3', 'maxLength' => '128', 'default' => $registrator['phone']));
+					echo $form->input('c_o', array('type' => 'text', 'label' => 'C/O', 'div' => 'c_o grid_3', 'maxLength' => '127', 'default' => $registrator['c_o']));
+					echo $form->input('street_address', array('type' => 'text', 'label' => 'Adress *', 'div' => 'address grid_3', 'maxLength' => '127', 'default' => $registrator['street_address']));
+					echo $form->input('postal_code', array('type' => 'text', 'label' => 'Postnr *', 'div' => 'postcode grid_2', 'maxLength' => '127', 'default' => $registrator['postal_code'] ));
+					echo $form->input('city', array('type' => 'text', 'label' => 'Stad *', 'div' => 'city grid_3', 'maxLength' => '127', 'default' => $registrator['city'])); 
 				?>						
 			</fieldset>
 			
@@ -82,23 +82,23 @@
 			<fieldset class="name grid_8 alpha" >
 				<p class="requiredinfo">Fält markerade med * är obligatoriska uppgifter!</p>
 				<?php
-					echo $form->input('first_name', array('type' => 'text', 'label' => 'Förnamn *', 'div' => 'first_name grid_3', 'default' => $first_name));
-					echo $form->input('last_name', array('type' => 'text', 'label' => 'Efternamn *', 'div' => 'last_name grid_3', 'default' => $last_name));
+					echo $form->input('first_name', array('type' => 'text', 'label' => 'Förnamn *', 'div' => 'first_name grid_3', 'maxLength' => '127', 'default' => $first_name));
+					echo $form->input('last_name', array('type' => 'text', 'label' => 'Efternamn *', 'div' => 'last_name grid_3', 'maxLength' => '127', 'default' => $last_name));
 				?>
 			</fieldset>
 			<fieldset class="email grid_8 alpha">
 				<?php
-					echo $form->input('email', array('type' => 'text', 'label' => 'E-post *', 'div' => 'email grid_3'));
-					echo $form->input('retype_email', array('type' => 'text', 'label' => 'Bekräfta e-post *', 'div' => 'retype_email grid_3'));
+					echo $form->input('email', array('type' => 'text', 'label' => 'E-post *', 'div' => 'email grid_3', 'maxLength' => '127'));
+					echo $form->input('retype_email', array('type' => 'text', 'label' => 'Bekräfta e-post *', 'div' => 'retype_email grid_3', 'maxLength' => '127'));
 				?>
 			</fieldset>
 			<fieldset class="contact grid_8 alpha">
 				<?php
-					echo $form->input('phone', array('type' => 'text', 'label' => 'Telefon *', 'div' => 'phone grid_3'));
-					echo $form->input('c_o', array('type' => 'text', 'label' => 'C/O', 'div' => 'c_o grid_3'));
-					echo $form->input('street_address', array('type' => 'text', 'label' => 'Adress *', 'div' => 'address grid_3'));
-					echo $form->input('postal_code', array('type' => 'text', 'label' => 'Postnr *', 'div' => 'postcode grid_2'));
-					echo $form->input('city', array('type' => 'text', 'label' => 'Stad *', 'div' => 'city grid_3')); 
+					echo $form->input('phone', array('type' => 'text', 'label' => 'Telefon *', 'div' => 'phone grid_3', 'maxLength' => '127'));
+					echo $form->input('c_o', array('type' => 'text', 'label' => 'C/O', 'div' => 'c_o grid_3', 'maxLength' => '127'));
+					echo $form->input('street_address', array('type' => 'text', 'label' => 'Adress *', 'div' => 'address grid_3', 'maxLength' => '127'));
+					echo $form->input('postal_code', array('type' => 'text', 'label' => 'Postnr *', 'div' => 'postcode grid_2', 'maxLength' => '127'));
+					echo $form->input('city', array('type' => 'text', 'label' => 'Stad *', 'div' => 'city grid_3', 'maxLength' => '127')); 
 				?>						
 			</fieldset>
 				

@@ -44,14 +44,14 @@
 		<?php 
 			echo $form->create('Person', array('id' => 'addamount'));
 			echo '<fieldset class="amount grid_8 alpha">';
-			echo $form->input('amount', array('type' => 'text', 'label' => 'Hur många är i ditt sällskap?', 'value' => $amountOfPeople, 'div' => 'amount'));
+			echo $form->input('amount', array('type' => 'text', 'label' => 'Hur många är i ditt sällskap?', 'value' => $amountOfPeople, 'div' => 'amount', 'maxLength' => '4'));
 			echo $form->submit('Ändra antal personer');
 			echo "</fieldset>";
 			echo $form->end();
 			?>
 	
 	<!--  Form helper - sets action post - parse form to the registration model class-->
-		<?php echo $form->create('Person', array('id' => 'PersonAddForm'));?>
+		<?php echo $form->create('Person', array('id' => 'PersonAddForm')); ?>
 
 	
 		
@@ -65,8 +65,8 @@
 				<li>
 					<fieldset class="name grid_8 alpha" >
 						<?php 
-							echo $form->input("Person.$key.first_name", array('type' => 'text', 'label' => 'Förnamn *', 'div' => 'first_name grid_2', 'class' => 'required', 'default' => $person['first_name']));
-							echo $form->input("Person.$key.last_name", array('type' => 'text', 'label' => 'Efternamn *', 'div' => 'last_name grid_2', 'class' => 'required', 'default' => $person['last_name']));
+							echo $form->input("Person.$key.first_name", array('type' => 'text', 'label' => 'Förnamn *', 'div' => 'first_name grid_2', 'class' => 'required', 'maxLength' => '127' , 'default' => $person['first_name']));
+							echo $form->input("Person.$key.last_name", array('type' => 'text', 'label' => 'Efternamn *', 'div' => 'last_name grid_2', 'class' => 'required', 'maxLength' => '127' , 'default' => $person['last_name']));
 							echo $form->input("Person.$key.role_id", array('options' => array($roles), 'label' => 'Anmäl dig som *', 'empty' => '(välj en)', 'div' => 'role grid_3', 'class' => 'required role', 'default' => $person['role_id']));
 						?>
 					</fieldset>
@@ -84,8 +84,8 @@
 				<li>
 					<fieldset class="name grid_8 alpha" >
 						<?php 
-							echo $form->input("Person.$i.first_name", array('type' => 'text', 'label' => 'Förnamn *', 'div' => 'first_name grid_2', 'class' => 'required'));
-							echo $form->input("Person.$i.last_name", array('type' => 'text', 'label' => 'Efternamn *', 'div' => 'last_name grid_2', 'class' => 'required'));
+							echo $form->input("Person.$i.first_name", array('type' => 'text', 'label' => 'Förnamn *', 'div' => 'first_name grid_2', 'class' => 'required', 'maxLength' => '127'));
+							echo $form->input("Person.$i.last_name", array('type' => 'text', 'label' => 'Efternamn *', 'div' => 'last_name grid_2', 'class' => 'required', 'maxLength' => '127'));
 							echo $form->input("Person.$i.role_id", array('options' => array($roles), 'label' => 'Anmäl dig som *', 'empty' => '(välj en)', 'div' => 'role grid_3', 'class' => 'required role'));
 						?>
 					</fieldset>

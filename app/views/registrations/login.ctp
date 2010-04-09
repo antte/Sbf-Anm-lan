@@ -8,8 +8,28 @@
 <div class="grid_12 login">
 
 	<?php 
+		
+		if(isset($error)){
+			?>
+			<div id="login_error" class="login_info">
+				<?php
+				
+				if($error == 'novalue'){
+					echo "<p>Du har glömt att fylla i.";
+				}
+				elseif($error == 'wrongvalue'){
+					echo "<p>Du har fyllt i fel data, var god kontrollera dina uppgifter.</p>";	
+				}
+				
+				?>
+				
+			</div>
+			<?php
+		}
+	
+	
 		echo $html->css('login', null, array(), false);
-		echo $form->create('login', array('id' => 'login', 'class' => 'grid_8'));
+		echo $form->create(null, array('id' => 'login', 'class' => 'grid_8', 'controller' => 'registrations' , 'action' => 'login'));
 		echo $form->input('Registration.number', array('label' => 'Bokningsnummer'));
 		echo $form->input('Registrator.email', array('label' => 'E-post'));
 	?>
