@@ -13,20 +13,20 @@
 			$controller = $step['controller'];
 			$action 	= $step['action'];
 			$order 		= $step['EventsStep']['order'];
-
+			$key		= $controller .'/'. $action;
 			
 			// controller  = plural
 			//$controller = Inflector::singularize($controller);
 			// controller = singular
-			$rocket[$controller .'.'. $action]['label'] = $label;
+			$rocket[$key]['label'] = $label;
 			if ($i==0){
-			$rocket[$controller .'.'. $action]['state'] = 'current';
+				$rocket[$key]['state'] = 'current';
 			} else {
-			$rocket[$controller .'.'. $action]['state'] = 'comming';
+				$rocket[$key]['state'] = 'comming';
 			}
-			$rocket[$controller .'.'. $action]['controller'] = strtolower(Inflector::pluralize($controller));
-			$rocket[$controller .'.'. $action]['action'] = $action;
-			$rocket[$controller .'.'. $action]['order']= $order; 
+			$rocket[$key]['controller'] = strtolower(Inflector::pluralize($controller));
+			$rocket[$key]['action'] = $action;
+			$rocket[$key]['order']= $order; 
 		}	
 		$rocket = $this->multisort($rocket,'order','label','action', 'controller','state');
 		return $rocket;	
