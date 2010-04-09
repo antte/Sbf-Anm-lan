@@ -9,7 +9,6 @@ class PeopleController extends AppController {
 	 */
 	function create($amountOfPeople = 1){
 		$this->layout='registration';		
-		debug($this->Session->read('Registration'));	
 		if (!$this->Session->read('Registration.Registration.event_id')) $this->redirect(array('controller' => 'events', 'action' => 'index'));
 		
 		//reads data from session in order to figure out if the user already has visited the module
@@ -52,10 +51,6 @@ class PeopleController extends AppController {
 					$edit_mode = true;
 				}
 				$this->saveModelDataToSession('Person', Sanitize::clean($this->data));
-				$steps = $this->Session->read('Event.steps');
-					foreach($steps as &$step) {
-						$step['current_step'] = false;
-					}
 				if( isset($edit_mode) ){ 
 					//in review mode continue to review page
 					$steps['Review']['current_step'] = true;

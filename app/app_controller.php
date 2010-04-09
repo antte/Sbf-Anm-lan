@@ -15,6 +15,7 @@
 			$array = $this->Session->read($arrayName);
 			$array[$modelName] = $dataToPush[$modelName];
 			$this->Session->write($arrayName, $array);
+			$this->Session->write($arrayName.'progress', $modelName . "/create");
 		}
 		
 	}

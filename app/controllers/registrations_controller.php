@@ -20,13 +20,14 @@ class RegistrationsController extends AppController {
 		$Registration['Registration']['number'] = $this->Registration->generateUniqueNumber();
 		$this->saveModelDataToSession('Registration', $Registration);		
 		$registration = $this->Session->read('Registration');
+		$event = $this->Session->read('Event');
 		if(!$this->Registration->saveAll($registration)) {
 			$this->Session->del('Registration');
 			$this->Session->setFlash('Vi ber om ursäkt, din registrering kunde inte slutföras. Kontakta support.');
 			$this->redirect(array('controller' => 'events', 'action' => 'index'));
 		} else {
 			$this->Session->write('Event.registrationId', $this->Registration->id);
-			$this->sendRegistrationConfirmMail($registration['Registrator'], $registration['Registration']);
+			$this->sendRegistrationConfirmMail($event, $registration['Registrator']);
 		    
 			$steps = $this->Session->read('Event.steps');
 			foreach($steps as &$step) {
@@ -51,13 +52,13 @@ class RegistrationsController extends AppController {
 	}
 	
 	function receipt() {
+		$this->layout='registration';
 		//If you haven't finished the previous steps you shouldn't be here
 		$person = $this->Session->read('Registration.Person');
 		$registrator = $this->Session->read('Registration.Registrator');
 		if( empty($person) || empty($registrator) ) {
 			$this->redirect(array('controller' => 'events', 'action' => 'index'));
 		}
-		$this->layout='registration';
 	}
 	
 	//recieve and process login credentials
@@ -85,7 +86,8 @@ class RegistrationsController extends AppController {
 	 * @param unknown_type $registrator --session array for the registration module 
 	 * @param unknown_type $registration -- session array for the registration module
 	 */
-	private function sendRegistrationConfirmMail($registrator,$registration){
+	private function sendRegistrationConfirmMail($event,$registrator){
+		debug($this->Session->read());
 		$this->Email->smtpOptions = array(
 			'port'			=> '25', 
 			'timeout'		=> '30',
