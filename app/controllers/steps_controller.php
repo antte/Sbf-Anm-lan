@@ -58,7 +58,7 @@ class StepsController extends AppController {
 		return $this->Session->write('Event.steps', $steps);
 	}
 	
-	function redirectToCurrent() {
+	function redirectToNextUnfinishedStep() {
 		
 		//we don't allow this action to be used unless requested
 		if(!isset($this->params['requested'])) return;
@@ -66,10 +66,15 @@ class StepsController extends AppController {
 		$steps = $this->Session->read('Event.steps');
 		
 		foreach($steps as $step) {
-			if($step['state'] == 'current') {
+			if($step['state'] != 'previous') {
+				$this->changeStepStateToCurrent($step);
 				$this->redirect(array('controller' => $step['controller'], 'action' => $step['action']));
 			}
 		}
 		
+	}
+	
+	private function changeStepStateToCurrent($step) {
+		$this->Session->write('Event.steps.' . ucfirst($step['controller']) .'/'. $step['action'] , 'current');
 	}
 }
