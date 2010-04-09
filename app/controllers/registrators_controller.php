@@ -16,6 +16,7 @@ class RegistratorsController extends AppController {
 		
 		
 		//Can't create registration without event
+		debug('Registration');
 		$eventId = $this->Session->read('Registration.Registration.event_id');
 		if (!$eventId) $this->redirect(array('action' => 'index'));
 		

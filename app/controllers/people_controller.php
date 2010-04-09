@@ -9,7 +9,6 @@ class PeopleController extends AppController {
 	 */
 	function create($amountOfPeople = 1){
 		$this->layout='registration';		
-		debug($this->Session->read('Registration'));	
 		if (!$this->Session->read('Registration.Registration.event_id')) $this->redirect(array('controller' => 'events', 'action' => 'index'));
 		
 		//reads data from session in order to figure out if the user already has visited the module

@@ -36,8 +36,11 @@
 			$modelName = ucfirst(Inflector::singularize($currentController->params['controller']));
 			$array[$modelName] = $currentController->data[$modelName];
 			$this->Session->write($arrayName, $array);
+			$this->Session->write($arrayName.'progress', $modelName . "/create");
+
 		} catch(Exception $e) {
 			return $e;
+
 		}
 		return true;
 	}
