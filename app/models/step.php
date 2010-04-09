@@ -19,11 +19,7 @@
 			//$controller = Inflector::singularize($controller);
 			// controller = singular
 			$rocket[$key]['label'] = $label;
-			if ($i==0){
-				$rocket[$key]['state'] = 'current';
-			} else {
-				$rocket[$key]['state'] = 'comming';
-			}
+			$rocket[$key]['state'] = 'comming';
 			$rocket[$key]['controller'] = strtolower(Inflector::pluralize($controller));
 			$rocket[$key]['action'] = $action;
 			$rocket[$key]['order']= $order; 

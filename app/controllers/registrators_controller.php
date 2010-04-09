@@ -13,6 +13,12 @@ class RegistratorsController extends AppController {
 	 * @param $event_id Id of an event for which the registration is created.
 	 */
 	function create() {
+		//change to registration layout so that the rocket will be precent on all steps.
+		echo $this->layout = 'registration';
+		
+		if (!$this->previousStepsHasData($this)){
+			$this->requestAction('steps/redirectToNextUnfinishedStep');	
+		}	
 		
 		
 		//Can't create registration without event
@@ -26,8 +32,6 @@ class RegistratorsController extends AppController {
 			$this->redirect(array('controller' => 'events', 'action' => 'index'));
 		}
 		
-		//change to registration layout so that the rocket will be precent on all steps.
-		echo $this->layout = 'registration';
 		
 		//$this->set('registration', $this->Session->read('Registration'));
 		//people/create/in_review_mode:1
@@ -87,27 +91,10 @@ class RegistratorsController extends AppController {
 				
 		$this->Registrator->set($this->data); 
 		if($this->Registrator->validates()) {
-			//if we dont have errors all was successful and we continue with the registration
-			
-			$this->saveModelDataToSession('Registrator', Sanitize::clean($this->data));
-			$steps = $this->Session->read('Event.steps');
-			foreach($steps as &$step) {
-				$step['current_step'] = false;
-			}
-			$steps['Review']['current_step'] = true;
-			$this->Session->write('Event.steps', $steps);
-			if( isset($this->params['named']['in_review_mode']) ) {
-				$this->redirect(array('controller' => 'registrations', 'action'=>'review'));	
-			} else {
-				//redirect to next step
-				$this->redirect(array('controller' => 'registrations', 'action' => 'review'));
-			}
+				$this->finalizeStep($this);				
+				$this->requestAction('steps/redirectToNextUnfinishedStep');	
 		} else {
 			$this->Session->write('errors', $this->Registrator->validationErrors);
-			
-			//varför gör vi det här: (?)
-			$this->Set('errors', $this->Registrator->validationErrors);
-			
 			$this->redirect(array('action' => 'create'));
 		}
 		

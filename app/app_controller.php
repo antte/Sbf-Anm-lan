@@ -2,7 +2,8 @@
 
 	App::import('Sanitize');
 	App::import('Inflector');
-		
+
+	
 	class AppController extends Controller {
 		
 		/**
@@ -44,5 +45,18 @@
 		}
 		return true;
 	}
+
+	function previousStepsHasData(&$currentController){
 		
+		$steps=$this->Session->read('Event.steps');
+		foreach ($steps as $step){
+			if ($step['state'] != 'previous'){
+				//if the first found step that isnt previous isn't the calling controller return false, else true
+				return (	
+					$step['controller'] == $currentController->params['controller'] 
+				&&	$step['action'] == $currentController->params['action']
+				);
+			}
+		}
+	}
 }

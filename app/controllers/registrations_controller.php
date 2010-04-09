@@ -41,6 +41,12 @@ class RegistrationsController extends AppController {
 	}
 
 	function review(){
+		$this->layout='registration';
+		
+		//you can't be in review if you haven't finished previous steps
+		if (!$this->previousStepsHasData($this)){
+			$this->requestAction('steps/redirectToNextUnfinishedStep');	
+		}		
 		//If you haven't finished the previous steps you shouldn't be here
 		$person = $this->Session->read('Registration.Person');
 		$registrator = $this->Session->read('Registration.Registrator');
@@ -48,11 +54,16 @@ class RegistrationsController extends AppController {
 			$this->redirect(array('controller' => 'events', 'action' => 'index'));
 		}
 		
-		$this->layout='registration';
 	}
 	
 	function receipt() {
 		$this->layout='registration';
+		
+		//you can't be in review if you haven't finished previous steps
+		if (!$this->previousStepsHasData($this)){
+			$this->requestAction('steps/redirectToNextUnfinishedStep');	
+		}		
+		
 		//If you haven't finished the previous steps you shouldn't be here
 		$person = $this->Session->read('Registration.Person');
 		$registrator = $this->Session->read('Registration.Registrator');

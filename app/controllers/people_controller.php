@@ -8,7 +8,10 @@ class PeopleController extends AppController {
 	 * @param unknown_type $amountOfPeople
 	 */
 	function create($amountOfPeople = 1){
-		$this->layout='registration';		
+		$this->layout='registration';
+		if (!$this->previousStepsHasData($this)){
+			$this->requestAction('steps/redirectToNextUnfinishedStep');	
+		}	
 		if (!$this->Session->read('Registration.Registration.event_id')) $this->redirect(array('controller' => 'events', 'action' => 'index'));
 		
 		//reads data from session in order to figure out if the user already has visited the module
@@ -51,10 +54,7 @@ class PeopleController extends AppController {
 				if($this->Session->read('Registration.Person')){
 					$edit_mode = true;
 				}
-				
-				$this->finalizeStep($this);
-				//redirect to the next action (now current since we ran advanceOneStep inside finalizeStep)
-				//debug($this->Session->read('Event'));
+				$this->finalizeStep($this);				
 				$this->requestAction('steps/redirectToNextUnfinishedStep');
 				
 			} else {

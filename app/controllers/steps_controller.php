@@ -77,4 +77,5 @@ class StepsController extends AppController {
 	private function changeStepStateToCurrent($step) {
 		$this->Session->write('Event.steps.' . ucfirst($step['controller']) .'/'. $step['action'] , 'current');
 	}
+	
 }
