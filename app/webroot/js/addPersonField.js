@@ -35,15 +35,19 @@ $(document).ready(function(){
 	
 	
 	// Appends a delete button on all the li:s (except the first one) in edit mode
-	$('#PersonAddForm.edit li:nth-child(1n+2) fieldset').each(function(){
-		$(this).append('<a class="removeField" href="#">Ta bort</a>');
-		$(this).find('a.removeField').click(function(){
-			$(this).parents('li').fadeOut('500', function(){
-				$(this).remove();
+	if($('#PersonAddForm input:first').attr('value') != ""){
+		$('#PersonAddForm li:nth-child(1n+2) fieldset').each(function(){
+			$(this).append('<a class="removeField" href="#">Ta bort</a>');
+			$(this).find('a.removeField').click(function(){
+				$(this).parents('li').fadeOut('500', function(){
+					$(this).remove();
+				});
+				return false;
 			});
-			return false;
 		});
-	});
+	}
+	
+	
 	
 });
 

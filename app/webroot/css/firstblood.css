@@ -123,6 +123,11 @@ label.error {
 	background: url(../img/info.png) no-repeat 0 0;
 }
 
+p.info {
+	text-indent: 20px;
+	background: url(../img/info.png) no-repeat 0 0;
+}
+
 .postcode, .c_o, .address {
 	clear: left;
 }
