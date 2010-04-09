@@ -17,6 +17,10 @@ form#login .input.text input, form#login .submit input {
 	width: 470px;
 }
 
+form#login #RegistrationNumber {
+	width: 180px;
+}
+
 form#login .submit {
 	margin-top: 20px;
 	float: none;

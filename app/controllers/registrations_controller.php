@@ -63,11 +63,36 @@ class RegistrationsController extends AppController {
 	
 	//recieve and process login credentials
 	function login() {
-		/*
-		if($this->data) {
+		if(!$this->data) {
+			//the user has not put in any values in the fields
+			$this->set('error', 'novalue');
+		} else {
+			
+			$number = Sanitize::clean($this->data['Registration']['number']);
+			$email = Sanitize::clean($this->data['Registrator']['email']);
+			
+			// get an array with all the info on the registration
+			if($registration = $this->Registration->findByNumber($number)){
+				
+				//Retype email is not stored in the database, so we add it to the array
+				$registration['Registrator']['retype_email'] = $registration['Registrator']['email'];
+				
+				debug($registration);
+				
+				//checks the array from the database and tries to match the email with the form
+				if($registration['Registrator']['email'] == $email){
+					
+					$this->Session->write('Registration', $registration);
+					$this->redirect(array('action' => 'review'));
+					
+				}
+				
+			} else {
+				//the user has put in wrong values in the fields
+				$this->set('error', 'wrongvalue');
+			}
 			
 		}
-		*/
 	}
 	
 	/**
