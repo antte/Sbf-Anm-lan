@@ -35,8 +35,8 @@ class StepsController extends AppController {
 		
 		//we don't allow this action to be used unless requested
 		if(!isset($this->params['requested'])) return;
-		
-		$steps = $this->Session->read('Steps');
+
+		$steps = $this->Session->read('Event.steps');
 		
 		//change that step arrays state value to previous
 		$currentFound = false;
@@ -55,7 +55,7 @@ class StepsController extends AppController {
 		
 		// after we change steps we need to write it to session or nothing will happen 
 		// & we lets requester know whether it fails or succeeds
-		return $this->Session->write('Steps', $steps);
+		return $this->Session->write('Event.steps', $steps);
 	}
 	
 	function redirectToCurrent() {
@@ -63,7 +63,7 @@ class StepsController extends AppController {
 		//we don't allow this action to be used unless requested
 		if(!isset($this->params['requested'])) return;
 		
-		$steps = $this->Session->read('Steps');
+		$steps = $this->Session->read('Event.steps');
 		
 		foreach($steps as $step) {
 			if($step['state'] == 'current') {

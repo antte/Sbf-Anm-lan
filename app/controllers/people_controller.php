@@ -54,6 +54,7 @@ class PeopleController extends AppController {
 				
 				$this->finalizeStep($this);
 				//redirect to the next action (now current since we ran advanceOneStep inside finalizeStep)
+				//debug($this->Session->read('Event'));
 				$this->requestAction('steps/redirectToCurrent');
 				
 			} else {
