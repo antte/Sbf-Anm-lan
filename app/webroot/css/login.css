@@ -1,6 +1,10 @@
-form#login {
+div.login {
 	background: #eee;
 	padding-bottom: 20px;
+}
+
+form#login {
+	float: none;
 }
 
 form#login .input.text, form#login .submit {
@@ -32,8 +36,18 @@ form#login .submit input {
 	font-size: 150%;
 	font-weight: bold;
 	padding: 10px 10px;
+	clear: both;
 }
 
 form#login .input.text #RegistratorEmail {
 	margin-bottom: 30px;
+}
+
+.login_info {
+	float: none;
+	display: block;
+	clear: both;
+	background: #fffcbb;
+	margin: 0 auto 20px auto;
+	padding: 5px 0;
 }
