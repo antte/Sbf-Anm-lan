@@ -81,7 +81,7 @@ class StepsController extends AppController {
 	function advanceOneStep() {
 		
 		//we don't allow this action to be used unless requested
-		if(!isset($this->params['requested'])) { return; }
+		if(!isset($this->params['requested'])) return;
 		
 		$steps = $this->Session->read('Steps');
 		
@@ -103,6 +103,21 @@ class StepsController extends AppController {
 		// after we change steps we need to write it to session or nothing will happen 
 		// & we lets requester know whether it fails or succeeds
 		return $this->Session->write('Steps', $steps);
+	}
+	
+	function redirectToCurrent() {
+		
+		//we don't allow this action to be used unless requested
+		if(!isset($this->params['requested'])) return;
+		
+		$steps = $this->Session->read('Steps');
+		
+		foreach($steps as $step) {
+			if($step['state'] == 'current') {
+				$this->redirect(array('controller' => $step['controller'], 'action' => $step['action']));
+			}
+		}
+		
 	}
 	
 }

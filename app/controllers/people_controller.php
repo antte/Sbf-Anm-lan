@@ -48,24 +48,15 @@ class PeopleController extends AppController {
 				//if we dont have errors all was successful and we continue with the registration
 				
 				// check if session is already set *before* saving the form, to check if we're in edit mode
+				// TODO is this deprecated?
 				if($this->Session->read('Registration.Person')){
 					$edit_mode = true;
 				}
-				$this->saveModelDataToSession('Person', Sanitize::clean($this->data));
-				$steps = $this->Session->read('Event.steps');
-					foreach($steps as &$step) {
-						$step['current_step'] = false;
-					}
-				if( isset($edit_mode) ){ 
-					//in review mode continue to review page
-					$steps['Review']['current_step'] = true;
-					$this->Session->write('Event.steps', $steps);
-					$this->redirect(array('controller' => 'registrations', 'action'=>'review'));	
-				} else {
-					$steps['Registrator']['current_step'] = true;
-					$this->Session->write('Event.steps', $steps);
-					$this->redirect(array('controller' => 'registrators', 'action'=>'create'));
-				}
+				
+				$this->finalizeStep($this);
+				//redirect to the next action (now current since we ran advanceOneStep inside finalizeStep)
+				$this->requestAction('steps/redirectToCurrent');
+				
 			} else {
 				$this->Session->write('errors', $errors);
 				$this->redirect(array('action' => 'create', sizeof($this->data['Person'])));
