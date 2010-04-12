@@ -4,10 +4,6 @@ class StepsController extends AppController {
 	
 	function index($controller = null  , $action = null){
 		if (!isset($this->params['requested'])) return;
-		
-		debug($controller);
-		debug($action);
-		
 		return $this->prepareStepsForView($this->Session->read('Event.steps'), $controller , $action);
 		
 	}
@@ -40,13 +36,17 @@ class StepsController extends AppController {
 	 * @param $steps initialized steps
 	 */
 	private function prepareStepsForView($steps, $controller ,$action) {
+		$controller = ucfirst($controller);
+		
 		$i = 0;
 		foreach($steps as &$step) {
-			
-			$step['classes'] = $step['state'];
-			
+			if ($controller == 'Registrations' && $action == 'receipt'){
+				$step['classes'] = 'disabled';			
+			} else {
+				$step['classes'] = $step['state'];
+			}
 			if ($controller == $step['controller'] && $action == $step['action']) {
-				
+				//make current the step corresponding to the calling controller
 				$step['classes'] = 'current';
 			}
 			
@@ -55,11 +55,10 @@ class StepsController extends AppController {
 			} else if ($i === (sizeof($steps) -1) ){
 				$step['classes'] .= " last";
 			}
+			
 			$i++;
 			unset($step['state']);
 		}
-		debug($steps);
-		debug("preparestepsforview");
 		return $steps;
 	}
 	

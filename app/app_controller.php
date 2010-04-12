@@ -11,12 +11,16 @@
 	 * @param string $modelName to which name would you like to push (name should be the same as the model that will later be used to save the data)
 	 * @param mixed $dataToPush this->data from the different controllers that contains the information that we'll later save
 	 */
-	function saveModelDataToSession(&$currentController) {
+	function saveModelDataToSession(&$currentController,$data = null) {
 		try {
 			$arrayName = 'Registration';
 			$array = $this->Session->read($arrayName);
 			$modelName = ucfirst(Inflector::singularize($currentController->params['controller']));
-			$array[$modelName] = $currentController->data[$modelName];
+			if (isset($data)){
+				$array[$modelName] = $data;
+			} else {
+				$array[$modelName] = $currentController->data[$modelName];
+			}
 			$this->Session->write($arrayName, $array);
 
 		} catch(Exception $e) {
@@ -33,8 +37,8 @@
 			if ($step['state'] != 'previous'){
 				//if the first found step that isnt previous isn't the calling controller return false, else true
 				if (
-					$step['controller'] == $currentController->params['controller'] 
-				&&	$step['action'] == $currentController->params['action']
+					$step['controller'] == ucfirst($currentController->params['controller'])
+				&&	$step['action'] == ucfirst($currentController->params['action'])
 				) return false;
 				return true;
 			}
