@@ -42,13 +42,10 @@ class RegistrationsController extends AppController {
 		//you can't be in review if you haven't finished previous steps
 		if (!$this->previousStepsAreDone($this)){
 			$this->requestAction('steps/redirectToNextUnfinishedStep');	
-		}		
-		//If you haven't finished the previous steps you shouldn't be here
-		$person = $this->Session->read('Registration.Person');
-		$registrator = $this->Session->read('Registration.Registrator');
-		if( empty($person) || empty($registrator) ) {
-			$this->redirect(array('controller' => 'events', 'action' => 'index'));
 		}
+		
+		//make review done as soon as we get there
+		$this->updateStepState($this->params['controller'] , $this->params['action']);
 		
 	}
 	
