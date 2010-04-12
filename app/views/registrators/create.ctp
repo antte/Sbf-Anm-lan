@@ -74,6 +74,12 @@
 					echo $form->input('city', array('type' => 'text', 'label' => 'Stad *', 'div' => 'city grid_3', 'maxLength' => '127', 'default' => $registrator['city'])); 
 				?>						
 			</fieldset>
+			<fieldset class="extra_information grid_8 alpha">
+				<?php 
+					echo $form->input('extra_information', array('type' => 'textarea', 'label' => 'Extra Information', 'div' => 'extra_information grid_3', 'default' => $registrator['extra_information']));
+				
+				?>
+			</fieldset>
 			
 			<?php $submitName = "Ändra";
 				} else { //not in review mode ?>
@@ -100,6 +106,12 @@
 					echo $form->input('postal_code', array('type' => 'text', 'label' => 'Postnr *', 'div' => 'postcode grid_2', 'maxLength' => '127'));
 					echo $form->input('city', array('type' => 'text', 'label' => 'Stad *', 'div' => 'city grid_3', 'maxLength' => '127')); 
 				?>						
+			</fieldset>
+			<fieldset class="extra_information grid_8 alpha">
+				<?php 
+					echo $form->input('extra_information', array('type' => 'textarea', 'label' => 'Extra Information', 'div' => 'extra_information grid_3'));
+				
+				?>
 			</fieldset>
 				
 				<?php 
