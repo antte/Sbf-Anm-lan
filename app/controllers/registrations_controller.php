@@ -7,7 +7,7 @@ class RegistrationsController extends AppController {
 	var $components = array('Email');
 	
 	function index() {
-		if (isset($this->params['requested'])) return $this->getRegistration();		
+		if (isset($this->params['requested'])) return $this->getRegistration();
 	}
 	
 	/**
@@ -16,24 +16,21 @@ class RegistrationsController extends AppController {
 	function finalize() {
 		//$this->layout='registration';
 		// The only thing registration needs right now is an event id
-		$Registration['Registration']['event_id'] = $this->Session->read('Registration.Registration.event_id');
-		$Registration['Registration']['number'] = $this->Registration->generateUniqueNumber();
-		$this->saveModelDataToSession('Registration', $Registration);		
+		$registration['event_id'] = $this->Session->read('Registration.Registration.event_id');
+		$registration['number'] = $this->Registration->generateUniqueNumber();
+		debug($registration);
+		$this->saveModelDataToSession($this,$registration);
+		$this->updateStepState('Registrations' , 'review');
 		$registration = $this->Session->read('Registration');
+		$event = $this->Session->read('Event');
+		debug($registration);
 		if(!$this->Registration->saveAll($registration)) {
 			$this->Session->del('Registration');
 			$this->Session->setFlash('Vi ber om ursäkt, din registrering kunde inte slutföras. Kontakta support.');
 			$this->redirect(array('controller' => 'events', 'action' => 'index'));
 		} else {
 			$this->Session->write('Event.registrationId', $this->Registration->id);
-			$this->sendRegistrationConfirmMail($registration['Registrator'], $registration['Registration']);
-		    
-			$steps = $this->Session->read('Event.steps');
-			foreach($steps as &$step) {
-				$step['current_step'] = false;
-			}
-			$steps['Receipt']['current_step'] = true;
-			$this->Session->write('Event.steps', $steps);
+			//$this->sendRegistrationConfirmMail($event, $registration['Registrator']);
 			$this->Session->del('Registration');
 			$this->redirect(array ('controller'=> 'registrations' , 'action' => 'receipt'));
 		}
@@ -41,13 +38,60 @@ class RegistrationsController extends AppController {
 
 	function review(){
 		$this->layout='registration';
+		
+		//you can't be in review if you haven't finished previous steps
+		if (!$this->previousStepsHasData($this)){
+			$this->requestAction('steps/redirectToNextUnfinishedStep');	
+		}		
+		//If you haven't finished the previous steps you shouldn't be here
+		$person = $this->Session->read('Registration.Person');
+		$registrator = $this->Session->read('Registration.Registrator');
+		if( empty($person) || empty($registrator) ) {
+			$this->redirect(array('controller' => 'events', 'action' => 'index'));
+		}
+		
 	}
 	
 	function receipt() {
 		$this->layout='registration';
+		
+		//you can't be in review if you haven't finished previous steps
+		if (!$this->previousStepsHasData($this)){
+			$this->requestAction('steps/redirectToNextUnfinishedStep');	
+		}						
 	}
 	
-	function testemail(){
+	//recieve and process login credentials
+	function login() {
+		if(!$this->data) {
+			//the user has not put in any values in the fields
+		} else {
+			
+			$number = Sanitize::clean($this->data['Registration']['number']);
+			$email = Sanitize::clean($this->data['Registrator']['email']);
+			
+			// get an array with all the info on the registration
+			if($registration = $this->Registration->findByNumber($number)){
+				
+				//Retype email is not stored in the database, so we add it to the array
+				$registration['Registrator']['retype_email'] = $registration['Registrator']['email'];
+				
+				debug($registration);
+				
+				//checks the array from the database and tries to match the email with the form
+				if($registration['Registrator']['email'] == $email){
+					
+					$this->Session->write('Registration', $registration);
+					$this->redirect(array('action' => 'review'));
+					
+				}
+				
+			} else {
+				//the user has put in wrong values in the fields
+				$this->set('error', 'wrongvalue');
+			}
+			
+		}
 	}
 	
 	/**
@@ -66,7 +110,8 @@ class RegistrationsController extends AppController {
 	 * @param unknown_type $registrator --session array for the registration module 
 	 * @param unknown_type $registration -- session array for the registration module
 	 */
-	private function sendRegistrationConfirmMail($registrator,$registration){
+	private function sendRegistrationConfirmMail($event,$registrator){
+		debug($this->Session->read());
 		$this->Email->smtpOptions = array(
 			'port'			=> '25', 
 			'timeout'		=> '30',
@@ -115,9 +160,12 @@ class RegistrationsController extends AppController {
 	}
 
 	function getEvent(){
+		
 		if (isset($this->params['requested'])) {
 			return $this->Session->read('Event');
-			}
+		}
+		
+		
 	}
 }
 

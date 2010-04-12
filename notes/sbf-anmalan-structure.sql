@@ -2,10 +2,10 @@
 -- version 3.2.0.1
 -- http://www.phpmyadmin.net
 --
--- Värd: localhost
--- Skapad: 29 mars 2010 kl 14:24
--- Serverversion: 5.1.36
--- PHP-version: 5.3.0
+-- Host: localhost
+-- Generation Time: Apr 07, 2010 at 12:00 PM
+-- Server version: 5.1.36
+-- PHP Version: 5.3.0
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
@@ -16,27 +16,41 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Databas: `sbf-anmalan`
+-- Database: `sbf-anmalan`
 --
 
 -- --------------------------------------------------------
 
 --
--- Struktur för tabell `events`
+-- Table structure for table `events`
 --
 
 CREATE TABLE IF NOT EXISTS `events` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(127) COLLATE utf8_bin NOT NULL,
   `is_active` int(1) DEFAULT '0',
-  `confirmation_message` text COLLATE utf8_bin,
+  `confirmation_message` varchar(1023) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=9 ;
 
 -- --------------------------------------------------------
 
 --
--- Struktur för tabell `people`
+-- Table structure for table `events_steps`
+--
+
+CREATE TABLE IF NOT EXISTS `events_steps` (
+  `event_id` int(11) NOT NULL,
+  `step_id` int(11) NOT NULL,
+  `order` int(11) NOT NULL,
+  KEY `event_id` (`event_id`),
+  KEY `step_id` (`step_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `people`
 --
 
 CREATE TABLE IF NOT EXISTS `people` (
@@ -47,12 +61,12 @@ CREATE TABLE IF NOT EXISTS `people` (
   `last_name` varchar(127) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`),
   KEY `registration_id` (`registration_id`,`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=18 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=25 ;
 
 -- --------------------------------------------------------
 
 --
--- Struktur för tabell `registrations`
+-- Table structure for table `registrations`
 --
 
 CREATE TABLE IF NOT EXISTS `registrations` (
@@ -63,12 +77,12 @@ CREATE TABLE IF NOT EXISTS `registrations` (
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `number` (`number`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=55 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=77 ;
 
 -- --------------------------------------------------------
 
 --
--- Struktur för tabell `registrators`
+-- Table structure for table `registrators`
 --
 
 CREATE TABLE IF NOT EXISTS `registrators` (
@@ -81,13 +95,14 @@ CREATE TABLE IF NOT EXISTS `registrators` (
   `street_address` varchar(127) COLLATE utf8_bin DEFAULT NULL,
   `city` varchar(127) COLLATE utf8_bin DEFAULT NULL,
   `postal_code` varchar(127) COLLATE utf8_bin DEFAULT NULL,
+  `extra_information` text COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`registration_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=55 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=77 ;
 
 -- --------------------------------------------------------
 
 --
--- Struktur för tabell `roles`
+-- Table structure for table `roles`
 --
 
 CREATE TABLE IF NOT EXISTS `roles` (
@@ -95,3 +110,17 @@ CREATE TABLE IF NOT EXISTS `roles` (
   `name` varchar(127) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=18 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `steps`
+--
+
+CREATE TABLE IF NOT EXISTS `steps` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(64) NOT NULL,
+  `controller` varchar(128) NOT NULL,
+  `action` varchar(128) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;

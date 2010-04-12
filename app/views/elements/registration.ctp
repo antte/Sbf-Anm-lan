@@ -1,6 +1,6 @@
 <?php $registration = $this->requestAction('registrations/index');?>
 <?php $event = $this->requestAction('registrations/getEvent');?>
-<!--  <h1><?php echo $event['name']?></h1> -->
+
 <div id="booking_nr" class="grid_8">
 	<div class="grid_full">
 		<h2><?php echo $event['name']?></h2>

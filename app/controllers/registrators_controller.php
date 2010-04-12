@@ -14,23 +14,65 @@ class RegistratorsController extends AppController {
 	 */
 	function create() {
 		//change to registration layout so that the rocket will be precent on all steps.
-		echo $this->layout ='registration';
+		echo $this->layout = 'registration';
 		
-		$this->set('registration', $this->Session->read('Registration'));
+		if (!$this->previousStepsHasData($this)){
+			$this->requestAction('steps/redirectToNextUnfinishedStep');	
+		}	
+		
+		
+		//Can't create registration without event
+		debug('Registration');
+		$eventId = $this->Session->read('Registration.Registration.event_id');
+		if (!$eventId) $this->redirect(array('action' => 'index'));
+		
+		//If you haven't finished people(sällskap) module you shouldn't be here
+		$person = $this->Session->read('Registration.Person');
+		if(empty($person)) {
+			$this->redirect(array('controller' => 'events', 'action' => 'index'));
+		}
+		
+		
+		//$this->set('registration', $this->Session->read('Registration'));
 		//people/create/in_review_mode:1
+		
+		//reads data from session in order to figure out if the user already has visited the module
+		if($this->Session->read('Registration.Registrator')){
+			$this->set('registrator', $this->Session->read('Registration.Registrator'));
+		}
+		
+		
+		
+		/*
 		if(isset($this->params['named']['in_review_mode']) && $this->params['named']['in_review_mode']) {
 			$this->set('in_review_mode', true);
 		} else {
 			$this->set('in_review_mode', false);
 		}
+		*/
 		
-	//debug($this->Session->read());
+
+		//debug($this->Session->read());
 		$eventId = $this->Session->read('Registration.Registration.event_id');
 				
 		//can't create registration without event
 		if (!$eventId) $this->redirect(array('action' => 'index'));
+
 		
-		//if we get any validation errors, errors will cointain them
+		//get person from session to set the name by default to the first person from the people form
+		$first_person = $this->Session->read('Registration.Person');
+		
+		foreach($first_person as $person) {
+			//
+			$first_name = $person['first_name'];
+			$last_name = $person['last_name'];
+			break;
+		}
+		$this->set('first_name', $first_name);
+		$this->set('last_name', $last_name);
+		
+		
+		//if we get any validation errors, errors will contain them
 		$this->set('errors', $this->Session->read('errors'));
 		$this->Session->write('errors', null);
 		
@@ -45,31 +87,14 @@ class RegistratorsController extends AppController {
 	/**
 	 * Just to save the data from create action
 	 */
-	function add() {
-				
+	function add($action = null) {
 		$this->Registrator->set($this->data); 
 		if($this->Registrator->validates()) {
-			//if we dont have errors all was successful and we continue with the registration
-			
-			$this->saveModelDataToSession('Registrator', Sanitize::clean($this->data));
-			$steps = $this->Session->read('Event.steps');
-			foreach($steps as &$step) {
-				$step['current_step'] = false;
-			}
-			$steps['Review']['current_step'] = true;
-			$this->Session->write('Event.steps', $steps);
-			if( isset($this->params['named']['in_review_mode']) ) {
-				$this->redirect(array('controller' => 'registrations', 'action'=>'review'));	
-			} else {
-				//redirect to next step
-				$this->redirect(array('controller' => 'registrations', 'action' => 'review'));
-			}
+			$this->saveModelDataToSession($this);
+			$this->updateStepState($this->params['controller'], $action);
+			$this->requestAction('steps/redirectToNextUnfinishedStep');
 		} else {
 			$this->Session->write('errors', $this->Registrator->validationErrors);
-			
-			//varför gör vi det här: (?)
-			$this->Set('errors', $this->Registrator->validationErrors);
-			
 			$this->redirect(array('action' => 'create'));
 		}
 		

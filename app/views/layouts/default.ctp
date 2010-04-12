@@ -19,6 +19,8 @@
 		
 
 		echo $html->css('firstblood');
+		//TODO $javascript is a non-object???
+		//echo $javascript->link('jquery.1.4.2-min', false);
 	?>
 	<!--[if lte IE 6]>
 		<?php echo $html->css('ie'); ?>
@@ -29,6 +31,13 @@
 	<div id="wrap">
 		<header>
 			<div class="container_12">
+			<?php 
+				if(Configure::read('debug') >= 1) {
+					echo "<div id='cookie' style='position:absolute;top:0;right:0;background:pink;color:black;padding:2px;'>";
+					echo $html->link('Put that cookie down!', array('controller' => 'registrations', 'action' => 'clearSession'));
+					echo "</div>";
+				}
+			?>
 			</div>
 		</header>
 		<div id="main" class="clearfix">
@@ -38,7 +47,6 @@
 			</div>
 		</div>
 	</div>
-	
 	<footer>
 		<div class="container_12">
 			<?php

@@ -8,15 +8,15 @@ class PeopleController extends AppController {
 	 * @param unknown_type $amountOfPeople
 	 */
 	function create($amountOfPeople = 1){
-		$this->layout='registration';		
-		debug($this->Session->read('Registration'));	
+		$this->layout='registration';
+		if (!$this->previousStepsHasData($this)){
+			$this->requestAction('steps/redirectToNextUnfinishedStep');	
+		}
 		if (!$this->Session->read('Registration.Registration.event_id')) $this->redirect(array('controller' => 'events', 'action' => 'index'));
 		
-		//people/create/in_review_mode:1
-		if(isset($this->params['named']['in_review_mode'])) {
-			$this->set('in_review_mode', true);
-		} else {
-			$this->set('in_review_mode', false);			
+		//reads data from session in order to figure out if the user already has visited the module
+		if($this->Session->read('Registration.Person')){
+			$this->set('people', $this->Session->read('Registration.Person'));
 		}
 	
 		if (!is_numeric($amountOfPeople) || $amountOfPeople < 1) {
@@ -29,44 +29,36 @@ class PeopleController extends AppController {
 		$event = $this->Person->Registration->Event->find('first', array('conditions' => array('id' => $this->Session->read('eventId')), 'fields' => array('Event.id', 'Event.name')));
 		$eventId = $this->Session->read('Registration.Registration.event_id');
 		$this->set('eventName' , $this->Person->Registration->Event->field('name', array('id' => $eventId)));
-		$this->set('people', $this->Session->read('Registration.Person'));
+		
 		$this->set('roles',$this->Person->Role->find('list'));
 		$this->set('errors', $this->Session->read('errors'));
 	}
 
-	/**
-	 * Controling the data from views and if valid redirect to next step other redirect to previous view  
-	 */
 	function add(){
 		if(isset($this->data['Person']['amount'])){
 			$this->Session->del('errors');
 			$this->redirect(array('action'=>'create',$this->data['Person']['amount']));
+		} else {
+			$this->redirect(array('action'=>'create'));			
 		}
-		
-		if($this->data['Person']){
+	}
+	
+	/**
+	 * Controlling the data from views and if valid redirect to next step other redirect to previous view  
+	 */
+	function edit($action = null) {
+		if(isset($this->data['Person']) && isset($action)){
 			$errors = $this->Person->validatesMultiple($this->data);
-			
 			if(empty($errors)) {
 				//if we dont have errors all was successful and we continue with the registration
-				$this->saveModelDataToSession('Person', Sanitize::clean($this->data));
-				$steps = $this->Session->read('Event.steps');
-					foreach($steps as &$step) {
-						$step['current_step'] = false;
-					}
-				if( isset($this->params['named']['in_review_mode']) ){ 
-					//in review mode continue to review page
-					$steps['Review']['current_step'] = true;
-					$this->Session->write('Event.steps', $steps);
-					$this->redirect(array('controller' => 'registrations', 'action'=>'review'));	
-				} else {
-					$steps['Registrator']['current_step'] = true;
-					$this->Session->write('Event.steps', $steps);
-					$this->redirect(array('controller' => 'registrators', 'action'=>'create'));
-				}
+				$this->saveModelDataToSession($this);
+				$this->updateStepState($this->params['controller'], $action);
+				$this->requestAction('steps/redirectToNextUnfinishedStep');
 			} else {
 				$this->Session->write('errors', $errors);
 				$this->redirect(array('action' => 'create', sizeof($this->data['Person'])));
 			}
 		}
 	}
+	
 }	

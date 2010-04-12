@@ -123,6 +123,11 @@ label.error {
 	background: url(../img/info.png) no-repeat 0 0;
 }
 
+p.info {
+	text-indent: 20px;
+	background: url(../img/info.png) no-repeat 0 0;
+}
+
 .postcode, .c_o, .address {
 	clear: left;
 }
@@ -253,29 +258,4 @@ table td {
 
 #main div.hover {
 	background: #fffcbb;
-}
-
-#rocket {
-	overflow: hidden;
-}
-
-#rocket li {
-	display: inline;
-	float: left;
-	list-style-type: none;
-	margin: 0px;
-	text-align: center;
-	border: 1px solid black;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-}
-
-#rocket li.previous {
-	background: #eee;
-}
-#rocket li.current {
-	background: #FFEFD6;
-}
-#rocket li.next {
-	background: #fff;
 }

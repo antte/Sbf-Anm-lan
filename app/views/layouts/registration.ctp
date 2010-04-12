@@ -15,10 +15,11 @@
 		echo $html->css('stickyfooter');
 		echo $html->css('960');
 		echo $html->css('text');
+		echo $html->css('rocket');
 		echo $html->css(array('print'), 'stylesheet', array('media' =>  'print'));
-		
-
 		echo $html->css('firstblood');
+		echo $javascript->link('jquery.1.4.2-min');
+		echo $javascript->link('rocket');
 	?>
 	<!--[if lte IE 6]>
 		<?php echo $html->css('ie'); ?>
@@ -26,14 +27,23 @@
 	
 </head>
 <body>
+
 	<div id="wrap">
 		<header>
 			<div class="container_12">
+				<?php 
+					if(Configure::read('debug') >= 1) {
+						echo "<div id='cookie' style='position:absolute;top:0;right:0;background:pink;color:black;padding:2px;'>";
+						echo $html->link('Put that cookie down!', array('controller' => 'registrations', 'action' => 'clearSession'));
+						echo "</div>";
+					}
+				?>
 			</div>
 		</header>
 		<div id="main" class="clearfix">
 			<div class="container_12">
-				<?php echo $this->renderElement('rocket'); ?>
+			
+				<?php echo $this->renderElement('step'); ?>
 			</div>
 			<div class="container_12">
 				<?php $session->flash(); ?>
@@ -41,7 +51,6 @@
 			</div>
 		</div>
 	</div>
-	
 	<footer>
 		<div class="container_12">
 			<?php
