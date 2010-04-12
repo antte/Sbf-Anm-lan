@@ -7,7 +7,8 @@
 		 * @param $eventId
 		 */
 		function getInitializedSteps($eventId){
-			$event = $this->Event->findById($eventId);
+			$event = $this->Event->Step->findByEventId($eventId);
+			debug($event);
 			$steps = $event['Step'];
 			$rocket = array();
 			/*

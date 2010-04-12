@@ -32,7 +32,7 @@ class StepsController extends AppController {
 	}
 	
 	/**
-	 * makes an initialized steps array pretty(dumb) for the view
+	 * makes an initialized steps array pretty for the view
 	 * @param $steps initialized steps
 	 */
 	private function prepareStepsForView($steps, $controller ,$action) {

@@ -40,7 +40,7 @@ class RegistrationsController extends AppController {
 		$this->layout='registration';
 		
 		//you can't be in review if you haven't finished previous steps
-		if (!$this->previousStepsAreDone($this)){
+		if (!$this->previousStepsHasData($this)){
 			$this->requestAction('steps/redirectToNextUnfinishedStep');	
 		}		
 		//If you haven't finished the previous steps you shouldn't be here
@@ -56,7 +56,7 @@ class RegistrationsController extends AppController {
 		$this->layout='registration';
 		
 		//you can't be in receipt if you haven't finished previous steps
-		if (!$this->previousStepsAreDone($this)){
+		if (!$this->previousStepsHasData($this)){
 			$this->requestAction('steps/redirectToNextUnfinishedStep');	
 		}						
 	}
