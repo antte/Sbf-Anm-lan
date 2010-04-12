@@ -76,7 +76,6 @@ class RegistrationsController extends AppController {
 	function login() {
 		if(!$this->data) {
 			//the user has not put in any values in the fields
-			$this->set('error', 'novalue');
 		} else {
 			
 			$number = Sanitize::clean($this->data['Registration']['number']);

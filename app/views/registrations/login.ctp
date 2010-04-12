@@ -11,23 +11,23 @@
 		
 		if(isset($error)){
 			?>
-			<div id="login_error" class="login_info">
+			<div id="login_error" class="login_info grid_8">
+				<div class="grid_full">
 				<?php
 				
-				if($error == 'novalue'){
-					echo "<p>Du har glömt att fylla i.";
-				}
-				elseif($error == 'wrongvalue'){
+				if($error == 'wrongvalue'){
 					echo "<p>Du har fyllt i fel data, var god kontrollera dina uppgifter.</p>";	
 				}
 				
 				?>
-				
+				</div>
 			</div>
 			<?php
 		}
 	
-	
+		echo $javascript->link('jquery.1.4.2-min', $inline = false);
+		echo $javascript->link('jquery.validate', $inline = false);
+		echo $javascript->link('jq.form.conf/jq.validate.login', $inline = false);
 		echo $html->css('login', null, array(), false);
 		echo $form->create(null, array('id' => 'login', 'class' => 'grid_8', 'controller' => 'registrations' , 'action' => 'login'));
 		echo $form->input('Registration.number', array('label' => 'Bokningsnummer'));
