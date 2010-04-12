@@ -13,3 +13,7 @@ body {
 #PersonAddForm ol li {
 	float: left;
 }
+
+form#login {
+	float: none;
+}

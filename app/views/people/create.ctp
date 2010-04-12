@@ -26,7 +26,6 @@
 		)
 	);
 	*/
-	$this->requestAction('steps');
 ?>
 
 <h2>Fyll i vilka som ska komma till <?php echo $eventName;?></h2>
@@ -51,8 +50,7 @@
 			?>
 	
 	<!--  Form helper - sets action post - parse form to the registration model class-->
-		<?php echo $form->create('Person', array('id' => 'PersonAddForm')); ?>
-
+		<?php echo $form->create('Person', array('id' => 'PersonAddForm', 'action' => 'edit/'.$this->params['action'])); ?>
 	
 		
 		<!--  Form helper - create input with label  -->
@@ -78,7 +76,7 @@
 			<?php echo $form->submit('Ändra')?>
 		
 		</fieldset>
-		<?php } else { //not in review mode ?>
+		<?php } else { //not in "review" mode ?>
 		<ol>
 			<?php for( $i = 0; $i < $amountOfPeople; $i++ ): ?>
 				<li>

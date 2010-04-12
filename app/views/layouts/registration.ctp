@@ -43,7 +43,7 @@
 		<div id="main" class="clearfix">
 			<div class="container_12">
 			
-				<?php echo $this->renderElement('rocket'); ?>
+				<?php echo $this->renderElement('step'); ?>
 			</div>
 			<div class="container_12">
 				<?php $session->flash(); ?>

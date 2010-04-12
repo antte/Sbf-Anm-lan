@@ -48,7 +48,7 @@
 	?>
 	
 	<!--  Form helper - sets action post - parse form to the registration model class-->
-	<?php echo $form->create( array ('id' => 'RegistratorAddForm')); ?> 
+	<?php echo $form->create( array ('id' => 'RegistratorAddForm', 'action' => 'add/'. $this->params['action'])); ?> 
 		
 		<?php if(isset($registrator)) { ?>
 			<!--  Form helper - create input with label  -->
@@ -73,6 +73,12 @@
 					echo $form->input('postal_code', array('type' => 'text', 'label' => 'Postnr *', 'div' => 'postcode grid_2', 'maxLength' => '127', 'default' => $registrator['postal_code'] ));
 					echo $form->input('city', array('type' => 'text', 'label' => 'Stad *', 'div' => 'city grid_3', 'maxLength' => '127', 'default' => $registrator['city'])); 
 				?>						
+			</fieldset>
+			<fieldset class="extra_information grid_8 alpha">
+				<?php 
+					echo $form->input('extra_information', array('type' => 'textarea', 'label' => 'Extra Information', 'div' => 'extra_information grid_3', 'default' => $registrator['extra_information']));
+				
+				?>
 			</fieldset>
 			
 			<?php $submitName = "Ändra";
@@ -100,6 +106,12 @@
 					echo $form->input('postal_code', array('type' => 'text', 'label' => 'Postnr *', 'div' => 'postcode grid_2', 'maxLength' => '127'));
 					echo $form->input('city', array('type' => 'text', 'label' => 'Stad *', 'div' => 'city grid_3', 'maxLength' => '127')); 
 				?>						
+			</fieldset>
+			<fieldset class="extra_information grid_8 alpha">
+				<?php 
+					echo $form->input('extra_information', array('type' => 'textarea', 'label' => 'Extra Information', 'div' => 'extra_information grid_3'));
+				
+				?>
 			</fieldset>
 				
 				<?php 

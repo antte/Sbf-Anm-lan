@@ -9,9 +9,9 @@ class PeopleController extends AppController {
 	 */
 	function create($amountOfPeople = 1){
 		$this->layout='registration';
-		if (!$this->previousStepsHasData($this)){
+		if (!$this->previousStepsAreDone($this)){
 			$this->requestAction('steps/redirectToNextUnfinishedStep');	
-		}	
+		}
 		if (!$this->Session->read('Registration.Registration.event_id')) $this->redirect(array('controller' => 'events', 'action' => 'index'));
 		
 		//reads data from session in order to figure out if the user already has visited the module
@@ -33,34 +33,35 @@ class PeopleController extends AppController {
 		$this->set('roles',$this->Person->Role->find('list'));
 		$this->set('errors', $this->Session->read('errors'));
 	}
-
+	
 	/**
-	 * Controling the data from views and if valid redirect to next step other redirect to previous view  
-	 */
+	* Change amount of people in your party
+	*/
 	function add(){
 		if(isset($this->data['Person']['amount'])){
 			$this->Session->del('errors');
 			$this->redirect(array('action'=>'create',$this->data['Person']['amount']));
+		} else {
+			$this->redirect(array('action'=>'create'));			
 		}
-		
-		if($this->data['Person']){
+	}
+	
+	/**
+	 * Saves People and redirects to next step
+	 */
+	function edit($action = null) {
+		if(isset($this->data['Person']) && isset($action)){
 			$errors = $this->Person->validatesMultiple($this->data);
-			
 			if(empty($errors)) {
 				//if we dont have errors all was successful and we continue with the registration
-				
-				// check if session is already set *before* saving the form, to check if we're in edit mode
-				// TODO is this deprecated?
-				if($this->Session->read('Registration.Person')){
-					$edit_mode = true;
-				}
-				$this->finalizeStep($this);				
+				$this->saveModelDataToSession($this);
+				$this->updateStepState($this->params['controller'], $action);
 				$this->requestAction('steps/redirectToNextUnfinishedStep');
-				
 			} else {
 				$this->Session->write('errors', $errors);
 				$this->redirect(array('action' => 'create', sizeof($this->data['Person'])));
 			}
 		}
 	}
+	
 }	

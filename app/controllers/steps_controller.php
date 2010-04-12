@@ -1,9 +1,11 @@
 <?php
 
 class StepsController extends AppController {
-
-	function index(){
-
+	
+	function index($controller = null  , $action = null){
+		if (!isset($this->params['requested'])) return;
+		return $this->prepareStepsForView($this->Session->read('Event.steps'), $controller , $action);
+		
 	}
 
 	/**
@@ -11,51 +13,8 @@ class StepsController extends AppController {
 	 *
 	 * @param $eventId
 	 */
-	function initSteps($eventId){
-		//if (isset($this->params['requested'])){
-		$this->Session->write('Event.steps', $this->Step->rocketData($eventId));
-		//}
-	}
-
-	/**
-	 * Get steps from session belongin to current event.
-	 * @param unknown_type $eventId
-	 */
-	function stepRocket(){
-		if (isset($this->params['requested'])){
-			return $this->Session->read('Event.steps');
-		}
-	}
-
-	
-	/**
-	 * sets current to previous and next to current
-	 */
-	function advanceOneStep() {
-		
-		//we don't allow this action to be used unless requested
-		if(!isset($this->params['requested'])) return;
-
-		$steps = $this->Session->read('Event.steps');
-		
-		//change that step arrays state value to previous
-		$currentFound = false;
-		$i = 0;
-		foreach($steps as &$step) { 
-			if ($step['state'] == 'current') {
-					$step['state'] = 'previous';
-					$currentFound = true;
-			} else if ($currentFound) {
-				//sets the next step in the rocket as current
-				$step['state'] = 'current';
-				break;
-			}
-			$i++;
-		}
-		
-		// after we change steps we need to write it to session or nothing will happen 
-		// & we lets requester know whether it fails or succeeds
-		return $this->Session->write('Event.steps', $steps);
+	function initializeSteps($eventId){
+		$this->Session->write('Event.steps', $this->Step->getInitializedSteps($eventId));
 	}
 	
 	function redirectToNextUnfinishedStep() {
@@ -67,15 +26,56 @@ class StepsController extends AppController {
 		
 		foreach($steps as $step) {
 			if($step['state'] != 'previous') {
-				$this->changeStepStateToCurrent($step);
 				$this->redirect(array('controller' => $step['controller'], 'action' => $step['action']));
 			}
 		}
-		
 	}
 	
-	private function changeStepStateToCurrent($step) {
-		$this->Session->write('Event.steps.' . ucfirst($step['controller']) .'/'. $step['action'] , 'current');
+	/**
+	 * makes an initialized steps array pretty(dumb) for the view
+	 * @param $steps initialized steps
+	 */
+	private function prepareStepsForView($steps, $controller ,$action) {
+		$controller = ucfirst($controller);
+		
+		$i = 0;
+		foreach($steps as &$step) {
+			if ($controller == 'Registrations' && $action == 'receipt'){
+				$step['classes'] = 'disabled';			
+			} else {
+				$step['classes'] = $step['state'];
+			}
+			if ($controller == $step['controller'] && $action == $step['action']) {
+				//make current the step corresponding to the calling controller
+				$step['classes'] = 'current';
+			}
+			
+			if($i === 0) {
+				$step['classes'] .= " first";
+			} else if ($i === (sizeof($steps) -1) ){
+				$step['classes'] .= " last";
+			}
+			
+			$i++;
+			unset($step['state']);
+		}
+		return $steps;
+	}
+	
+	/**
+	 * Checks to see if data exists in the right place and if so sets the correct steps state to previous
+	 */
+	function updateSteps() {
+		$registration = $this->Session->read('Registration');
+		
+		foreach($registration as $modelName => $modelData) {
+			if(!empty($modelData)) {
+				
+			}
+		}
+		//if data exists in session-> Registration.Person
+		//if data exists in session-> Registration.Registrator
+		//if data exists in session-> Registration.Registration.Review
 	}
 	
 }

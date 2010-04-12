@@ -30,7 +30,7 @@
 		return true;
 	}
 
-	function previousStepsAreDone(&$currentController){
+	function previousStepsHasData(&$currentController){
 		
 		$steps = $this->Session->read('Event.steps');
 		foreach ($steps as $step){

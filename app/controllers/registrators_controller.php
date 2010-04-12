@@ -16,7 +16,7 @@ class RegistratorsController extends AppController {
 		//change to registration layout so that the rocket will be precent on all steps.
 		echo $this->layout = 'registration';
 		
-		if (!$this->previousStepsHasData($this)){
+		if (!$this->previousStepsAreDone($this)){
 			$this->requestAction('steps/redirectToNextUnfinishedStep');	
 		}	
 		
@@ -85,14 +85,14 @@ class RegistratorsController extends AppController {
 	}
 	
 	/**
-	 * Just to save the data from create action
+	 * Saves Contact Information and redirects to next step
 	 */
-	function add() {
-				
+	function add($action = null) {
 		$this->Registrator->set($this->data); 
 		if($this->Registrator->validates()) {
-				$this->finalizeStep($this);				
-				$this->requestAction('steps/redirectToNextUnfinishedStep');	
+			$this->saveModelDataToSession($this);
+			$this->updateStepState($this->params['controller'], $action);
+			$this->requestAction('steps/redirectToNextUnfinishedStep');
 		} else {
 			$this->Session->write('errors', $this->Registrator->validationErrors);
 			$this->redirect(array('action' => 'create'));
@@ -100,7 +100,7 @@ class RegistratorsController extends AppController {
 		
 	}
 
- function receipt(){	 	
+ 	function receipt(){	 	
 		if (isset($this->params['requested'])) {
 			$registrationData = $this->Registrator->Registration->findById($this->Session->read('registrationId'));
 			return $registrationData['Registrator'];

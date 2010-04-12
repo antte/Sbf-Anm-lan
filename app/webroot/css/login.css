@@ -3,10 +3,6 @@ div.login {
 	padding-bottom: 20px;
 }
 
-form#login {
-	float: none;
-}
-
 form#login .input.text, form#login .submit {
 	width: 490px;
 	margin: 10px auto 0 auto;
@@ -31,6 +27,10 @@ form#login label {
 	margin-top: 20px;
 }
 
+form#login label.error {
+	margin-top: 0;
+}
+
 form#login .input input {
 	font-size: 250%;
 	padding: 10px;
@@ -43,15 +43,28 @@ form#login .submit input {
 	clear: both;
 }
 
-form#login .input.text #RegistratorEmail {
-	margin-bottom: 30px;
-}
-
 .login_info {
 	float: none;
 	display: block;
 	clear: both;
 	background: #fffcbb;
-	margin: 0 auto 20px auto;
+	margin: 20px auto 20px auto;
 	padding: 5px 0;
+}
+
+#login_error {
+	margin-bottom: 0;
+}
+
+div.input.text {
+	margin-top: 0;
+}
+
+#login_error p {
+	text-indent: 20px;
+	background: url(../img/error.png) no-repeat 0 0;
+}
+
+form#login {
+	float: none;
 }
