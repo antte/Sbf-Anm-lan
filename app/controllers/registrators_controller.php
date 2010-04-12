@@ -87,12 +87,12 @@ class RegistratorsController extends AppController {
 	/**
 	 * Just to save the data from create action
 	 */
-	function add() {
-				
+	function add($action = null) {
 		$this->Registrator->set($this->data); 
 		if($this->Registrator->validates()) {
-				$this->finalizeStep($this);				
-				$this->requestAction('steps/redirectToNextUnfinishedStep');	
+			$this->saveModelDataToSession($this);
+			$this->updateStepState($this->params['controller'], $action);
+			$this->requestAction('steps/redirectToNextUnfinishedStep');
 		} else {
 			$this->Session->write('errors', $this->Registrator->validationErrors);
 			$this->redirect(array('action' => 'create'));

@@ -39,7 +39,7 @@ class EventsController extends AppController {
 		unset($event['Step']);	
 		$this->Session->write('Event', $event['Event']);
 		$this->Session->write('Registration.Registration.event_id', $eventId);
-		$this->requestAction('Steps/initSteps/'. $eventId);
+		$this->requestAction('Steps/initializeSteps/'. $eventId);
 		//TODO trassel med eventid som tillåts vara namnet på eventet, borde fixa en bättre lösning än denna?
 		$eventId = $this->Event->find('first', array('conditions' => array('name' => $eventId)));
 		$eventId = $eventId['Event']['id'];

@@ -48,7 +48,7 @@
 	?>
 	
 	<!--  Form helper - sets action post - parse form to the registration model class-->
-	<?php echo $form->create( array ('id' => 'RegistratorAddForm')); ?> 
+	<?php echo $form->create( array ('id' => 'RegistratorAddForm', 'action' => 'add/'. $this->params['action'])); ?> 
 		
 		<?php if(isset($registrator)) { ?>
 			<!--  Form helper - create input with label  -->
