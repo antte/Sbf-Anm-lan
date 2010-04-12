@@ -5,6 +5,7 @@
 		
 	function rocketData($eventId){
 		$steps = $this->Event->findById($eventId);
+		debug($steps);	
 		$steps = $steps['Step'];
 		$rocket = array();
 		foreach($steps as $i => $step) {
@@ -23,7 +24,7 @@
 			$rocket[$key]['controller'] = strtolower(Inflector::pluralize($controller));
 			$rocket[$key]['action'] = $action;
 			$rocket[$key]['order']= $order; 
-		}	
+		}
 		$rocket = $this->multisort($rocket,'order','label','action', 'controller','state');
 		return $rocket;	
 	}		
