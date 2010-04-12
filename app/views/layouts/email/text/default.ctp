@@ -28,18 +28,19 @@
 	            '@<noembed[^>]*?.*?</noembed>@siu',
 	            //Remove table header it is impossible to make nice tables so the header is not needed
 	            '@<th[^>]*?.*?</th>@siu',
-	            // Add line breaks before and after blocks
+	            // Add line breaks after blocks
 	            '@</?((address)|(blockquote)|(center)|(del))@iu',
 	            '@</?((/div)|(/h[1-9])|(/ins)|(/isindex)|(/p)|(/pre))@iu',
 	            '@</?((/dir)|(/dl)|(/dt)|(/dd)|(/li)|(/menu)|(/ol)|(/ul))@iu',
-	            '@</?((/table)|(/td)|(/caption))@iu',
+	            '@</?((/table)|(/tr)|(/caption))@iu',
+	            '@</?((/td))@iu',
 	          	'@</?((/form)|(/button)|(/fieldset)|(/legend)|(input))@iu'
 	          //'@</?((label)|(select)|(optgroup)|(option)|(textarea))@iu',
 	          //'@</?((frameset)|(frame)|(iframe))@iu',
 	        ),
 	        array(
 	            '', '', "", '', '', '', '', '','','','','','',
-	            "\n\$0", "\n\$0", "\n\$0", "\n\$0", "\n\$0"
+	            "\n\$0", "\n\$0", "\n\$0", "\n\$0",', ', "\n\$0"
 	        ),
 	        $text );
 	    return strip_tags( $text );
