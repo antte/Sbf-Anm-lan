@@ -3,10 +3,6 @@ div.login {
 	padding-bottom: 20px;
 }
 
-form#login {
-	float: none;
-}
-
 form#login .input.text, form#login .submit {
 	width: 490px;
 	margin: 10px auto 0 auto;
@@ -67,4 +63,8 @@ div.input.text {
 #login_error p {
 	text-indent: 20px;
 	background: url(../img/error.png) no-repeat 0 0;
+}
+
+form#login {
+	float: none;
 }
