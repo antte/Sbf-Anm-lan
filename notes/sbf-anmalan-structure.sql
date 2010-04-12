@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `registrators` (
   `street_address` varchar(127) COLLATE utf8_bin DEFAULT NULL,
   `city` varchar(127) COLLATE utf8_bin DEFAULT NULL,
   `postal_code` varchar(127) COLLATE utf8_bin DEFAULT NULL,
-  `extra_information` varchar(220) COLLATE utf8_bin DEFAULT NULL,
+  `extra_information` text COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`registration_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=77 ;
 
