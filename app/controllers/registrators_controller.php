@@ -49,19 +49,24 @@ class RegistratorsController extends AppController {
 		//can't create registration without event
 		if (!$eventId) $this->redirect(array('action' => 'index'));
 
-		
-		//get person from session to set the name by default to the first person from the people form
-		$first_person = $this->Session->read('Registration.Person');
-		
-		foreach($first_person as $person) {
-			//
-			$first_name = $person['first_name'];
-			$last_name = $person['last_name'];
-			break;
+		//if the Module Person hav been finnished before this step set the first person names to view
+		if ($this->Session->check('Registration.Person')){	
+			//get person from session to set the name by default to the first person from the people form
+			$first_person = $this->Session->read('Registration.Person');
+			
+			foreach($first_person as $person) {
+				//
+				$first_name = $person['first_name'];
+				$last_name = $person['last_name'];
+				break;
+			}
+			$this->set('first_name', $first_name);
+			$this->set('last_name', $last_name);
+		} else {
+			$this->set('first_name', "");
+			$this->set('last_name', "");
+			
 		}
-		$this->set('first_name', $first_name);
-		$this->set('last_name', $last_name);
-		
 		
 		//if we get any validation errors, errors will contain them
 		$this->set('errors', $this->Session->read('errors'));

@@ -8,6 +8,8 @@ class RegistrationsController extends AppController {
 	
 	function index() {
 		if (isset($this->params['requested'])) return $this->getRegistration();
+		
+		//Link to index and this will take you to the right step.
 		$this->requestAction('steps/redirectToNextUnfinishedStep');
 	}
 	
