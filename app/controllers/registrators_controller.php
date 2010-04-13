@@ -14,24 +14,15 @@ class RegistratorsController extends AppController {
 	 */
 	function create() {
 		//change to registration layout so that the rocket will be precent on all steps.
-		echo $this->layout = 'registration';
+		$this->layout = 'registration';
 		
 		if (!$this->previousStepsAreDone($this)){
 			$this->requestAction('steps/redirectToNextUnfinishedStep');	
 		}	
 		
-		
 		//Can't create registration without event
-		debug('Registration');
 		$eventId = $this->Session->read('Registration.Registration.event_id');
-		if (!$eventId) $this->redirect(array('action' => 'index'));
-		
-		//If you haven't finished people(sällskap) module you shouldn't be here
-		$person = $this->Session->read('Registration.Person');
-		if(empty($person)) {
-			$this->redirect(array('controller' => 'events', 'action' => 'index'));
-		}
-		
+		if (!$eventId) $this->redirect(array('action' => 'index'));		
 		
 		//$this->set('registration', $this->Session->read('Registration'));
 		//people/create/in_review_mode:1

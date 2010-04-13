@@ -23,7 +23,6 @@ class StepsController extends AppController {
 		if(!isset($this->params['requested'])) return;
 		
 		$steps = $this->Session->read('Event.steps');
-		
 		foreach($steps as $step) {
 			if($step['state'] != 'previous') {
 				$this->redirect(array('controller' => $step['controller'], 'action' => $step['action']));
