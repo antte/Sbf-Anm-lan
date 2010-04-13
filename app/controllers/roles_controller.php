@@ -1,6 +1,10 @@
 <?php
 	class RolesController extends AppController {
 		
+		/*
+		 * Fetches a list of all the roles stored in the database
+		 * @return array list of roles
+		 */
 		function index() {
 			if($this->params['requested']) {
 				$rolesData = $this->Role->find('list');

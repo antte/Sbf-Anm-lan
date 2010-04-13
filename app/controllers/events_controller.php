@@ -4,7 +4,8 @@ class EventsController extends AppController {
 	var $helpers = array('Html', 'Form', 'Javascript');
 
 	/**
-	 * Send array of all events in the database to the index view
+	 * Get an array of all the events in the database and returns it to the index view
+	 * @return array
 	 */
 	function index() {
 		if(isset($this->params['requested'])) {
@@ -24,15 +25,14 @@ class EventsController extends AppController {
 	}
 
 	/**
-	 * Get the event id and send event info to the view
+	 * Get a single event with info to the view and write it to the session
 	 * @param unknown_type $eventId
 	 */
 	function view($eventId = null) {
+		
+		//if we dont have an id for an event, redirect to the list of all the events
 		if (!isset($eventId)) $this->redirect(array('action' => 'index'));
-			
-		//TODO delete the rows because we only want to select an event by id, not name
-		if (is_numeric($eventId)) $this->set('event', $this->Event->findById($eventId));
-		if (is_string($eventId)) $this->set('event', $this->Event->findByName($eventId));
+		
 		$this->set('event', $this->Event->findById($eventId));
 		$event = $this->Event->findById($eventId);
 		unset($event['Registration']);	
@@ -44,11 +44,6 @@ class EventsController extends AppController {
 		$eventId = $this->Event->find('first', array('conditions' => array('name' => $eventId)));
 		$eventId = $eventId['Event']['id'];
 	}
-
-	/**
-	 * Save the selected event in session and redirect to next step
-	 * @param $eventId
-	 */
 
 
 }

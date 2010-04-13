@@ -17,6 +17,9 @@ class StepsController extends AppController {
 		$this->Session->write('Event.steps', $this->Step->getInitializedSteps($eventId));
 	}
 	
+	/*
+	 * Finds the first step in the session that isn't in previous state and redirects to it
+	 */
 	function redirectToNextUnfinishedStep() {
 		
 		//we don't allow this action to be used unless requested
