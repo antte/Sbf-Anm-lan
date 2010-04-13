@@ -9,50 +9,25 @@ class RegistratorsController extends AppController {
 	}
 	
 	/**
-	 * Creates a registration to an event
-	 * @param $event_id Id of an event for which the registration is created.
+	 * Inits the create view and sets the first person in the party to be the default registrator
 	 */
 	function create() {
-		//change to registration layout so that the rocket will be precent on all steps.
+		//change to registration layout so that the rocket will be present on all steps.
 		echo $this->layout = 'registration';
 		
 		if (!$this->previousStepsAreDone($this)){
 			$this->requestAction('steps/redirectToNextUnfinishedStep');	
 		}	
 		
-		
 		//Can't create registration without event
-		debug('Registration');
 		$eventId = $this->Session->read('Registration.Registration.event_id');
 		if (!$eventId) $this->redirect(array('action' => 'index'));
-		
-		//If you haven't finished people(sällskap) module you shouldn't be here
-		$person = $this->Session->read('Registration.Person');
-		if(empty($person)) {
-			$this->redirect(array('controller' => 'events', 'action' => 'index'));
-		}
-		
-		
-		//$this->set('registration', $this->Session->read('Registration'));
-		//people/create/in_review_mode:1
 		
 		//reads data from session in order to figure out if the user already has visited the module
 		if($this->Session->read('Registration.Registrator')){
 			$this->set('registrator', $this->Session->read('Registration.Registrator'));
 		}
-		
-		
-		
-		/*
-		if(isset($this->params['named']['in_review_mode']) && $this->params['named']['in_review_mode']) {
-			$this->set('in_review_mode', true);
-		} else {
-			$this->set('in_review_mode', false);
-		}
-		*/
-		
 
-		//debug($this->Session->read());
 		$eventId = $this->Session->read('Registration.Registration.event_id');
 				
 		//can't create registration without event
@@ -98,7 +73,11 @@ class RegistratorsController extends AppController {
 			$this->redirect(array('action' => 'create'));
 		}		
 	}
-
+	
+	/*
+	 * Fetches registration data from the database
+	 * @return array Registrator data for the receipt
+	 */
  	function receipt(){	 	
 		if (isset($this->params['requested'])) {
 			$registrationData = $this->Registrator->Registration->findById($this->Session->read('registrationId'));

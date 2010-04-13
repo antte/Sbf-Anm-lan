@@ -11,17 +11,18 @@ class RegistrationsController extends AppController {
 	}
 	
 	/**
-	 * Finalizes the registration saving it and emailing it to the registrator
+	 * Finalizes the registration, saving it and emailing it to the registrator
 	 */
 	function finalize() {
-		//$this->layout='registration';
 		// The only thing registration needs right now is an event id
 		$registration['event_id'] = $this->Session->read('Registration.Registration.event_id');
 		$registration['number'] = $this->Registration->generateUniqueNumber();
+
 		$this->saveModelDataToSession($this,$registration);
 		$this->updateStepState('Registrations' , 'review');
 		$registration = $this->Session->read('Registration');
 		$event = $this->Session->read('Event');
+
 		if(!$this->Registration->saveAll($registration)) {
 			$this->Session->del('Registration');
 			$this->Session->setFlash('Vi ber om ursäkt, din registrering kunde inte slutföras. Kontakta support.');
@@ -33,7 +34,10 @@ class RegistrationsController extends AppController {
 			$this->redirect(array ('controller'=> 'registrations' , 'action' => 'receipt'));
 		}
 	}
-
+	
+	/*
+	 * Inits the review mode
+	 */
 	function review(){
 		$this->layout='registration';
 		
@@ -47,6 +51,9 @@ class RegistrationsController extends AppController {
 		
 	}
 	
+	/*
+	 * Inits the receipt view for the whole registration
+	 */
 	function receipt() {
 		$this->layout='registration';
 		
@@ -56,33 +63,37 @@ class RegistrationsController extends AppController {
 		}						
 	}
 	
-	//recieve and process login credentials
+	/*
+	 * Recieve and process login credentials, fetches and stores the registration to session and redirects to review
+	 */
 	function login() {
 		if(!$this->data) {
-			//the user has not put in any values in the fields
+			// First time visiting the site, do nothing and just display the view
 		} else {
 			
+			// Sanitize the input data
 			$number = Sanitize::clean($this->data['Registration']['number']);
 			$email = Sanitize::clean($this->data['Registrator']['email']);
 			
-			// get an array with all the info on the registration
+			// Get an array from the database with all the info on the registration
 			if($registration = $this->Registration->findByNumber($number)){
 				
-				//Retype email is not stored in the database, so we add it to the array
-				$registration['Registrator']['retype_email'] = $registration['Registrator']['email'];
-				
-				debug($registration);
-				
-				//checks the array from the database and tries to match the email with the form
+				// Checks the array from the database and tries to match the email with the form
 				if($registration['Registrator']['email'] == $email){
+					
+					// Retype email is not stored in the database, so we add it to the array
+					$registration['Registrator']['retype_email'] = $registration['Registrator']['email'];
 					
 					$this->Session->write('Registration', $registration);
 					$this->redirect(array('action' => 'review'));
 					
+				} else {
+					//the user has put in wrong values in the field 'email'
+					$this->set('error', 'wrongvalue');
 				}
 				
 			} else {
-				//the user has put in wrong values in the fields
+				//the user has put in wrong values in at least the 'booking number' field
 				$this->set('error', 'wrongvalue');
 			}
 			
@@ -153,7 +164,12 @@ class RegistrationsController extends AppController {
 		//the user isn't making a registration so we send the requester all registrations
 		return $this->Registration->find('all');
 	}
-
+	
+	
+	/*
+	 * Returns the event from session
+	 * @return array
+	 */
 	function getEvent(){
 		
 		if (isset($this->params['requested'])) {
