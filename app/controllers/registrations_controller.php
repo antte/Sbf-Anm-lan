@@ -12,30 +12,51 @@ class RegistrationsController extends AppController {
 		//Link to index and this will take you to the right step.
 		$this->requestAction('steps/redirectToNextUnfinishedStep');
 	}
+	/**
+	 * 
+	 * @param unknown_type $action
+	 */
+	function add($action = null){
+		$this->updateStepState($this->params['controller'], $action);
+		$this->finalize();
+		$this->requestAction('steps/redirectToNextUnfinishedStep');
+		
+	}
 	
 	/**
 	 * Finalizes the registration, saving it and emailing it to the registrator
 	 */
 	function finalize() {
 		// The only thing registration needs right now is an event id
-		$registration['event_id'] = $this->Session->read('Registration.Registration.event_id');
-		$registration['number'] = $this->Registration->generateUniqueNumber();
-
+		$registration= $this->Session->read('Registration.Registration');
+		if (!$this->Session->check('Registration.Registration.number')){
+			$registration['number'] = $this->Registration->generateUniqueNumber();
+		} else { 
+			$registration['number'] = $this->Session->read('Registration.Registration.number');
+		}
 		$this->saveModelDataToSession($this,$registration);
+		//Slut på vanlig modul
+		//-----------------------
+		//början på spara i DB
 		$this->updateStepState('Registrations' , 'review');
 		$registration = $this->Session->read('Registration');
 		$event = $this->Session->read('Event');
-
+		
+		// if we're in edit, we delete everything and save the session again
+		if ($this->Session->check('loggedIn')){
+			$this->Registration->deleteAll(array ('Registration.id' => $registration['Registration']['id'] ));						
+			$this->Registration->Person->deleteAll(array ('Person.registration_id' => $registration['Registration']['id'] ));						
+			$this->Registration->Registrator->deleteAll(array ('Registrator.registration_id' => $registration['Registration']['id'] ));								
+		}
 		if(!$this->Registration->saveAll($registration)) {
 			$this->Session->del('Registration');
 			$this->Session->setFlash('Vi ber om ursäkt, din registrering kunde inte slutföras. Kontakta support.');
-			$this->redirect(array('controller' => 'events', 'action' => 'index'));
 		} else {
 			$this->Session->write('Event.registrationId', $this->Registration->id);
 			//$this->sendRegistrationConfirmMail($event, $registration['Registrator']);
 			$this->Session->del('Registration');
-			$this->redirect(array ('controller'=> 'registrations' , 'action' => 'receipt'));
 		}
+			
 	}
 	
 	/*
@@ -47,13 +68,9 @@ class RegistrationsController extends AppController {
 		//you can't be in review if you haven't finished previous steps
 		if (!$this->previousStepsAreDone($this)){
 			$this->requestAction('steps/redirectToNextUnfinishedStep');	
-		}
-		
-		//make review done as soon as we get there
-		$this->updateStepState($this->params['controller'] , $this->params['action']);
-		
+		}		
 	}
-	
+		
 	/*
 	 * Inits the receipt view for the whole registration
 	 */
@@ -80,16 +97,19 @@ class RegistrationsController extends AppController {
 			
 			// Get an array from the database with all the info on the registration
 			if($registration = $this->Registration->findByNumber($number)){
-				
 				// Checks the array from the database and tries to match the email with the form
 				if($registration['Registrator']['email'] == $email){
+					
+					$this->Session->write('loggedIn', true);
 					
 					// Retype email is not stored in the database, so we add it to the array
 					$registration['Registrator']['retype_email'] = $registration['Registrator']['email'];
 					
 					$this->Session->write('Registration', $registration);
-					$this->redirect(array('action' => 'review'));
-					
+					$this->Session->write('Event.steps', $this->Registration->Event->Step->getInitializedSteps($registration['Registration']['event_id']));
+					$this->setStep('Registrations','review');
+					$this->requestAction('events/setEvent/'. $registration['Registration']['event_id']);
+					$this->requestAction('steps/redirectToNextUnfinishedStep');
 				} else {
 					//the user has put in wrong values in the field 'email'
 					$this->set('error', 'wrongvalue');
@@ -110,6 +130,7 @@ class RegistrationsController extends AppController {
 	function clearSession() {
 		$this->Session->del('Registration');
 		$this->Session->del('Event');
+		$this->Session->del('loggedIn');
 		$this->Session->setFlash('Session rensad');
 		$this->redirect(array ('controller' =>'events', 'action' => 'index'));
 	}
@@ -168,19 +189,6 @@ class RegistrationsController extends AppController {
 		return $this->Registration->find('all');
 	}
 	
-	
-	/*
-	 * Returns the event from session
-	 * @return array
-	 */
-	function getEvent(){
-		
-		if (isset($this->params['requested'])) {
-			return $this->Session->read('Event');
-		}
-		
-		
-	}
 }
 
 

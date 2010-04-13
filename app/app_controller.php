@@ -44,6 +44,17 @@
 		}
 	}
 	
+	function setStep($controller , $action){
+		$steps = $this->Session->read('Event.steps');
+		foreach($steps as &$step) {
+			if ($step['controller'] == ucfirst($controller) && $step['action'] == $action) {
+				break;
+			}
+			$step['state'] = 'previous';
+		}
+		$this->Session->write('Event.steps', $steps);
+	}
+	
 	function updateStepState($controller , $action){
 		$steps = $this->Session->read('Event.steps');
 		foreach($steps as &$step) {

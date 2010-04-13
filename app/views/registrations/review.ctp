@@ -21,7 +21,7 @@
 </div>
 <div class="grid_8">
 	<?php 
-		echo $form->create('Registration' , array('action' => 'finalize'));
+		echo $form->create('Registration' , array('action' => 'add/review'));
 		echo "<fieldset>";
 		echo $form->submit('Bekräfta anmälan');
 		echo "</fieldset>";

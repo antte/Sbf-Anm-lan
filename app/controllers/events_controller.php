@@ -45,5 +45,15 @@ class EventsController extends AppController {
 		$eventId = $eventId['Event']['id'];
 	}
 
+	function setEvent($id){
+		
+		if (isset($this->params['requested'])) {
+			 $this->Session->write('Event' , $this->Event->field('id',$id));
+			
+			 debug($this->Event->getEventById($id));
+		}
+			
+	}
+	
 
 }

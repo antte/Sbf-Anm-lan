@@ -4,6 +4,7 @@ class StepsController extends AppController {
 	
 	function index($controller = null  , $action = null){
 		if (!isset($this->params['requested'])) return;
+		
 		return $this->prepareStepsForView($this->Session->read('Event.steps'), $controller , $action);
 		
 	}
@@ -63,7 +64,7 @@ class StepsController extends AppController {
 		}
 		return $steps;
 	}
-	
+	//TODO Depricated ???
 	/**
 	 * Checks to see if data exists in the right place and if so sets the correct steps state to previous
 	 */
@@ -79,5 +80,7 @@ class StepsController extends AppController {
 		//if data exists in session-> Registration.Registrator
 		//if data exists in session-> Registration.Registration.Review
 	}
-	
+	function debug(){
+		return $this->Session->read('Registration');
+	}
 }

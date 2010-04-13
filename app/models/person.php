@@ -8,7 +8,7 @@ Class Person extends AppModel {
 			"Role",
 			"Registration" 
 			);
-
+	
 	var $validate = array(
         'first_name' => array (
 			'rule' 		=> array('notEmpty', 'maxLength'=>127),
