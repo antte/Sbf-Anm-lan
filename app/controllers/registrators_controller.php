@@ -71,8 +71,7 @@ class RegistratorsController extends AppController {
 		} else {
 			$this->Session->write('errors', $this->Registrator->validationErrors);
 			$this->redirect(array('action' => 'create'));
-		}
-		
+		}		
 	}
 	
 	/*
