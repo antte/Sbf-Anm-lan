@@ -100,30 +100,30 @@ INSERT INTO `registrations` (`id`, `event_id`, `number`, `created`, `modified`) 
 -- Dumping data for table `registrators`
 --
 
-INSERT INTO `registrators` (`registration_id`, `first_name`, `last_name`, `email`, `phone`, `c_o`, `street_address`, `city`, `postal_code`) VALUES
-(54, 'FGSG', 'GFSG', 'a@a.nu', '', NULL, 'SDFG', 'sdg', '12142'),
-(55, 'sdg', 'srg', 'andreas_fliesberg@hotmail.com', '', NULL, 'aef', 'adg', '21412'),
-(56, 'sdg', 'qwer', 'andreas_fliesberg@hotmail.com', '', NULL, 'aagh', 'awertyu', '23451'),
-(57, 'sdg', 'qwer', 'andreas_fliesberg@hotmail.com', '', NULL, 'aagh', 'awertyu', '23451'),
-(58, 'asdg', 'asdg', 'andreas_fliesberg@hotmail.com', '', NULL, 'asdfg', 'sdgh', '12346'),
-(59, 'asdg', 'asdg', 'andreas_fliesberg@hotmail.com', '', NULL, 'asdfg', 'sdgh', '12346'),
-(60, 'asdf', 'sadf', 'andreas_fliesberg@hotmail.com', '', NULL, 'sadg', 'sdg', '12415'),
-(61, 'asdfg', 'adf', 'andreas_fliesberg@hotmail.com', '', NULL, 'sadg', 'edg', '12451'),
-(62, 'asdfg', 'adf', 'andreas_fliesberg@hotmail.com', '', NULL, 'sadg', 'edg', '12451'),
-(63, 'sdg', 'sdgf', 'andreas_fliesberg@hotmail.com', '4575434', NULL, 'adsgsg', 'egahh', '32434'),
-(64, 'qwed', 'wer', 'andreas_fliesberg@hotmail.com', '32541346', 'cocoocococcocc', 'dfghj', 'tyuikjl', '23456'),
-(65, 'g', 'qwe', 'andreas_fliesberg@hotmail.com', '34567842', 'edrftgyh', 'wedrfghj', 'aseftyui', '23453'),
-(66, 'asdwedf', 'sdagf', 'andreas_fliesberg@hotmail.com', '345678523', 'sadfghj', 'sdfghj', 'asdrftgjh', '34564'),
-(67, 'sdfg', 'qwert', 'a@a.nu', '234567843', '', 'asfdasg', 'sadfghjkl', '23456'),
-(68, 'sdfgqwer', 'qwert', 'a@a.nu', '23456789', '', 'sadasd', 'asdsdas', '21412'),
-(69, 'asdf', 'qwe', 'a@a.nu', '23456789', '', 'adf', 'sdfs', '12351'),
-(70, 'asdf', 'qwe', 'a@a.nu', '23456789', '', 'adf', 'sdfs', '12351'),
-(71, 'asdfgh', 'qwert', 'a@a.nu', '234567890', '', 'qwefhj', 'sdfgh', '12521'),
-(72, 'adfgh', 'fgh', 'a@a.nu', '234567890', '', 'dfgh', 'eh', '24554'),
-(73, 'sdf', 'qwer', 'a@a.nu', '23456789', '', 'rtyu', 'wsedrftyukjl', '23456'),
-(74, 'wertyu', 'wertyuil', 'a@a.nu', '34567890', '', 'edfghj', 'ertuk', '34567'),
-(75, 'dgkj', 'qwerty', 'a@a.nu', '23456890', '', 'sedfghj', 'sdrfgthjk', '34567'),
-(76, 'sedrtfgyh', 'esdfgh', 'a@a.nu', '34567890', 'werfgth', 'qwert', 'rsdyhde', '12345');
+INSERT INTO `registrators` (`id`, `registration_id`, `first_name`, `last_name`, `email`, `phone`, `c_o`, `street_address`, `city`, `postal_code`) VALUES
+(1,54, 'FGSG', 'GFSG', 'a@a.nu', '', NULL, 'SDFG', 'sdg', '12142'),
+(2,55, 'sdg', 'srg', 'andreas_fliesberg@hotmail.com', '', NULL, 'aef', 'adg', '21412'),
+(3,56, 'sdg', 'qwer', 'andreas_fliesberg@hotmail.com', '', NULL, 'aagh', 'awertyu', '23451'),
+(4,57, 'sdg', 'qwer', 'andreas_fliesberg@hotmail.com', '', NULL, 'aagh', 'awertyu', '23451'),
+(5,58, 'asdg', 'asdg', 'andreas_fliesberg@hotmail.com', '', NULL, 'asdfg', 'sdgh', '12346'),
+(6,59, 'asdg', 'asdg', 'andreas_fliesberg@hotmail.com', '', NULL, 'asdfg', 'sdgh', '12346'),
+(7,60, 'asdf', 'sadf', 'andreas_fliesberg@hotmail.com', '', NULL, 'sadg', 'sdg', '12415'),
+(8,61, 'asdfg', 'adf', 'andreas_fliesberg@hotmail.com', '', NULL, 'sadg', 'edg', '12451'),
+(9,62, 'asdfg', 'adf', 'andreas_fliesberg@hotmail.com', '', NULL, 'sadg', 'edg', '12451'),
+(10,63, 'sdg', 'sdgf', 'andreas_fliesberg@hotmail.com', '4575434', NULL, 'adsgsg', 'egahh', '32434'),
+(11,64, 'qwed', 'wer', 'andreas_fliesberg@hotmail.com', '32541346', 'cocoocococcocc', 'dfghj', 'tyuikjl', '23456'),
+(12,65, 'g', 'qwe', 'andreas_fliesberg@hotmail.com', '34567842', 'edrftgyh', 'wedrfghj', 'aseftyui', '23453'),
+(13,66, 'asdwedf', 'sdagf', 'andreas_fliesberg@hotmail.com', '345678523', 'sadfghj', 'sdfghj', 'asdrftgjh', '34564'),
+(14,67, 'sdfg', 'qwert', 'a@a.nu', '234567843', '', 'asfdasg', 'sadfghjkl', '23456'),
+(15,68, 'sdfgqwer', 'qwert', 'a@a.nu', '23456789', '', 'sadasd', 'asdsdas', '21412'),
+(16,69, 'asdf', 'qwe', 'a@a.nu', '23456789', '', 'adf', 'sdfs', '12351'),
+(17,70, 'asdf', 'qwe', 'a@a.nu', '23456789', '', 'adf', 'sdfs', '12351'),
+(18,71, 'asdfgh', 'qwert', 'a@a.nu', '234567890', '', 'qwefhj', 'sdfgh', '12521'),
+(19,72, 'adfgh', 'fgh', 'a@a.nu', '234567890', '', 'dfgh', 'eh', '24554'),
+(20,73, 'sdf', 'qwer', 'a@a.nu', '23456789', '', 'rtyu', 'wsedrftyukjl', '23456'),
+(21,74, 'wertyu', 'wertyuil', 'a@a.nu', '34567890', '', 'edfghj', 'ertuk', '34567'),
+(22,75, 'dgkj', 'qwerty', 'a@a.nu', '23456890', '', 'sedfghj', 'sdrfgthjk', '34567'),
+(23,76, 'sedrtfgyh', 'esdfgh', 'a@a.nu', '34567890', 'werfgth', 'qwert', 'rsdyhde', '12345');
 
 --
 -- Dumping data for table `roles`

@@ -18,12 +18,10 @@ class RegistrationsController extends AppController {
 		// The only thing registration needs right now is an event id
 		$registration['event_id'] = $this->Session->read('Registration.Registration.event_id');
 		$registration['number'] = $this->Registration->generateUniqueNumber();
-		debug($registration);
 		$this->saveModelDataToSession($this,$registration);
 		$this->updateStepState('Registrations' , 'review');
 		$registration = $this->Session->read('Registration');
 		$event = $this->Session->read('Event');
-		debug($registration);
 		if(!$this->Registration->saveAll($registration)) {
 			$this->Session->del('Registration');
 			$this->Session->setFlash('Vi ber om ursäkt, din registrering kunde inte slutföras. Kontakta support.');
