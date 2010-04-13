@@ -10,5 +10,6 @@
 		 echo $registrator['city'] . "\n\n";
 		 echo "Kontakt: \n";
 		 echo $registrator['email']. "\n";
-		 echo $registrator['phone']?>
+		 echo $registrator['phone'];
+		 echo $registrator['extra_information] . "\n"?>
 		

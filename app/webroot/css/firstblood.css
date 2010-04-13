@@ -75,6 +75,16 @@ fieldset {
 	width: 220px;
 }
 
+.extra_information textarea {
+	width: 300px;
+	height: 100px;
+	margin-bottom: 10px;
+}
+
+p.extra_information {
+	overflow:hidden;
+}
+
 .amount label {
 	clear: right;	
 }
