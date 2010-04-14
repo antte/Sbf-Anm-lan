@@ -48,6 +48,7 @@ class RegistrationsController extends AppController {
 			$this->Registration->Person->deleteAll(array ('Person.registration_id' => $registration['Registration']['id'] ));						
 			$this->Registration->Registrator->deleteAll(array ('Registrator.registration_id' => $registration['Registration']['id'] ));								
 		}
+		//debug($registration['Registration']);
 		if(!$this->Registration->saveAll($registration)) {
 			$this->Session->del('Registration');
 			$this->Session->setFlash('Vi ber om ursäkt, din registrering kunde inte slutföras. Kontakta support.');
@@ -97,6 +98,9 @@ class RegistrationsController extends AppController {
 			
 			// Get an array from the database with all the info on the registration
 			if($registration = $this->Registration->findByNumber($number)){
+				$event = $registration['Event'];
+				unset($registration['Event']);
+				$this->Session->write('Event', $event);
 				// Checks the array from the database and tries to match the email with the form
 				if($registration['Registrator']['email'] == $email){
 					
@@ -106,9 +110,10 @@ class RegistrationsController extends AppController {
 					$registration['Registrator']['retype_email'] = $registration['Registrator']['email'];
 					
 					$this->Session->write('Registration', $registration);
+					$this->Session->write('Registration.Registration.modified', date('Y-m-d H:i:s'));
 					$this->Session->write('Event.steps', $this->Registration->Event->Step->getInitializedSteps($registration['Registration']['event_id']));
 					$this->setStep('Registrations','review');
-					$this->requestAction('events/setEvent/'. $registration['Registration']['event_id']);
+					//$this->requestAction('events/setEvent/'. $registration['Registration']['event_id']);
 					$this->requestAction('steps/redirectToNextUnfinishedStep');
 				} else {
 					//the user has put in wrong values in the field 'email'

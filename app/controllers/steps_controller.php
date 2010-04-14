@@ -25,7 +25,6 @@ class StepsController extends AppController {
 		
 		//we don't allow this action to be used unless requested
 		if(!isset($this->params['requested'])) return;
-		
 		$steps = $this->Session->read('Event.steps');
 		foreach($steps as $step) {
 			if($step['state'] != 'previous') {
@@ -81,6 +80,6 @@ class StepsController extends AppController {
 		//if data exists in session-> Registration.Registration.Review
 	}
 	function debug(){
-		return $this->Session->read('Registration');
+		return $this->Session->read();
 	}
 }
