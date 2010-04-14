@@ -7,21 +7,27 @@ class EventsController extends AppController {
 	 * Get an array of all the events in the database and returns it to the index view
 	 * @return array
 	 */
-	function index() {
+	function index($eventId = null) {
 		if(isset($this->params['requested'])) {
-			//the requester wants either ALL events or the ONE event the user is making a registration for right now
-
-			if ($this->Session->read('Event.id')) {
-					
+			//If event info is allready pipulated to Session use that event id 
+			if ($this->Session->check('Event.id')) {					
 				$event = $this->Event->findById($this->Session->read('Event.id'));
-				unset($event['Registration']);
+				$event = $event['Event'];
 				return $event;
 			}
-
+			//If no event is populated in Session get info with $id
+			if (isset($id)){
+				$event = $this->Event->findById($eventId);
+				$event = $event['Event'];
+				return $event;
+				
+			}
+			//If not specified event id return all Events
 			return $this->Event->find('all');
-		}
+		} else {
 			
 		$this->set('events', $this->Event->find('all'));
+		}
 	}
 
 	/**

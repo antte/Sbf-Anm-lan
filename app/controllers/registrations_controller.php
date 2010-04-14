@@ -28,17 +28,17 @@ class RegistrationsController extends AppController {
 	 */
 	function finalize() {
 		// The only thing registration needs right now is an event id
-		$registration= $this->Session->read('Registration.Registration');
 		if (!$this->Session->check('Registration.Registration.number')){
 			$registration['number'] = $this->Registration->generateUniqueNumber();
 		} else { 
 			$registration['number'] = $this->Session->read('Registration.Registration.number');
 		}
+		$registration= $this->Session->read('Registration.Registration');
 		$this->saveModelDataToSession($this,$registration);
+		$this->updateStepState('Registrations' , 'review');
 		//Slut på vanlig modul
 		//-----------------------
 		//början på spara i DB
-		$this->updateStepState('Registrations' , 'review');
 		$registration = $this->Session->read('Registration');
 		$event = $this->Session->read('Event');
 		
