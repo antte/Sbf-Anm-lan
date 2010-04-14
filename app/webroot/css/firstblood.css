@@ -269,3 +269,8 @@ table td {
 #main div.hover {
 	background: #fffcbb;
 }
+
+.datetime {
+	font-size: 12px;
+	color: #555;
+}
