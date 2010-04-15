@@ -23,9 +23,10 @@
 		</div>
 		<?php
 		//function that displays the textarea correctly with new line
+		/*
 		function mynl2br($text) {
    		return strtr($text, array("\r\n" => '<br />', "\r" => '<br />', "\n" => '<br />'));
-		}
+		}*/
 		?> 
 		<div class="grid_8 alpha">
 			<h4>Extra Information</h4>

@@ -13,10 +13,17 @@ class RegistrationsController extends AppController {
 		$this->requestAction('steps/redirectToNextUnfinishedStep');
 	}
 	/**
-	 * 
+	 * Saves Registration.Registration To Session and save and email the whole Registration
 	 * @param unknown_type $action
 	 */
 	function add($action = null){
+	// The only thing registration needs right now is an event id
+		if (!$this->Session->check('Registration.Registration.number')){
+			$this->Session->write('Registration.Registration.number' , $this->Registration->generateUniqueNumber());
+		}
+		$registration= $this->Session->read('Registration.Registration');
+		debug($registration);
+		$this->saveModelDataToSession($this,$registration);
 		$this->updateStepState($this->params['controller'], $action);
 		$this->finalize();
 		$this->requestAction('steps/redirectToNextUnfinishedStep');
@@ -26,16 +33,7 @@ class RegistrationsController extends AppController {
 	/**
 	 * Finalizes the registration, saving it and emailing it to the registrator
 	 */
-	function finalize() {
-		// The only thing registration needs right now is an event id
-		if (!$this->Session->check('Registration.Registration.number')){
-			$registration['number'] = $this->Registration->generateUniqueNumber();
-		} else { 
-			$registration['number'] = $this->Session->read('Registration.Registration.number');
-		}
-		$registration= $this->Session->read('Registration.Registration');
-		$this->saveModelDataToSession($this,$registration);
-		$this->updateStepState('Registrations' , 'review');
+	private function finalize() {
 		//Slut på vanlig modul
 		//-----------------------
 		//början på spara i DB
@@ -50,12 +48,12 @@ class RegistrationsController extends AppController {
 		}
 		//debug($registration['Registration']);
 		if(!$this->Registration->saveAll($registration)) {
-			$this->Session->del('Registration');
+			//$this->Session->del('Registration');
 			$this->Session->setFlash('Vi ber om ursäkt, din registrering kunde inte slutföras. Kontakta support.');
 		} else {
 			$this->Session->write('Event.registrationId', $this->Registration->id);
-			//$this->sendRegistrationConfirmMail($event, $registration['Registrator']);
-			$this->Session->del('Registration');
+			$this->sendRegistrationConfirmMail($event, $registration['Registrator']);
+			//$this->Session->del('Registration');
 		}
 			
 	}
@@ -77,7 +75,7 @@ class RegistrationsController extends AppController {
 	 */
 	function receipt() {
 		$this->layout='registration';
-		
+		debug($this->Registration->validationErrors);
 		//you can't be in receipt if you haven't finished previous steps
 		if (!$this->previousStepsAreDone($this)){
 			$this->requestAction('steps/redirectToNextUnfinishedStep');	
@@ -146,7 +144,6 @@ class RegistrationsController extends AppController {
 	 * @param unknown_type $registration -- session array for the registration module
 	 */
 	private function sendRegistrationConfirmMail($event,$registrator){
-		debug($this->Session->read());
 		$this->Email->smtpOptions = array(
 			'port'			=> '25', 
 			'timeout'		=> '30',
