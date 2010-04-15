@@ -42,6 +42,7 @@
 	 		),
 	 	
 	 		'phone' => array (
+	 			'required'  => true,
 				'rule' 		=> array('maxLength',127),
 	 			'message' 	=> 'Ange ett korrekt telefonnummer.'
 			),
