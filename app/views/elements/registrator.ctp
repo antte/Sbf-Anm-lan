@@ -21,13 +21,7 @@
 			<p class="email"><?php echo $registration['Registrator']['email']?></p>
 			<p class="phone"><?php echo $registration['Registrator']['phone']?></p>
 		</div>
-		<?php
-		//function that displays the textarea correctly with new line
-		/*
-		function mynl2br($text) {
-   		return strtr($text, array("\r\n" => '<br />', "\r" => '<br />', "\n" => '<br />'));
-		}*/
-		?> 
+
 		<div class="grid_8 alpha">
 			<h4>Extra Information</h4>
 			<p class="extra_information"><?php echo $registration['Registrator']['extra_information'] . "\r\n"?></p>

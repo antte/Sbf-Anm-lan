@@ -60,7 +60,7 @@ class RegistratorsController extends AppController {
 		$this->set("eventName", $this->Event->field('name', array('id' => $eventId)));
 		
 		$this->loadModel("Role");
-		$this->set('roles', $this->Role->find('list', array('fields' => array('Role.name')))); //Find list fetches roles as an assoc array
+		$this	->set('roles', $this->Role->find('list', array('fields' => array('Role.name')))); //Find list fetches roles as an assoc array
 	
 	}
 	
