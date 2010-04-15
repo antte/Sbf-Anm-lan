@@ -58,10 +58,6 @@
 		<!--  Form helper - create input with label  -->
 		<p class="requiredinfo">Fält markerade med * är obligatoriska uppgifter!</p>
 		
-		<?php 
-		debug('People');
-		debug($people); ?>
-		
 		<ol>
 			<?php $k=0; ?>
 			<?php if(isset($people)) { ?> 
