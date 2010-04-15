@@ -32,7 +32,7 @@ class PeopleController extends AppController {
 		$this->set('roles',$this->Person->Role->find('list'));
 		
 		$this->set('errors', $this->Session->read('errors'));
-	}
+	}	
 	
 	/**
 	* Change amount of people in your party
@@ -53,6 +53,8 @@ class PeopleController extends AppController {
 		if(isset($this->data['Person']) && isset($action)){
 			$errors = $this->Person->validatesMultiple($this->data);
 			if(empty($errors)) {
+				//$this->Session->del('Registration.Person');
+				//$this->Session->write('Registration.Person', $this->data);
 				//if we dont have errors all was successful and we continue with the registration
 				$this->saveModelDataToSession($this);
 				$this->updateStepState($this->params['controller'], $action);
