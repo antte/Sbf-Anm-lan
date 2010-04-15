@@ -5,27 +5,6 @@
 	echo $javascript->link('jq.form.conf/messages_se', $inline = false);
 	echo $javascript->link('jq.form.conf/jq.validate.persons', $inline = false);
 	echo $javascript->link('addPersonField', $inline = false);
-	/**
-	 * todo:
-	 * edit mode:
-	 * fält ska vara färdigifyllda (vyn behöver en in_review_mode + den behöver tillgång till people ifrån registration i session)
-	 * och när man trycker submit ska man komma tillbaka till review sidan och inte till "nästa" steg
-	 */
-	/* TODO REMOVE all these ugly comments when we're done
-	$in_review_mode = true;
-	$people = array(
-		0 => array(
-			'first_name' => 'pelle'
-			,'last_name' => 'phant'
-			,'role_id' => 14
-		)
-		,3 => array(
-			'first_name' => 'kalle'
-			,'last_name' => 'nalle'
-			,'role_id' => 15
-		)
-	);
-	*/
 ?>
 <div class="grid_12">
 	<div class="grid_full">
