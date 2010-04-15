@@ -16,7 +16,7 @@ class PeopleController extends AppController {
 		if (!$this->Session->read('Registration.Registration.event_id')) $this->redirect(array('controller' => 'events', 'action' => 'index'));
 		
 		// Checks if people are already in the session and sends an array to init edit mode in the view
-		if($this->Session->read('Registration.Person')){
+		if($this->Session->check('Registration.Person')){
 			$this->set('people', $this->Session->read('Registration.Person'));
 		}
 		// Checks if amountOfPeople is a validated number
