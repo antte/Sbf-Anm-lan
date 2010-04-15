@@ -39,7 +39,7 @@
 					echo "</div>";
 					
 					//put that cookie UP
-					echo "<div id='cookie' style='position:absolute;top:30px;right:0;background:pink;color:black;padding:2px;'>";
+					echo "<div id='cookie' style='position:absolute;top:30px;right:0;background:lightgreen;color:black;padding:2px;'>";
 					echo $html->link('Put that cookie up!', array( 'controller' =>'registrations' , 'action' => 'populateSessionAndRedirectToNextUnfinished'));
 					echo "</div>";
 				}
