@@ -57,15 +57,11 @@
 		
 		<!--  Form helper - create input with label  -->
 		<p class="requiredinfo">Fält markerade med * är obligatoriska uppgifter!</p>
-		
-		<?php 
-		debug('People');
-		debug($people); ?>
-		
 		<ol>
-			<?php $k=0; ?>
-			<?php if(isset($people)) { ?> 
-				<?php foreach( $people as $key => $person ):?>
+			<?php $k=0; //At least one?>
+			<?php // gets the people stored in Session?>
+			<?php if(isset($people)): ?> 
+				<?php foreach( $people as $key => $person ): ?>
 				<li>
 					<fieldset class="name grid_8 alpha" >
 						<?php 
@@ -76,7 +72,9 @@
 						?>
 					</fieldset>
 				</li>
-			<?php endforeach; ?>
+				<?php endforeach; ?>
+			<?php endif ?>
+			<?php //If amount of people extends the amount stored in session loop emty fields?>
 			<?php for( $i = $k; $i < $amountOfPeople; $i++ ): ?>
 				<li>
 					<fieldset class="name grid_8 alpha" >
@@ -89,14 +87,13 @@
 				</li>
 			<?php endfor; ?>			
 		</ol>
+		<?php if(isset($people)) { ?>
 		<fieldset class="submit grid_8 alpha">
 			<?php echo $form->submit('Ändra')?>
 		
 		</fieldset>
 		<?php } else { //not in "review" mode ?>
-		<ol>
-					</ol>
-		<fieldset class="submit grid_8 alpha">
+			<fieldset class="submit grid_8 alpha">
 			<?php echo $form->submit('Nästa')?>
 		
 		</fieldset>
