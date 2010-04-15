@@ -83,6 +83,7 @@ fieldset {
 
 p.extra_information {
 	overflow:hidden;
+	width: 300px;
 }
 
 .amount label {
