@@ -13,7 +13,7 @@ class RegistratorsController extends AppController {
 	 */
 	function create() {
 		//change to registration layout so that the rocket will be present on all steps.
-		echo $this->layout = 'registration';
+		$this->layout = 'registration';
 		
 		if (!$this->previousStepsAreDone($this)){
 			$this->requestAction('steps/redirectToNextUnfinishedStep');	

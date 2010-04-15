@@ -5,27 +5,7 @@
 	echo $javascript->link('jq.form.conf/messages_se', $inline = false);
 	echo $javascript->link('jq.form.conf/jq.validate.persons', $inline = false);
 	echo $javascript->link('addPersonField', $inline = false);
-	/**
-	 * todo:
-	 * edit mode:
-	 * fält ska vara färdigifyllda (vyn behöver en in_review_mode + den behöver tillgång till people ifrån registration i session)
-	 * och när man trycker submit ska man komma tillbaka till review sidan och inte till "nästa" steg
-	 */
-	/* TODO REMOVE all these ugly comments when we're done
-	$in_review_mode = true;
-	$people = array(
-		0 => array(
-			'first_name' => 'pelle'
-			,'last_name' => 'phant'
-			,'role_id' => 14
-		)
-		,3 => array(
-			'first_name' => 'kalle'
-			,'last_name' => 'nalle'
-			,'role_id' => 15
-		)
-	);
-	*/
+
 ?>
 <div class="grid_12">
 	<div class="grid_full">
@@ -63,18 +43,20 @@
 			<?php // gets the people stored in Session?>
 			<?php if(isset($people)): ?> 
 				<?php foreach( $people as $key => $person ): ?>
-				<li>
-					<fieldset class="name grid_8 alpha" >
-						<?php 
-							echo $form->input("Person.$key.first_name", array('type' => 'text', 'label' => 'Förnamn *', 'div' => 'first_name grid_2', 'class' => 'required', 'maxLength' => '127' , 'default' => $person['first_name']));
-							echo $form->input("Person.$key.last_name", array('type' => 'text', 'label' => 'Efternamn *', 'div' => 'last_name grid_2', 'class' => 'required', 'maxLength' => '127' , 'default' => $person['last_name']));
-							echo $form->input("Person.$key.role_id", array('options' => array($roles), 'label' => 'Anmäl dig som *', 'empty' => '(välj en)', 'div' => 'role grid_3', 'class' => 'required role', 'default' => $person['role_id']));
-							$k++;						
-						?>
-					</fieldset>
-				</li>
+					<?php //User has opportunity to delete the last person?>
+					<?php if($k == $amountOfPeople) break;?>
+					<li>
+						<fieldset class="name grid_8 alpha" >
+							<?php 
+								echo $form->input("Person.$key.first_name", array('type' => 'text', 'label' => 'Förnamn *', 'div' => 'first_name grid_2', 'class' => 'required', 'maxLength' => '127' , 'default' => $person['first_name']));
+								echo $form->input("Person.$key.last_name", array('type' => 'text', 'label' => 'Efternamn *', 'div' => 'last_name grid_2', 'class' => 'required', 'maxLength' => '127' , 'default' => $person['last_name']));
+								echo $form->input("Person.$key.role_id", array('options' => array($roles), 'label' => 'Anmäl dig som *', 'empty' => '(välj en)', 'div' => 'role grid_3', 'class' => 'required role', 'default' => $person['role_id']));
+								$k++;
+							?>
+						</fieldset>
+					</li>
 				<?php endforeach; ?>
-			<?php endif ?>
+			<?php endif; ?>
 			<?php //If amount of people extends the amount stored in session loop emty fields?>
 			<?php for( $i = $k; $i < $amountOfPeople; $i++ ): ?>
 				<li>
