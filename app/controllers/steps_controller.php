@@ -28,20 +28,21 @@ class StepsController extends AppController {
 		$steps = $this->Session->read('Event.steps');
 		foreach($steps as $step) {
 			if($step['state'] != 'previous') {
-				if($step['controller'] == 'Registrations' && $step['action'] == 'receipt') {
+				// lite fult men har ingen bättre lösnig
+				//if($step['controller'] == 'Registrations' && $step['action'] == 'receipt') {
 					/*
 					 * The next unfinished step is receipt
 					 * We check to see if the registration is saved, if it isnt saved we redirect to review instead so that the user can save it
 					 */
-					if ($this->Session->read('Registration.Registrator.email')) { 
+					//if ($this->Session->read('Registration.Registrator.email')) { 
 						/*
 						 * If no registration exists in session we ASSUME(!) its saved already because
 						 * when we save a registration we delete it from the session
 						 */
-						$this->redirect(array('controller' => 'registrations', 'action' => 'review'));
-					}
-						$this->redirect(array('controller' => 'registrations', 'action' => 'receipt'));
-				}
+			//			$this->redirect(array('controller' => 'registrations', 'action' => 'review'));
+			//		}
+			//			$this->redirect(array('controller' => 'registrations', 'action' => 'receipt'));
+				//}
 				$this->redirect(array('controller' => $step['controller'], 'action' => $step['action']));
 			}
 		}
@@ -55,17 +56,22 @@ class StepsController extends AppController {
 		$controller = ucfirst($controller);
 		
 		$i = 0;
+		$first = false;
 		foreach($steps as &$step) {
 			if ($controller == 'Registrations' && $action == 'receipt'){
 				$step['classes'] = 'disabled';			
 			} else {
 				$step['classes'] = $step['state'];
 			}
+			if ($step['state'] == 'coming' && $first != true) {
+				$step['classes'] = 'started'; 
+				$first = true;		
+			}
+			
 			if ($controller == $step['controller'] && $action == $step['action']) {
 				//make current the step corresponding to the calling controller
 				$step['classes'] = 'current';
-			}
-			
+			}			
 			if($i === 0) {
 				$step['classes'] .= " first";
 			} else if ($i === (sizeof($steps) -1) ){
@@ -94,6 +100,6 @@ class StepsController extends AppController {
 		//if data exists in session-> Registration.Registration.Review
 	}
 	function debug(){
-		return $this->Session->read('Event');
+		return $this->Session->read();
 	}
 }

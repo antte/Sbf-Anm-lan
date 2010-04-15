@@ -67,8 +67,8 @@ class RegistrationsController extends AppController {
 		$this->layout='registration';
 		
 		//as soon as we're on the review step we set it to previous so that that the user can go back to review mode by clicking the rocket
-		$this->updateStepStateToPrevious($this->params['controller'], $this->params['action'] );
-		
+
+		$this->updateStepStateToPrevious($this->params['controller'], $this->params['action'] );	
 		//you can't be in review if you haven't finished previous steps
 		if (!$this->previousStepsAreDone($this)){
 			$this->requestAction('steps/redirectToNextUnfinishedStep');	
