@@ -23,6 +23,11 @@
 			</ul>
 		<?php } ?>
 		<?php 
+			if (isset($people)){
+				if ($amountOfPeople < sizeof($people)){
+					$amountOfPeople = sizeof($people);
+				} 
+			}
 			echo $form->create('Person', array('id' => 'addamount'));
 			echo '<fieldset class="amount grid_8 alpha">';
 			echo $form->input('amount', array('type' => 'text', 'label' => 'Hur många är i ditt sällskap?', 'value' => $amountOfPeople, 'div' => 'amount', 'maxLength' => '4'));

@@ -67,7 +67,7 @@ class RegistrationsController extends AppController {
 		$this->layout='registration';
 		
 		//as soon as we're on the review step we set it to previous so that that the user can go back to review mode by clicking the rocket
-		$this->updateStepState($this->params['controller'], $this->params['action'] );
+		//$this->updateStepState($this->params['controller'], $this->params['action'] );
 		
 		//you can't be in review if you haven't finished previous steps
 		if (!$this->previousStepsAreDone($this)){
@@ -142,7 +142,6 @@ class RegistrationsController extends AppController {
 	}
 	
 	function clearSessionAndRedirectToEvents() {
-		debug('här kommer vi');
 		$this->clearSession();
 		$this->redirect(array('controller' => 'events', 'action' => 'index'));
 	}
@@ -178,8 +177,8 @@ class RegistrationsController extends AppController {
 			'Registrator' => array(
 							 'first_name' => 'Andreas',
 							 'last_name' => 'Fliesberg',
-							 'email' => 'andreas.fliesberg@hotmail.com',
-							 'retype_email' => 'andreas.fliesberg@hotmail.com',
+							 'email' => 'andreas_fliesberg@hotmail.com',
+							 'retype_email' => 'andreas_fliesberg@hotmail.com',
 							 'phone' => '070-123456789',
 							 'c_o' => '',
 							 'street_address' => 'Wollmar Yxkullsgatan 28',
