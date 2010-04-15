@@ -177,8 +177,8 @@ class RegistrationsController extends AppController {
 			'Registrator' => array(
 							 'first_name' => 'Andreas',
 							 'last_name' => 'Fliesberg',
-							 'email' => 'andreas.fliesberg@hotmail.com',
-							 'retype_email' => 'andreas.fliesberg@hotmail.com',
+							 'email' => 'andreas_fliesberg@hotmail.com',
+							 'retype_email' => 'andreas_fliesberg@hotmail.com',
 							 'phone' => '070-123456789',
 							 'c_o' => '',
 							 'street_address' => 'Wollmar Yxkullsgatan 28',
