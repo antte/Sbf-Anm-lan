@@ -55,9 +55,14 @@
 	background-image: none;
 }
 
-#rocket .previous, #rocket .disabled {
+#rocket .previous, #rocket .disabled ,#rocket .started  {
 	background-color: #ccc;	
 }
+
+#rocket span.disabled {
+	padding:0 7px;
+}
+
 #rocket .current {
 	background-color: #ffe84c;	
 }
