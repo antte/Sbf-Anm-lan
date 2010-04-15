@@ -145,6 +145,29 @@ class RegistrationsController extends AppController {
 		$this->redirect(array ('controller' =>'events', 'action' => 'index'));
 	}
 	
+	function populateSession() {
+		
+		$debugSession = array();
+		$debugSession = array(
+			'Registration' 	=> array(
+							'event_id' => 7
+							),
+			'Person' => array(
+						'0' => 	array(
+								'first_name' => 'Andreas',
+								'last_name'  => 'Fliesberg',
+								'role_id' => 14
+								),
+						'1' => array(
+								'first_name' => 'Tim',
+								'last_name'  => 'Olsson',
+								'role_id' => 17
+								)
+						));
+		
+		//$this->Session->
+	}
+	
 	/**
 	 * Sending a comfirmmail using the reciept view for layout
 	 * @param unknown_type $registrator --session array for the registration module 
