@@ -71,7 +71,7 @@ class RegistratorsController extends AppController {
 		$this->Registrator->set($this->data); 
 		if($this->Registrator->validates()) {
 			$this->saveModelDataToSession($this);
-			$this->updateStepState($this->params['controller'], $action);
+			$this->updateStepStateToPrevious($this->params['controller'], $action);
 			$this->requestAction('steps/redirectToNextUnfinishedStep');
 		} else {
 			$this->Session->write('errors', $this->Registrator->validationErrors);

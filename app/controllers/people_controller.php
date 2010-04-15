@@ -55,7 +55,7 @@ class PeopleController extends AppController {
 			if(empty($errors)) {
 				//if we dont have errors all was successful and we continue with the registration
 				$this->saveModelDataToSession($this);
-				$this->updateStepState($this->params['controller'], $action);
+				$this->updateStepStateToPrevious($this->params['controller'], $action);
 				$this->requestAction('steps/redirectToNextUnfinishedStep');
 			} else {
 				$this->Session->write('errors', $errors);

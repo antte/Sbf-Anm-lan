@@ -28,7 +28,7 @@ class RegistrationsController extends AppController {
 		
 		$registration= $this->Session->read('Registration.Registration');
 		$this->saveModelDataToSession($this,$registration);
-		$this->updateStepState($this->params['controller'], $action);
+		$this->updateStepStateToPrevious($this->params['controller'], $action);
 		$this->finalize();
 		$this->requestAction('steps/redirectToNextUnfinishedStep');
 		
@@ -67,7 +67,7 @@ class RegistrationsController extends AppController {
 		$this->layout='registration';
 		
 		//as soon as we're on the review step we set it to previous so that that the user can go back to review mode by clicking the rocket
-		$this->updateStepState($this->params['controller'], $this->params['action'] );
+		$this->updateStepStateToPrevious($this->params['controller'], $this->params['action'] );
 		
 		//you can't be in review if you haven't finished previous steps
 		if (!$this->previousStepsAreDone($this)){
@@ -190,8 +190,8 @@ class RegistrationsController extends AppController {
 		
 		$this->Session->write('Registration', $debugSession);
 		
-		$this->updateStepState('People', 'create');
-		$this->updateStepState('Registrators', 'create');
+		$this->updateStepStateToPrevious('People', 'create');
+		$this->updateStepStateToPrevious('Registrators', 'create');
 		
 		$this->requestAction('steps/redirectToNextUnfinishedStep');
 	}
