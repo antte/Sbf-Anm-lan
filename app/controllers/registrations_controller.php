@@ -46,12 +46,12 @@ class RegistrationsController extends AppController {
 			$this->Registration->Registrator->deleteAll(array ('Registrator.registration_id' => $registration['Registration']['id'] ));								
 		}
 		if(!$this->Registration->saveAll($registration)) {
-			//$this->Session->del('Registration');
+			$this->Session->del('Registration');
 			$this->Session->setFlash('Vi ber om ursäkt, din registrering kunde inte slutföras. Kontakta support.');
 		} else {
 			$this->Session->write('Event.registrationId', $this->Registration->id);
 			$this->sendRegistrationConfirmMail($event, $registration['Registrator']);
-			//$this->Session->del('Registration');
+			$this->Session->del('Registration');
 		}
 			
 	}
