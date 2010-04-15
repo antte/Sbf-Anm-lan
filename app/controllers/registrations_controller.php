@@ -31,6 +31,10 @@ class RegistrationsController extends AppController {
 		$this->saveModelDataToSession($this,$registration);
 		$this->updateStepState($this->params['controller'], $action);
 		$this->finalize();
+		/*
+		 * We dont run redirect to next unfinished because it should always be receipt
+		 * If we would
+		 */
 		$this->requestAction('steps/redirectToNextUnfinishedStep');
 		
 	}
@@ -64,6 +68,9 @@ class RegistrationsController extends AppController {
 	 */
 	function review(){
 		$this->layout='registration';
+		
+		//as soon as we're on the review step we set it to previous so that that the user can go back to review mode by clicking the rocket
+		$this->updateStepState($this->params['controller'], $this->params['action'] );
 		
 		//you can't be in review if you haven't finished previous steps
 		if (!$this->previousStepsAreDone($this)){
