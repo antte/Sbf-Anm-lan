@@ -5,7 +5,10 @@
 	echo $javascript->link('jq.form.conf/messages_se', $inline = false);
 	echo $javascript->link('jq.form.conf/jq.validate.persons', $inline = false);
 	echo $javascript->link('addPersonField', $inline = false);
+<<<<<<< HEAD
+=======
 
+>>>>>>> 8d6341d96db966c0899e7cd24c4ed1b5ec26932f
 ?>
 <div class="grid_12">
 	<div class="grid_full">
