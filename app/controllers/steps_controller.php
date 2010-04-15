@@ -94,6 +94,6 @@ class StepsController extends AppController {
 		//if data exists in session-> Registration.Registration.Review
 	}
 	function debug(){
-		return $this->Session->read();
+		return $this->Session->read('Event');
 	}
 }

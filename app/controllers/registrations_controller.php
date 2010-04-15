@@ -20,10 +20,9 @@ class RegistrationsController extends AppController {
 		// Check if there already exists a booking number means that this is a editation of existing booking,	
 		if ($this->Session->check('Registration.Registration.number')){
 			//Set the modified date for the editation
-			$this->Session->write('Registration.Registration.modified', date('Y-m-d H:i:s'));					
-		// 
+			$this->Session->write('Registration.Registration.modified', date('Y-m-d H:i:s'));
 		} else {
-			// Make and set a booking number tio Session
+			// Make and set a booking number to Session
 			$this->Session->write('Registration.Registration.number' , $this->Registration->generateUniqueNumber());			
 		}
 		
@@ -31,10 +30,6 @@ class RegistrationsController extends AppController {
 		$this->saveModelDataToSession($this,$registration);
 		$this->updateStepState($this->params['controller'], $action);
 		$this->finalize();
-		/*
-		 * We dont run redirect to next unfinished because it should always be receipt
-		 * If we would
-		 */
 		$this->requestAction('steps/redirectToNextUnfinishedStep');
 		
 	}
@@ -53,13 +48,15 @@ class RegistrationsController extends AppController {
 			$this->Registration->Registrator->deleteAll(array ('Registrator.registration_id' => $registration['Registration']['id'] ));								
 		}
 		if(!$this->Registration->saveAll($registration)) {
-			$this->Session->del('Registration');
+			$this->Session->del('Registrations');
+			$this->Session->del('logedIn');
 			$this->Session->setFlash('Vi ber om ursäkt, din registrering kunde inte slutföras. Kontakta support.');
 		} else {
 			$this->Session->write('Event.registrationId', $this->Registration->id);
 			$this->sendRegistrationConfirmMail($event, $registration['Registrator']);
-			$this->Session->del('Registration');
-		}
+			$this->Session->del('Registrations');
+			$this->Session->del('logedIn');
+			}
 			
 	}
 	
@@ -142,7 +139,12 @@ class RegistrationsController extends AppController {
 		$this->Session->del('Event');
 		$this->Session->del('loggedIn');
 		$this->Session->setFlash('Session rensad');
-		$this->redirect(array ('controller' =>'events', 'action' => 'index'));
+	}
+	
+	function clearSessionAndRedirectToEvents() {
+		debug('här kommer vi');
+		$this->clearSession();
+		$this->redirect(array('controller' => 'events', 'action' => 'index'));
 	}
 	
 	function populateSession() {
