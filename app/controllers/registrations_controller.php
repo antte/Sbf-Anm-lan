@@ -98,7 +98,7 @@ class RegistrationsController extends AppController {
 			// Sanitize the input data
 			$number = Sanitize::clean($this->data['Registration']['number']);
 			$email = Sanitize::clean($this->data['Registrator']['email']);
-			
+			$number = strtoupper($number);
 			// Get an array from the database with all the info on the registration
 			if($registration = $this->Registration->findByNumber($number)){
 				$event = $registration['Event'];
@@ -142,7 +142,6 @@ class RegistrationsController extends AppController {
 	}
 	
 	function clearSessionAndRedirectToEvents() {
-		debug('här kommer vi');
 		$this->clearSession();
 		$this->redirect(array('controller' => 'events', 'action' => 'index'));
 	}
