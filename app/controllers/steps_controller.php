@@ -28,6 +28,20 @@ class StepsController extends AppController {
 		$steps = $this->Session->read('Event.steps');
 		foreach($steps as $step) {
 			if($step['state'] != 'previous') {
+				if($step['controller'] == 'Registrations' && $step['action'] == 'receipt') {
+					/*
+					 * The next unfinished step is receipt
+					 * We check to see if the registration is saved, if it isnt saved we redirect to review instead so that the user can save it
+					 */
+					if ($this->Session->read('Registration.Registrator.email')) { 
+						/*
+						 * If no registration exists in session we ASSUME(!) its saved already because
+						 * when we save a registration we delete it from the session
+						 */
+						$this->redirect(array('controller' => 'registrations', 'action' => 'review'));
+					}
+						$this->redirect(array('controller' => 'registrations', 'action' => 'receipt'));
+				}
 				$this->redirect(array('controller' => $step['controller'], 'action' => $step['action']));
 			}
 		}
