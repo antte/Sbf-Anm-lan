@@ -33,8 +33,14 @@
 			<div class="container_12">
 				<?php 
 				if(Configure::read('debug') >= 1) {
+					//put that cookie DOWN
 					echo "<div id='cookie' style='position:absolute;top:0;right:0;background:pink;color:black;padding:2px;'>";
 					echo $html->link('Put that cookie down!', array( 'controller' =>'registrations' , 'action' => 'clearSessionAndRedirectToEvents'));
+					echo "</div>";
+					
+					//put that cookie UP
+					echo "<div id='cookie' style='position:absolute;top:30px;right:0;background:pink;color:black;padding:2px;'>";
+					echo $html->link('Put that cookie up!', array( 'controller' =>'registrations' , 'action' => 'populateSessionAndRedirectToNextUnfinished'));
 					echo "</div>";
 				}
 				?>

@@ -147,27 +147,54 @@ class RegistrationsController extends AppController {
 		$this->redirect(array('controller' => 'events', 'action' => 'index'));
 	}
 	
-	function populateSession() {
+	
+	/*
+	 * Debug function that populates Session with dummy data and redirects to next unfinished step
+	 * TODO delete on deploy!
+	 */
+	function populateSessionAndRedirectToNextUnfinished() {
 		
-		$debugSession = array();
 		$debugSession = array(
-			'Registration' 	=> array(
-							'event_id' => 7
-							),
+			'Registration' 	=> 	array(
+								'event_id' => 7
+			),
 			'Person' => array(
 						'0' => 	array(
 								'first_name' => 'Andreas',
 								'last_name'  => 'Fliesberg',
 								'role_id' => 14
-								),
+						),
 						'1' => array(
 								'first_name' => 'Tim',
 								'last_name'  => 'Olsson',
 								'role_id' => 17
-								)
-						));
+						),
+						'2' => array(
+								'first_name' => 'Pelle',
+								'last_name'  => 'Skarsgård',
+								'role_id' => 17
+						)
+			),
+			'Registrator' => array(
+							 'first_name' => 'Andreas',
+							 'last_name' => 'Fliesberg',
+							 'email' => 'andreas.fliesberg@hotmail.com',
+							 'retype_email' => 'andreas.fliesberg@hotmail.com',
+							 'phone' => '070-123456789',
+							 'c_o' => '',
+							 'street_address' => 'Wollmar Yxkullsgatan 28',
+							 'postal_code' => '121 83',
+							 'city' => 'Stockholm',
+							 'extra_information' => 'Tim Olsson i mitt sällskap är allergisk mot spiskummin'
+			)
+		);
 		
-		//$this->Session->
+		$this->Session->write('Registration', $debugSession);
+		
+		$this->updateStepState('People', 'create');
+		$this->updateStepState('Registrators', 'create');
+		
+		$this->requestAction('steps/redirectToNextUnfinishedStep');
 	}
 	
 	/**
