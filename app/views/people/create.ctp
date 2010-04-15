@@ -58,29 +58,26 @@
 		<!--  Form helper - create input with label  -->
 		<p class="requiredinfo">Fält markerade med * är obligatoriska uppgifter!</p>
 		
+		<?php 
+		debug('People');
+		debug($people); ?>
 		
-		<?php if(isset($people)) { ?>
 		<ol>
-			<?php foreach( $people as $key => $person ): ?>
+			<?php $k=0; ?>
+			<?php if(isset($people)) { ?> 
+				<?php foreach( $people as $key => $person ):?>
 				<li>
 					<fieldset class="name grid_8 alpha" >
 						<?php 
 							echo $form->input("Person.$key.first_name", array('type' => 'text', 'label' => 'Förnamn *', 'div' => 'first_name grid_2', 'class' => 'required', 'maxLength' => '127' , 'default' => $person['first_name']));
 							echo $form->input("Person.$key.last_name", array('type' => 'text', 'label' => 'Efternamn *', 'div' => 'last_name grid_2', 'class' => 'required', 'maxLength' => '127' , 'default' => $person['last_name']));
 							echo $form->input("Person.$key.role_id", array('options' => array($roles), 'label' => 'Anmäl dig som *', 'empty' => '(välj en)', 'div' => 'role grid_3', 'class' => 'required role', 'default' => $person['role_id']));
+							$k++;						
 						?>
 					</fieldset>
 				</li>
 			<?php endforeach; ?>
-			<?php //echo $form->input("in_review_mode", array('type' => 'hidden', 'default' => 1)); ?>
-		</ol>
-		<fieldset class="submit grid_8 alpha">
-			<?php echo $form->submit('Ändra')?>
-		
-		</fieldset>
-		<?php } else { //not in "review" mode ?>
-		<ol>
-			<?php for( $i = 0; $i < $amountOfPeople; $i++ ): ?>
+			<?php for( $i = $k; $i < $amountOfPeople; $i++ ): ?>
 				<li>
 					<fieldset class="name grid_8 alpha" >
 						<?php 
@@ -90,8 +87,15 @@
 						?>
 					</fieldset>
 				</li>
-			<?php endfor; ?>
+			<?php endfor; ?>			
 		</ol>
+		<fieldset class="submit grid_8 alpha">
+			<?php echo $form->submit('Ändra')?>
+		
+		</fieldset>
+		<?php } else { //not in "review" mode ?>
+		<ol>
+					</ol>
 		<fieldset class="submit grid_8 alpha">
 			<?php echo $form->submit('Nästa')?>
 		

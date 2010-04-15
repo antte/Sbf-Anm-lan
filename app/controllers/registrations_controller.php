@@ -17,14 +17,24 @@ class RegistrationsController extends AppController {
 	 * @param unknown_type $action
 	 */
 	function add($action = null){
-	// The only thing registration needs right now is an event id
-		if (!$this->Session->check('Registration.Registration.number')){
-			$this->Session->write('Registration.Registration.number' , $this->Registration->generateUniqueNumber());
+		// Check if there already exists a booking number means that this is a editation of existing booking,	
+		if ($this->Session->check('Registration.Registration.number')){
+			//Set the modified date for the editation
+			$this->Session->write('Registration.Registration.modified', date('Y-m-d H:i:s'));					
+		// 
+		} else {
+			// Make and set a booking number tio Session
+			$this->Session->write('Registration.Registration.number' , $this->Registration->generateUniqueNumber());			
 		}
+		
 		$registration= $this->Session->read('Registration.Registration');
 		$this->saveModelDataToSession($this,$registration);
 		$this->updateStepState($this->params['controller'], $action);
 		$this->finalize();
+		/*
+		 * We dont run redirect to next unfinished because it should always be receipt
+		 * If we would
+		 */
 		$this->requestAction('steps/redirectToNextUnfinishedStep');
 		
 	}
@@ -33,9 +43,6 @@ class RegistrationsController extends AppController {
 	 * Finalizes the registration, saving it and emailing it to the registrator
 	 */
 	private function finalize() {
-		//Slut på vanlig modul
-		//-----------------------
-		//början på spara i DB
 		$registration = $this->Session->read('Registration');
 		$event = $this->Session->read('Event');
 		
@@ -61,6 +68,9 @@ class RegistrationsController extends AppController {
 	 */
 	function review(){
 		$this->layout='registration';
+		
+		//as soon as we're on the review step we set it to previous so that that the user can go back to review mode by clicking the rocket
+		$this->updateStepState($this->params['controller'], $this->params['action'] );
 		
 		//you can't be in review if you haven't finished previous steps
 		if (!$this->previousStepsAreDone($this)){
@@ -106,7 +116,6 @@ class RegistrationsController extends AppController {
 					$registration['Registrator']['retype_email'] = $registration['Registrator']['email'];
 					
 					$this->Session->write('Registration', $registration);
-					$this->Session->write('Registration.Registration.modified', date('Y-m-d H:i:s'));
 					$this->Session->write('Event.steps', $this->Registration->Event->Step->getInitializedSteps($registration['Registration']['event_id']));
 					$this->setStep('Registrations','review');
 					//$this->requestAction('events/setEvent/'. $registration['Registration']['event_id']);
