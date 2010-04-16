@@ -23,13 +23,18 @@
 			</ul>
 		<?php } ?>
 		<?php 
+			if (isset($people)){
+				if ($amountOfPeople < sizeof($people)){
+					$amountOfPeople = sizeof($people);
+				} 
+			}
 			echo $form->create('Person', array('id' => 'addamount', 'action' => 'create'));
 			echo '<fieldset class="amount grid_8 alpha">';
 			echo $form->input('amount', array('type' => 'text', 'label' => 'Hur många är i ditt sällskap?', 'value' => $amountOfPeople, 'div' => 'amount', 'maxLength' => '4'));
 			echo $form->submit('Ändra antal personer');
 			echo "</fieldset>";
 			echo $form->end();
-			?>
+		?>
 	
 	<!--  Form helper - sets action post - parse form to the registration model class-->
 		<?php echo $form->create('Person', array('id' => 'PersonAddForm', 'action' => 'add')); ?>

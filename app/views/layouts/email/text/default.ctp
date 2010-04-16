@@ -1,4 +1,5 @@
 <?php echo strip_html_tags($this->renderElement('event'))?>
+Du kan logga in med ditt bokningsnummer och email för att göra ändringar i din bokning på den här adressen: http://www.sbf.se/anmalan/registrations/login
 <?php echo strip_html_tags($this->renderElement('registration'))?>
 <?php echo strip_html_tags($this->renderElement('person'))?>
 <?php echo strip_html_tags($this->renderElement('registrator'))?>

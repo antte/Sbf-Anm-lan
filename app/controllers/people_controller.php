@@ -62,7 +62,7 @@ class PeopleController extends AppController {
 	}
 	
 	/**
-	* Saves People tp Session and redirects to next unfinished step
+	* Saves People to Session and redirects to next unfinished step
 	*/
 	function add($amountOfPeople = 1){
 		
@@ -89,6 +89,8 @@ class PeopleController extends AppController {
 		if(isset($this->data['Person']) && isset($action)){
 			$errors = $this->Person->validatesMultiple($this->data);
 			if(empty($errors)) {
+				//$this->Session->del('Registration.Person');
+				//$this->Session->write('Registration.Person', $this->data);
 				//if we dont have errors all was successful and we continue with the registration
 				$this->saveModelDataToSession($this);
 				$this->updateStepState($this->params['controller'], $action);
