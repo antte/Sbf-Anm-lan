@@ -130,20 +130,95 @@ class RegistrationsController extends AppController {
 		}
 	}
 	
+	
+	/**
+	 * Sending a comfirmmail using the reciept view for layout
+	 * @param unknown_type $registrator --session array for the registration module 
+	 * @param unknown_type $registration -- session array for the registration module
+	 */
+	private function sendRegistrationConfirmMail($event,$registrator){
+		if($this->Session->read('dontSendEmails')) return;
+		$this->Email->smtpOptions = array(
+			'port'			=> '25', 
+			'timeout'		=> '30',
+			'host' 			=> 'localhost'
+		);
+		
+		$this->Email->delivery 	= 'smtp';
+		
+		$this->Email->from		= 'noreply@sbf.se';
+		$this->Email->to		= "{$registrator['first_name']} {$registrator['last_name']} <{$registrator['email']}>";
+		$this->Email->bcc		= "it sbf <it@sbf.se>";
+		$this->Email->replyTo	= 'it@sbf.se';
+		
+		$event = $this->Session->read('Event');
+		$this->Email->subject	= "Kvitto för din anmälan till {$event['name']}";
+		$this->Email->template	= 'default';
+		$this->Email->sendAs	= 'both'; //both text and html
+		$this->Email->send();
+	}
+	
+	
+	/**
+	 * if a registration has been made recently we return it
+	 * we need to take into account that this action can be requested both before and after a registration has been saved
+	 */
+	private function getRegistration() {
+		
+		// if Registration exists the registration hasn't been saved yet and the user is reviewing his registration
+		$registration = $this->Session->read('Registration');
+		
+		// if it isnt in session we try to find it in db
+		// registrationId is set when saving the registration so we take that as indication its saved in db already
+		if(!$registration && $this->Session->read('Event.registrationId')) {
+			$registration = $this->Registration->findById($this->Session->read('Event.registrationId'));
+			$eventData = $this->Registration->Event->find('first', array('conditions' => array('id' => $registration['Registration']['event_id'])));
+			$registration['Event'] = $eventData['Event'];
+		}
+		
+		if ($registration) {
+			//something has been added (we have either collected registration from session or from db)
+			return $registration;
+		}
+		
+		//the user isn't making a registration so we send the requester all registrations
+		return $this->Registration->find('all');
+	}
+	
 	/**
 	 * Clear the session from data regarding Registration   
 	 * TODO remove at deploy
 	 */
 	function clearSession() {
-		$this->Session->del('Registration');
-		$this->Session->del('Event');
-		$this->Session->del('loggedIn');
-		$this->Session->setFlash('Session rensad');
+		if(Configure::read('debug') >= 1) {
+			$this->Session->del('Registration');
+			$this->Session->del('Event');
+			$this->Session->del('loggedIn');
+			$this->Session->setFlash('Session rensad');
+		} else {
+			$this->Session->setFlash('You can\'t use debug functions when not in debug mode.');
+			$this->redirect(array('controller' => 'events', 'action' => 'index'));
+		}
 	}
 	
 	function clearSessionAndRedirectToEvents() {
 		$this->clearSession();
 		$this->redirect(array('controller' => 'events', 'action' => 'index'));
+	}
+	
+	function toggleSendEmails() {
+		if(Configure::read('debug') >= 1) {
+			if($this->Session->read('dontSendEmails')) {
+				$this->Session->setFlash('Will send emails again.');
+				$this->Session->write('dontSendEmails', 0);
+			} else {
+				$this->Session->setFlash('Wont send email anymore.');
+				$this->Session->write('dontSendEmails', 1);
+			}
+		} else {
+			$this->Session->setFlash('You can\'t use debug functions when not in debug mode.');
+			$this->redirect(array('controller' => 'events', 'action' => 'index'));
+		}
 	}
 	
 	
@@ -195,60 +270,6 @@ class RegistrationsController extends AppController {
 		
 		$this->requestAction('steps/redirectToNextUnfinishedStep');
 	}
-	
-	/**
-	 * Sending a comfirmmail using the reciept view for layout
-	 * @param unknown_type $registrator --session array for the registration module 
-	 * @param unknown_type $registration -- session array for the registration module
-	 */
-	private function sendRegistrationConfirmMail($event,$registrator){
-		$this->Email->smtpOptions = array(
-			'port'			=> '25', 
-			'timeout'		=> '30',
-			'host' 			=> 'localhost'
-		);
-		
-		$this->Email->delivery 	= 'smtp';
-		
-		$this->Email->from		= 'noreply@sbf.se';
-		$this->Email->to		= "{$registrator['first_name']} {$registrator['last_name']} <{$registrator['email']}>";
-		$this->Email->bcc		= "it sbf <it@sbf.se>";
-		$this->Email->replyTo	= 'it@sbf.se';
-		
-		$event = $this->Session->read('Event');
-		$this->Email->subject	= "Kvitto för din anmälan till {$event['name']}";
-		$this->Email->template	= 'default';
-		$this->Email->sendAs	= 'both'; //both text and html
-		$this->Email->send();
-	}
-	
-	
-	/**
-	 * if a registration has been made recently we return it
-	 * we need to take into account that this action can be requested both before and after a registration has been saved
-	 */
-	private function getRegistration() {
-		
-		// if Registration exists the registration hasn't been saved yet and the user is reviewing his registration
-		$registration = $this->Session->read('Registration');
-		
-		// if it isnt in session we try to find it in db
-		// registrationId is set when saving the registration so we take that as indication its saved in db already
-		if(!$registration && $this->Session->read('Event.registrationId')) {
-			$registration = $this->Registration->findById($this->Session->read('Event.registrationId'));
-			$eventData = $this->Registration->Event->find('first', array('conditions' => array('id' => $registration['Registration']['event_id'])));
-			$registration['Event'] = $eventData['Event'];
-		}
-		
-		if ($registration) {
-			//something has been added (we have either collected registration from session or from db)
-			return $registration;
-		}
-		
-		//the user isn't making a registration so we send the requester all registrations
-		return $this->Registration->find('all');
-	}
-	
 }
 
 

@@ -17,7 +17,6 @@
 <div id="registration" class="grid_8">
 	
 	<?php 
-//	debug($sessionApa);
 		if (!empty($errors)) {
 			echo '<ul id="validationErrors" class="message">';
 				foreach ($errors as $error):?>
