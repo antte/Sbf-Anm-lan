@@ -114,8 +114,7 @@ class RegistrationsController extends AppController {
 					
 					$this->Session->write('Registration', $registration);
 					$this->Session->write('Event.steps', $this->Registration->Event->Step->getInitializedSteps($registration['Registration']['event_id']));
-					$this->setStep('Registrations','review');
-					//$this->requestAction('events/setEvent/'. $registration['Registration']['event_id']);
+					$this->setPreviousStepsToPrevious('Registrations','review');
 					$this->requestAction('steps/redirectToNextUnfinishedStep');
 				} else {
 					//the user has put in wrong values in the field 'email'
