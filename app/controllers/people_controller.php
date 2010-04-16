@@ -64,7 +64,7 @@ class PeopleController extends AppController {
 	/**
 	* Saves People to Session and redirects to next unfinished step
 	*/
-	function add($amountOfPeople = 1){
+	function add($amountOfPeople = 1, $action){
 		
 		// Saves People in Session and redirects to next unfinished step
 		if(isset($this->data['Person'])){
