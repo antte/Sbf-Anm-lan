@@ -87,7 +87,6 @@ class PeopleController extends AppController {
 		}
 	}
 	
-<<<<<<< HEAD
 	/**
 	 * Saves People and redirects to next step
 	 * TODO TA BORT DEN HÄR, DEN GÖR INGET FINNS BARA KVAR PGA DOKUMENTATION AV TIDIGARE FUNGERANDE KOD
@@ -109,6 +108,4 @@ class PeopleController extends AppController {
 		}
 	}
 	
-=======
->>>>>>> 48318fc9f63c2136b47d1e8674561ed4d13e568e
 }	

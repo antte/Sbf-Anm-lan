@@ -60,16 +60,14 @@
 		$this->Session->write('Event.steps', $steps);
 	}
 	
-<<<<<<< HEAD
+
 	function updateStepStateToPrevious($controller , $action){
-=======
+
 	/**
 	 * step specified becomes previous
 	 * @param unknown_type $controller
 	 * @param unknown_type $action
 	 */
-	function updateStepState($controller , $action){
->>>>>>> 48318fc9f63c2136b47d1e8674561ed4d13e568e
 		$steps = $this->Session->read('Event.steps');
 		foreach($steps as &$step) {
 			if ($step['controller'] == ucfirst($controller) && $step['action'] == $action) {

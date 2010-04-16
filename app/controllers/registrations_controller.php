@@ -118,12 +118,12 @@ class RegistrationsController extends AppController {
 					$this->requestAction('steps/redirectToNextUnfinishedStep');
 				} else {
 					//the user has put in wrong values in the field 'email'
-					$this->set('error', 'wrongvalue');
+					$this->Session->write('errors.people', 'Du måste fylla i <strong>email</strong>');
 				}
 				
 			} else {
 				//the user has put in wrong values in at least the 'booking number' field
-				$this->set('error', 'wrongvalue');
+				$this->Session->write('errors.people', 'Du måste fylla i <strong>bokningsnummer</strong>');
 			}
 			
 		}
