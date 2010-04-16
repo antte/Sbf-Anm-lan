@@ -88,13 +88,5 @@ class RegistratorsController extends AppController {
 			$registrationData = $this->Registrator->Registration->findById($this->Session->read('registrationId'));
 			return $registrationData['Registrator'];
 		}
-	}
-	
-/*	TODO deprecated? find out if this function is depricated.
- * 	function review() {
-		if (isset($this->params['requested'])) {
-			return $this->Session->read('Registration.Registrator');
-		}
-	}
-	*/
+	}	
 }
