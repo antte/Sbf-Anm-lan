@@ -17,16 +17,16 @@ class RegistrationsController extends AppController {
 	 * @param unknown_type $action
 	 */
 	function add($action = null){
-		// Check if there already exists a booking number means that this is a editation of existing booking,	
+		// If there already exists a booking number the user is editing an existing registration
 		if ($this->Session->check('Registration.Registration.number')){
-			//Set the modified date for the editation
+			//Set the modified date for the editation and leave registration number unchanged
 			$this->Session->write('Registration.Registration.modified', date('Y-m-d H:i:s'));
 		} else {
 			// Make and set a booking number to Session
 			$this->Session->write('Registration.Registration.number' , $this->Registration->generateUniqueNumber());			
 		}
 		
-		$registration= $this->Session->read('Registration.Registration');
+		$registration = $this->Session->read('Registration.Registration');
 		$this->saveModelDataToSession($this,$registration);
 		$this->updateStepState($this->params['controller'], $action);
 		$this->finalize();
@@ -47,16 +47,14 @@ class RegistrationsController extends AppController {
 			$this->Registration->Person->deleteAll(array ('Person.registration_id' => $registration['Registration']['id'] ));						
 			$this->Registration->Registrator->deleteAll(array ('Registrator.registration_id' => $registration['Registration']['id'] ));								
 		}
-		if(!$this->Registration->saveAll($registration)) {
-			$this->Session->del('Registrations');
-			$this->Session->del('logedIn');
-			$this->Session->setFlash('Vi ber om ursäkt, din registrering kunde inte slutföras. Kontakta support.');
-		} else {
+		if($this->Registration->saveAll($registration)) {
 			$this->Session->write('Event.registrationId', $this->Registration->id);
 			$this->sendRegistrationConfirmMail($event, $registration['Registrator']);
-			$this->Session->del('Registrations');
-			$this->Session->del('logedIn');
-			}
+			$this->clearSessionFromAllRegistrationInformation();
+		} else {
+			$this->clearSessionFromAllRegistrationInformation();
+			$this->Session->setFlash('Vi ber om ursäkt, din registrering kunde inte slutföras. Kontakta support.');
+		}
 			
 	}
 	
@@ -185,8 +183,7 @@ class RegistrationsController extends AppController {
 	}
 	
 	/**
-	 * Clear the session from data regarding Registration   
-	 * TODO remove at deploy
+	 * Clear the session from data regarding Registration
 	 */
 	function clearSession() {
 		if(Configure::read('debug') >= 1) {
@@ -198,6 +195,11 @@ class RegistrationsController extends AppController {
 			$this->Session->setFlash('You can\'t use debug functions when not in debug mode.');
 			$this->redirect(array('controller' => 'events', 'action' => 'index'));
 		}
+	}
+	
+	private function clearSessionFromAllRegistrationInformation() {
+		$this->Session->del('Registrations');
+		$this->Session->del('loggedIn');
 	}
 	
 	function clearSessionAndRedirectToEvents() {
