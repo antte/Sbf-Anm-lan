@@ -38,17 +38,15 @@ class EventsController extends AppController {
 		
 		//if we dont have an id for an event, redirect to the list of all the events
 		if (!isset($eventId)) $this->redirect(array('action' => 'index'));
+		if (!is_numeric($eventId)) $this->redirect(array('action' => 'index'));
 		
-		$this->set('event', $this->Event->findById($eventId));
 		$event = $this->Event->findById($eventId);
+		$this->set('event', $event);
 		unset($event['Registration']);	
 		unset($event['Step']);	
 		$this->Session->write('Event', $event['Event']);
 		$this->Session->write('Registration.Registration.event_id', $eventId);
 		$this->requestAction('Steps/initializeSteps/'. $eventId);
-		//TODO trassel med eventid som tillåts vara namnet på eventet, borde fixa en bättre lösning än denna?
-		$eventId = $this->Event->find('first', array('conditions' => array('name' => $eventId)));
-		$eventId = $eventId['Event']['id'];
 	}
 
 	function setEvent($id){

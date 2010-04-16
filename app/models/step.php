@@ -12,7 +12,7 @@
 			$steps = $event['Step'];
 			$rocket = array();
 			/*
-			TODO comment
+				Flattens the steps array
 			*/
 			foreach($steps as $step) {
 				$key = $step['controller'] .'/'. $step['action'];

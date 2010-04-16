@@ -28,21 +28,6 @@ class StepsController extends AppController {
 		$steps = $this->Session->read('Event.steps');
 		foreach($steps as $step) {
 			if($step['state'] != 'previous') {
-				// lite fult men har ingen bättre lösnig
-				//if($step['controller'] == 'Registrations' && $step['action'] == 'receipt') {
-					/*
-					 * The next unfinished step is receipt
-					 * We check to see if the registration is saved, if it isnt saved we redirect to review instead so that the user can save it
-					 */
-					//if ($this->Session->read('Registration.Registrator.email')) { 
-						/*
-						 * If no registration exists in session we ASSUME(!) its saved already because
-						 * when we save a registration we delete it from the session
-						 */
-			//			$this->redirect(array('controller' => 'registrations', 'action' => 'review'));
-			//		}
-			//			$this->redirect(array('controller' => 'registrations', 'action' => 'receipt'));
-				//}
 				$this->redirect(array('controller' => $step['controller'], 'action' => $step['action']));
 			}
 		}
@@ -83,22 +68,7 @@ class StepsController extends AppController {
 		}
 		return $steps;
 	}
-	//TODO Depricated ???
-	/**
-	 * Checks to see if data exists in the right place and if so sets the correct steps state to previous
-	 */
-	function updateSteps() {
-		$registration = $this->Session->read('Registration');
-		
-		foreach($registration as $modelName => $modelData) {
-			if(!empty($modelData)) {
-				
-			}
-		}
-		//if data exists in session-> Registration.Person
-		//if data exists in session-> Registration.Registrator
-		//if data exists in session-> Registration.Registration.Review
-	}
+	
 	function debug(){
 		return $this->Session->read();
 	}

@@ -74,7 +74,6 @@
 	 		)
     	);
     	
-    //TODO Är den här funktionen nödvändig?	
     /**
      * Matches one field against data (another field)
      * @param $data to match with

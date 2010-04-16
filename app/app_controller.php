@@ -44,7 +44,12 @@
 		}
 	}
 	
-	function setStep($controller , $action){
+	/**
+	 * All previous steps up until the step specified but not including the step specified are set to previous
+	 * @param string $controller
+	 * @param string $action
+	 */
+	function setPreviousStepsToPrevious($controller , $action){
 		$steps = $this->Session->read('Event.steps');
 		foreach($steps as &$step) {
 			if ($step['controller'] == ucfirst($controller) && $step['action'] == $action) {
@@ -55,6 +60,11 @@
 		$this->Session->write('Event.steps', $steps);
 	}
 	
+	/**
+	 * step specified becomes previous
+	 * @param unknown_type $controller
+	 * @param unknown_type $action
+	 */
 	function updateStepState($controller , $action){
 		$steps = $this->Session->read('Event.steps');
 		foreach($steps as &$step) {

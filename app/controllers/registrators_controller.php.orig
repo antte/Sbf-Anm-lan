@@ -88,6 +88,10 @@ class RegistratorsController extends AppController {
 			$registrationData = $this->Registrator->Registration->findById($this->Session->read('registrationId'));
 			return $registrationData['Registrator'];
 		}
+<<<<<<< HEAD
+	}	
+=======
 	}
 	
+>>>>>>> 48318fc9f63c2136b47d1e8674561ed4d13e568e
 }
