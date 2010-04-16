@@ -27,7 +27,6 @@ class PeopleController extends AppController {
 		if (isset($this->data['Person']['amount'])){
 			$amountOfPeople = Sanitize::clean($this->data['Person']['amount']);
 			if (!is_numeric($amountOfPeople)){
-				debug("not numeric");
 				$errors = $this->Session->read('errors');
 				$errors['numeric'] = 'Du måste skriva in ett nummer';
 				$this->Session->write('errors' , $errors);
@@ -37,29 +36,28 @@ class PeopleController extends AppController {
 		//Five state can be set to this point
 		// 1 first time ever no people are stored in session and user havn't set amount of people in party
 		if (!$people && !$amountOfPeople){
-			$amountOfPeople = 1;
-			$this->set('amountOfPeople', $amountOfPeople);	
+			$this->set('amountOfPeople', 1);	
 		// The user come from another page and have already finished this step
 		} elseif ($people && !$amountOfPeople){
 			$amountOfPeople = sizeof($people);
 			$this->set('amountOfPeople', $amountOfPeople);	
-			$this->set('people', $people);
-		// The peopel have finnis this step and change the amount of people to the same as populated in session	
+		// The people have finished this step and changed the amount of people to the same as populated in session	
 		} elseif ($people && $amountOfPeople == sizeof($people)) {
 			$this->set('amountOfPeople', $amountOfPeople);	
-			$this->set('people', $people);
-		//The peopel have finnis this step and change the amount of people to the less than populated in session				
+		//The people have finished this step and changed the amount of people to the less than populated in session				
 		} elseif ($people && $amountOfPeople < sizeof($people)) {
 			$people = array_slice($people, 0, $amountOfPeople);
 			$this->set('amountOfPeople', $amountOfPeople);	
-			$this->set('people', $people);					
-		//The peopel have finnis this step and change the amount of people to the more than populated in session				
+		//The people have finished this step and changed the amount of people to the more than populated in session				
 		} elseif ($people && $amountOfPeople > sizeof($people)){
 			$this->set('amountOfPeople', $amountOfPeople);	
-			$this->set('people', $people);	
 		} else {
 			$this->set('amountOfPeople', $amountOfPeople);	
 		}
+		
+		//if we dont have people in session $people will be false
+		$this->set('people', $people);	
+		
 		// Fetches data from the database from event and roles
 		$eventId = $this->Session->read('Registration.Registration.event_id');
 		$this->set('eventName' , $this->Person->Registration->Event->field('name', array('id' => $eventId)));
@@ -84,27 +82,6 @@ class PeopleController extends AppController {
 				$this->requestAction('steps/redirectToNextUnfinishedStep');
 			} else {
 				$this->Session->write('errors.people', 'Du måste fylla i <strong>förnamn</strong>, <strong>efternamn</strong> och <strong>roll</strong> för alla personer.');
-				$this->redirect(array('action' => 'create', sizeof($this->data['Person'])));
-			}
-		}
-	}
-	
-	/**
-	 * Saves People and redirects to next step
-	 * TODO TA BORT DEN HÄR, DEN GÖR INGET FINNS BARA KVAR PGA DOKUMENTATION AV TIDIGARE FUNGERANDE KOD
-	 */
-	function edit($action = null) {
-		if(isset($this->data['Person']) && isset($action)){
-			$errors = $this->Person->validatesMultiple($this->data);
-			if(empty($errors)) {
-				//$this->Session->del('Registration.Person');
-				//$this->Session->write('Registration.Person', $this->data);
-				//if we dont have errors all was successful and we continue with the registration
-				$this->saveModelDataToSession($this);
-				$this->updateStepState($this->params['controller'], $action);
-				$this->requestAction('steps/redirectToNextUnfinishedStep');
-			} else {
-				$this->Session->write('errors', $errors);
 				$this->redirect(array('action' => 'create', sizeof($this->data['Person'])));
 			}
 		}

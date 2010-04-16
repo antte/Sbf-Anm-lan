@@ -20,8 +20,6 @@
 		
 
 		echo $html->css('firstblood');
-		//TODO $javascript is a non-object???
-		//echo $javascript->link('jquery.1.4.2-min', false);
 	?>
 	<!--[if lte IE 6]>
 		<?php echo $html->css('ie'); ?>

@@ -90,11 +90,4 @@ class RegistratorsController extends AppController {
 		}
 	}
 	
-/*	TODO deprecated? find out if this function is depricated.
- * 	function review() {
-		if (isset($this->params['requested'])) {
-			return $this->Session->read('Registration.Registrator');
-		}
-	}
-	*/
 }

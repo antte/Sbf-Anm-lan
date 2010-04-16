@@ -47,7 +47,7 @@
 		<ol>
 			<?php $k=0; //At least one?>
 			<?php // gets the people stored in Session?>
-			<?php if(isset($people)): ?> 
+			<?php if($people): ?> 
 				<?php foreach( $people as $key => $person ): ?>
 					<?php //User has opportunity to delete the last person?>
 					<?php if($k == $amountOfPeople) break;?>
