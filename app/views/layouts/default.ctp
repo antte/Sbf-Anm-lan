@@ -15,6 +15,7 @@
 		echo $html->css('stickyfooter');
 		echo $html->css('960');
 		echo $html->css('text');
+		echo $html->css('debug');
 		echo $html->css(array('print'), 'stylesheet', array('media' =>  'print'));
 		
 
@@ -31,13 +32,7 @@
 	<div id="wrap">
 		<header>
 			<div class="container_12">
-			<?php 
-				if(Configure::read('debug') >= 1) {
-					echo "<div id='cookie' style='position:absolute;top:0;right:0;background:pink;color:black;padding:2px;'>";
-					echo $html->link('Put that cookie down!', array('registrations/clearSessionAndRedirectToEvents'));
-					echo "</div>";
-				}
-			?>
+			<?php if(Configure::read('debug') >= 1) echo $this->renderElement('debug');?>
 			</div>
 		</header>
 		<div id="main" class="clearfix">

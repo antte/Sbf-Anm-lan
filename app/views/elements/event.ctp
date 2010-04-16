@@ -12,6 +12,10 @@
 		<p class="general_info">
 			Du har fått denna information mailad till den email du angav. Om du inte har fått mailet kontrollera din skräppost eller <a href="mailto:it@sbf.se">kontakta support it@sbf.se</a>.
 		</p>
-		<p><a href="javaScript:window.print();" class="print">Skriv gärna ut denna bekräftelse</a> och spara den. Du kan även ändra i din beställning vid ett senare tillfälle genom att använda vårt inloggningssystem.</p>
+		<p>
+		<a href="javaScript:window.print();" class="print">Skriv gärna ut denna bekräftelse</a>
+		 och spara den. Du kan även ändra i din beställning vid ett senare tillfälle genom att använda vårt 
+		 <?php echo $html->link('inloggningssystem', array('controller' => 'registrations', 'action' => 'login')); ?>.
+		 </p>
 	</div>
 </div>
