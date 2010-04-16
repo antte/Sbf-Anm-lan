@@ -1,0 +1,11 @@
+ul#debug {
+	list-style-type: none;
+}
+
+ul#debug li {
+	position:absolute;
+	top:0;
+	right:0;
+	color:black;
+	padding:2px;
+}
