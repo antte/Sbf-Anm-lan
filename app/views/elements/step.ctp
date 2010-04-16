@@ -1,6 +1,5 @@
 <?php $steps = $this->requestAction("steps/index/". $this->params['controller'] . "/". $this->params['action']); 
-//debug($this->requestAction('steps/debug'));
-debug($steps);
+debug($this->requestAction('steps/debug'));
 ?>
 
 <ol id="rocket" class="grid_full">

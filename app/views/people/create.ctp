@@ -17,9 +17,11 @@
 	<?php 
 		if (!empty($errors)) {?>
 			<ul id="validationErrors" class="message">
+				<?php foreach ($errors as $key => $error): ?>
 					<li>
-						Du måste fylla i <strong>förnamn</strong>, <strong>efternamn</strong> och <strong>roll</strong> för alla personer.
+						<?php echo $error; ?>
 					</li>
+				<?php endforeach;?>			
 			</ul>
 		<?php } ?>
 		<?php 
@@ -37,7 +39,7 @@
 		?>
 	
 	<!--  Form helper - sets action post - parse form to the registration model class-->
-		<?php echo $form->create('Person', array('id' => 'PersonAddForm', 'action' => 'add')); ?>
+		<?php echo $form->create('Person', array('id' => 'PersonAddForm', 'action' => 'add/create')); ?>
 	
 		
 		<!--  Form helper - create input with label  -->
