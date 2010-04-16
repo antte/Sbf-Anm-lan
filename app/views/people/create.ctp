@@ -23,7 +23,7 @@
 			</ul>
 		<?php } ?>
 		<?php 
-			echo $form->create('Person', array('id' => 'addamount'));
+			echo $form->create('Person', array('id' => 'addamount', 'action' => 'create'));
 			echo '<fieldset class="amount grid_8 alpha">';
 			echo $form->input('amount', array('type' => 'text', 'label' => 'Hur många är i ditt sällskap?', 'value' => $amountOfPeople, 'div' => 'amount', 'maxLength' => '4'));
 			echo $form->submit('Ändra antal personer');
@@ -32,7 +32,7 @@
 			?>
 	
 	<!--  Form helper - sets action post - parse form to the registration model class-->
-		<?php echo $form->create('Person', array('id' => 'PersonAddForm', 'action' => 'edit/'.$this->params['action'])); ?>
+		<?php echo $form->create('Person', array('id' => 'PersonAddForm', 'action' => 'add')); ?>
 	
 		
 		<!--  Form helper - create input with label  -->
@@ -89,13 +89,13 @@
 	<?php echo $form->end(); ?>	
 </div> 
 
-<div id="javascript_info" class="grid_4" >
-	<noscript>
+<noscript>
+	<div id="javascript_info" class="grid_4" >
 		<div class="grid_full">
 			<h2>Information</h2>
 			<p>
 				<em>För bästa funktionalitet rekommenderas att ni sätter på JavaScript - annars kan information gå förlorad vid felaktigt införda värden i formulären.</em> 
 			</p>
 		</div>
-	</noscript>
-</div>
+	</div>
+</noscript>
