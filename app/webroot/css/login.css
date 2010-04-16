@@ -54,6 +54,7 @@ form#login .submit input {
 
 #login_error {
 	margin-bottom: 0;
+	background-color:#ffaaaa;
 }
 
 div.input.text {
@@ -63,6 +64,7 @@ div.input.text {
 #login_error p {
 	text-indent: 20px;
 	background: url(../img/error.png) no-repeat 0 0;
+	font-size:150%;
 }
 
 form#login {

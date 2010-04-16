@@ -11,7 +11,7 @@
 		
 		if(isset($error)){
 			?>
-			<div id="login_error" class="login_info grid_8">
+			<div id="login_error" class="login_info validationErrors grid_8">
 				<div class="grid_full">
 				<?php
 				
