@@ -1,4 +1,13 @@
 <?php
-	class AdminsController extends AppController {
+class AdminsController extends AppController {
+
+	function login(){
 		
 	}
+
+	function addLogin(){
+		
+	}
+
+}
+
