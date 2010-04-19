@@ -28,7 +28,7 @@ class RegistrationsController extends AppController {
 		
 		$registration = $this->Session->read('Registration.Registration');
 		$this->saveModelDataToSession($this,$registration);
-		$this->updateStepState($this->params['controller'], $action);
+		$this->updateStepStateToPrevious($this->params['controller'], $action);
 		$this->finalize();
 		$this->requestAction('steps/redirectToNextUnfinishedStep');
 		
@@ -65,8 +65,8 @@ class RegistrationsController extends AppController {
 		$this->layout='registration';
 		
 		//as soon as we're on the review step we set it to previous so that that the user can go back to review mode by clicking the rocket
-		//$this->updateStepState($this->params['controller'], $this->params['action'] );
-		
+
+		$this->updateStepStateToPrevious($this->params['controller'], $this->params['action'] );	
 		//you can't be in review if you haven't finished previous steps
 		if (!$this->previousStepsAreDone($this)){
 			$this->requestAction('steps/redirectToNextUnfinishedStep');	
@@ -96,7 +96,7 @@ class RegistrationsController extends AppController {
 			// Sanitize the input data
 			$number = Sanitize::clean($this->data['Registration']['number']);
 			$email = Sanitize::clean($this->data['Registrator']['email']);
-			
+			$number = strtoupper($number);
 			// Get an array from the database with all the info on the registration
 			if($registration = $this->Registration->findByNumber($number)){
 				$event = $registration['Event'];
@@ -116,12 +116,12 @@ class RegistrationsController extends AppController {
 					$this->requestAction('steps/redirectToNextUnfinishedStep');
 				} else {
 					//the user has put in wrong values in the field 'email'
-					$this->set('error', 'wrongvalue');
+					$this->Session->write('errors.people', 'Du måste fylla i <strong>email</strong>');
 				}
 				
 			} else {
 				//the user has put in wrong values in at least the 'booking number' field
-				$this->set('error', 'wrongvalue');
+				$this->Session->write('errors.people', 'Du måste fylla i <strong>bokningsnummer</strong>');
 			}
 			
 		}
@@ -266,8 +266,8 @@ class RegistrationsController extends AppController {
 		
 		$this->Session->write('Registration', $debugSession);
 		
-		$this->updateStepState('People', 'create');
-		$this->updateStepState('Registrators', 'create');
+		$this->updateStepStateToPrevious('People', 'create');
+		$this->updateStepStateToPrevious('Registrators', 'create');
 		
 		$this->requestAction('steps/redirectToNextUnfinishedStep');
 	}

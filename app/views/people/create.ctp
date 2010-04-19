@@ -44,6 +44,7 @@
 		
 		<!--  Form helper - create input with label  -->
 		<p class="requiredinfo">Fält markerade med * är obligatoriska uppgifter!</p>
+
 		<ol>
 			<?php $k=0; //At least one?>
 			<?php // gets the people stored in Session?>

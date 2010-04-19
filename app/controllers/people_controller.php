@@ -87,4 +87,25 @@ class PeopleController extends AppController {
 		}
 	}
 	
+	/**
+	 * Saves People and redirects to next step
+	 * TODO TA BORT DEN HÄR, DEN GÖR INGET FINNS BARA KVAR PGA DOKUMENTATION AV TIDIGARE FUNGERANDE KOD
+	 */
+	function edit($action = null) {
+		if(isset($this->data['Person']) && isset($action)){
+			$errors = $this->Person->validatesMultiple($this->data);
+			if(empty($errors)) {
+				//$this->Session->del('Registration.Person');
+				//$this->Session->write('Registration.Person', $this->data);
+				//if we dont have errors all was successful and we continue with the registration
+				$this->saveModelDataToSession($this);
+				$this->updateStepStateToPrevious($this->params['controller'], $action);
+				$this->requestAction('steps/redirectToNextUnfinishedStep');
+			} else {
+				$this->Session->write('errors', $errors);
+				$this->redirect(array('action' => 'create', sizeof($this->data['Person'])));
+			}
+		}
+	}
+	
 }	

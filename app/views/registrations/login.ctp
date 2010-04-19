@@ -13,13 +13,12 @@
 			?>
 			<div id="login_error" class="login_info validationErrors grid_8">
 				<div class="grid_full">
-				<?php
-				
-				if($error == 'wrongvalue'){
-					echo "<p>Du har fyllt i fel data, var god kontrollera dina uppgifter.</p>";	
-				}
-				
-				?>
+				<?php foreach ($errors as $key => $error): ?>
+					<li>
+						<?php echo $error; ?>
+					</li>
+				<?php endforeach;?>			
+			</ul>
 				</div>
 			</div>
 			<?php

@@ -265,13 +265,14 @@ table td {
 }
 
 .even {
-	background:#fff;
+	background:#fff;	
 }
 
 .odd {
 	 background:#eee;
+	
 }
-
+	
 #main div.hover {
 	background: #fffcbb;
 }
