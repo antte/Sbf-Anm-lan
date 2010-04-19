@@ -26,36 +26,27 @@ class RegistrationsController extends AppController {
 			$this->Session->write('Registration.Registration.number' , $this->Registration->generateUniqueNumber());			
 		}
 		
-		$registration = $this->Session->read('Registration.Registration');
-		$this->saveModelDataToSession($this,$registration);
+		$registrationRegistration = $this->Session->read('Registration.Registration');
+		$this->saveModelDataToSession($this,$registrationRegistration);
 		$this->updateStepStateToPrevious($this->params['controller'], $action);
-		$this->finalize();
-		$this->requestAction('steps/redirectToNextUnfinishedStep');
 		
-	}
-	
-	/**
-	 * Finalizes the registration, saving it and emailing it to the registrator
-	 */
-	private function finalize() {
 		$registration = $this->Session->read('Registration');
-		$event = $this->Session->read('Event');
 		
-		// if we're in edit, we delete everything and save the session again
 		if ($this->Session->check('loggedIn')){
-			$this->Registration->deleteAll(array ('Registration.id' => $registration['Registration']['id'] ));						
-			$this->Registration->Person->deleteAll(array ('Person.registration_id' => $registration['Registration']['id'] ));						
-			$this->Registration->Registrator->deleteAll(array ('Registrator.registration_id' => $registration['Registration']['id'] ));								
+			// if we're in edit, we delete everything and save the session again because updateAll & deleteAll are ... unkind
+			$this->Registration->deleteAllRegistrationRelatedDataById($registration['Registration']['id']);
 		}
+		
 		if($this->Registration->saveAll($registration)) {
 			$this->Session->write('Event.registrationId', $this->Registration->id);
-			$this->sendRegistrationConfirmMail($event, $registration['Registrator']);
+			$this->sendRegistrationConfirmMail($this->Session->read('Event'), $registration['Registrator']);
 			$this->clearSessionFromAllRegistrationInformation();
 		} else {
 			$this->clearSessionFromAllRegistrationInformation();
 			$this->Session->setFlash('Vi ber om ursäkt, din registrering kunde inte slutföras. Kontakta support.');
 		}
-			
+		$this->requestAction('steps/redirectToNextUnfinishedStep');
+		
 	}
 	
 	/*
