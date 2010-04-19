@@ -30,7 +30,7 @@
 		echo $javascript->link('jq.form.conf/jq.validate.loginAdmin', $inline = false);
 		echo $html->css('login', null, array(), false);
 		
-		echo $form->create(null, array('id' => 'login', 'class' => 'grid_8', 'action' => 'login'));
+		echo $form->create(null, array('id' => 'login', 'class' => 'grid_8', 'controller' => 'admins' , 'action' => 'login'));
 		echo $form->input('Admin.username', array('label' => 'Andvändarnamn'));
 		echo $form->input('Admin.password', array('label' => 'Lösenord'));
 	?>
