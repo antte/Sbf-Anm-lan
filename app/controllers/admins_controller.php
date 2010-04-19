@@ -6,7 +6,7 @@ class AdminsController extends AppController {
 	function login(){
 		if ($this->data){
 			if ( $username = $this->data['Admin']['username'] == 'user' && $password = $this->data['Admin']['password'] == 'pass'){
-				$this->Session->write('adminLoggrdIn', 'true');
+				$this->Session->write('adminLoggedIn', 'true');
 				$this->redirect(array('controller' => 'Admin' , 'action' => 'index'));
 				
 				
@@ -14,14 +14,14 @@ class AdminsController extends AppController {
 			} else {
 				$this->set('errors'. $this->Admin->errors);
 			}
-			//no data not lopped here
+			//no data not looped here
 		} else {
 
 		}
 	}
 
 	function index(){
-		// Logged in as admon do
+		// Logged in as admin do
 		if($this->Session->check('adminLoggedIn')){
 			
 		// Not logged in do
@@ -29,6 +29,14 @@ class AdminsController extends AppController {
 			$this->redirect(array('controller' => 'Admin' , 'action' => 'login'));		
 		}
 	}
+	
+	function logout() {
+		//deletes the user session
+		$this->Session->del('adminLoggedIn');
+		$this->Session->setFlash("Du har nu loggat ut!");
+		//when you have logged out you get redirected to login
+		$this->redirect(array('controller' => 'Admin' , 'action' => 'login''));
+		}
+	}
 
-}
 
