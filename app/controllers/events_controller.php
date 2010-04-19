@@ -53,11 +53,13 @@ class EventsController extends AppController {
 		
 		if (isset($this->params['requested'])) {
 			 $this->Session->write('Event' , $this->Event->field('id',$id));
-			
-			 debug($this->Event->getEventById($id));
 		}
 			
 	}
 	
-
+	function getEvents(){
+		if (isset($this->params['requested'])) {
+			return $this->Event->find('all',array('fields' => array('id','name','confirmation_message','is_active'),'recursive' => 0));
+		}
+	}
 }

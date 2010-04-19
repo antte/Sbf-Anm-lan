@@ -6,8 +6,8 @@ class AdminsController extends AppController {
 	function login(){
 		if ($this->data){
 			if ( $username = $this->data['Admin']['username'] == 'user' && $password = $this->data['Admin']['password'] == 'pass'){
-				$this->Session->write('adminLoggrdIn', 'true');
-				$this->redirect(array('controller' => 'Admin' , 'action' => 'index'));
+				$this->Session->write('adminLoggedIn', 'true');
+				$this->redirect(array('controller' => 'admins' , 'action' => 'index'));
 				
 				
 				//$this->Session->write('adminLoggedIn', 'true');
@@ -26,7 +26,7 @@ class AdminsController extends AppController {
 			
 		// Not logged in do
 		} else {
-			$this->redirect(array('controller' => 'Admin' , 'action' => 'login'));		
+			$this->redirect(array('controller' => 'admins' , 'action' => 'login'));		
 		}
 	}
 
