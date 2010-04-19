@@ -77,42 +77,62 @@ class RegistrationsController extends AppController {
 	 * Recieve and process login credentials, fetches and stores the registration to session and redirects to review
 	 */
 	function login() {
-		if(!$this->data) {
+		debug($this->Session->read());
+		$this->set('errors', $this->Session->read('errors'));
+		$this->Session->write('errors', null);
+		
+	}
+	
+	
+	function addLogin(){
+		if(!$this->data['Registration']['number'] && !$this->data['Registrator']['email']) {
 			// First time visiting the site, do nothing and just display the view
-		} else {
-			
+			$this->Session->write('errors.noInput', 'Fyll i <strong>bokningsnummer</strong> och <strong>email</strong>');
+		} else { 
 			// Sanitize the input data
-			$number = Sanitize::clean($this->data['Registration']['number']);
-			$email = Sanitize::clean($this->data['Registrator']['email']);
-			$number = strtoupper($number);
-			// Get an array from the database with all the info on the registration
-			if($registration = $this->Registration->findByNumber($number)){
-				$event = $registration['Event'];
-				unset($registration['Event']);
-				$this->Session->write('Event', $event);
-				// Checks the array from the database and tries to match the email with the form
-				if($registration['Registrator']['email'] == $email){
-					
-					$this->Session->write('loggedIn', true);
-					
-					// Retype email is not stored in the database, so we add it to the array
-					$registration['Registrator']['retype_email'] = $registration['Registrator']['email'];
-					
-					$this->Session->write('Registration', $registration);
-					$this->Session->write('Event.steps', $this->Registration->Event->Step->getInitializedSteps($registration['Registration']['event_id']));
-					$this->setPreviousStepsToPrevious('Registrations','review');
-					$this->requestAction('steps/redirectToNextUnfinishedStep');
-				} else {
-					//the user has put in wrong values in the field 'email'
-					$this->Session->write('errors.people', 'Du måste fylla i <strong>email</strong>');
-				}
-				
+			if($this->data['Registration']['number']) {
+				$number = Sanitize::clean($this->data['Registration']['number']);
 			} else {
-				//the user has put in wrong values in at least the 'booking number' field
-				$this->Session->write('errors.people', 'Du måste fylla i <strong>bokningsnummer</strong>');
+				$this->Session->write('errors.noNumber', 'Du har glömt fylla i <strong>bokningsnummer</strong>');
+				$number = false;
 			}
-			
+			if ($this->data['Registrator']['email']){
+				$email = Sanitize::clean($this->data['Registrator']['email']);
+			} else {
+				$this->Session->write('errors.noEmail', 'Du har glömt fylla i <strong>email</strong>');
+				$email = false;
+			}
+			if ($number && $email){
+				$number = strtoupper($number);
+				// Get an array from the database with all the info on the registration
+				if($registration = $this->Registration->findByNumber($number)){
+					$event = $registration['Event'];
+					unset($registration['Event']);
+					$this->Session->write('Event', $event);
+					// Checks the array from the database and tries to match the email with the form//
+					$email = $this->data['Registrator']['email'];
+					if($registration['Registrator']['email'] == $email){
+						
+						$this->Session->write('loggedIn', true);
+						
+						// Retype email is not stored in the database, so we add it to the array
+						$registration['Registrator']['retype_email'] = $registration['Registrator']['email'];
+						
+						$this->Session->write('Registration', $registration);
+						$this->Session->write('Event.steps', $this->Registration->Event->Step->getInitializedSteps($registration['Registration']['event_id']));
+						$this->setPreviousStepsToPrevious('Registrations','review');
+						$this->requestAction('steps/redirectToNextUnfinishedStep');
+					} else {
+						//the user has put in wrong values in the field 'email'
+						$this->Session->write('errors.unvalidEmail', 'Är du säker på att skrev rätt <strong>email?</strong>');
+					} 
+				} else {
+					//the user has put in wrong values in at least the 'booking number' field
+					$this->Session->write('errors.noBookingnr', 'Är du säker på att du skrev rätt <strong>bokningsnummer?</strong>');		
+				}
+			}
 		}
+		$this->redirect(array('controller' => 'registrations', 'action' => 'login'));		
 	}
 	
 	
@@ -121,7 +141,7 @@ class RegistrationsController extends AppController {
 	 * @param unknown_type $registrator --session array for the registration module 
 	 * @param unknown_type $registration -- session array for the registration module
 	 */
-	private function sendRegistrationConfirmMail($event,$registrator){
+		private function sendRegistrationConfirmMail($event,$registrator){
 		if($this->Session->read('dontSendEmails')) return;
 		$this->Email->smtpOptions = array(
 			'port'			=> '25', 
@@ -177,6 +197,7 @@ class RegistrationsController extends AppController {
 		if(Configure::read('debug') >= 1) {
 			$this->Session->del('Registration');
 			$this->Session->del('Event');
+			$this->Session->del('errors');
 			$this->Session->del('loggedIn');
 			$this->Session->setFlash('Session rensad');
 		} else {

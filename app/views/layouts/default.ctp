@@ -43,7 +43,7 @@
 	<footer>
 		<div class="container_12">
 			<?php
-			 echo $cakeDebug; ?>
+			echo $cakeDebug; ?>
 		</div>
 		<?php echo $scripts_for_layout;?>
 	</footer>

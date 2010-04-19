@@ -8,9 +8,8 @@
 <div class="grid_12 login">
 
 	<?php 
-		
-		if(isset($error)){
-			?>
+		if(!empty($errors)){?>
+			
 			<div id="login_error" class="login_info validationErrors grid_8">
 				<div class="grid_full">
 				<?php foreach ($errors as $key => $error): ?>
@@ -19,6 +18,7 @@
 					</li>
 				<?php endforeach;?>			
 			</ul>
+			
 				</div>
 			</div>
 			<?php
@@ -28,7 +28,7 @@
 		echo $javascript->link('jquery.validate', $inline = false);
 		echo $javascript->link('jq.form.conf/jq.validate.login', $inline = false);
 		echo $html->css('login', null, array(), false);
-		echo $form->create(null, array('id' => 'login', 'class' => 'grid_8', 'controller' => 'registrations' , 'action' => 'login'));
+		echo $form->create(null, array('id' => 'login', 'class' => 'grid_8', 'controller' => 'registrations' , 'action' => 'addlogin'));
 		echo $form->input('Registration.number', array('label' => 'Bokningsnummer'));
 		echo $form->input('Registrator.email', array('label' => 'E-post'));
 	?>

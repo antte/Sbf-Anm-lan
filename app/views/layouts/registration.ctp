@@ -49,6 +49,7 @@
 	<footer>
 		<div class="container_12">
 			<?php
+			 echo $this->requestAction('steps/debug'); 
 			 echo $cakeDebug; ?>
 		</div>
 		<?php echo $scripts_for_layout;?>
