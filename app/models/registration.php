@@ -43,6 +43,16 @@ Class Registration extends AppModel {
 		}while($this->findByNumber($string));
 		return $string;
 	}
+	
+	/**
+	 * 
+	 * @param int $registrationId registration to delete
+	 */
+	function deleteAllRegistrationRelatedDataById($registrationId) {
+		$this->deleteAll				( array('Registration.id' => $registrationId));
+		$this->Person->deleteAll		( array('Person.registration_id' => $registrationId ));						
+		$this->Registrator->deleteAll	( array('Registrator.registration_id' => $registrationId ));	
+	}
 }
 
 
