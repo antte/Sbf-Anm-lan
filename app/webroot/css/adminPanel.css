@@ -1,0 +1,53 @@
+#adminPanel {
+	padding: 10px;
+	background: #eee;	
+}
+
+#adminPanel a.logout {
+	display: block;
+	font-size: 18px;
+	float: right;
+	padding: 4px;
+	vertical-align: middle;
+	text-decoration: none;
+	color: blue;
+}
+	
+#adminSteps {
+	overflow: hidden;
+	font-size: 18px;
+	height: 37px;
+	list-style-type: none;
+	margin: 0;
+}
+
+#adminSteps li {
+	margin: 0px;
+	float: left;
+	height: 35px;
+	line-height: 35px;
+	padding: 0;
+	background-color: #fff;
+	vertical-align: middle;
+	border: 1px dotted #555;
+}
+
+#adminSteps li a {
+	height: 35px;
+	display: inline-block;
+	text-decoration: none;
+	color: black;
+	padding: 0 20px;
+}
+
+#adminSteps li a:link, #adminSteps li a:active, #adminSteps li a:visited {
+	color: black;
+}
+
+#adminSteps li:hover {
+	background: #eee;
+}
+
+#adminSteps li.active {
+	background: #ffe84c;
+}
