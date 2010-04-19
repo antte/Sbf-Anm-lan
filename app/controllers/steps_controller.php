@@ -5,8 +5,7 @@ class StepsController extends AppController {
 	function index($controller = null  , $action = null){
 		if (!isset($this->params['requested'])) return;
 		
-		return $this->prepareStepsForView($this->Session->read('Event.steps'), $controller , $action);
-		
+		return $this->prepareStepsForView( $controller , $action );
 	}
 
 	/**
@@ -37,33 +36,39 @@ class StepsController extends AppController {
 	 * makes an initialized steps array pretty(dumb) for the view
 	 * @param $steps initialized steps
 	 */
-	private function prepareStepsForView($steps, $controller ,$action) {
+	private function prepareStepsForView($controller ,$action) {
+		$steps = $this->Session->read('Event.steps');
 		$controller = ucfirst($controller);
 		
-		$i = 0;
-		$first = false;
+		$stepCounter = 0;
+		$firstComingStepFound = false;
+		
+		//The function of this foreach is to arrange css classes so that the view can handle it correctly
 		foreach($steps as &$step) {
+			//receipt should always be disabled if its not current
 			if ($controller == 'Registrations' && $action == 'receipt'){
-				$step['classes'] = 'disabled';			
+				$step['classes'] = 'disabled';
 			} else {
 				$step['classes'] = $step['state'];
 			}
-			if ($step['state'] == 'coming' && $first != true) {
+			
+			if ($step['state'] == 'coming' && $firstComingStepFound != true) {
 				$step['classes'] = 'started'; 
-				$first = true;		
+				$firstComingStepFound = true;	
 			}
 			
 			if ($controller == $step['controller'] && $action == $step['action']) {
 				//make current the step corresponding to the calling controller
 				$step['classes'] = 'current';
-			}			
-			if($i === 0) {
+			}
+						
+			if($stepCounter === 0) {
 				$step['classes'] .= " first";
-			} else if ($i === (sizeof($steps) -1) ){
+			} else if ($stepCounter === (sizeof($steps) -1) ){
 				$step['classes'] .= " last";
 			}
 			
-			$i++;
+			$stepCounter++;
 			unset($step['state']);
 		}
 		return $steps;
