@@ -3,13 +3,13 @@ div.login {
 	padding-bottom: 20px;
 }
 
-form#login .input.text, form#login .submit {
+form#login .input.text, form#login .submit, form#login .input.password {
 	width: 490px;
 	margin: 10px auto 0 auto;
 	clear: both;
 }
 
-form#login .input.text input, form#login .submit input {
+form#login .input.text input, form#login .submit input,form#login .input.password input {
 	width: 470px;
 }
 
