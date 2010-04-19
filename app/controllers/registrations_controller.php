@@ -77,7 +77,6 @@ class RegistrationsController extends AppController {
 	 * Recieve and process login credentials, fetches and stores the registration to session and redirects to review
 	 */
 	function login() {
-		debug($this->Session->read());
 		$this->set('errors', $this->Session->read('errors'));
 		$this->Session->write('errors', null);
 		
