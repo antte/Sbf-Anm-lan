@@ -29,6 +29,7 @@
 		echo $javascript->link('jquery.validate', $inline = false);
 		echo $javascript->link('jq.form.conf/jq.validate.loginAdmin', $inline = false);
 		echo $html->css('login', null, array(), false);
+		
 		echo $form->create(null, array('id' => 'login', 'class' => 'grid_8', 'controller' => 'registrations' , 'action' => 'addlogin'));
 		echo $form->input('Admin.username', array('label' => 'Andvändarnamn'));
 		echo $form->input('Admin.password', array('label' => 'Lösenord'));
@@ -36,7 +37,7 @@
 	
 	<div class="grid_8 login_info clearfix">
 		<div class="grid_full">
-			<p class="info">Du har fått bokningsnumret mailat till dig i samband med din bokning, kontrollera din mail. Om du har genomfört en bokning men tappat bort ditt nummer, kontakta Bilsportförbundets support.</p>
+			<p class="info">Skriv in i Användarnamn och lösenord </p>
 		</div>
 	</div>
 	
