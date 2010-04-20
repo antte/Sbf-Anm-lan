@@ -8,10 +8,7 @@ class AdminsController extends AppController {
 			if ( $username = $this->data['Admin']['username'] == 'user' && $password = $this->data['Admin']['password'] == 'pass'){
 				$this->Session->write('adminLoggedIn', 'true');
 
-				$this->redirect(array('controller' => 'admins' , 'action' => 'index'));
-				
-				$this->redirect(array('controller' => 'Admin' , 'action' => 'index'));
-				
+				$this->redirect(array('controller' => 'admins' , 'action' => 'index'));				
 				
 				//$this->Session->write('adminLoggedIn', 'true');
 			} else {
@@ -23,15 +20,28 @@ class AdminsController extends AppController {
 		}
 	}
 
-	function index(){
+	function index($id = null ){
+		$this->loadModel('Event');
 		// Logged in as admin do
-		if($this->Session->check('adminLoggedIn')){
+		if ($this->Session->check('adminLoggedIn')){
+			if ($id) {
+				$this->redirect(array('controller'=>'admins' , 'action' => 'events' ,$id));
+			}
+		$this->set('events', $this->Event->getEvents());
 			
 		// Not logged in do
 		} else {
 			$this->redirect(array('controller' => 'admins' , 'action' => 'login'));		
 		}
 	}
+	
+	function event($id){
+		$event->$this->Event->getEvent($id);
+		$this->set('Event' , $event);
+		debug($this->Session->read());
+		//$this->set('event',$this->params)		
+	}
+	
 	
 	function logout() {
 		//deletes the user session
@@ -49,8 +59,10 @@ class AdminsController extends AppController {
 		
 		if(!isset($this->params['requested'])) return;
 		
-		$steps = $this->requestAction('steps/getInitializedSteps/'. $this->Session->read('Event.id'));
-		
+		if ($this->Session->check('Event.id'))
+			$steps = $this->requestAction('steps/getInitializedSteps/'. $this->Session->read('Event.id'));
+		else
+			return false;
 		/**
 		 * remove registration review and registration receipt from steps before returning
 		 */
