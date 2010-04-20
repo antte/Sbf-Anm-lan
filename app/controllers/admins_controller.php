@@ -8,9 +8,9 @@ class AdminsController extends AppController {
 	var $layout = "admin";
 	
 	function beforeFilter() {
-		
-		$this->eventId = Sanitize::clean($this->params['pass'][0]);
-		
+		if(isset($this->params['pass'][0])) {
+			$this->eventId = Sanitize::clean($this->params['pass'][0]);
+		}
 	}
 
 	/**
@@ -26,20 +26,23 @@ class AdminsController extends AppController {
 			$this->set('loginErrors', $this->Admin->loginErrors);
 		}
 	}
+	
+	function index() {
+		//redurect me to the first active events bookings!!!
+	}
 
-	function index($id = null ){
+	function events(){ //removed $id from arguments and everything broked, fix me!
 		$this->loadModel('Event');
 		// Logged in as admin do
-		if ($this->Session->check('adminLoggedIn')){
-			if ($id) {
-				$this->redirect(array('controller'=>'admins' , 'action' => 'event' ,$id));
-			}
-		$this->set('events', $this->Event->getEvents());
-			
-		// Not logged in do
-		} else {
-			$this->redirect(array('controller' => 'admins' , 'action' => 'login'));		
+		if ( !($this->Session->check('adminLoggedIn')) ) {
+			$this->redirect(array('controller' => 'admins' , 'action' => 'login'));
 		}
+		
+		if ($this->eventId) {
+			$this->redirect(array('controller'=>'admins' , 'action' => 'event' ,$this->eventId));
+		}
+		$this->set('events', $this->Event->getEvents());
+		//redirect to next active events bookings
 	}
 	
 	function event($id){		
