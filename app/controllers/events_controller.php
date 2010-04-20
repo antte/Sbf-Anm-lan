@@ -26,7 +26,7 @@ class EventsController extends AppController {
 			return $this->Event->find('all');
 		} else {
 			
-		$this->set('events', $this->Event->find('all'));
+		$this->set('events', $this->Event->find('all',array('recursive' => 0)));
 		}
 	}
 
@@ -50,14 +50,15 @@ class EventsController extends AppController {
 	}
 
 	function setEvent($id){
-		
 		if (isset($this->params['requested'])) {
-			 $this->Session->write('Event' , $this->Event->field('id',$id));
-			
-			 debug($this->Event->getEventById($id));
+			 $this->Session->write('Event' , $this->Event->getEvent($id));
 		}
 			
 	}
 	
-
+	function getEvents(){
+		if (isset($this->params['requested'])) {
+			return $this->Event->getEvents();
+		}
+	}
 }

@@ -32,6 +32,14 @@ class StepsController extends AppController {
 		}
 	}
 	
+	/*
+	 * When you dont want to use initializeSteps to autimatically write steps to session
+	 */
+	function getInitializedSteps($eventId) {
+		if(!isset($this->params['requested'])) return;
+		return $this->Step->getInitializedSteps($eventId);
+	}
+	
 	/**
 	 * makes an initialized steps array pretty(dumb) for the view
 	 * @param $steps initialized steps
