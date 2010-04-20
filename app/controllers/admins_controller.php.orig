@@ -7,11 +7,23 @@ class AdminsController extends AppController {
 	 * login action for login view also processes login when POSTed
 	 */
 	function login(){
+<<<<<<< HEAD
+		if ($this->data){
+			if ( $username = $this->data['Admin']['username'] == 'user' && $password = $this->data['Admin']['password'] == 'pass'){
+				$this->Session->write('adminLoggedIn', 'true');
+
+				$this->redirect(array('controller' => 'admins' , 'action' => 'index'));				
+				
+				//$this->Session->write('adminLoggedIn', 'true');
+			} else {
+				$this->set('errors'. $this->Admin->errors);
+=======
 		if ($this->data['Admin']){
 			//the user wants to log in
 			if($this->Admin->valid($this->data['Admin']['username'], $this->data['Admin']['password'])) {
 				$this->Session->write('adminLoggedIn', 1);
 				$this->redirect( array('action' => 'events') );
+>>>>>>> 5e6a62bba1e5946c534cbb133857d475d8839056
 			}
 			$this->set('loginErrors', $this->Admin->loginErrors);
 		}
@@ -46,7 +58,6 @@ class AdminsController extends AppController {
 		$this->Session->setFlash("Du har nu loggat ut!");
 		//when you have logged out you get redirected to login
 		$this->redirect(array('controller' => 'Admin' , 'action' => 'login'));
-
 	}
 	
 	/**

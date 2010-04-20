@@ -1,35 +1,17 @@
-<div class="grid_11">
-	<div class="grid_full">
-		<h1>Gör ditt val</h1>
-		<table>
-	<?php
-		echo $html->tableHeaders(
-    	array(
-      	'id', 
-      	'name',
-      	'confirmation_message',
-      	'is_active'
-    	)
-	);
-
-	foreach($events as $event) {
-  	echo $html->tableCells(
-      array(
-        array(
-          $event['Event']['id'],
-          $event['Event']['name'],
-          $event['Event']['confirmation_message'],
-          $event['Event']['is_active']
-        )
-      )
-    );
-	}
-?>
-
-		</table>		
-	</div>
+<?php echo $this->renderElement('adminPanel')?>
+<div>
+	<h1>Admin</h1>
+	<table>
+	<?php 
+		echo $html->tableHeaders(array('Event namn','Bekräftningsmedelande','Aktiv'));	
+		foreach ($events as $event){
+			echo '<tr>';
+			echo	'<td>'.	$html->link( $event['name'], array('action' => 'index', $event['id']))  . '</td>';
+			echo	'<td>'.	$event['confirmation_message'] . '</td>';
+			echo	'<td>'.	$event['is_active'] . '</td>';
+		}
+	?>	
+	</table>
 </div>
-
-
-<?php echo $html->css('firstblood', null, array(), false);?>
+<?php debug($events); ?>
 

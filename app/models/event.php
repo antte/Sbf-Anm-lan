@@ -13,6 +13,15 @@
 			return $this->findById($id);
 	}
 		
-		
+	function getEvents(){
+		$events = $this->find('all',array('fields' => array('id','name','confirmation_message','is_active'),'recursive' => 0));
+		foreach ($events as &$event) {
+			$event = $event['Event'];
+		}
+		return $events;
+	}
+	function getEvent($id){
+		return $this->field('id',$id);
+	}	
 }
 	
