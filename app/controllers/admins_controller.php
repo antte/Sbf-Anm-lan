@@ -32,7 +32,7 @@ class AdminsController extends AppController {
 		// Logged in as admin do
 		if ($this->Session->check('adminLoggedIn')){
 			if ($id) {
-				$this->redirect(array('controller'=>'admins' , 'action' => 'events' ,$id));
+				$this->redirect(array('controller'=>'admins' , 'action' => 'event' ,$id));
 			}
 		$this->set('events', $this->Event->getEvents());
 			
