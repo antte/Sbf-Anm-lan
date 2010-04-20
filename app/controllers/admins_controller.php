@@ -1,8 +1,17 @@
 <?php
+App::import('Sanitize');
+
 class AdminsController extends AppController {
 
 	var $helpers = array('html','form','javascript');
+	var $eventId = null;
 	var $layout = "admin";
+	
+	function beforeFilter() {
+		if(isset($this->params['pass'][0])) {
+			$this->eventId = Sanitize::clean($this->params['pass'][0]);
+		}
+	}
 
 	/**
 	 * login action for login view also processes login when POSTed
@@ -17,20 +26,23 @@ class AdminsController extends AppController {
 			$this->set('loginErrors', $this->Admin->loginErrors);
 		}
 	}
+	
+	function index() {
+		//redurect me to the first active events bookings!!!
+	}
 
-	function index($id = null ){
+	function events(){ //removed $id from arguments and everything broked, fix me!
 		$this->loadModel('Event');
 		// Logged in as admin do
-		if ($this->Session->check('adminLoggedIn')){
-			if ($id) {
-				$this->redirect(array('controller'=>'admins' , 'action' => 'events' ,$id));
-			}
-		$this->set('events', $this->Event->getEvents());
-			
-		// Not logged in do
-		} else {
-			$this->redirect(array('controller' => 'admins' , 'action' => 'login'));		
+		if ( !($this->Session->check('adminLoggedIn')) ) {
+			$this->redirect(array('controller' => 'admins' , 'action' => 'login'));
 		}
+		
+		if ($this->eventId) {
+			$this->redirect(array('controller'=>'admins' , 'action' => 'event' ,$this->eventId));
+		}
+		$this->set('events', $this->Event->getEvents());
+		//redirect to next active events bookings
 	}
 	
 	function event($id){		
@@ -53,16 +65,18 @@ class AdminsController extends AppController {
 	
 	/**
 	 * Made to be requested by the admin panel
+	 * state becomes classes
 	 * @return admin steps (event steps without review and receipt)
 	 */
 	function steps() {
 		
 		if(!isset($this->params['requested'])) return;
 		
-		if ($this->Session->check('Event.id'))
-			$steps = $this->requestAction('steps/getInitializedSteps/'. $this->Session->read('Event.id'));
-		else
-			return false;
+		//if we can't find eventId we wont be able to find steps
+		if (!$this->eventId) return;
+			
+		$steps = $this->requestAction('steps/getInitializedSteps/'. $this->eventId);
+
 		/**
 		 * remove registration review and registration receipt from steps before returning
 		 */

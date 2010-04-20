@@ -41,7 +41,7 @@ Du kan logga in med ditt bokningsnummer och email för att göra ändringar i di
 	        ),
 	        array(
 	            '', '', "", '', '', '', '', '','','','','','',
-	            "\n\$0", "\n\$0", "\n\$0", "\n\$0",', ', "\n\$0"
+	            "\n\$0", "\n\$0", "\n\$0", "\n\$0",', $0', "\n\$0"
 	        ),
 	        $text );
 	    return strip_tags( $text );
