@@ -19,6 +19,7 @@
 		echo $html->css('firstblood');
 		echo $html->css('debug');
 		echo $html->css('adminPanel');
+		echo $html->css('admin');
 		echo $javascript->link('jquery.1.4.2-min');
 	?>
 	<!--[if lte IE 6]>

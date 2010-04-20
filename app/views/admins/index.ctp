@@ -1,5 +1,3 @@
-<?php echo $html->css('admin',false); ?>
-<?php echo $this->renderElement('adminPanel')?>
 <div class="grid_12">
 	<div class="grid_full">
 		<h1>Admin</h1>
