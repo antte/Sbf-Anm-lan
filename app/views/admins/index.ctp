@@ -17,3 +17,8 @@
 		</table>
 	</div>
 </div>
+<<<<<<< HEAD
+<?php debug($events); ?>
+
+=======
+>>>>>>> ba9560f532ddd3d69e6a22c47e125679b1280bd3

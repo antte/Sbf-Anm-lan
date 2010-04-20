@@ -1,52 +1,58 @@
 <?php
+App::import('Sanitize');
+
 class AdminsController extends AppController {
 
 	var $helpers = array('html','form','javascript');
+	var $eventId = null;
+	var $layout = "admin";
+	
+	function beforeFilter() {
+		if(isset($this->params['pass'][0])) {
+			$this->eventId = Sanitize::clean($this->params['pass'][0]);
+		}
+		if ($this->Session->check('adminLoggedIn')) 
+			
+			$this->set('adminLoggedIn', 1);
+		else {
+			if (!$this->params['action'] == 'login')
+				$this->redirect(array( 'controller' => 'admins' , 'action' => 'login' )); 
+			$this->set('adminLoggedIn', 0);
+			 	
+		}	
+	}
 
 	/**
 	 * login action for login view also processes login when POSTed
 	 */
 	function login(){
-<<<<<<< HEAD
-		if ($this->data){
-			if ( $username = $this->data['Admin']['username'] == 'user' && $password = $this->data['Admin']['password'] == 'pass'){
-				$this->Session->write('adminLoggedIn', 'true');
-
-				$this->redirect(array('controller' => 'admins' , 'action' => 'index'));				
-				
-				//$this->Session->write('adminLoggedIn', 'true');
-			} else {
-				$this->set('errors'. $this->Admin->errors);
-=======
 		if ($this->data['Admin']){
 			//the user wants to log in
 			if($this->Admin->valid($this->data['Admin']['username'], $this->data['Admin']['password'])) {
 				$this->Session->write('adminLoggedIn', 1);
 				$this->redirect( array('action' => 'events') );
->>>>>>> 5e6a62bba1e5946c534cbb133857d475d8839056
 			}
 			$this->set('loginErrors', $this->Admin->loginErrors);
 		}
 	}
+	
+	function index() {
+		//redurect me to the first active events bookings!!!
+	}
 
-	function index($id = null ){
-		$this->loadModel('Event');
-		// Logged in as admin do
-		if ($this->Session->check('adminLoggedIn')){
-			if ($id) {
-				$this->redirect(array('controller'=>'admins' , 'action' => 'events' ,$id));
-			}
-		$this->set('events', $this->Event->getEvents());
-			
-		// Not logged in do
-		} else {
-			$this->redirect(array('controller' => 'admins' , 'action' => 'login'));		
+	function events(){ //removed $id from arguments and everything broked, fix me!
+		$this->loadModel('Event');		
+		if ($this->eventId) {
+			$this->redirect(array('controller'=>'admins' , 'action' => 'event' ,$this->eventId));
 		}
+		$this->set('events', $this->Event->getEvents());
+		//redirect to next active events bookings
 	}
 	
-	function event($id){
-		$event->$this->Event->getEvent($id);
-		$this->set('Event' , $event);
+	function event($id){		
+		$this->loadModel('Event');
+		$event = $this->Event->find('first', array('conditions' => array('id' => $id) , 'recursive' => 0) );
+		$this->set('event' , $event);
 		debug($this->Session->read());
 		//$this->set('event',$this->params)		
 	}
@@ -57,21 +63,28 @@ class AdminsController extends AppController {
 		$this->Session->del('adminLoggedIn');
 		$this->Session->setFlash("Du har nu loggat ut!");
 		//when you have logged out you get redirected to login
+<<<<<<< HEAD
+		$this->redirect(array('controller' => 'admins' , 'action' => 'login'));
+=======
 		$this->redirect(array('controller' => 'Admin' , 'action' => 'login'));
+
+>>>>>>> 28fb262fd885eaf0fe79ae4c1078c15ca338c830
 	}
 	
 	/**
 	 * Made to be requested by the admin panel
+	 * state becomes classes
 	 * @return admin steps (event steps without review and receipt)
 	 */
 	function steps() {
 		
 		if(!isset($this->params['requested'])) return;
 		
-		if ($this->Session->check('Event.id'))
-			$steps = $this->requestAction('steps/getInitializedSteps/'. $this->Session->read('Event.id'));
-		else
-			return false;
+		//if we can't find eventId we wont be able to find steps
+		if (!$this->eventId) return;
+			
+		$steps = $this->requestAction('steps/getInitializedSteps/'. $this->eventId);
+
 		/**
 		 * remove registration review and registration receipt from steps before returning
 		 */
@@ -99,6 +112,8 @@ class AdminsController extends AppController {
 		$admin['Admin']['password'] = md5($password);
 		$this->Admin->save($admin);
 	}
+	
+	function checkAdminLoggedIn() {	return $this->Session->check('adminLoggedIn'); }
 	
 }
 

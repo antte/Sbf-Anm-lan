@@ -1,5 +1,5 @@
 #adminPanel {
-	background: #eee;	
+	background: #0e2b87;	
 }
 
 #adminPanel a.logout {
@@ -9,7 +9,7 @@
 	padding: 4px;
 	vertical-align: middle;
 	text-decoration: none;
-	color: blue;
+	color: white;
 }
 	
 #adminSteps {
@@ -44,7 +44,7 @@
 }
 
 #adminSteps li:hover {
-	background: #eee;
+	background: #f86b2b;
 }
 
 #adminSteps li.active {
