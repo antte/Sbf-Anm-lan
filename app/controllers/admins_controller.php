@@ -3,23 +3,17 @@ class AdminsController extends AppController {
 
 	var $helpers = array('html','form','javascript');
 
+	/**
+	 * login action for login view also processes login when POSTed
+	 */
 	function login(){
-		if ($this->data){
-			if ( $username = $this->data['Admin']['username'] == 'user' && $password = $this->data['Admin']['password'] == 'pass'){
-				$this->Session->write('adminLoggedIn', 'true');
-
-				$this->redirect(array('controller' => 'admins' , 'action' => 'index'));
-				
-				$this->redirect(array('controller' => 'Admin' , 'action' => 'index'));
-				
-				
-				//$this->Session->write('adminLoggedIn', 'true');
-			} else {
-				$this->set('errors'. $this->Admin->errors);
+		if ($this->data['Admin']){
+			//the user wants to log in
+			if($this->Admin->valid($this->data['Admin']['username'], $this->data['Admin']['password'])) {
+				$this->Session->write('adminLoggedIn', 1);
+				$this->redirect( array('action' => 'events') );
 			}
-			//no data not looped here
-		} else {
-
+			$this->set('loginErrors', $this->Admin->loginErrors);
 		}
 	}
 
@@ -65,6 +59,18 @@ class AdminsController extends AppController {
 		}
 		
 		return $steps;
+	}
+	
+	/**
+	 * TODO remove on deploy
+	 * @param $username
+	 * @param $password
+	 */
+	function newAdmin($username, $password) {
+		if( !(Configure::read('debug') >= 1) ) return;
+		$admin['Admin']['username'] = $username;
+		$admin['Admin']['password'] = md5($password);
+		$this->Admin->save($admin);
 	}
 	
 }

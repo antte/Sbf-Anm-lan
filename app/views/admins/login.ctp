@@ -13,7 +13,7 @@
 			<div id="login_error" class="login_info validationErrors grid_8">
 				<div class="grid_full">
 				<ul>
-				<?php foreach ($errors as $key => $error): ?>
+				<?php foreach ($loginErrors as $error): ?>
 					<li>
 						<?php echo $error; ?>
 					</li>
