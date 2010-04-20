@@ -17,3 +17,7 @@ body {
 form#login {
 	float: none;
 }
+
+#adminPanel {
+	height:40px;
+}

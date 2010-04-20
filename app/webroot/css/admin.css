@@ -1,0 +1,11 @@
+.eventslist{
+	background-color:#eee;
+}	
+
+table {
+	margin:10px;
+}
+	
+#adminPanel {
+	min-height:40px;
+}
