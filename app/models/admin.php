@@ -18,8 +18,8 @@
 			//findBy automatically Sanitizes so i omited that
 			$admin = $this->findByUsername($username);
 			
-			if($admin['Admin']['password'] == md5($password)) return true;
-			
+			if($admin['Admin']['password'] == md5($password))
+				return true;
 			
 			//just feels right to have a default return of false
 			$loginErrors[] = 'Fel användarnamn eller lösenord';

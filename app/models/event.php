@@ -6,11 +6,12 @@
 		var $hasAndBelongsToMany = "Step";
 			
 	/*
+	 * TODO use findById instead, where is this used
 	 * Returns the event from DB based on Id
 	 * @return array
 	 */
 	function getEventById($id = null){
-			return $this->findById($id);
+		return $this->findById($id);
 	}
 		
 	function getEvents(){
@@ -20,8 +21,6 @@
 		}
 		return $events;
 	}
-	function getEvent($id){
-		return $this->field('id',$id);
-	}	
+	
 }
 	
