@@ -1,5 +1,6 @@
 #adminPanel {
-	background: #0e2b87;	
+	background: #0e2b87;
+	min-height:55px;
 }
 
 #adminPanel a.logout {
