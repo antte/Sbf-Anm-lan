@@ -1,8 +1,17 @@
 <?php
+App::import('Sanitize');
+
 class AdminsController extends AppController {
 
 	var $helpers = array('html','form','javascript');
+	var $eventId = null;
 	var $layout = "admin";
+	
+	function beforeFilter() {
+		
+		$this->eventId = Sanitize::clean($this->params['pass'][0]);
+		
+	}
 
 	/**
 	 * login action for login view also processes login when POSTed
@@ -52,16 +61,18 @@ class AdminsController extends AppController {
 	
 	/**
 	 * Made to be requested by the admin panel
+	 * state becomes classes
 	 * @return admin steps (event steps without review and receipt)
 	 */
 	function steps() {
 		
 		if(!isset($this->params['requested'])) return;
 		
-		if ($this->Session->check('Event.id'))
-			$steps = $this->requestAction('steps/getInitializedSteps/'. $this->Session->read('Event.id'));
-		else
-			return false;
+		//if we can't find eventId we wont be able to find steps
+		if (!$this->eventId) return;
+			
+		$steps = $this->requestAction('steps/getInitializedSteps/'. $this->eventId);
+
 		/**
 		 * remove registration review and registration receipt from steps before returning
 		 */
