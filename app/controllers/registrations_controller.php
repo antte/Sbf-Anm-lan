@@ -197,6 +197,7 @@ class RegistrationsController extends AppController {
 			$this->Session->del('Registration');
 			$this->Session->del('Event');
 			$this->Session->del('errors');
+			$this->Session->del('adminLoggedIn');
 			$this->Session->del('loggedIn');
 			$this->Session->setFlash('Session rensad');
 		} else {

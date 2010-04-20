@@ -11,6 +11,15 @@ class AdminsController extends AppController {
 		if(isset($this->params['pass'][0])) {
 			$this->eventId = Sanitize::clean($this->params['pass'][0]);
 		}
+		if ($this->Session->check('adminLoggedIn')) 
+			
+			$this->set('adminLoggedIn', 1);
+		else {
+			if (!$this->params['action'] == 'login')
+				$this->redirect(array( 'controller' => 'admins' , 'action' => 'login' )); 
+			$this->set('adminLoggedIn', 0);
+			 	
+		}	
 	}
 
 	/**
@@ -21,7 +30,7 @@ class AdminsController extends AppController {
 			//the user wants to log in
 			if($this->Admin->valid($this->data['Admin']['username'], $this->data['Admin']['password'])) {
 				$this->Session->write('adminLoggedIn', 1);
-				$this->redirect( array('action' => 'index') );
+				$this->redirect( array('action' => 'events') );
 			}
 			$this->set('loginErrors', $this->Admin->loginErrors);
 		}
@@ -32,12 +41,7 @@ class AdminsController extends AppController {
 	}
 
 	function events(){ //removed $id from arguments and everything broked, fix me!
-		$this->loadModel('Event');
-		// Logged in as admin do
-		if ( !($this->Session->check('adminLoggedIn')) ) {
-			$this->redirect(array('controller' => 'admins' , 'action' => 'login'));
-		}
-		
+		$this->loadModel('Event');		
 		if ($this->eventId) {
 			$this->redirect(array('controller'=>'admins' , 'action' => 'event' ,$this->eventId));
 		}
@@ -59,7 +63,7 @@ class AdminsController extends AppController {
 		$this->Session->del('adminLoggedIn');
 		$this->Session->setFlash("Du har nu loggat ut!");
 		//when you have logged out you get redirected to login
-		$this->redirect(array('controller' => 'Admin' , 'action' => 'login'));
+		$this->redirect(array('controller' => 'admins' , 'action' => 'login'));
 	}
 	
 	/**
