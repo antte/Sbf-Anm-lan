@@ -27,4 +27,9 @@
 			
 		}
 		
+		function redirectToNextActiveEvent($event) {
+			if(!isset($this->params['requested'])) return;
+			
+		}
+		
 	}

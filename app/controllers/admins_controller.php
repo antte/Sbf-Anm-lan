@@ -49,6 +49,7 @@ class AdminsController extends AppController {
 		$this->loadModel('Event');
 		$event = $this->Event->find('first', array('conditions' => array('id' => $id) , 'recursive' => 0) );
 		$this->set('event' , $event);
+		$this->admin->redirectToNextActiveEvent(null, true);
 		debug($this->Session->read());
 		//$this->set('event',$this->params)		
 	}
@@ -91,7 +92,8 @@ class AdminsController extends AppController {
 		}
 		
 		return $steps;
-	}
+	
+
 	
 	/**
 	 * TODO remove on deploy
