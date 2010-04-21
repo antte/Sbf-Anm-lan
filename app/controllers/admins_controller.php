@@ -13,14 +13,12 @@ class AdminsController extends AppController {
 	}
 	
 	function beforeFilter() {
-		if ($this->Session->check('adminLoggedIn')) 
-			
+		if ($this->Session->check('adminLoggedIn')){ 
 			$this->set('adminLoggedIn', 1);
-		else {
-			if (!$this->params['action'] == 'login')
+		} else {
+			if (!($this->params['action'] == 'login'))
 				$this->redirect(array( 'controller' => 'admins' , 'action' => 'login' )); 
-			$this->set('adminLoggedIn', 0);
-			 	
+			$this->set('adminLoggedIn', 0);			 	
 		}	
 	}
 
