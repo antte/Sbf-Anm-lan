@@ -111,5 +111,20 @@ class AdminsController extends AppController {
 	
 	function checkAdminLoggedIn() {	return $this->Session->check('adminLoggedIn'); }
 	
+	/**
+	 * Action for a view that lists all registrations for the particular event the user has chosen
+	 */
+	function registrations() {
+		
+		//TODO check so that the admin has chosen an event here (like we have on our other actions)
+		
+		$eventId = $this->Session->read('Event.id');
+		
+		$this->loadModel('Event');
+		
+		$this->set( 'event', $this->Event->find('first', array('recursive' => 1) ) );
+		
+	}
+	
 }
 
