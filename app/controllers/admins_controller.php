@@ -87,7 +87,7 @@ class AdminsController extends AppController {
 		if (!$this->Session->check('Event.id')) return;
 			
 		$steps = $this->requestAction('steps/getInitializedSteps/'. $this->Session->read('Event.id'));
-
+		
 		/**
 		 * remove registration review and registration receipt from steps before returning
 		 */
@@ -97,6 +97,14 @@ class AdminsController extends AppController {
 				unset($step);
 				continue;
 			}
+			
+			// rename some steps for the admin view
+			if( $step['label'] == "Sällskap")
+				$step['label'] = "Anmälda";
+				
+			if( $step['label'] == "Kontaktuppgifter")
+				$step['label'] = "Bokningar";
+			
 			$step['classes'] = $step['state'];
 			unset($step['state']);
 		}
