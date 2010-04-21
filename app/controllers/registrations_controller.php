@@ -66,7 +66,6 @@ class RegistrationsController extends AppController {
 	 */
 	function receipt() {
 		$this->layout='registration';
-		debug($this->Registration->validationErrors);
 		//you can't be in receipt if you haven't finished previous steps
 		if (!$this->previousStepsAreDone($this)){
 			$this->requestAction('steps/redirectToNextUnfinishedStep');	
@@ -168,6 +167,7 @@ class RegistrationsController extends AppController {
 	 * we need to take into account that this action can be requested both before and after a registration has been saved
 	 */
 	private function getRegistration() {
+		// In receipt mode, we still have SOME data in session but not everything we need!
 		
 		// if Registration exists the registration hasn't been saved yet and the user is reviewing his registration
 		$registration = $this->Session->read('Registration');
@@ -207,7 +207,7 @@ class RegistrationsController extends AppController {
 	}
 	
 	private function clearSessionFromAllRegistrationInformation() {
-		$this->Session->del('Registrations');
+		$this->Session->del('Registration');
 		$this->Session->del('loggedIn');
 	}
 	
