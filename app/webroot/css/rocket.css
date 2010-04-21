@@ -47,6 +47,16 @@
 	color: #333;
 }
 
+#rocket li:active {
+	margin: 2px 0 0 2px;
+}
+#rocket li:active + li {
+	margin-left: -2px;
+}
+#rocket li.current:active, #rocket li.current:active + li {
+	margin: 0;
+}
+
 #rocket .first .leftArrow {
 	background-image: none;
 }
