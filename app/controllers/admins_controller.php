@@ -68,7 +68,7 @@ class AdminsController extends AppController {
 	function logout() {
 		//deletes the user session
 		$this->Session->del('adminLoggedIn');
-		$this->Session->setFlash("Du har nu loggat ut!");
+		$this->Session->setFlash("Du har nu loggat ut!", 'default', array('class' => 'loggedOut'));
 		//when you have logged out you get redirected to login
 		$this->redirect(array('controller' => 'admins' , 'action' => 'login'));
 

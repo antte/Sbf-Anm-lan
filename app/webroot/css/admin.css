@@ -23,3 +23,8 @@ table {
 	margin: 2px 0 12px;
 	text-indent: 2em;
 }
+
+.loggedOut {
+	font-weight: bold;
+	font-size: 18px;
+}
