@@ -27,7 +27,7 @@ class AdminsController extends AppController {
 			//the user wants to log in
 			if($this->Admin->valid($this->data['Admin']['username'], $this->data['Admin']['password'])) {
 				$this->Session->write('adminLoggedIn', 1);
-				
+				$this->choseFirstActiveEvent();
 			}
 			$this->set('loginErrors', $this->Admin->loginErrors);
 		}
@@ -81,8 +81,10 @@ class AdminsController extends AppController {
 		 * remove registration review and registration receipt from steps before returning
 		 */
 		foreach ($steps as &$step) {
-			if ( $step['controller'] == 'Registrations' && 
-			( $step['action'] == 'review' || $step['action'] == 'receipt' ) ) {
+			if ( 
+				$step['controller'] == 'Registrations' && 
+				( $step['action'] == 'review' || $step['action'] == 'receipt' ) 
+			) {
 				unset($step);
 				continue;
 			}
@@ -93,6 +95,7 @@ class AdminsController extends AppController {
 				
 			if( $step['label'] == "Kontaktuppgifter")
 				$step['label'] = "Bokningar";
+				
 			
 			$step['classes'] = $step['state'];
 			unset($step['state']);
@@ -124,18 +127,15 @@ class AdminsController extends AppController {
 		//TODO check so that the admin has chosen an event here (like we have on our other actions)
 		
 		$eventId = $this->Session->read('Event.id');
-		
-		$this->loadModel('Event');
-		
-		$this->set( 'event', $this->Event->find('first', array('recursive' => 1) ) );
-		
+		$event = $this->Event->find('first', array('conditions' => array('id' => $eventId), 'recursive' => 1));
+		$this->set( 'event', $event );
 	}
 	
 	/**
 	 * Puts the event in session and redirects to registrations
 	 */
 	function choseEvent($id) {
-		$this->Session->write('Event', $event['Event']);
+		$this->requestAction('events/setEvent/'. $id);
 		$this->redirect( array('action' => 'registrations') );
 	}
 	
@@ -144,6 +144,8 @@ class AdminsController extends AppController {
 	 */
 	private function choseFirstActiveEvent() {
 		$event = $this->Event->findFirstActiveEvent();
+		debug($event);
+		debug($event['Event']['id']);
 		$this->choseEvent($event['Event']['id']);
 	}
 	

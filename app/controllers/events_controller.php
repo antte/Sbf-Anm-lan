@@ -9,21 +9,32 @@ class EventsController extends AppController {
 	 */
 	function index($eventId = null) {
 		if(isset($this->params['requested'])) {
-			//If event info is allready pipulated to Session use that event id 
+			
+			//If event info is already populated to Session use that event id 
 			if ($this->Session->check('Event.id')) {					
 				$event = $this->Event->findById($this->Session->read('Event.id'));
 				$event = $event['Event'];
 				return $event;
 			}
+			
+			//if event info is populated like this we still want to return it
+			if ($this->Session->check('Event.Event.id')) {					
+				$event = $this->Event->findById($this->Session->read('Event.Event.id'));
+				$event = $event['Event'];
+				return $event;
+			}
+			
 			//If no event is populated in Session get info with $id
 			if (isset($id)){
 				$event = $this->Event->findById($eventId);
 				$event = $event['Event'];
 				return $event;
-				
 			}
+			
+			
 			//If not specified event id return all Events
 			return $this->Event->find('all');
+			
 		} else {
 			
 		$this->set('events', $this->Event->find('all',array('recursive' => 0)));
@@ -51,9 +62,9 @@ class EventsController extends AppController {
 
 	function setEvent($id){
 		if (isset($this->params['requested'])) {
-			 $this->Session->write('Event' , $this->Event->getEvent($id));
+			$event = $this->Event->getEventById($id);
+			$this->Session->write('Event' , $event['Event'] );
 		}
-			
 	}
 	
 	function getEvents(){

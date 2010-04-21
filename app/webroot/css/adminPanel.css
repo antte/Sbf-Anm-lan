@@ -4,19 +4,26 @@
 	color: white;
 }
 
+#adminPanel h2 {
+	margin-bottom: 10px;
+}
+
 #adminPanel a {
 	color: white;
 }
 
-#adminPanel a.logout {
-	display: block;
-	font-size: 18px;
-	float: right;
-	padding: 4px;
-	vertical-align: middle;
-	text-decoration: none;
+#adminPanel ul#adminUtilitiesMenu {
+	list-style-type: none;
+	margin: 0;
 }
-	
+
+#adminPanel #adminUtilitiesMenu a {
+	font-size: 16px;
+	float: right;
+	vertical-align: middle;
+	padding: 0 7px;
+}
+
 #adminSteps {
 	overflow: hidden;
 	font-size: 18px;
