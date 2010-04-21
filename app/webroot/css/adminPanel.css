@@ -1,5 +1,6 @@
 #adminPanel {
-	background: #eee;	
+	background: #0e2b87;
+	min-height:55px;
 }
 
 #adminPanel a.logout {
@@ -9,7 +10,7 @@
 	padding: 4px;
 	vertical-align: middle;
 	text-decoration: none;
-	color: blue;
+	color: white;
 }
 	
 #adminSteps {
