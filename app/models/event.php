@@ -10,8 +10,8 @@
 	 * Returns the event from DB based on Id
 	 * @return array
 	 */
-	function getEventById($id = null){
-		return $this->findById($id);
+	function getEventById($id){
+		return $this->findById($id , array( 'recursive' => 0));
 	}
 		
 	function getEvents(){

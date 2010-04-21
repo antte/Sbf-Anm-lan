@@ -59,7 +59,6 @@ class AdminsController extends AppController {
 		$this->loadModel('Event');
 		$event = $this->Event->find('first', array('conditions' => array('id' => $id) , 'recursive' => 0) );
 		$this->set('event' , $event);
-		debug($event);
 		$this->Session->write('Event',$event['Event']);
 		//$this->set('event',$this->params)		
 	}
