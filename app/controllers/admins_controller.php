@@ -6,13 +6,8 @@ class AdminsController extends AppController {
 	var $helpers = array('html','form','javascript');
 	var $layout = "admin";
 	
-	
-	function __constructor() {
-		parent::__constructor();
-		$this->loadModel('Event');		
-	}
-	
 	function beforeFilter() {
+		$this->loadModel('Event');
 		if ($this->Session->check('adminLoggedIn')) 
 			
 			$this->set('adminLoggedIn', 1);
@@ -32,11 +27,7 @@ class AdminsController extends AppController {
 			//the user wants to log in
 			if($this->Admin->valid($this->data['Admin']['username'], $this->data['Admin']['password'])) {
 				$this->Session->write('adminLoggedIn', 1);
-				$this->loadModel('Event');	
-				$event = $this->Event->findFirstActiveEvent();
-				$this->Session->write('Event', $event['Event']);
-				//debug($event);
-				$this->redirect( array('action' => 'registrations') );
+				
 			}
 			$this->set('loginErrors', $this->Admin->loginErrors);
 		}
@@ -46,13 +37,12 @@ class AdminsController extends AppController {
 		//redurect me to the first active events bookings!!!
 	}
 
-	function events(){ //removed $id from arguments and everything broked, fix me!
-		$this->loadModel('Event');		
-		if ($this->Session->check('Event.id')) {
-			$this->redirect(array('controller'=>'admins' , 'action' => 'event' ,$this->Session->read('Event.id')));
-		}
+	function events(){
+		//if you're here you want to change event so we "deselect" the current event from session
+		$this->Session->del('Event');
+		
+		$this->loadModel('Event');
 		$this->set('events', $this->Event->getEvents());
-		//redirect to next active events bookings
 	}
 	
 	function event($id){		
@@ -132,6 +122,22 @@ class AdminsController extends AppController {
 		
 		$this->set( 'event', $this->Event->find('first', array('recursive' => 1) ) );
 		
+	}
+	
+	/**
+	 * Puts the event in session and redirects to registrations
+	 */
+	function choseEvent($id) {
+		$this->Session->write('Event', $event['Event']);
+		$this->redirect( array('action' => 'registrations') );
+	}
+	
+	/**
+	 * 
+	 */
+	private function choseFirstActiveEvent() {
+		$event = $this->Event->findFirstActiveEvent();
+		$this->choseEvent($event['Event']['id']);
 	}
 	
 }

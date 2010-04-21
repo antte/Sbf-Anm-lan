@@ -1,5 +1,6 @@
 <div id="adminPanel" class="grid_12">
 	<div class="grid_full">
+		<?php echo $html->link( 'Byt evenemang', array('controller' => 'admins', 'action' => 'events')); ?>
 		<?php echo $html->link( 'Logga ut', array('controller' => 'admins', 'action' => 'logout'), array( 'class' => 'logout') );?>
 		<?php if ($steps = $this->requestAction('admins/steps')) :?>
 			<ol id="adminSteps">
