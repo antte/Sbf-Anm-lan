@@ -39,9 +39,9 @@
 #rocket li a, #rocket li span.expander {
 	height: 35px;
 	display: inline-block;
-	text-decoration: none;
 	color: black;
 	padding:0 7px;
+	border-bottom: 2px solid black;
 }
 #rocket li a:hover {
 	color: #333;

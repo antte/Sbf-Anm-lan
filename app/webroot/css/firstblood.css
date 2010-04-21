@@ -217,12 +217,20 @@ label.error {
 
 #receipt_info { 
 	float: right; 
-	background: #eee;
 	font-size: 16px;
 	font-weight: bold;
 }
 .general_info {
 	margin-top: 30px;
+}
+
+#receipt_info {
+	background: lightblue;
+}
+
+#receipt_info h2 {
+	text-indent: 20px;
+	background: url(../img/receipt.png) no-repeat 0 8px;
 }
 
 a.print {
