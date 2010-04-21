@@ -7,6 +7,12 @@ class AdminsController extends AppController {
 	var $eventId = null;
 	var $layout = "admin";
 	
+	
+	function __constructor() {
+		parent::__constructor();
+		$this->loadModel('Event');		
+	}
+	
 	function beforeFilter() {
 		if(isset($this->params['pass'][0])) {
 			$this->eventId = Sanitize::clean($this->params['pass'][0]);
@@ -30,7 +36,11 @@ class AdminsController extends AppController {
 			//the user wants to log in
 			if($this->Admin->valid($this->data['Admin']['username'], $this->data['Admin']['password'])) {
 				$this->Session->write('adminLoggedIn', 1);
-				$this->redirect( array('action' => 'events') );
+				$this->loadModel('Event');	
+				$event = $this->Event->findFirstActiveEvent();
+				$this->Session->write('Event', $event['Event']);
+				//debug($event);
+				$this->redirect( array('action' => 'registrations') );
 			}
 			$this->set('loginErrors', $this->Admin->loginErrors);
 		}
@@ -53,7 +63,6 @@ class AdminsController extends AppController {
 		$this->loadModel('Event');
 		$event = $this->Event->find('first', array('conditions' => array('id' => $id) , 'recursive' => 0) );
 		$this->set('event' , $event);
-		$this->admin->redirectToNextActiveEvent(null, true);
 		debug($this->Session->read());
 		//$this->set('event',$this->params)		
 	}
@@ -97,7 +106,7 @@ class AdminsController extends AppController {
 		
 		return $steps;
 	
-
+	}
 	
 	/**
 	 * TODO remove on deploy
