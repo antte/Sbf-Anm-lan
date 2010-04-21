@@ -4,13 +4,9 @@ App::import('Sanitize');
 class AdminsController extends AppController {
 
 	var $helpers = array('html','form','javascript');
-	var $eventId = null;
 	var $layout = "admin";
 	
 	function beforeFilter() {
-		if(isset($this->params['pass'][0])) {
-			$this->eventId = Sanitize::clean($this->params['pass'][0]);
-		}
 		if ($this->Session->check('adminLoggedIn')) 
 			
 			$this->set('adminLoggedIn', 1);
@@ -42,8 +38,8 @@ class AdminsController extends AppController {
 
 	function events(){ //removed $id from arguments and everything broked, fix me!
 		$this->loadModel('Event');		
-		if ($this->eventId) {
-			$this->redirect(array('controller'=>'admins' , 'action' => 'event' ,$this->eventId));
+		if ($this->Session->check('Event.id')) {
+			$this->redirect(array('controller'=>'admins' , 'action' => 'event' ,$this->Session->read('Event.id')));
 		}
 		$this->set('events', $this->Event->getEvents());
 		//redirect to next active events bookings
@@ -53,7 +49,8 @@ class AdminsController extends AppController {
 		$this->loadModel('Event');
 		$event = $this->Event->find('first', array('conditions' => array('id' => $id) , 'recursive' => 0) );
 		$this->set('event' , $event);
-		debug($this->Session->read());
+		debug($event);
+		$this->Session->write('Event',$event['Event']);
 		//$this->set('event',$this->params)		
 	}
 	
@@ -77,9 +74,9 @@ class AdminsController extends AppController {
 		if(!isset($this->params['requested'])) return;
 		
 		//if we can't find eventId we wont be able to find steps
-		if (!$this->eventId) return;
+		if (!$this->Session->check('Event.id')) return;
 			
-		$steps = $this->requestAction('steps/getInitializedSteps/'. $this->eventId);
+		$steps = $this->requestAction('steps/getInitializedSteps/'. $this->Session->read('Event.id'));
 
 		/**
 		 * remove registration review and registration receipt from steps before returning
@@ -110,6 +107,21 @@ class AdminsController extends AppController {
 	}
 	
 	function checkAdminLoggedIn() {	return $this->Session->check('adminLoggedIn'); }
+	
+	/**
+	 * Action for a view that lists all registrations for the particular event the user has chosen
+	 */
+	function registrations() {
+		
+		//TODO check so that the admin has chosen an event here (like we have on our other actions)
+		
+		$eventId = $this->Session->read('Event.id');
+		
+		$this->loadModel('Event');
+		
+		$this->set( 'event', $this->Event->find('first', array('recursive' => 1) ) );
+		
+	}
 	
 }
 
