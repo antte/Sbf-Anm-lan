@@ -71,7 +71,7 @@ class PeopleController extends AppController {
 		if($this->Session->check('adminLoggedIn')) {
 			if($this->Session->check('Event.id')) {
 				$people = $this->Person->listAllPeople($this->Session->read('Event.id'));
-				$this->set('people', $people);
+				return $people;
 				
 			}
 		}
