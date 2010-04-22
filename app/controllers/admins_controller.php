@@ -127,7 +127,6 @@ class AdminsController extends AppController {
 		unset($event['id']);
 		unset($event['event_id']);
 		$this->set( 'event', $event);
-		//debug($event);
 		
 		//$event = Set::sort($event, '{n}.Registration.created', 'modified');
 		
