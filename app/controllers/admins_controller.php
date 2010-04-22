@@ -71,10 +71,8 @@ class AdminsController extends AppController {
 		if(!isset($this->params['requested'])) return;
 		
 		//if we can't find eventId we wont be able to find steps
-		if (!$this->Session->check('Event.id')) return;
-			
+		if (!$this->Session->check('Event.id')) return;	
 		$steps = $this->requestAction('steps/getInitializedSteps/'. $this->Session->read('Event.id'));
-		
 		/**
 		 * remove registration review and registration receipt from steps before returning
 		 */
@@ -88,11 +86,14 @@ class AdminsController extends AppController {
 			}
 			
 			// rename some steps for the admin view
-			if( $step['label'] == "Sällskap")
+			if( $step['controller'] == "People"){
 				$step['label'] = "Anmälda";
+				$step['action'] = 'index';
+			}
 				
-			if( $step['label'] == "Kontaktuppgifter")
+			if( $step['controller'] == "Registrators")
 				$step['label'] = "Bokningar";
+				$step['action'] = 'index';
 				
 			
 			$step['classes'] = $step['state'];
@@ -121,12 +122,10 @@ class AdminsController extends AppController {
 	 * Action for a view that lists all registrations for the particular event the user has chosen
 	 */
 	function registrations() {
-		
 		//TODO check so that the admin has chosen an event here (like we have on our other actions)
-		
 		$eventId = $this->Session->read('Event.id');
-		$event = $this->Event->find('first', array('conditions' => array('id' => $eventId), 'recursive' => 1));
-		$this->set( 'event', $event );
+		debug($this->params);
+		$this->set('element' , $this->params['pass'][0]. '/' .$this->params['pass'][1] );
 	}
 	
 	/**
@@ -142,8 +141,6 @@ class AdminsController extends AppController {
 	 */
 	private function choseFirstActiveEvent() {
 		$event = $this->Event->findFirstActiveEvent();
-		debug($event);
-		debug($event['Event']['id']);
 		$this->choseEvent($event['Event']['id']);
 	}
 	
