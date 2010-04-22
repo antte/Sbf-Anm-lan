@@ -66,41 +66,36 @@ class AdminsController extends AppController {
 	 * state becomes classes
 	 * @return admin steps (event steps without review and receipt)
 	 */
-	function steps() {
-		
+	function steps( $controller = null ) {
+		$controller = Inflector::camelize($controller);
 		if(!isset($this->params['requested'])) return;
 		
 		//if we can't find eventId we wont be able to find steps
 		if (!$this->Session->check('Event.id')) return;	
 		$steps = $this->requestAction('steps/getInitializedSteps/'. $this->Session->read('Event.id'));
+		
 		/**
 		 * remove registration review and registration receipt from steps before returning
 		 */
-		foreach ($steps as &$step) {
-			if ( 
-				$step['controller'] == 'Registrations' && 
-				( $step['action'] == 'review' || $step['action'] == 'receipt' ) 
-			) {
-				unset($step);
+		$adminSteps = array();
+		foreach ($steps as $key => $step) {
+			if (!$step['admin_label']) {
 				continue;
 			}
 			
-			// rename some steps for the admin view
-			if( $step['controller'] == "People"){
-				$step['label'] = "Anmälda";
-				$step['action'] = 'index';
+			if ($step['controller'] == $controller){
+				$adminSteps[$key]['classes'] = 'current';
 			}
-				
-			if( $step['controller'] == "Registrators")
-				$step['label'] = "Bokningar";
-				$step['action'] = 'index';
-				
+			else {
+				$adminSteps[$key]['classes'] = $step['state'];
+			}
+			$adminSteps[$key]['admin_label'] = $step['admin_label'];
+			$adminSteps[$key]['controller'] = $step['controller'];
+			$adminSteps[$key]['action'] = $step['action'];
+			$adminSteps[$key]['order'] = $step['order'];
 			
-			$step['classes'] = $step['state'];
-			unset($step['state']);
 		}
-		
-		return $steps;
+		return $adminSteps;
 	
 	}
 	
@@ -121,7 +116,8 @@ class AdminsController extends AppController {
 	/**
 	 * Action for a view that lists all registrations for the particular event the user has chosen
 	 */
-	function registrations() {
+	function eventindex() {
+		$indexElement='/index';
 		//TODO check so that the admin has chosen an event here (like we have on our other actions)
 		$eventId = $this->Session->read('Event.id');
 
@@ -137,9 +133,10 @@ class AdminsController extends AppController {
 		
 
 		if ($this->params['pass'])
-			$elementUrl = $this->params['pass'][0]. '/' .$this->params['pass'][1]; 
+			$elementUrl = $this->params['pass'][0] . $indexElement ; 
 		else 
-			$elementUrl = 'registratiors/index';
+			//default
+			$elementUrl = 'registrators' . $indexElement;
 		$this->set('element' , $elementUrl);
 	}
 	
@@ -148,7 +145,7 @@ class AdminsController extends AppController {
 	 */
 	function choseEvent($id) {
 		$this->requestAction('events/setEvent/'. $id);
-		$this->redirect( array('action' => 'registrations') );
+		$this->redirect( array('action' => 'eventindex'));
 	}
 	
 	/**

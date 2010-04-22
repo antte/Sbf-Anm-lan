@@ -11,12 +11,12 @@
 		<?php if(isset($event['id'])): ?>
 			<h2><?php echo $html->link($event['name'],array ('controller' => 'admins', 'action' => 'event' , $event['id']))?></h2>
 		<?php endif; ?>
-			
-		<?php if ($steps = $this->requestAction('admins/steps')) :?>
+		
+		<?php if ($steps = $this->requestAction('admins/steps/'.$this->params['pass'][0])) :?>
 			<ol id="adminSteps">
 				<?php foreach($steps as $step): ?>
 					<li class="<?php echo $step['classes']; ?>">
-						<?php echo $html->link($step['label'], array('controller' => 'admins', 'action' => 'registrations', strtolower($step['controller']).'/' . $step['action']));?>
+						<?php echo $html->link($step['admin_label'], array('controller' => 'admins', 'action' => 'eventindex', strtolower($step['controller']). '/index'));?>
 					</li>
 				<?php endforeach; ?>
 			</ol>

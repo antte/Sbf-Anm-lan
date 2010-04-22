@@ -25,7 +25,7 @@
 	color: white;
 }
 
-#adminSteps {
+#adminPanel #adminSteps {
 	overflow: hidden;
 	font-size: 18px;
 	height: 37px;
@@ -33,7 +33,7 @@
 	margin: 0;
 }
 
-#adminSteps li {
+#adminPanel #adminSteps li {
 	margin: 0px;
 	float: left;
 	height: 35px;
@@ -44,7 +44,7 @@
 	border: 1px dotted #555;
 }
 
-#adminSteps li a {
+#adminPanel #adminSteps li a {
 	height: 35px;
 	display: inline-block;
 	text-decoration: none;
@@ -52,14 +52,14 @@
 	padding: 0 20px;
 }
 
-#adminSteps li a:link, #adminSteps li a:active, #adminSteps li a:visited {
+#adminPanel #adminSteps li a:link, #adminPanel #adminSteps li a:active,#adminPanel #adminSteps li a:visited {
 	color: black;
 }
 
-#adminSteps li:hover {
-	background: #f86b2b;
+#adminPanel #adminSteps li.active {
+	background: #ffe84c;
 }
 
-#adminSteps li.active {
-	background: #ffe84c;
+#adminPanel #adminSteps li:hover {
+	background: #f86b2b;
 }
