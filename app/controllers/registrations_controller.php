@@ -13,7 +13,7 @@ class RegistrationsController extends AppController {
 		$this->requestAction('steps/redirectToNextUnfinishedStep');
 	}
 	/**
-	 * Saves Registration.Registration To Session and save and email the whole Registration
+	 * Saves Registration.Registration To Session and saves and emails the registration
 	 * @param unknown_type $action
 	 */
 	function add($action = null){
@@ -45,12 +45,13 @@ class RegistrationsController extends AppController {
 			$this->clearSessionFromAllRegistrationInformation();
 			$this->Session->setFlash('Vi ber om ursäkt, din registrering kunde inte slutföras. Kontakta support.');
 		}
-		$this->requestAction('steps/redirectToNextUnfinishedStep');
+		$this->redirect(array('action' => 'receipt'));
 		
 	}
 	
 	/*
 	 * Inits the review mode
+	 * TODO (lies?) no it doesnt :P its essentially an empty action for the review view 
 	 */
 	function review(){
 		$this->layout='registration';

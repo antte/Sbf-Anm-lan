@@ -1,17 +1,30 @@
 #adminPanel {
 	background: #0e2b87;
 	min-height:55px;
-}
-
-#adminPanel a.logout {
-	display: block;
-	font-size: 18px;
-	float: right;
-	padding: 4px;
-	vertical-align: middle;
 	color: white;
 }
-	
+
+#adminPanel h2 {
+	margin-bottom: 10px;
+}
+
+#adminPanel a {
+	color: white;
+}
+
+#adminPanel ul#adminUtilitiesMenu {
+	list-style-type: none;
+	margin: 0;
+}
+
+#adminPanel #adminUtilitiesMenu a {
+	font-size: 16px;
+	float: right;
+	vertical-align: middle;
+	padding: 0 7px;
+	color: white;
+}
+
 #adminSteps {
 	overflow: hidden;
 	font-size: 18px;

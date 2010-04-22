@@ -6,20 +6,15 @@ class AdminsController extends AppController {
 	var $helpers = array('html','form','javascript');
 	var $layout = "admin";
 	
-	
-	function __constructor() {
-		parent::__constructor();
-		$this->loadModel('Event');		
-	}
-	
 	function beforeFilter() {
-		if ($this->Session->check('adminLoggedIn')){ 
+		$this->loadModel("Event");
+		if ($this->Session->check('adminLoggedIn')) {
 			$this->set('adminLoggedIn', 1);
 		} else {
 			if (!($this->params['action'] == 'login'))
 				$this->redirect(array( 'controller' => 'admins' , 'action' => 'login' )); 
 			$this->set('adminLoggedIn', 0);			 	
-		}	
+		}
 	}
 
 	/**
@@ -30,11 +25,7 @@ class AdminsController extends AppController {
 			//the user wants to log in
 			if($this->Admin->valid($this->data['Admin']['username'], $this->data['Admin']['password'])) {
 				$this->Session->write('adminLoggedIn', 1);
-				$this->loadModel('Event');	
-				$event = $this->Event->findFirstActiveEvent();
-				$this->Session->write('Event', $event['Event']);
-				//debug($event);
-				$this->redirect( array('action' => 'registrations') );
+				$this->choseFirstActiveEvent();
 			}
 			$this->set('loginErrors', $this->Admin->loginErrors);
 		}
@@ -44,13 +35,12 @@ class AdminsController extends AppController {
 		//redurect me to the first active events bookings!!!
 	}
 
-	function events(){ //removed $id from arguments and everything broked, fix me!
-		$this->loadModel('Event');		
-		if ($this->Session->check('Event.id')) {
-			$this->redirect(array('controller'=>'admins' , 'action' => 'event' ,$this->Session->read('Event.id')));
-		}
+	function events(){
+		//if you're here you want to change event so we "deselect" the current event from session
+		$this->Session->del('Event');
+		
+		$this->loadModel('Event');
 		$this->set('events', $this->Event->getEvents());
-		//redirect to next active events bookings
 	}
 	
 	function event($id){		
@@ -81,26 +71,30 @@ class AdminsController extends AppController {
 		if(!isset($this->params['requested'])) return;
 		
 		//if we can't find eventId we wont be able to find steps
-		if (!$this->Session->check('Event.id')) return;
-			
+		if (!$this->Session->check('Event.id')) return;	
 		$steps = $this->requestAction('steps/getInitializedSteps/'. $this->Session->read('Event.id'));
-		
 		/**
 		 * remove registration review and registration receipt from steps before returning
 		 */
 		foreach ($steps as &$step) {
-			if ( $step['controller'] == 'Registrations' && 
-			( $step['action'] == 'review' || $step['action'] == 'receipt' ) ) {
+			if ( 
+				$step['controller'] == 'Registrations' && 
+				( $step['action'] == 'review' || $step['action'] == 'receipt' ) 
+			) {
 				unset($step);
 				continue;
 			}
 			
 			// rename some steps for the admin view
-			if( $step['label'] == "Sällskap")
+			if( $step['controller'] == "People"){
 				$step['label'] = "Anmälda";
+				$step['action'] = 'index';
+			}
 				
-			if( $step['label'] == "Kontaktuppgifter")
+			if( $step['controller'] == "Registrators")
 				$step['label'] = "Bokningar";
+				$step['action'] = 'index';
+				
 			
 			$step['classes'] = $step['state'];
 			unset($step['state']);
@@ -128,10 +122,9 @@ class AdminsController extends AppController {
 	 * Action for a view that lists all registrations for the particular event the user has chosen
 	 */
 	function registrations() {
-		
 		//TODO check so that the admin has chosen an event here (like we have on our other actions)
-		
 		$eventId = $this->Session->read('Event.id');
+
 		
 		$this->loadModel('Event');
 		$event = $this->Event->find('first', array('recursive' => 1) );
@@ -142,6 +135,29 @@ class AdminsController extends AppController {
 		
 		//$event = Set::sort($event, '{n}.Registration.created', 'modified');
 		
+
+		if ($this->params['pass'])
+			$elementUrl = $this->params['pass'][0]. '/' .$this->params['pass'][1]; 
+		else 
+			$elementUrl = 'registratiors/index';
+		$this->set('element' , $elementUrl);
+	}
+	
+	/**
+	 * Puts the event in session and redirects to registrations
+	 */
+	function choseEvent($id) {
+		$this->requestAction('events/setEvent/'. $id);
+		$this->redirect( array('action' => 'registrations') );
+	}
+	
+	/**
+	 * 
+	 */
+	private function choseFirstActiveEvent() {
+		$event = $this->Event->findFirstActiveEvent();
+		$this->choseEvent($event['Event']['id']);
+>>>>>>> cd4c277b4ec79109532d583d6aace195c683d09e
 	}
 	
 }
