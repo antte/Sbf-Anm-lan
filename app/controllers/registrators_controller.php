@@ -15,7 +15,7 @@ class RegistratorsController extends AppController {
 				
 				$registrators = $this->Registrator->listAll($this->Session->read('Event.id'));
 				
-				$this->set('registrators', $registrators);
+				return $registrators;
 				
 			}
 			
