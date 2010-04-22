@@ -40,7 +40,7 @@
 			
 			<div class="container_12">
 				 
-				<?php echo ($adminLoggedIn)? $this->renderElement('adminPanel'): ''; ?>
+				<?php echo ( $adminLoggedIn && !($this->params['action'] == "login") ) ? $this->renderElement('adminPanel') : ''; ?>
 				<?php $session->flash(); ?>
 				<?php echo $content_for_layout; ?>
 			</div>
