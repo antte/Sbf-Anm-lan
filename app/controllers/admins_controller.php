@@ -129,8 +129,13 @@ class AdminsController extends AppController {
 		$eventId = $this->Session->read('Event.id');
 		
 		$this->loadModel('Event');
+		$event = $this->Event->find('first', array('recursive' => 1) );
+		unset($event['id']);
+		unset($event['event_id']);
+		$this->set( 'event', $event);
+		debug($event);
 		
-		$this->set( 'event', $this->Event->find('first', array('recursive' => 1) ) );
+		//$event = Set::sort($event, '{n}.Registration.created', 'modified');
 		
 	}
 	
