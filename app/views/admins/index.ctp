@@ -1,6 +1,6 @@
 <div class="grid_12">
 	<div class="grid_full">
-		<h1>Admin</h1>
+		<h1>Lista på alla bokade</h1>
 	</div>
 	<div class="eventslist">
 		<table>
