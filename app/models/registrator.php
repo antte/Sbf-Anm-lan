@@ -84,4 +84,23 @@
 		return ($value[0] == $this->data[$this->name][$field]);
 	}
 	
+	/*
+	 * Lists all the registrators
+	 * @param $eventId the id of the event from which we find find the registrators
+	 */
+	function listAll($eventId) {
+		
+		$registrations = $this->Registration->findAllByEventId($eventId);
+		
+		//removes all the unimportant values from the array
+		foreach($registrations as &$registration) {
+			$registration = $registration['Registrator'];
+			unset($registration['id']);
+			unset($registration['registration_id']);
+		}
+		
+		return $registrations;
+		
+	}
+	
 }

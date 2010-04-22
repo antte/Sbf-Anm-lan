@@ -4,8 +4,27 @@ class RegistratorsController extends AppController {
 	
 	var $helpers = array('Form', 'Html', 'Javascript');
 	
+	// Lists all the registators (if we're logged in as admin)
 	function index() {
-		$this->redirect(array('controller' => 'events'));
+		
+		// Checks if admin is logged in
+		if($this->Session->check('adminLoggedIn')) {
+			
+			// Checks if event id is in session
+			if($this->Session->check('Event.id')) {
+				
+				$registrators = $this->Registrator->listAll($this->Session->read('Event.id'));
+				
+				$this->set('registrators', $registrators);
+				
+			}
+			
+			
+		} else {
+			// If not logged in as admin, flash a fail message and redirect to the beginning
+			$this->Session->setFlash("Någonting har gått fel i din bokning, vi beklagar problemet.");
+			$this->redirect(array('controller' => 'events'));
+		}
 	}
 	
 	/**
