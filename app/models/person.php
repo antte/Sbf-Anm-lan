@@ -26,5 +26,25 @@ Class Person extends AppModel {
         )
     );
 
+	function listAllPeople($eventId) {
+		$events = $this->Registration->findAllByEventId($eventId);
+		$roles = $this->Role->find('list');
+		foreach($events as &$event) :
+			$event = $event['Person'];
+			foreach($event as &$person) :
+				foreach($roles as $key => $value) {
+					if($key == $person['role_id']) {
+						$person['role'] = $value;
+					}
+				}
+				unset($person['id']);
+				unset($person['registration_id']);
+				unset($person['role_id']);
+				
+			endforeach;
+			
+		endforeach;
+		return $events;
+	}
     
 }

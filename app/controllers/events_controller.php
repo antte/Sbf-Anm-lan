@@ -9,6 +9,9 @@ class EventsController extends AppController {
 	 */
 	function index($eventId = null) {
 		if(isset($this->params['requested'])) {
+
+			//If event info is allready populated to Session use that event id 
+
 			
 			//If event info is already populated to Session use that event id 
 			if ($this->Session->check('Event.id')) {					

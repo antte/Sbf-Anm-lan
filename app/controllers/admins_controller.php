@@ -120,6 +120,18 @@ class AdminsController extends AppController {
 		$indexElement='/index';
 		//TODO check so that the admin has chosen an event here (like we have on our other actions)
 		$eventId = $this->Session->read('Event.id');
+
+		
+		$this->loadModel('Event');
+		$event = $this->Event->find('first', array('recursive' => 1) );
+		unset($event['id']);
+		unset($event['event_id']);
+		$this->set( 'event', $event);
+		debug($event);
+		
+		//$event = Set::sort($event, '{n}.Registration.created', 'modified');
+		
+
 		if ($this->params['pass'])
 			$elementUrl = $this->params['pass'][0] . $indexElement ; 
 		else 
@@ -142,6 +154,7 @@ class AdminsController extends AppController {
 	private function choseFirstActiveEvent() {
 		$event = $this->Event->findFirstActiveEvent();
 		$this->choseEvent($event['Event']['id']);
+>>>>>>> cd4c277b4ec79109532d583d6aace195c683d09e
 	}
 	
 }

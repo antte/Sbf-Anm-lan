@@ -67,6 +67,17 @@ class PeopleController extends AppController {
 		
 	}
 	
+	function index() {
+		if($this->Session->check('adminLoggedIn')) {
+			if($this->Session->check('Event.id')) {
+				$people = $this->Person->listAllPeople($this->Session->read('Event.id'));
+				$this->set('people', $people);
+				
+			}
+		}
+		//$this->setFlash('Vi ber om ursäkt men vi kunde inte genomföra din önskan');
+		//$this->redirect(array('controller' => 'events'));
+	}
 	/**
 	* Saves People to Session and redirects to next unfinished step
 	*/
