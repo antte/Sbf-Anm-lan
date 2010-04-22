@@ -124,8 +124,11 @@ class AdminsController extends AppController {
 	function registrations() {
 		//TODO check so that the admin has chosen an event here (like we have on our other actions)
 		$eventId = $this->Session->read('Event.id');
-		debug($this->params);
-		$this->set('element' , $this->params['pass'][0]. '/' .$this->params['pass'][1] );
+		if ($this->params['pass'])
+			$elementUrl = $this->params['pass'][0]. '/' .$this->params['pass'][1]; 
+		else 
+			$elementUrl = 'registratiors/index';
+		$this->set('element' , $elementUrl);
 	}
 	
 	/**
