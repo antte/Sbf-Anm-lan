@@ -8,6 +8,7 @@ class PeopleController extends AppController {
 	 * @param unknown_type $amountOfPeople
 	 */
 	function create($amountOfPeople = null){
+		
 		$this->layout='registration';
 		if (!$this->previousStepsAreDone($this)){
 			$this->requestAction('steps/redirectToNextUnfinishedStep');	
@@ -71,7 +72,6 @@ class PeopleController extends AppController {
 	* Saves People to Session and redirects to next unfinished step
 	*/
 	function add($action = null){
-		
 		// Saves People in Session and redirects to next unfinished step
 		if(isset($this->data['Person'])){
 			$errors = $this->Person->validatesMultiple($this->data);
@@ -88,24 +88,14 @@ class PeopleController extends AppController {
 	}
 	
 	/**
-	 * Saves People and redirects to next step
-	 * TODO TA BORT DEN HÄR, DEN GÖR INGET FINNS BARA KVAR PGA DOKUMENTATION AV TIDIGARE FUNGERANDE KOD
+	 * Returns true if you're changing people and false if you're not (you're there for the first time) 
 	 */
-	function edit($action = null) {
-		if(isset($this->data['Person']) && isset($action)){
-			$errors = $this->Person->validatesMultiple($this->data);
-			if(empty($errors)) {
-				//$this->Session->del('Registration.Person');
-				//$this->Session->write('Registration.Person', $this->data);
-				//if we dont have errors all was successful and we continue with the registration
-				$this->saveModelDataToSession($this);
-				$this->updateStepStateToPrevious($this->params['controller'], $action);
-				$this->requestAction('steps/redirectToNextUnfinishedStep');
-			} else {
-				$this->Session->write('errors', $errors);
-				$this->redirect(array('action' => 'create', sizeof($this->data['Person'])));
-			}
-		}
+	function sessionContainsPeople() {
+		
+		if(!isset($this->params['requested'])) return;
+
+		return $this->Session->check('Registration.Person');
+		
 	}
 	
 }	
