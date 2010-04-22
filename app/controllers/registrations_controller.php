@@ -217,7 +217,7 @@ class RegistrationsController extends AppController {
 		$this->redirect(array('controller' => 'events', 'action' => 'index'));
 	}
 	
-	function toggleSendEmails() {
+	function toggleSendEmails($controller, $action) {
 		if(Configure::read('debug') >= 1) {
 			if($this->Session->read('dontSendEmails')) {
 				$this->Session->setFlash('Will send emails again.');
@@ -226,6 +226,7 @@ class RegistrationsController extends AppController {
 				$this->Session->setFlash('Wont send email anymore.');
 				$this->Session->write('dontSendEmails', 1);
 			}
+			$this->redirect( array('controller' => $controller, 'action' => $action) );
 		} else {
 			$this->Session->setFlash('You can\'t use debug functions when not in debug mode.');
 			$this->redirect(array('controller' => 'events', 'action' => 'index'));
@@ -280,6 +281,17 @@ class RegistrationsController extends AppController {
 		$this->updateStepStateToPrevious('Registrators', 'create');
 		
 		$this->requestAction('steps/redirectToNextUnfinishedStep');
+	}
+	
+	/**
+	 * 
+	 */
+	function sendEmails() {
+		if ($this->Session->read('dontSendEmails')) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 }
 

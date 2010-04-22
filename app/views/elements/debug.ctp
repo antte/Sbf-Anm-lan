@@ -6,8 +6,12 @@
 		<li style='top:30px;background:lightgreen;'>
 		<?php echo $html->link('Put that cookie up!', array( 'controller' =>'registrations' , 'action' => 'populateSessionAndRedirectToNextUnfinished'));?>
 		</li>
-		<li style='top:60px;background:lightblue;'>
-		<?php echo $html->link('TOGGLE sendEmails', array( 'controller' =>'registrations' , 'action' => 'toggleSendEmails'));?>
+		<?php if ($this->requestAction('registrations/sendEmails')): ?>
+			<li style='top:60px;background:green;'>
+		<?php else: ?>
+			<li style='top:60px;background:red;'>
+		<?php endif; ?>
+		<?php echo $html->link('sendingEmails', array( 'controller' =>'registrations' , 'action' => 'toggleSendEmails', $this->params['controller'], $this->params['action'] ), array('class' => 'sendingEmails')); ?>
 		</li>
 	</ul>
 <?php endif;?>
