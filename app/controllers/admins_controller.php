@@ -7,16 +7,14 @@ class AdminsController extends AppController {
 	var $layout = "admin";
 	
 	function beforeFilter() {
-		$this->loadModel('Event');
-		if ($this->Session->check('adminLoggedIn')) 
-			
+		$this->loadModel("Event");
+		if ($this->Session->check('adminLoggedIn')) {
 			$this->set('adminLoggedIn', 1);
-		else {
-			if (!$this->params['action'] == 'login')
+		} else {
+			if (!($this->params['action'] == 'login'))
 				$this->redirect(array( 'controller' => 'admins' , 'action' => 'login' )); 
-			$this->set('adminLoggedIn', 0);
-			 	
-		}	
+			$this->set('adminLoggedIn', 0);			 	
+		}
 	}
 
 	/**
