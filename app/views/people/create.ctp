@@ -5,7 +5,6 @@
 	echo $javascript->link('jq.form.conf/messages_se', $inline = false);
 	echo $javascript->link('jq.form.conf/jq.validate.persons', $inline = false);
 	echo $javascript->link('addPersonField', $inline = false);
-
 ?>
 <div class="grid_12">
 	<div class="grid_full">
@@ -77,21 +76,15 @@
 				</li>
 			<?php endfor; ?>			
 		</ol>
-		<?php if(isset($people)) { ?>
 		<fieldset class="submit grid_8 alpha">
-			<?php echo $form->submit('Ändra')?>
-		
+			<?php 
+			if($this->requestAction('people/sessionContainsPeople')):
+				echo $form->submit('Ändra');
+			else:
+				echo $form->submit('Nästa');			
+			endif; 
+			?>
 		</fieldset>
-		<?php } else { //not in "review" mode ?>
-			<fieldset class="submit grid_8 alpha">
-			<?php echo $form->submit('Nästa')?>
-		
-		</fieldset>
-		<?php } ?>
-			
-		
-		
-		
 		
 	<!--  Form helper - end form-->
 	<?php echo $form->end(); ?>	
