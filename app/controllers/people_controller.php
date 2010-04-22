@@ -2,7 +2,6 @@
 
 class PeopleController extends AppController {
 	var $helpers = array('Html','Form','Javascript');
-
 	/**
 	 * Inits the view for adding people (including amount of people) to the party
 	 * @param unknown_type $amountOfPeople

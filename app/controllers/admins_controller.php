@@ -66,7 +66,7 @@ class AdminsController extends AppController {
 	 * state becomes classes
 	 * @return admin steps (event steps without review and receipt)
 	 */
-	function steps() {
+	function steps( $controller = null ) {
 		
 		if(!isset($this->params['requested'])) return;
 		
@@ -94,9 +94,11 @@ class AdminsController extends AppController {
 			if( $step['controller'] == "Registrators")
 				$step['label'] = "Bokningar";
 				$step['action'] = 'index';
-				
-			
-			$step['classes'] = $step['state'];
+			//		
+			if ($step['controller'] == $controller)
+				$step['classes'] = 'current';
+			else 
+				$step['classes'] = $step['state'];
 			unset($step['state']);
 		}
 		
@@ -121,13 +123,15 @@ class AdminsController extends AppController {
 	/**
 	 * Action for a view that lists all registrations for the particular event the user has chosen
 	 */
-	function registrations() {
+	function eventindex() {
 		//TODO check so that the admin has chosen an event here (like we have on our other actions)
 		$eventId = $this->Session->read('Event.id');
+		debug($this->params);
 		if ($this->params['pass'])
-			$elementUrl = $this->params['pass'][0]. '/' .$this->params['pass'][1]; 
+			$elementUrl = $this->params['pass'][0]; 
 		else 
-			$elementUrl = 'registratiors/index';
+			//default
+			$elementUrl = 'registrators';
 		$this->set('element' , $elementUrl);
 	}
 	
@@ -136,7 +140,7 @@ class AdminsController extends AppController {
 	 */
 	function choseEvent($id) {
 		$this->requestAction('events/setEvent/'. $id);
-		$this->redirect( array('action' => 'registrations') );
+		$this->redirect( array('action' => 'eventindex'));
 	}
 	
 	/**

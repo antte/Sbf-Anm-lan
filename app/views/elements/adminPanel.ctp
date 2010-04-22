@@ -16,7 +16,7 @@
 			<ol id="adminSteps">
 				<?php foreach($steps as $step): ?>
 					<li class="<?php echo $step['classes']; ?>">
-						<?php echo $html->link($step['label'], array('controller' => 'admins', 'action' => 'registrations', strtolower($step['controller']).'/' . $step['action']));?>
+						<?php echo $html->link($step['label'], array('controller' => 'admins', 'action' => 'eventindex', strtolower($step['controller'])));?>
 					</li>
 				<?php endforeach; ?>
 			</ol>
