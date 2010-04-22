@@ -127,7 +127,7 @@ class AdminsController extends AppController {
 		unset($event['id']);
 		unset($event['event_id']);
 		$this->set( 'event', $event);
-		debug($event);
+		//debug($event);
 		
 		//$event = Set::sort($event, '{n}.Registration.created', 'modified');
 		
@@ -154,6 +154,7 @@ class AdminsController extends AppController {
 	private function choseFirstActiveEvent() {
 		$event = $this->Event->findFirstActiveEvent();
 		$this->choseEvent($event['Event']['id']);
+
 
 	}
 	
