@@ -94,9 +94,34 @@
 		
 		//removes all the unimportant values from the array
 		foreach($registrations as &$registration) {
-			$registration = $registration['Registrator'];
-			unset($registration['id']);
-			unset($registration['registration_id']);
+			
+			unset($registration['Event']);
+			unset($registration['Person']);
+			unset($registration['Registration']['event_id']);
+			unset($registration['Registrator']['id']);
+			unset($registration['Registrator']['registration_id']);
+			
+			$registration['number'] = $registration['Registration']['number'];
+			$registration['created'] = $registration['Registration']['created'];
+			if( $registration['Registration']['created'] != $registration['Registration']['modified'] ) {
+				$registration['modified'] = $registration['Registration']['modified'];
+			} else {
+				$registration['modified'] = "";
+			}
+			
+			$registration['first_name'] = $registration['Registrator']['first_name'];
+			$registration['last_name'] = $registration['Registrator']['last_name'];
+			$registration['email'] = $registration['Registrator']['email'];
+			$registration['phone'] = $registration['Registrator']['phone'];
+			$registration['c_o'] = $registration['Registrator']['c_o'];
+			$registration['street_address'] = $registration['Registrator']['street_address'];
+			$registration['city'] = $registration['Registrator']['city'];
+			$registration['postal_code'] = $registration['Registrator']['postal_code'];
+			$registration['extra_information'] = $registration['Registrator']['extra_information'];
+			
+			unset($registration['Registration']);
+			unset($registration['Registrator']);
+			
 		}
 		
 		return $registrations;
