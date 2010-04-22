@@ -21,8 +21,9 @@
 				$rocket[$key]['controller'] = $step['controller'];
 				$rocket[$key]['action'] = $step['action'];
 				$rocket[$key]['order'] = $step['EventsStep']['order'];
+				$rocket[$key]['admin_label'] = $step['admin_label'];
 			}	
-			return $this->multisort($rocket,'order','label','action', 'controller','state');
+			return $this->multisort($rocket,'order','label','action', 'controller','state','admin_label');
 		}
 		
 		/**
