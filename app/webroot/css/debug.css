@@ -9,3 +9,7 @@ ul#debug li {
 	color:black;
 	padding:2px;
 }
+
+ul#debug li a.sendingEmails {
+	color: white;
+}
