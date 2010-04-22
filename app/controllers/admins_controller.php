@@ -13,14 +13,12 @@ class AdminsController extends AppController {
 	}
 	
 	function beforeFilter() {
-		if ($this->Session->check('adminLoggedIn')) 
-			
+		if ($this->Session->check('adminLoggedIn')){ 
 			$this->set('adminLoggedIn', 1);
-		else {
-			if (!$this->params['action'] == 'login')
+		} else {
+			if (!($this->params['action'] == 'login'))
 				$this->redirect(array( 'controller' => 'admins' , 'action' => 'login' )); 
-			$this->set('adminLoggedIn', 0);
-			 	
+			$this->set('adminLoggedIn', 0);			 	
 		}	
 	}
 
@@ -59,7 +57,6 @@ class AdminsController extends AppController {
 		$this->loadModel('Event');
 		$event = $this->Event->find('first', array('conditions' => array('id' => $id) , 'recursive' => 0) );
 		$this->set('event' , $event);
-		debug($event);
 		$this->Session->write('Event',$event['Event']);
 		//$this->set('event',$this->params)		
 	}
@@ -87,7 +84,7 @@ class AdminsController extends AppController {
 		if (!$this->Session->check('Event.id')) return;
 			
 		$steps = $this->requestAction('steps/getInitializedSteps/'. $this->Session->read('Event.id'));
-
+		
 		/**
 		 * remove registration review and registration receipt from steps before returning
 		 */
@@ -97,6 +94,14 @@ class AdminsController extends AppController {
 				unset($step);
 				continue;
 			}
+			
+			// rename some steps for the admin view
+			if( $step['label'] == "Sällskap")
+				$step['label'] = "Anmälda";
+				
+			if( $step['label'] == "Kontaktuppgifter")
+				$step['label'] = "Bokningar";
+			
 			$step['classes'] = $step['state'];
 			unset($step['state']);
 		}

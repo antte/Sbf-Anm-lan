@@ -1,6 +1,9 @@
 <div id="adminPanel" class="grid_12">
 	<div class="grid_full">
 		<?php echo $html->link( 'Logga ut', array('controller' => 'admins', 'action' => 'logout'), array( 'class' => 'logout') );?>
+		<?php if ($event = $this->requestAction('events/index')): ?>
+			<h2><?php echo $html->link($event['name'],array ('controller' => 'admins', 'action' => 'event' , $event['id']))?></h2>
+			<?php endif;?>
 		<?php if ($steps = $this->requestAction('admins/steps')) :?>
 			<ol id="adminSteps">
 				<?php foreach($steps as $step): ?>
