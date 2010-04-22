@@ -154,7 +154,6 @@ class AdminsController extends AppController {
 	private function choseFirstActiveEvent() {
 		$event = $this->Event->findFirstActiveEvent();
 		$this->choseEvent($event['Event']['id']);
->>>>>>> cd4c277b4ec79109532d583d6aace195c683d09e
 	}
 	
 }
