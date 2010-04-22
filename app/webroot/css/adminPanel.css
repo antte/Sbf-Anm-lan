@@ -63,3 +63,7 @@
 #adminPanel #adminSteps li:hover {
 	background: #f86b2b;
 }
+
+#adminPanel #adminSteps .current {
+	background: #FFE84C;
+}
