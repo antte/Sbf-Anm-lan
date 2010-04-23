@@ -212,7 +212,6 @@ class RegistrationsController extends AppController {
 	}
 	
 	function toggleSendEmails($controller, $action) {
-		if(Configure::read('debug') >= 1) {
 			if($this->Session->read('dontSendEmails')) {
 				$this->Session->setFlash('Will send emails again.');
 				$this->Session->write('dontSendEmails', 0);
@@ -221,12 +220,16 @@ class RegistrationsController extends AppController {
 				$this->Session->write('dontSendEmails', 1);
 			}
 			$this->redirect( array('controller' => $controller, 'action' => $action) );
+	}
+	
+	function debugToggleSendEmails($controller, $action){
+		if(Configure::read('debug') >= 1) {
+			$this->toggleSendEmails($controller, $action);
 		} else {
 			$this->Session->setFlash('You can\'t use debug functions when not in debug mode.');
 			$this->redirect(array('controller' => 'events', 'action' => 'index'));
 		}
-	}
-	
+	} 
 	
 	/*
 	 * Debug function that populates Session with dummy data and redirects to next unfinished step
