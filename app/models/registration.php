@@ -53,7 +53,17 @@ Class Registration extends AppModel {
 		$this->Person->deleteAll		( array('Person.registration_id' => $registrationId ));						
 		$this->Registrator->deleteAll	( array('Registrator.registration_id' => $registrationId ));	
 	}
-
+	
+	/**
+	 * 
+	 */
+	function putRegistrationInSession($registration, &$session) {
+		// Retype email is not stored in the database, so we add it to the array
+		$registration['Registrator']['retype_email'] = $registration['Registrator']['email'];
+		
+		$session->write('Registration', $registration);
+		$session->write('Event.steps', $this->Event->Step->getInitializedSteps($registration['Registration']['event_id']));
+	}
 	
 }
 
