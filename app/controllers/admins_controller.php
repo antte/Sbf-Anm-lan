@@ -25,14 +25,10 @@ class AdminsController extends AppController {
 			//the user wants to log in
 			if($this->Admin->valid($this->data['Admin']['username'], $this->data['Admin']['password'])) {
 				$this->Session->write('adminLoggedIn', 1);
-				$this->choseFirstActiveEvent();
+				$this->chooseFirstActiveEvent();
 			}
 			$this->set('loginErrors', $this->Admin->loginErrors);
 		}
-	}
-	
-	function index() {
-		//redurect me to the first active events bookings!!!
 	}
 
 	function events(){
@@ -117,32 +113,31 @@ class AdminsController extends AppController {
 	 * Action for a view that lists all registrations for the particular event the user has chosen
 	 */
 	function eventindex() {
-		$indexElement='/index';
+		$defaultElementAction='index';
 		//TODO check so that the admin has chosen an event here (like we have on our other actions)
 		$eventId = $this->Session->read('Event.id');
 
-		
-		$this->loadModel('Event');
+		//set event info to view
 		$event = $this->Event->find('first', array('recursive' => 1) );
 		unset($event['id']);
 		unset($event['event_id']);
 		$this->set( 'event', $event);
+	
 		
-		//$event = Set::sort($event, '{n}.Registration.created', 'modified');
-		
-
 		if ($this->params['pass'])
-			$elementUrl = $this->params['pass'][0] . $indexElement ; 
-		else 
-			//default
-			$elementUrl = 'registrators' . $indexElement;
-		$this->set('element' , $elementUrl);
+			$elementUrl = $this->params['pass'][0] . '/' .  $defaultElementAction ; 
+		else {
+			$this->params['pass'][0]= 'registrators'; //default
+			$elementUrl = 'registrators/' . $defaultElementAction;
+		}
+		$this->set('elementUrl' , $elementUrl);
 	}
 	
 	/**
 	 * Puts the event in session and redirects to registrations
+	 * @param $id the id of an event
 	 */
-	function choseEvent($id) {
+	function chooseEvent($id) {
 		$this->requestAction('events/setEvent/'. $id);
 		$this->redirect( array('action' => 'eventindex'));
 	}
@@ -150,11 +145,15 @@ class AdminsController extends AppController {
 	/**
 	 * 
 	 */
-	private function choseFirstActiveEvent() {
+	private function chooseFirstActiveEvent() {
 		$event = $this->Event->findFirstActiveEvent();
+<<<<<<< HEAD
 		$this->choseEvent($event['Event']['id']);
 
 
+=======
+		$this->chooseEvent($event['Event']['id']);
+>>>>>>> d9c6e5625549d672e1011127b11e410903c62926
 	}
 	
 }

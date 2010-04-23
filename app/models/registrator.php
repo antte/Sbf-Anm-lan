@@ -88,12 +88,14 @@
 	 * Lists all the registrators
 	 * @param $eventId the id of the event from which we find find the registrators
 	 */
-	function listAll($eventId) {
+	function listAllRegistrators($eventId) {
 		
 		$registrations = $this->Registration->findAllByEventId($eventId);
 		
 		//removes all the unimportant values from the array
 		foreach($registrations as &$registration) {
+			
+			// TODO make dry with a loop!
 			
 			unset($registration['Event']);
 			unset($registration['Person']);

@@ -11,6 +11,6 @@
 		}
 
 	?>
-</table>
+</table> 
 </div>
 

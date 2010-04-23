@@ -27,24 +27,28 @@ Class Person extends AppModel {
     );
 
 	function listAllPeople($eventId) {
-		$events = $this->Registration->findAllByEventId($eventId);
+		$registrations = $this->Registration->findAllByEventId($eventId, array('recursive' => 0));
 		$roles = $this->Role->find('list');
-		foreach($events as &$event) :
-			$event = $event['Person'];
-			foreach($event as &$person) :
-				foreach($roles as $key => $value) {
-					if($key == $person['role_id']) {
-						$person['role'] = $value;
+		
+		foreach($registrations as &$registration) :
+				
+			// get booking number in this return
+			// in view: fix so that each booking är en td
+			$registration = $registration['Person'];
+			foreach($registration as &$model) :
+				foreach($roles as $id => $name) {
+					if($id == $model['role_id']) {
+						$model['role'] = $name;
 					}
 				}
-				unset($person['id']);
-				unset($person['registration_id']);
-				unset($person['role_id']);
+				unset($model['id']);
+				unset($model['registration_id']);
+				unset($model['role_id']);
 				
 			endforeach;
 			
 		endforeach;
-		return $events;
+		return $registrations;
 	}
     
 }

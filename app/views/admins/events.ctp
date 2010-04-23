@@ -9,7 +9,7 @@
 		foreach ($events as $i => $event){ ?>
 			<tr class ="<?php echo ($i%2)? 'even': 'odd';?>" >
 			<?php
-			echo	'<td>'.	$html->link( $event['name'], array('action' => 'choseEvent/'. $event['id'])) . '</td>';
+			echo	'<td>'.	$html->link( $event['name'], array('action' => 'chooseEvent/'. $event['id'])) . '</td>';
 			echo	'<td>'.	$event['confirmation_message'] . '</td>';
 			echo	'<td>'.	$event['is_active'] . '</td>';
 		}
