@@ -49,7 +49,6 @@ Class Person extends AppModel {
 			endforeach;
 			
 		endforeach;
-			debug( $registrations);
 		return $registrations;
 	}
     
