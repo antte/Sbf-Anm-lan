@@ -113,12 +113,7 @@ class RegistrationsController extends AppController {
 					if($registration['Registrator']['email'] == $email){
 						
 						$this->Session->write('loggedIn', true);
-						
-						// Retype email is not stored in the database, so we add it to the array
-						$registration['Registrator']['retype_email'] = $registration['Registrator']['email'];
-						
-						$this->Session->write('Registration', $registration);
-						$this->Session->write('Event.steps', $this->Registration->Event->Step->getInitializedSteps($registration['Registration']['event_id']));
+						$this->Registration->putRegistrationInSession($registration, $this->Session);
 						$this->setPreviousStepsToPrevious('Registrations','review');
 						$this->requestAction('steps/redirectToNextUnfinishedStep');
 					} else {
@@ -133,7 +128,6 @@ class RegistrationsController extends AppController {
 		}
 		$this->redirect(array('controller' => 'registrations', 'action' => 'login'));		
 	}
-	
 	
 	/**
 	 * Sending a comfirmmail using the reciept view for layout
@@ -218,7 +212,6 @@ class RegistrationsController extends AppController {
 	}
 	
 	function toggleSendEmails($controller, $action) {
-		if(Configure::read('debug') >= 1) {
 			if($this->Session->read('dontSendEmails')) {
 				$this->Session->setFlash('Will send emails again.');
 				$this->Session->write('dontSendEmails', 0);
@@ -227,12 +220,16 @@ class RegistrationsController extends AppController {
 				$this->Session->write('dontSendEmails', 1);
 			}
 			$this->redirect( array('controller' => $controller, 'action' => $action) );
+	}
+	
+	function debugToggleSendEmails($controller, $action){
+		if(Configure::read('debug') >= 1) {
+			$this->toggleSendEmails($controller, $action);
 		} else {
 			$this->Session->setFlash('You can\'t use debug functions when not in debug mode.');
 			$this->redirect(array('controller' => 'events', 'action' => 'index'));
 		}
-	}
-	
+	} 
 	
 	/*
 	 * Debug function that populates Session with dummy data and redirects to next unfinished step
@@ -293,6 +290,7 @@ class RegistrationsController extends AppController {
 			return true;
 		}
 	}
+	
 }
 
 
