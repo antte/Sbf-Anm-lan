@@ -54,17 +54,7 @@ Class Registration extends AppModel {
 		$this->Registrator->deleteAll	( array('Registrator.registration_id' => $registrationId ));	
 	}
 
-	function sortedSqlQueryForAdmin() {
-			// TODO finish this function in the morning ('21-04-2010')
-			//the purpose of the function is:
-			//1. To fetch registration for admin with registrators connected and sort the output
-			// it shall exclude id, event_id and other non obligable info form registrators
-			$event->this->find('first', array('recursive' => 1));
-			unset($event['id']);
-			unset($event['event_id']);
-			unset($event['']);
-			$this->set( 'event', $event);
-		}
+	
 }
 
 

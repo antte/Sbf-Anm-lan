@@ -13,7 +13,7 @@ class RegistratorsController extends AppController {
 			// Checks if event id is in session
 			if($this->Session->check('Event.id')) {
 				
-				$registrators = $this->Registrator->listAll($this->Session->read('Event.id'));
+				$registrators = $this->Registrator->listAllRegistrators($this->Session->read('Event.id'));
 				
 				return $registrators;
 				
