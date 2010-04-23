@@ -151,5 +151,13 @@ class AdminsController extends AppController {
 
 	}
 	
+	/**
+	 * 
+	 */
+	function putRegistrationInSessionAndRedirect() {
+		//put registration in session
+		
+	}
+	
 }
 
