@@ -31,7 +31,7 @@ Class Person extends AppModel {
 		$roles = $this->Role->find('list');
 		
 		foreach($registrations as &$registration) :
-				
+			$number = $registration['Registration']['number'];	
 			// get booking number in this return
 			// in view: fix so that each booking är en td
 			$registration = $registration['Person'];
@@ -39,7 +39,8 @@ Class Person extends AppModel {
 				foreach($roles as $id => $name) {
 					if($id == $model['role_id']) {
 						$model['role'] = $name;
-					}
+						$model['number'] = $number;
+					}	
 				}
 				unset($model['id']);
 				unset($model['registration_id']);
@@ -48,6 +49,7 @@ Class Person extends AppModel {
 			endforeach;
 			
 		endforeach;
+			debug( $registrations);
 		return $registrations;
 	}
     
