@@ -36,12 +36,15 @@
 #adminPanel #adminSteps li {
 	margin: 0px;
 	float: left;
-	height: 35px;
-	line-height: 35px;
+	height: 31px;
+	line-height: 31px;
 	padding: 0;
 	background-color: #fff;
 	vertical-align: middle;
-	border: 1px dotted #555;
+	border-top:3px solid #999;
+	border-left: 3px solid #999;
+	border-right: 3px solid #444;
+	border-bottom: 3px solid #444;
 }
 
 #adminPanel #adminSteps li a {
@@ -55,15 +58,6 @@
 #adminPanel #adminSteps li a:link, #adminPanel #adminSteps li a:active,#adminPanel #adminSteps li a:visited {
 	color: black;
 }
-
-#adminPanel #adminSteps li.active {
-	background: #ffe84c;
-}
-
-#adminPanel #adminSteps li:hover {
-	background: #f86b2b;
-}
-
 #adminPanel #adminSteps .current {
 	background: #FFE84C;
 }

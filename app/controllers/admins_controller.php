@@ -133,10 +133,11 @@ class AdminsController extends AppController {
 
 		if ($this->params['pass'])
 			$elementUrl = $this->params['pass'][0] . $indexElement ; 
-		else 
-			//default
+		else {
+			$this->params['pass'][0]= 'registrators'; //default
 			$elementUrl = 'registrators' . $indexElement;
-		$this->set('element' , $elementUrl);
+		}
+			$this->set('element' , $elementUrl);
 	}
 	
 	/**

@@ -11,8 +11,14 @@
 		<?php if(isset($event['id'])): ?>
 			<h2><?php echo $html->link($event['name'],array ('controller' => 'admins', 'action' => 'event' , $event['id']))?></h2>
 		<?php endif; ?>
-		
-		<?php if ($steps = $this->requestAction('admins/steps/'.$this->params['pass'][0])) :?>
+		<?php 
+			if(isset($this->params['pass'][0])){
+				$pass = $this->params['pass'][0];
+			} else {
+				$pass ='';
+			}
+		?>
+		<?php if ($steps = $this->requestAction('admins/steps/'.$pass)) :?>
 			<ol id="adminSteps">
 				<?php foreach($steps as $step): ?>
 					<li class="<?php echo $step['classes']; ?>">
