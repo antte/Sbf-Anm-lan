@@ -113,12 +113,7 @@ class RegistrationsController extends AppController {
 					if($registration['Registrator']['email'] == $email){
 						
 						$this->Session->write('loggedIn', true);
-						
-						// Retype email is not stored in the database, so we add it to the array
-						$registration['Registrator']['retype_email'] = $registration['Registrator']['email'];
-						
-						$this->Session->write('Registration', $registration);
-						$this->Session->write('Event.steps', $this->Registration->Event->Step->getInitializedSteps($registration['Registration']['event_id']));
+						$this->Registration->putRegistrationInSession($registration, $this->Session);
 						$this->setPreviousStepsToPrevious('Registrations','review');
 						$this->requestAction('steps/redirectToNextUnfinishedStep');
 					} else {
@@ -133,7 +128,6 @@ class RegistrationsController extends AppController {
 		}
 		$this->redirect(array('controller' => 'registrations', 'action' => 'login'));		
 	}
-	
 	
 	/**
 	 * Sending a comfirmmail using the reciept view for layout
@@ -293,6 +287,7 @@ class RegistrationsController extends AppController {
 			return true;
 		}
 	}
+	
 }
 
 

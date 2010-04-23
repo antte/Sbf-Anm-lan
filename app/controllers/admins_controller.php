@@ -154,9 +154,16 @@ class AdminsController extends AppController {
 	/**
 	 * 
 	 */
-	function putRegistrationInSessionAndRedirect() {
-		//put registration in session
+	function putRegistrationInSessionAndRedirect($registrationNumber) {
 		
+		$registration = $this->Event->Registration->findByNumber($registrationNumber);
+		
+		$this->Event->Registration->putRegistrationInSession($registration, $this->Session);
+		
+		//all steps up until review are set to previous so that redirectToNextUnfinished redirects to the right step
+		$this->setPreviousStepsToPrevious('Registrations','review');
+		
+		$this->requestAction('steps/redirectToNextUnfinishedStep');
 	}
 	
 }
