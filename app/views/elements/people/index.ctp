@@ -2,12 +2,12 @@
 	<div class="grid_full">
 		<h1>Lista på alla bokade</h1>
 	</div>
-<table id="registrations">
+	<table id="registrations">
 		<?php 
 		$people = $this->requestAction('people/index');
-		echo $html->tableHeaders(array ('Bokningsnummer', 'Förnamn', 'Efternamn', 'Roll'));
-		?>
-		<?php
+		echo "<thead>";
+			echo $html->tableHeaders(array ('Bokningsnummer', 'Förnamn', 'Efternamn', 'Roll'));
+		echo "</thead>";
 		$k=0;
 		foreach ($people as $company){ ?>
 		<?php 
