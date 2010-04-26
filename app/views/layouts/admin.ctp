@@ -19,8 +19,13 @@
 		echo $html->css('firstblood');
 		echo $html->css('debug');
 		echo $html->css('adminPanel');
+		echo $html->css('dataTable');
 		echo $html->css('admin');
+		
 		echo $javascript->link('jquery.1.4.2-min');
+		echo $javascript->link('jquery.dataTables.min');
+		echo $javascript->link('adminSearch');
+		
 	?>
 	<!--[if lte IE 6]>
 		<?php echo $html->css('ie'); ?>

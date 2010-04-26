@@ -5,7 +5,9 @@
 	<table id="registrations">
 		<?php 
 			$people = $this->requestAction('people/index');
-			echo $html->tableHeaders(array ('Bokningsnummer', 'Förnamn', 'Efternamn', 'Roll'));
+			echo "<thead>";
+				echo $html->tableHeaders(array ('Bokningsnummer', 'Förnamn', 'Efternamn', 'Roll'));
+			echo "</thead>";
 			$k=0;
 			$i=0;
 			foreach ($people as $company){ 

@@ -19,7 +19,10 @@
 		echo $html->css(array('print'), 'stylesheet', array('media' =>  'print'));
 		echo $html->css('firstblood');
 		echo $html->css('debug');
+
+		echo $html->css('dataTable');
 		echo $html->css('adminPanel');
+
 		echo $javascript->link('jquery.1.4.2-min');
 		echo $javascript->link('rocket');
 	?>
