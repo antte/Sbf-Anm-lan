@@ -1,6 +1,7 @@
 <?php
 
 	class AppModel extends Model {
+		 var $actsAs = array('Containable');
 		
 		/**
 		 * Validates an array with multiple sets of data
