@@ -11,7 +11,7 @@ class AdminsController extends AppController {
 		if ($this->Session->check('adminLoggedIn')) {
 			$this->set('adminLoggedIn', 1);
 		} else {
-			if (!($this->params['action'] == 'login'))
+			if (!($this->params['action'] == 'login') && !($this->params['action'] == 'checkAdminLoggedIn'))
 				$this->redirect(array( 'controller' => 'admins' , 'action' => 'login' )); 
 			$this->set('adminLoggedIn', 0);			 	
 		}
@@ -108,7 +108,9 @@ class AdminsController extends AppController {
 		$this->Admin->save($admin);
 	}
 	
-	function checkAdminLoggedIn() {	return $this->Session->check('adminLoggedIn'); }
+	function checkAdminLoggedIn() {	
+		return $this->Session->check('adminLoggedIn'); 
+	}
 	
 	/**
 	 * Action for a view that lists all registrations for the particular event the user has chosen
