@@ -74,7 +74,7 @@
 	 		)
     	);
     	
-   
+
     	
     /**
      * Matches one field against data (another field)
@@ -86,54 +86,36 @@
 		return ($value[0] == $this->data[$this->name][$field]);
 	}
 	
+	
 	/*
 	 * Lists all the registrators
 	 * @param $eventId the id of the event from which we find find the registrators
 	 */
 		
-		
-		
-		
-		
 		//removes all the unimportant values from the array
 		//foreach($registrations as &$registration) {
-				
-	//return $registrations;
-		/*	
 			
-			
-			// TODO make dry with a loop!
-			
-			unset($registration['Event']);
-			unset($registration['Person']);
-			unset($registration['Registration']['event_id']);
-			unset($registration['Registrator']['id']);
-			unset($registration['Registrator']['registration_id']);
-			
-			$registration['number'] = $registration['Registration']['number'];
-			$registration['created'] = $registration['Registration']['created'];
-			if( $registration['Registration']['created'] != $registration['Registration']['modified'] ) {
-				$registration['modified'] = $registration['Registration']['modified'];
-			} else {
-				$registration['modified'] = "";
-			}
-			
-			$registration['first_name'] = $registration['Registrator']['first_name'];
-			$registration['last_name'] = $registration['Registrator']['last_name'];
-			$registration['email'] = $registration['Registrator']['email'];
-			$registration['phone'] = $registration['Registrator']['phone'];
-			//$registration['c_o'] = $registration['Registrator']['c_o'];
-			//$registration['street_address'] = $registration['Registrator']['street_address'];
-			//$registration['city'] = $registration['Registrator']['city'];
-			//$registration['postal_code'] = $registration['Registrator']['postal_code'];
-			//$registration['extra_information'] = $registration['Registrator']['extra_information'];
-			
-			unset($registration['Registration']);
-			unset($registration['Registrator']);
-			
+	function listAllRegistrators($eventId) {
+		$registrators = $this->find('all', array('conditions' => 
+			array(
+				'Registration.event_id' => $eventId
+			),
+			'fields' => array(
+				'Registration.number', 
+				'Registrator.first_name', 
+				'Registrator.last_name', 
+				'Registrator.email', 
+				'Registrator.phone',
+			)
+		));
+		foreach($registrators as &$registrator) {
+			$registrator['Registrator']['number'] = $registrator['Registration']['number'];
+			unset($registrator['Registration']);
 		}
+		return $registrators;
 		
-	}*/
-		
+		}
+	
+	}	
 		
 	

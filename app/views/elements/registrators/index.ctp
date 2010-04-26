@@ -8,18 +8,21 @@
 		
 		echo "<thead>";
 		echo $html->tableHeaders(
-			array('Bokningsnr', 'Skapad', 'Ändrad', 'Förnamn', 'Efternamn', 'E-post', 'Telefonnummer')
+			array('Förnamn', 'Efternamn', 'E-post', 'Telefonnummer', 'Bokningsnummer')
 		);
 		echo "</thead>";
 			foreach ($registrators as $i => $registrator){ ?> 
 				<tr >
 				<?php 	
-					foreach ($registrator as $j => $colum){
-						echo 	'<td>'. $html->link($registrator[$j],'putRegistrationInSessionAndRedirect/'. $registrator['number']) . '</td>';
+					foreach ($registrator as $modelName => $fields){
+						foreach($fields as $fieldName => $fieldValue) {
+							echo 	'<td>'. $html->link($fields[$fieldName],'putRegistrationInSessionAndRedirect/'. $registrator['Registrator']['number']) . '</td>';
+						}
 					}
 					echo " </a></tr> ";
-					
+				
 				}
+			
 			?>
 	</table>
 </div>

@@ -11,7 +11,7 @@ class AdminsController extends AppController {
 		if ($this->Session->check('adminLoggedIn')) {
 			$this->set('adminLoggedIn', 1);
 		} else {
-			if (!($this->params['action'] == 'login'))
+			if (!($this->params['action'] == 'login') && !($this->params['action'] == 'checkAdminLoggedIn'))
 				$this->redirect(array( 'controller' => 'admins' , 'action' => 'login' )); 
 			$this->set('adminLoggedIn', 0);			 	
 		}
@@ -24,7 +24,8 @@ class AdminsController extends AppController {
 		if ($this->data['Admin']){
 			//the user wants to log in
 			if($this->Admin->valid($this->data['Admin']['username'], $this->data['Admin']['password'])) {
-				$this->Session->write('adminLoggedIn', 1);
+				$admin = $this->Admin->findByUsername($this->data['Admin']['username']);
+				$this->Session->write('adminLoggedIn', $admin['Admin']['id']);
 				$this->chooseFirstActiveEvent();
 			}
 			$this->set('loginErrors', $this->Admin->loginErrors);
@@ -107,7 +108,9 @@ class AdminsController extends AppController {
 		$this->Admin->save($admin);
 	}
 	
-	function checkAdminLoggedIn() {	return $this->Session->check('adminLoggedIn'); }
+	function checkAdminLoggedIn() {	
+		return $this->Session->check('adminLoggedIn'); 
+	}
 	
 	/**
 	 * Action for a view that lists all registrations for the particular event the user has chosen
@@ -164,6 +167,17 @@ class AdminsController extends AppController {
 		$this->setPreviousStepsToPrevious('Registrations','review');
 		
 		$this->requestAction('steps/redirectToNextUnfinishedStep');
+	}
+	
+	/**
+	 * @return int current admins.id
+	 */
+	function getCurrentAdminId() {
+		
+		if(!isset($this->params['requested'])) return;
+		
+		return $this->Session->read('adminLoggedIn');
+		
 	}
 	
 }

@@ -41,9 +41,13 @@ class RegistrationsController extends AppController {
 		
 		$registration = $this->Session->read('Registration');
 		
+<<<<<<< HEAD
+		if ($this->Session->check('loggedIn') || $this->Session->check('adminLoggedIn')){
+=======
 		if($this->requestAction('admins/checkAdminLoggedIn')) $registration = $this->touchByAdmin($registration);
 		
 		if ($this->Session->check('loggedIn')){
+>>>>>>> 8924c7acbf330ac98508884cbd07bc389cb3e5eb
 			// if we're in edit, we delete everything and save the session again because updateAll & deleteAll are ... unkind
 			$this->Registration->deleteAllRegistrationRelatedDataById($registration['Registration']['id']);
 		}
@@ -56,12 +60,12 @@ class RegistrationsController extends AppController {
 				$this->sendRegistrationConfirmMail($this->Session->read('Event'), $registration['Registrator']);
 			}
 			
-			$this->clearSessionFromAllRegistrationInformation();
+			//$this->clearSessionFromAllRegistrationInformation();
 		} else {
-			$this->clearSessionFromAllRegistrationInformation();
+			//$this->clearSessionFromAllRegistrationInformation();
 			$this->Session->setFlash('Vi ber om ursäkt, din registrering kunde inte slutföras. Kontakta support.');
 		}
-		$this->redirect(array('action' => 'receipt'));
+		//$this->redirect(array('action' => 'receipt'));
 		
 	}
 	

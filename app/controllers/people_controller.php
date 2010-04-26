@@ -6,9 +6,12 @@ class PeopleController extends AppController {
 	 * Inits the view for adding people (including amount of people) to the party
 	 * @param unknown_type $amountOfPeople
 	 */
+	function beforeFilter(){
+		$this->layout='registration';	
+	}
+	
 	function create($amountOfPeople = null){
 		
-		$this->layout='registration';
 		if (!$this->previousStepsAreDone($this)){
 			$this->requestAction('steps/redirectToNextUnfinishedStep');	
 		}
