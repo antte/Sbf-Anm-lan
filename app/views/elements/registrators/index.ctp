@@ -9,7 +9,7 @@
 		
 		echo "<thead>";
 		echo $html->tableHeaders(
-			array('Bokningsnr', 'Skapad', 'Ändrad', 'Förnamn', 'Efternamn', 'E-post', 'Telefonnummer', 'C/O', 'Adress', 'Stad', 'Postkod', 'Extra information')
+			array('Bokningsnr', 'Skapad', 'Ändrad', 'Förnamn', 'Efternamn', 'E-post', 'Telefonnummer')
 		);
 		echo "</thead>";
 		

@@ -115,11 +115,11 @@
 			$registration['last_name'] = $registration['Registrator']['last_name'];
 			$registration['email'] = $registration['Registrator']['email'];
 			$registration['phone'] = $registration['Registrator']['phone'];
-			$registration['c_o'] = $registration['Registrator']['c_o'];
-			$registration['street_address'] = $registration['Registrator']['street_address'];
-			$registration['city'] = $registration['Registrator']['city'];
-			$registration['postal_code'] = $registration['Registrator']['postal_code'];
-			$registration['extra_information'] = $registration['Registrator']['extra_information'];
+			//$registration['c_o'] = $registration['Registrator']['c_o'];
+			//$registration['street_address'] = $registration['Registrator']['street_address'];
+			//$registration['city'] = $registration['Registrator']['city'];
+			//$registration['postal_code'] = $registration['Registrator']['postal_code'];
+			//$registration['extra_information'] = $registration['Registrator']['extra_information'];
 			
 			unset($registration['Registration']);
 			unset($registration['Registrator']);
