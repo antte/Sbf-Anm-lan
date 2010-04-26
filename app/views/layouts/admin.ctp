@@ -32,7 +32,7 @@
 	<![endif]-->
 	
 </head>
-<body>
+<body class="admin">
 
 	<div id="wrap">
 		<header>

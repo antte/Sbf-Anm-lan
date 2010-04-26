@@ -31,7 +31,7 @@
 	<![endif]-->
 	
 </head>
-<body>
+<body class="<?php echo($this->requestAction('admins/checkAdminLoggedIn'))? 'admin' : 'registration' ;?>" >
 
 	<div id="wrap">
 		<header>
