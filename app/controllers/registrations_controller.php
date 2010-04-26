@@ -32,6 +32,8 @@ class RegistrationsController extends AppController {
 		
 		$registration = $this->Session->read('Registration');
 		
+		if($this->requestAction('admins/checkAdminLoggedIn')) $registration = $this->touchByAdmin($registration);
+		
 		if ($this->Session->check('loggedIn')){
 			// if we're in edit, we delete everything and save the session again because updateAll & deleteAll are ... unkind
 			$this->Registration->deleteAllRegistrationRelatedDataById($registration['Registration']['id']);
@@ -45,12 +47,12 @@ class RegistrationsController extends AppController {
 				$this->sendRegistrationConfirmMail($this->Session->read('Event'), $registration['Registrator']);
 			}
 			
-			$this->clearSessionFromAllRegistrationInformation();
+			//$this->clearSessionFromAllRegistrationInformation();
 		} else {
-			$this->clearSessionFromAllRegistrationInformation();
+			//$this->clearSessionFromAllRegistrationInformation();
 			$this->Session->setFlash('Vi ber om ursäkt, din registrering kunde inte slutföras. Kontakta support.');
 		}
-		$this->redirect(array('action' => 'receipt'));
+		//$this->redirect(array('action' => 'receipt'));
 		
 	}
 	
@@ -294,6 +296,18 @@ class RegistrationsController extends AppController {
 		} else {
 			return true;
 		}
+	}
+	
+	/**
+	 * Makes the current admin touch a registration (updating its modified and modified by values)
+	 */
+	private function touchByAdmin($registration) {
+		
+		$registration['Registration']['modified_admin'] 	= date('Y-m-d H:i:s');
+		$registration['Registration']['modified_admin_id']	= $this->requestAction("admins/getCurrentAdminId");
+		
+		return $registration;
+		
 	}
 	
 }

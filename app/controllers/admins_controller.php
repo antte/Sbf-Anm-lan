@@ -24,7 +24,8 @@ class AdminsController extends AppController {
 		if ($this->data['Admin']){
 			//the user wants to log in
 			if($this->Admin->valid($this->data['Admin']['username'], $this->data['Admin']['password'])) {
-				$this->Session->write('adminLoggedIn', 1);
+				$admin = $this->Admin->findByUsername($this->data['Admin']['username']);
+				$this->Session->write('adminLoggedIn', $admin['Admin']['id']);
 				$this->chooseFirstActiveEvent();
 			}
 			$this->set('loginErrors', $this->Admin->loginErrors);
@@ -164,6 +165,17 @@ class AdminsController extends AppController {
 		$this->setPreviousStepsToPrevious('Registrations','review');
 		
 		$this->requestAction('steps/redirectToNextUnfinishedStep');
+	}
+	
+	/**
+	 * @return int current admins.id
+	 */
+	function getCurrentAdminId() {
+		
+		if(!isset($this->params['requested'])) return;
+		
+		return $this->Session->read('adminLoggedIn');
+		
 	}
 	
 }
