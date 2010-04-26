@@ -32,7 +32,7 @@ class RegistrationsController extends AppController {
 		
 		$registration = $this->Session->read('Registration');
 		
-		if ($this->Session->check('loggedIn')){
+		if ($this->Session->check('loggedIn') || $this->Session->check('adminLoggedIn')){
 			// if we're in edit, we delete everything and save the session again because updateAll & deleteAll are ... unkind
 			$this->Registration->deleteAllRegistrationRelatedDataById($registration['Registration']['id']);
 		}

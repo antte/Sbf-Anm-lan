@@ -50,7 +50,7 @@ Class Registration extends AppModel {
 	 */
 	function deleteAllRegistrationRelatedDataById($registrationId) {
 		$this->deleteAll				( array('Registration.id' => $registrationId));
-		$this->Person->deleteAll		( array('Person.registration_id' => $registrationId ));						
+		$this->Person->deleteAll		( array('Person.registration_id' => $registrationId )); //Funkar Inte						
 		$this->Registrator->deleteAll	( array('Registrator.registration_id' => $registrationId ));	
 	}
 	
