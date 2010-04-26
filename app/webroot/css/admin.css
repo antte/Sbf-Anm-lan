@@ -49,29 +49,24 @@ table#registrations td {
 }
 
 
-#registrations a {
+#moduleIndex a {
 	display:block;
 	width:100%;
 	height:100%;
 	padding:5px;
 }
 
-#registrations a.odd, #registrations a.odd:visited, #registrations a.odd:hover {
+#moduleIndex a.odd, #moduleIndex a.odd:visited, #moduleIndex a.odd:hover {
 	color:#000;
 	background:none;
 }
 
-#registrations a.even, #registrations a.even:visited, #registrations a.even:hover {
+#moduleIndex a.even, #moduleIndex a.even:visited, #moduleIndex a.even:hover {
 	color:#00f;
 	background:none;
 }
 
-#registrations tr:hover {
+#moduleIndex tr:hover {
 	background:#fcc;
 }
 
-#registrations tr.company td {
-	border-top:none;
-	border-bottom:none;
-	
-}
