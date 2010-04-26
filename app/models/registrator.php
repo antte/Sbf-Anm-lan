@@ -2,6 +2,7 @@
 
 	class Registrator extends AppModel {
 		var $belongsTo = array('Registration');
+		 var $actsAs = array('Containable');
 		
 		var $validate = array(
         	'first_name' => array (
@@ -74,6 +75,8 @@
 	 		)
     	);
     	
+   
+    	
     /**
      * Matches one field against data (another field)
      * @param $data to match with
@@ -88,12 +91,21 @@
 	 * Lists all the registrators
 	 * @param $eventId the id of the event from which we find find the registrators
 	 */
-	function listAllRegistrators($eventId) {
+		
+		function listAllRegistrators() {
+		$registrations = $this->Registration->find('all', array('contain' => array('number' => array('created' => 
+														array('modified' => array('first_name' => array('last_name' 
+														=> array('email' => array('phone')))))))));
+
 		
 		$registrations = $this->Registration->findAllByEventId($eventId);
 		
 		//removes all the unimportant values from the array
 		foreach($registrations as &$registration) {
+			
+			
+		/*	
+			
 			
 			// TODO make dry with a loop!
 			
@@ -128,6 +140,6 @@
 		
 		return $registrations;
 		
-	}
+	}*/
 	
-}
+	}
