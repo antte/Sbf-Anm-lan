@@ -19,8 +19,17 @@ class RegistrationsController extends AppController {
 	function add($action = null){
 		// If there already exists a booking number the user is editing an existing registration
 		if ($this->Session->check('Registration.Registration.number')){
-			//Set the modified date for the editation and leave registration number unchanged
-			$this->Session->write('Registration.Registration.modified', date('Y-m-d H:i:s'));
+			
+			/**
+			 * If this registration is being edited by an admin we dont want modified to be
+			 * updated because it isnt the registrator that is updating it.
+			 */
+
+			if (!$this->requestAction('admins/checkAdminLoggedIn')) {
+				// Set the modified date for the editation and leave registration number unchanged
+				$this->Session->write('Registration.Registration.modified', date('Y-m-d H:i:s'));
+			}
+			
 		} else {
 			// Make and set a booking number to Session
 			$this->Session->write('Registration.Registration.number' , $this->Registration->generateUniqueNumber());			
