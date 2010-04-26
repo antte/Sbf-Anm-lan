@@ -50,7 +50,7 @@ class RegistrationsController extends AppController {
 			$this->clearSessionFromAllRegistrationInformation();
 			$this->Session->setFlash('Vi ber om ursäkt, din registrering kunde inte slutföras. Kontakta support.');
 		}
-		//$this->redirect(array('action' => 'receipt'));
+		$this->redirect(array('action' => 'receipt'));
 		
 	}
 	
