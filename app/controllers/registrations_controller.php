@@ -39,13 +39,18 @@ class RegistrationsController extends AppController {
 		
 		if($this->Registration->saveAll($registration)) {
 			$this->Session->write('Event.registrationId', $this->Registration->id);
-			$this->sendRegistrationConfirmMail($this->Session->read('Event'), $registration['Registrator']);
+			
+			if( !($this->data['Registration']['sendConfirmationEmail'] == 0) ) {
+				//We send out confirmation mail unless an admin has explicitly chosen not to
+				$this->sendRegistrationConfirmMail($this->Session->read('Event'), $registration['Registrator']);
+			}
+			
 			$this->clearSessionFromAllRegistrationInformation();
 		} else {
 			$this->clearSessionFromAllRegistrationInformation();
 			$this->Session->setFlash('Vi ber om ursäkt, din registrering kunde inte slutföras. Kontakta support.');
 		}
-		$this->redirect(array('action' => 'receipt'));
+		//$this->redirect(array('action' => 'receipt'));
 		
 	}
 	
