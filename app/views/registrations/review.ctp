@@ -28,6 +28,11 @@
 	<?php 
 		echo $form->create('Registration' , array('action' => 'add/review'));
 		echo "<fieldset>";
+		
+		if($this->requestAction('admins/checkAdminLoggedIn')) {
+			echo $form->input('sendConfirmationEmail', array('type' => 'checkbox', 'checked' => true, 'label' => 'Vill du att ett bekräftelsemail ska skickas till Kontaktpersonen för bokningen?'));
+		}
+		
 		echo $form->submit('Bekräfta anmälan');
 		echo "</fieldset>";
 		echo $form->end();

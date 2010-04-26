@@ -291,3 +291,14 @@ table td {
 	color: #555;
 }
 
+#RegistrationAdd\/reviewForm .input.checkbox {
+	margin-left: 10px;
+}
+
+#RegistrationAdd\/reviewForm .input.checkbox label {
+	float: none;
+	font-size: 100%;
+}
+#RegistrationAdd\/reviewForm .input.checkbox input {
+	margin-right: 5px;
+}
