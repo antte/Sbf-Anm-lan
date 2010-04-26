@@ -1,9 +1,6 @@
 $(document).ready(function(){
-	$('table#registrators').dataTable({
-		"bPaginate": false
-	});
-	
-	$('table#registrations').dataTable({
+	$('table#moduleIndex').dataTable({
+		"aaSorting": [[ 0, "desc", 4 ]],
 		"bPaginate": false
 	});
 	

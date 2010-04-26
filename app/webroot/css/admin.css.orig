@@ -66,19 +66,19 @@ table#registrations td {
 	background:none;
 }
 
-#moduleIndex tbody tr:hover, #registrators tbody tr:hover, #moduleIndex tbody tr:hover td.sorting_1, #registrators tbody tr:hover td.sorting_1 {
+<<<<<<< HEAD
+#moduleIndex tr:hover {
+	background:#fcc;
+=======
+#registrations tbody tr:hover, #registrators tbody tr:hover, #registrations tbody tr:hover td.sorting_1, #registrators tbody tr:hover td.sorting_1 {
 	background: #0e2b87;
 }
-#moduleIndex tr:hover a, #registrators tr:hover a {
+#registrations tr:hover a, #registrators tr:hover a {
 	color: #fff;
 }
 
-#moduleIndex thead th, #registrators thead th {
+#registrations thead th, #registrators thead th {
 	padding-right: 20px;
+>>>>>>> b9b9342925be0c55d8c3acb3af5c0ac2101f8866
 }
 
-#moduleIndex tr.company td {
-	border-top:none;
-	border-bottom:none;
-	
-}

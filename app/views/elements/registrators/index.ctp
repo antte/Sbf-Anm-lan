@@ -13,11 +13,10 @@
 		);
 		echo "</thead>";
 			foreach ($registrators as $i => $registrator){ ?> 
-				<tr class ="<?php 	echo ($i%2)? 'even': 'odd';
-							?>" >
+				<tr >
 				<?php 	
 					foreach ($registrator as $j => $colum){
-						echo 	'<td>'. $html->link($registrator[$j],'putRegistrationInSessionAndRedirect/'. $registrator['number'],array('class'=> ($i%2)? 'even': 'odd')) . '</td>';
+						echo 	'<td>'. $html->link($registrator[$j],'putRegistrationInSessionAndRedirect/'. $registrator['number']) . '</td>';
 					}
 					echo " </a></tr> ";
 					
