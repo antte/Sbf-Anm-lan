@@ -66,8 +66,15 @@ table#registrations td {
 	background:none;
 }
 
-#registrations tr:hover {
-	background:#fcc;
+#registrations tbody tr:hover, #registrators tbody tr:hover, #registrations tbody tr:hover td.sorting_1, #registrators tbody tr:hover td.sorting_1 {
+	background: #0e2b87;
+}
+#registrations tr:hover a, #registrators tr:hover a {
+	color: #fff;
+}
+
+#registrations thead th, #registrators thead th {
+	padding-right: 20px;
 }
 
 #registrations tr.company td {
