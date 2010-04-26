@@ -12,13 +12,9 @@
 			$i=0;
 			foreach ($people as $company){ 
 				foreach ($company as $person){ ?> 
-				<tr class ="<?php 	echo ($k%2)? 'even': 'odd';
-									echo ($k%2)? 'company': '';
-							?>" >
-				<?php 	echo 	'<td>'. $html->link($person['number'],'putRegistrationInSessionAndRedirect/'. $person['number'],array('class'=> ($i%2)? 'even': 'odd')) . '</td>';
-						echo	'<td>'.	$html->link($person['first_name'],'putRegistrationInSessionAndRedirect/'. $person['number'],array('class'=> ($i%2)? 'even': 'odd')) . '</td>';
-						echo	'<td>'.	$html->link($person['last_name'],'putRegistrationInSessionAndRedirect/'. $person['number'],array('class'=> ($i%2)? 'even': 'odd')) . '</td>';
-						echo	'<td>'.	$html->link($person['role'],'putRegistrationInSessionAndRedirect/'. $person['number'],array('class'=> ($i%2)? 'even': 'odd')) . '</td>';
+				<tr class ="<?php echo ($i%2)? 'company ': '';	?>" >
+				<?php 	foreach ($person as $j => $row)
+							echo 	'<td>'. $html->link($person[$j],'putRegistrationInSessionAndRedirect/'. $person['number'],array('class'=> ($i%2)? 'even ': 'odd ')) . '</td>';
 					echo " </a></tr> ";
 					$k++;
 					

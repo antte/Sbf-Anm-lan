@@ -12,9 +12,16 @@
 			array('Bokningsnr', 'Skapad', 'Ändrad', 'Förnamn', 'Efternamn', 'E-post', 'Telefonnummer', 'C/O', 'Adress', 'Stad', 'Postkod', 'Extra information')
 		);
 		echo "</thead>";
-		
-		echo $html->tableCells($registrators, array('class' => 'odd'), array('class' => 'even'));
-		
-	?>
+			foreach ($registrators as $i => $registrator){ ?> 
+				<tr class ="<?php 	echo ($i%2)? 'even': 'odd';
+							?>" >
+				<?php 	
+					foreach ($registrator as $j => $colum){
+						echo 	'<td>'. $html->link($registrator[$j],'putRegistrationInSessionAndRedirect/'. $registrator['number'],array('class'=> ($i%2)? 'even': 'odd')) . '</td>';
+					}
+					echo " </a></tr> ";
+					
+				}
+			?>
 	</table>
 </div>
