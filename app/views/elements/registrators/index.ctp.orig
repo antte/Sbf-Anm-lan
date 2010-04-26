@@ -2,13 +2,18 @@
 	<div class="grid_full">
 		<h1>Lista på alla bokningar</h1>
 	</div>
+<<<<<<< HEAD
+	<?php echo $html->link('en bokning', array('controller' => 'admins', 'action' => 'putRegistrationInSessionAndRedirect', 'O2H1RD' ))?>
 	<table id="moduleIndex">
+=======
+	<table id="registrators">
+>>>>>>> 15308a486e9ea7f20e113d0f688463c8c19d404c
 	<?php 
 		$registrators = $this->requestAction('registrators/index');
 		
 		echo "<thead>";
 		echo $html->tableHeaders(
-			array('Bokningsnr', 'Skapad', 'Ändrad', 'Förnamn', 'Efternamn', 'E-post', 'Telefonnummer')
+			array('Bokningsnr', 'Skapad', 'Ändrad', 'Förnamn', 'Efternamn', 'E-post', 'Telefonnummer', 'C/O', 'Adress', 'Stad', 'Postkod', 'Extra information')
 		);
 		echo "</thead>";
 			foreach ($registrators as $i => $registrator){ ?> 

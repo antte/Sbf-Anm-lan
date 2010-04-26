@@ -54,9 +54,7 @@
 	</div>
 	<footer>
 		<div class="container_12">
-			<?php
-			if(Configure::read('debug') >= 1) echo $this->requestAction('steps/debug');
-			 echo $cakeDebug; ?>
+			<?php echo $cakeDebug; ?>
 		</div>
 		<?php echo $scripts_for_layout;?>
 	</footer>

@@ -1,3 +1,5 @@
+<!-- element/people/index.ctp -->
+
 <div class="grid_12">
 	<div class="grid_full">
 		<h1>Lista på alla bokade</h1>
@@ -14,9 +16,9 @@
 				foreach ($company as $person){ ?> 
 				<tr class ="<?php echo $person['number']; ?>" >
 				<?php 	foreach ($person as $j => $row)
-							echo 	'<td>'. $html->link($person[$j],'putRegistrationInSessionAndRedirect/'. $person['number'],array('class'=> ($i%2)? 'even ': 'odd ')) . '</td>';
+							echo 	'<td>'. $html->link($person[$j],'putRegistrationInSessionAndRedirect/'. $person['number']) . '</td>';
 					echo " </a></tr> ";
-					$k++;
+			
 					
 				}
 				$i++;
