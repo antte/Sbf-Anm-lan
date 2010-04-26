@@ -76,3 +76,43 @@
 #rocket .disabled {
 	color: #555;
 }
+
+/* THIS IS FOR ADMIN ROCKET MAYBE BRAKE OUT */
+
+body.admin #rocket {
+	clear: both;
+	background: #0E2B87;
+	height: 42px;
+	padding: 0 10px;
+}
+
+body.admin #rocket li span.leftArrow{
+	display:none;	
+}
+
+body.admin #rocket li{
+	background-color:#FFFFFF;
+	border-color:#999999 #444444 #444444 #999999;
+	border-style:solid;
+	border-width:3px;
+	float:left;
+	height:31px;
+	line-height:31px;
+	margin:0;
+	padding:0;
+}
+
+body.admin #rocket li {
+	display:inline-block;
+	height:31px;
+	padding:0 20px;
+	text-decoration:none;
+}
+
+body.admin #rocket li.current {
+	background: #ffe84c;
+}
+
+body.admin #rocket .disabled {
+	background: #ffffff;
+}

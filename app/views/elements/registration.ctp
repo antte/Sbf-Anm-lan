@@ -3,15 +3,21 @@
 <div id="booking_nr" class="grid_8">
 	<div class="grid_full">
 	  	<h2><?php echo $event['name'];?></h2>
-		<?php if(isset($registration['Registration']['number'])){?>
+		<?php if(isset($registration['Registration']['number'])):?>
 			<p class="booking_nr">Bokningsnummer: <?php echo $registration['Registration']['number']?></p>
-		<?php } ?>
+		<?php endif; ?>
+		
 		<?php if(isset($registration['Registration']['created']) && isset($registration['Registration']['modified'])):?>
-				<p class="datetime">Skapad: <?php echo $registration['Registration']['created']?></p>
+			<p class="datetime">Skapad: <?php echo $registration['Registration']['created']?></p>
+			
 			<?php if ( $registration['Registration']['created'] !== $registration['Registration']['modified'] ):?>
-				<?php //if created and modified is the same the registration was just created and the user isn't interested ?>
 				<p class="datetime">Senast ändrad: <?php echo $registration['Registration']['modified']?></p>
 			<?php endif; ?>
-		<?php endif;?>
+			
+			<?php if ( $registration['Registration']['modified_admin']):?>
+				<p class="datetime">Senast ändrad av SBF: <?php echo $registration['Registration']['modified_admin'] . '<br /> Referens: ' . $registration['Registration']['modified_admin_id']?></p>
+			<?php endif; ?>
+		
+		<?php endif; ?>
 	</div>
 </div>

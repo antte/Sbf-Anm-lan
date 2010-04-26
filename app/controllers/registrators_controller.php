@@ -4,6 +4,12 @@ class RegistratorsController extends AppController {
 	
 	var $helpers = array('Form', 'Html', 'Javascript');
 	
+	
+	function beforeFilter(){
+		$this->layout = 'registration';	
+	}
+	
+	
 	// Lists all the registators (if we're logged in as admin)
 	function index() {
 		
@@ -32,7 +38,6 @@ class RegistratorsController extends AppController {
 	 */
 	function create() {
 		//change to registration layout so that the rocket will be present on all steps.
-		$this->layout = 'registration';
 		
 		if (!$this->previousStepsAreDone($this)){
 			$this->requestAction('steps/redirectToNextUnfinishedStep');	

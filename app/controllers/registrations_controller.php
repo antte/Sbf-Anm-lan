@@ -5,6 +5,7 @@ class RegistrationsController extends AppController {
 	var $helpers = array('Form', 'Html', 'Javascript');
 	
 	var $components = array('Email');
+
 	
 	function index() {
 		if (isset($this->params['requested'])) return $this->getRegistration();
@@ -43,7 +44,7 @@ class RegistrationsController extends AppController {
 		
 		if($this->requestAction('admins/checkAdminLoggedIn')) $registration = $this->touchByAdmin($registration);
 		
-		if ($this->Session->check('loggedIn')){
+		if ($this->Session->check('loggedIn') || $this->requestAction('admins/checkAdminLoggedIn')){
 			// if we're in edit, we delete everything and save the session again because updateAll & deleteAll are ... unkind
 			$this->Registration->deleteAllRegistrationRelatedDataById($registration['Registration']['id']);
 		}
