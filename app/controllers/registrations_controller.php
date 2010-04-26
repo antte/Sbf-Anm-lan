@@ -19,8 +19,17 @@ class RegistrationsController extends AppController {
 	function add($action = null){
 		// If there already exists a booking number the user is editing an existing registration
 		if ($this->Session->check('Registration.Registration.number')){
-			//Set the modified date for the editation and leave registration number unchanged
-			$this->Session->write('Registration.Registration.modified', date('Y-m-d H:i:s'));
+			
+			/**
+			 * If this registration is being edited by an admin we dont want modified to be
+			 * updated because it isnt the registrator that is updating it.
+			 */
+
+			if (!$this->requestAction('admins/checkAdminLoggedIn')) {
+				// Set the modified date for the editation and leave registration number unchanged
+				$this->Session->write('Registration.Registration.modified', date('Y-m-d H:i:s'));
+			}
+			
 		} else {
 			// Make and set a booking number to Session
 			$this->Session->write('Registration.Registration.number' , $this->Registration->generateUniqueNumber());			
@@ -31,6 +40,8 @@ class RegistrationsController extends AppController {
 		$this->updateStepStateToPrevious($this->params['controller'], $action);
 		
 		$registration = $this->Session->read('Registration');
+		
+		if($this->requestAction('admins/checkAdminLoggedIn')) $registration = $this->touchByAdmin($registration);
 		
 		if ($this->Session->check('loggedIn')){
 			// if we're in edit, we delete everything and save the session again because updateAll & deleteAll are ... unkind
@@ -45,9 +56,9 @@ class RegistrationsController extends AppController {
 				$this->sendRegistrationConfirmMail($this->Session->read('Event'), $registration['Registrator']);
 			}
 			
-			$this->clearSessionFromAllRegistrationInformation();
+			//$this->clearSessionFromAllRegistrationInformation();
 		} else {
-			$this->clearSessionFromAllRegistrationInformation();
+			//$this->clearSessionFromAllRegistrationInformation();
 			$this->Session->setFlash('Vi ber om ursäkt, din registrering kunde inte slutföras. Kontakta support.');
 		}
 		//$this->redirect(array('action' => 'receipt'));
@@ -294,6 +305,18 @@ class RegistrationsController extends AppController {
 		} else {
 			return true;
 		}
+	}
+	
+	/**
+	 * Makes the current admin touch a registration (updating its modified and modified by values)
+	 */
+	private function touchByAdmin($registration) {
+		
+		$registration['Registration']['modified_admin'] 	= date('Y-m-d H:i:s');
+		$registration['Registration']['modified_admin_id']	= $this->requestAction("admins/getCurrentAdminId");
+		
+		return $registration;
+		
 	}
 	
 }
