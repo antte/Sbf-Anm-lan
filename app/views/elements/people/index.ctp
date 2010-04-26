@@ -8,13 +8,13 @@
 		<?php 
 			$people = $this->requestAction('people/index');
 			echo "<thead>";
-				echo $html->tableHeaders(array ('Bokningsnummer', 'Förnamn', 'Efternamn', 'Roll'));
+				echo $html->tableHeaders(array ('Förnamn', 'Efternamn', 'Roll', 'Bokningsnummer'));
 			echo "</thead>";
 			$k=0;
 			$i=0;
 			foreach ($people as $company){ 
 				foreach ($company as $person){ ?> 
-				<tr class ="<?php echo $person['number']; ?>" >
+				<tr class="<?php echo $person['number']?>">
 				<?php 	foreach ($person as $j => $row)
 							echo 	'<td>'. $html->link($person[$j],'putRegistrationInSessionAndRedirect/'. $person['number']) . '</td>';
 					echo " </a></tr> ";
