@@ -305,3 +305,12 @@ table td {
 #RegistrationAdd\/reviewForm .input.textarea {
 	clear: right;
 }
+
+.resend {
+	font-size: 140%;
+}
+
+.resend input {
+	height: 25px;
+	width: 25px;
+}
