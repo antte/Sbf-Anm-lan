@@ -33,7 +33,7 @@
 			echo $form->input('sendConfirmationEmail', array('type' => 'checkbox', 'checked' => true, 'label' => 'Vill du att ett bekräftelsemail ska skickas till Kontaktpersonen för bokningen?'));
 		}
 		
-		echo $form->submit('Bekräfta anmälan');
+		echo $form->submit('Spara');
 		echo "</fieldset>";
 		echo $form->end();
 	?>
