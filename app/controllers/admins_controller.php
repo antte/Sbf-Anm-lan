@@ -174,7 +174,7 @@ class AdminsController extends AppController {
 	 */
 	function putRegistrationInSessionAndRedirect($registrationNumber) {
 		
-		$registration = Sanitize::clean($registration);
+		$registrationNumber = Sanitize::clean($registrationNumber);
 		
 		$registration = $this->Event->Registration->findByNumber($registrationNumber);
 		
