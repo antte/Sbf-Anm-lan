@@ -5,6 +5,7 @@ class AdminsController extends AppController {
 
 	var $helpers = array('html','form','javascript');
 	var $layout = "admin";
+	var $defaultElementAction = "index";
 	
 	function beforeFilter() {
 		
@@ -35,31 +36,45 @@ class AdminsController extends AppController {
 		}
 	}
 	
+	/**
+	 * Admins get here when they want to change event
+	 */
 	function events(){
+		
 		//if you're here we assume you want to change event so we "deselect" the current event from session
 		$this->Session->del('Event');
 		
 		$this->set('events', $this->Event->getEvents());
+		
 	}
 	
+	/**
+	 * This is when you want to view an event, its kind of redundant
+	 * @param $id
+	 */
 	function event($id){
+		
 		$event = $this->Event->find('first', array('conditions' => array('id' => $id) , 'recursive' => 0) );
+		
 		$this->set('event' , $event);
+		
 	}
-	
 	
 	function logout() {
+		
 		//deletes the user session
 		$this->Session->del('adminLoggedIn');
+		
 		$this->Session->setFlash("Du har nu loggat ut!", 'default', array('class' => 'loggedOut'));
+		
 		//when you have logged out you get redirected to login
 		$this->redirect(array('controller' => 'admins' , 'action' => 'login'));
 
 	}
 	
 	/**
-	 * Made to be requested by the admin panel
-	 * state becomes classes
+	 * Made to be requested by the admin panel to recieve steps
+	 * Step state becomes step classes (similar to the usual rocket view for steps seen when making a registration)
 	 * @return admin steps (event steps without review and receipt)
 	 */
 	function steps( $controller = null ) {
@@ -112,27 +127,29 @@ class AdminsController extends AppController {
 	}
 	
 	/**
-	 * Action for a view that lists all registrations for the particular event the user has chosen
+	 * The view renders the index element of the controller (ex app/views/elements/registrators/index.ctp) 
+	 * the user is currently on. (selected in the panel)
 	 */
 	function eventindex() {
-		$defaultElementAction='index';
-		//TODO check so that the admin has chosen an event here (like we have on our other actions)
-		$eventId = $this->Session->read('Event.id');
-
-		//set event info to view
-		$event = $this->Event->find('first', array('recursive' => 1) );
-		unset($event['id']);
-		unset($event['event_id']);
-		$this->set( 'event', $event);
-	
 		
-		if ($this->params['pass'])
-			$elementUrl = $this->params['pass'][0] . '/' .  $defaultElementAction ; 
-		else {
-			$this->params['pass'][0]= 'registrators'; //default
-			$elementUrl = 'registrators/' . $defaultElementAction;
+		// elementUrl dicides which element the view renders 
+		if ($this->params['pass']) {
+			$elementUrl = $this->params['pass'][0] . '/' .  $this->defaultElementAction; 
+		} else {
+			
+			/* 
+			 * the only purpose of this next line is that
+			 * the admin panel checks in pass for the current action
+			 * so that it can display which "step" is "current"
+			 */ 
+			$this->params['pass'][0] = 'registrators/' . $this->defaultElementAction;
+			
+			$elementUrl = 'registrators/' . $this->defaultElementAction;
+			
 		}
+		
 		$this->set('elementUrl' , $elementUrl);
+		
 	}
 	
 	/**
@@ -145,18 +162,19 @@ class AdminsController extends AppController {
 	}
 	
 	/**
-	 * 
+	 * Find first active event and runs chose event on it
 	 */
 	private function chooseFirstActiveEvent() {
 		$event = $this->Event->findFirstActiveEvent();
 		$this->chooseEvent($event['Event']['id']);
-
 	}
 	
 	/**
-	 * 
+	 * Puts registration in session and redirects to the specified registration number
 	 */
 	function putRegistrationInSessionAndRedirect($registrationNumber) {
+		
+		$registration = Sanitize::clean($registration);
 		
 		$registration = $this->Event->Registration->findByNumber($registrationNumber);
 		
