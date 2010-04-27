@@ -70,16 +70,16 @@ table#registrators tr th {
 	background:none;
 }
 
-#moduleIndex tbody tr.companyhover, #moduleIndex tbody tr.companyhover td.sorting_1 {
+#moduleIndex tbody tr.companyhover td, #moduleIndex tbody tr.companyhover td.sorting_1 {
 	background: #7ac5cd;
 }
 
-#moduleIndex tbody tr.hover, #moduleIndex tbody tr.hover td.sorting_1 {
+#moduleIndex tbody tr.hover td, #moduleIndex tbody tr.hover td.sorting_1 {
 	color: #fff;
 	background: #00008b;
 }
 
-#moduleIndex tbody tr.hover, #moduleIndex tbody tr.hover td.sorting_1 {
+#moduleIndex tbody tr.hover td, #moduleIndex tbody tr.hover td.sorting_1 {
 	color: #fff;
 	background: #00008b;
 }
