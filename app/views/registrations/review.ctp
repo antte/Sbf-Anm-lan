@@ -7,14 +7,7 @@
 		<h2>Granska dina uppgifter </h2>
 	</div>
 </div>
-<div class="grid_4" id="receipt_info">
-	<div class="grid_full">
-		<h2>Granskning</h2>
-		<p>Var vänlig och kontrollera alla dina uppgifter innan du bekräftar din anmälan. För att ändra i någon uppgift, använd Redigera-länkarna under respektive del.</p>
-		<p>Du kommer även att ha möjlighet att ändra i din order efter bekräftelse.</p>
-	</div>
-
-</div>
+<?php echo $this->renderElement('registrations/review_info'); ?>
 <?php echo $this->renderElement('registration')?>
 <?php echo $this->renderElement('person');?>
 <div class="edit_link grid_8">
@@ -33,7 +26,7 @@
 			echo $form->input('sendConfirmationEmail', array('type' => 'checkbox', 'checked' => true, 'label' => 'Vill du att ett bekräftelsemail ska skickas till Kontaktpersonen för bokningen?'));
 		}
 		
-		echo $form->submit('Bekräfta anmälan');
+		echo $form->submit('Spara');
 		echo "</fieldset>";
 		echo $form->end();
 	?>

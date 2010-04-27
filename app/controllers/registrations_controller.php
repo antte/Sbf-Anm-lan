@@ -63,6 +63,10 @@ class RegistrationsController extends AppController {
 			$this->clearSessionFromAllRegistrationInformation();
 			$this->Session->setFlash('Vi ber om ursäkt, din registrering kunde inte slutföras. Kontakta support.');
 		}
+		
+		//If you're an admin you dont want to get to receipt when you're done saving a registration
+		if($this->requestAction('admins/checkAdminLoggedIn')) $this->redirect(array('controller' => 'admins', 'action' => 'eventindex'));
+		
 		$this->redirect(array('action' => 'receipt'));
 		
 	}

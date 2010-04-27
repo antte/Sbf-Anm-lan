@@ -29,6 +29,7 @@
 		echo $javascript->link('jquery.validate', $inline = false);
 		echo $javascript->link('jq.form.conf/jq.validate.adminLogin', $inline = false);
 		echo $javascript->link('adminLoginInfo', $inline = false);
+		echo $javascript->link('highlightInputField', $inline = false);
 		
 		echo $form->create(null, array('id' => 'login', 'class' => 'grid_8', 'action' => 'login'));
 		echo $form->input('Admin.username', array('label' => 'Användarnamn'));
