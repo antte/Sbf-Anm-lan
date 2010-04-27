@@ -30,7 +30,9 @@
 		echo "<fieldset>";
 		
 		if($this->requestAction('admins/checkAdminLoggedIn')) {
-			echo $form->input('sendConfirmationEmail', array('type' => 'checkbox', 'checked' => true, 'label' => 'Vill du att ett bekräftelsemail ska skickas till Kontaktpersonen för bokningen?'));
+			echo '<div class="resend">';
+			echo $form->input('sendConfirmationEmail', array('type' => 'checkbox', 'checked' => true, 'label' => 'Skicka ett nytt bekräftelsemail'));
+			echo '</div>';
 		}
 		
 		echo $form->submit('Spara');

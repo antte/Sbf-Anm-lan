@@ -302,3 +302,13 @@ table td {
 #RegistrationAdd\/reviewForm .input.checkbox input {
 	margin-right: 5px;
 }
+
+
+.resend {
+	font-size: 140%;
+}
+
+.resend input {
+	height: 25px;
+	width: 25px;
+}
