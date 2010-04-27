@@ -13,6 +13,7 @@ class RegistrationsController extends AppController {
 		//Link to index and this will take you to the right step.
 		$this->requestAction('steps/redirectToNextUnfinishedStep');
 	}
+	
 	/**
 	 * Saves Registration.Registration To Session and saves and emails the registration
 	 * @param unknown_type $action

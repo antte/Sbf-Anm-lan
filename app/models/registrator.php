@@ -91,10 +91,6 @@
 	 * Lists all the registrators
 	 * @param $eventId the id of the event from which we find find the registrators
 	 */
-		
-		//removes all the unimportant values from the array
-		//foreach($registrations as &$registration) {
-			
 	function listAllRegistrators($eventId) {
 		$registrators = $this->find('all', array('conditions' => 
 			array(
@@ -102,20 +98,36 @@
 			),
 			'fields' => array(
 				'Registration.number', 
+				'Registration.modified', 
+				'Registration.modified_admin', 
+				'Registration.modified_admin_id',
 				'Registrator.first_name', 
 				'Registrator.last_name', 
 				'Registrator.email', 
 				'Registrator.phone',
 			)
 		));
-		foreach($registrators as &$registrator) {
-			$registrator['Registrator']['number'] = $registrator['Registration']['number'];
-			unset($registrator['Registration']);
-		}
+		
 		return $registrators;
 		
-		}
+	}
 	
-	}	
+	/**
+	 * takes findData from listAllRegistrators and returns human readable field names for the html->tableHeaders() method
+	 * @param array $findData data returned from the listAllRegistrators function (should work with other functions that has many registrators and associated data)
+	 */
+	function getTranslatedFieldNames($findData) {
+		$fieldNames = array();
 		
+		//we only need the first record found (all records have the same names presumably)
+		foreach($findData[0] as $modelName => &$modelData) {
+			foreach($modelData as $fieldName => $fieldValue) {
+				$fieldNames[] = $modelName.'.'.$fieldName;
+			}
+		}
+		
+		return $this->translateFieldNames($fieldNames);
+		
+	}
 	
+}

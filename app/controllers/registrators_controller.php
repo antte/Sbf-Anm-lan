@@ -114,4 +114,11 @@ class RegistratorsController extends AppController {
 		}
 	}
 	
+	/**
+	 * returns table headers for the registrators/registrations view
+	 */
+	function getTableHeaders() {
+		return $this->Registrator->getTranslatedFieldNames($this->Registrator->listAllRegistrators($this->Session->read('Event.id')));
+	}
+	
 }
