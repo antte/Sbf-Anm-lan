@@ -12,7 +12,7 @@
 		echo $html->tableHeaders($tableHeaders);
 		echo "</thead>";
 		foreach ($registrators as $registrator): ?> 
-			<tr>
+			<tr class="<?php echo $registrator['Registration']['number']?>">
 			<?php foreach ($registrator as $modelName => $fields): ?>
 				<?php foreach($fields as $fieldName => $fieldValue): ?>
 					<td>

@@ -3,7 +3,7 @@ $(document).ready(function(){
 	jsonColums = jQuery.parseJSON(aoColumnss);
 	
 	$('table#moduleIndex').dataTable({
-		"aaSorting": [[ 2, "asc"]],
+		"aaSorting": [[ 1, "asc"]],
 		"bPaginate": false,
 		"aoColumns": jsonColums
 	});

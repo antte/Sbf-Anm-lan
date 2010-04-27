@@ -38,13 +38,18 @@ table#registrators tr th {
 	float: right;
 	margin-right: 10px;
 	height: 50px;
-	margin-top: -50px;
+	margin-top: -60px;
 	line-height: 50px;
+	display: inline;
 }
 
 .dataTables_filter input {
 	float: none;
 	margin: 0;
+}
+
+#moduleIndex {
+	
 }
 
 #moduleIndex a {
@@ -65,11 +70,16 @@ table#registrators tr th {
 	background:none;
 }
 
-#moduleIndex tbody tr.companyhover a, #moduleIndex tbody tr.companyhover td.sorting_1 a {
+#moduleIndex tbody tr.companyhover, #moduleIndex tbody tr.companyhover td.sorting_1 {
 	background: #7ac5cd;
 }
 
-#moduleIndex tbody tr.hover a, #moduleIndex tbody tr.hover td.sorting_1 a {
+#moduleIndex tbody tr.hover, #moduleIndex tbody tr.hover td.sorting_1 {
+	color: #fff;
+	background: #00008b;
+}
+
+#moduleIndex tbody tr.hover, #moduleIndex tbody tr.hover td.sorting_1 {
 	color: #fff;
 	background: #00008b;
 }
