@@ -54,6 +54,10 @@ class RegistrationsController extends AppController {
 			$this->Session->write('Event.registrationId', $this->Registration->id);
 			
 			if( !($this->data['Registration']['sendConfirmationEmail'] == 0) ) {
+				
+				//If we have a message for the registrator we want to put it in session so that the email element can send it along
+				$this->Session->write('Registration.messageForRegistrator', $this->data['Registration']['message_for_registrator']);
+				
 				//We send out confirmation mail unless an admin has explicitly chosen not to
 				$this->sendRegistrationConfirmMail($this->Session->read('Event'), $registration['Registrator']);
 			}
