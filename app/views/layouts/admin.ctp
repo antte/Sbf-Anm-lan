@@ -3,7 +3,7 @@
 <head>
 	<?php echo $html->charset(); ?>
 	<title>
-		<?php __('CakePHP: the rapid development php framework:'); ?>
+		Svenska bilsportförbundet -
 		<?php echo $title_for_layout; ?>  
 	</title>
 	<?php
@@ -25,6 +25,7 @@
 		echo $javascript->link('jquery.1.4.2-min');
 		echo $javascript->link('jquery.dataTables.min');
 		echo $javascript->link('adminSearch');
+		echo $javascript->link('highlightInputField');
 		
 	?>
 	<!--[if lte IE 6]>

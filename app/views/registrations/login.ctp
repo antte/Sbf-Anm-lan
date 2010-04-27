@@ -1,6 +1,6 @@
 <div class="grid_12">
 	<div class="grid_full">
-		<h2>Logga in för att ändra i din bokning</h2>
+		<h2>Ändra i din bokning</h2>
 	</div>
 </div>
 
@@ -27,6 +27,8 @@
 		echo $javascript->link('jquery.1.4.2-min', $inline = false);
 		echo $javascript->link('jquery.validate', $inline = false);
 		echo $javascript->link('jq.form.conf/jq.validate.login', $inline = false);
+		echo $javascript->link('adminLoginInfo', $inline = false);
+		echo $javascript->link('highlightInputField', $inline = false);
 		echo $html->css('login', null, array(), false);
 		echo $form->create(null, array('id' => 'login', 'class' => 'grid_8', 'controller' => 'registrations' , 'action' => 'addlogin'));
 		echo $form->input('Registration.number', array('label' => 'Bokningsnummer'));

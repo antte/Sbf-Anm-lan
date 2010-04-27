@@ -3,7 +3,7 @@
 <head>
 	<?php echo $html->charset(); ?>
 	<title>
-		<?php __('CakePHP: the rapid development php framework:'); ?>
+		Svenska bilsportförbundet -
 		<?php echo $title_for_layout; ?>  
 	</title>
 	<?php

@@ -14,16 +14,17 @@ $(document).ready(function(){
 		
 		//finds the booking number class of the tr
 		var booking = $(this).attr('class').match("^.{6}").toString();
-		
+
 		$(this).addClass('hover');
 		$('table#moduleIndex tbody .' + booking).addClass('companyhover');
-	
+		
 	},function(){
 		var booking = $(this).attr('class').match("^.{6}").toString();
 		$(this).removeClass('hover');
 		$('table#moduleIndex tbody .' + booking).removeClass('companyhover');
+		
 	});
-	
+
 });
 
 function aoColumnsForDataTable() {
