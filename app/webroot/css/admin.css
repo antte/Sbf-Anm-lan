@@ -48,6 +48,10 @@ table#registrators tr th {
 	margin: 0;
 }
 
+#moduleIndex {
+	
+}
+
 #moduleIndex a {
 	display: block;
 	width: 100%;
@@ -66,11 +70,16 @@ table#registrators tr th {
 	background:none;
 }
 
-#moduleIndex tbody tr.companyhover a, #moduleIndex tbody tr.companyhover td.sorting_1 a {
+#moduleIndex tbody tr.companyhover, #moduleIndex tbody tr.companyhover td.sorting_1 {
 	background: #7ac5cd;
 }
 
-#moduleIndex tbody tr.hover a, #moduleIndex tbody tr.hover td.sorting_1 a {
+#moduleIndex tbody tr.hover, #moduleIndex tbody tr.hover td.sorting_1 {
+	color: #fff;
+	background: #00008b;
+}
+
+#moduleIndex tbody tr.hover, #moduleIndex tbody tr.hover td.sorting_1 {
 	color: #fff;
 	background: #00008b;
 }
