@@ -1,6 +1,6 @@
-<div class="grid_12">
+<div id="adminPanel" class="grid_12">
 	<div class="grid_full">
-		<h2>Logga in till Admingränssnittet</h2>
+		<h2>Administrera bokningar</h2>
 	</div>
 </div>
 
