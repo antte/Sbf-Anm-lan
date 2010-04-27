@@ -60,6 +60,10 @@ table#registrators tr th {
 	text-indent: 5px;
 }
 
+#moduleIndex tr:hover, #moduleIndex td:hover {
+	cursor: pointer;
+}
+
 #moduleIndex a.odd, #moduleIndex a.odd:visited, #moduleIndex a.odd:hover {
 	color:#000;
 	background:none;
@@ -75,13 +79,11 @@ table#registrators tr th {
 }
 
 #moduleIndex tbody tr.hover td, #moduleIndex tbody tr.hover td.sorting_1 {
-	color: #fff;
 	background: #00008b;
 }
 
-#moduleIndex tbody tr.hover td, #moduleIndex tbody tr.hover td.sorting_1 {
+#moduleIndex tr.hover a {
 	color: #fff;
-	background: #00008b;
 }
 
 #moduleIndex thead th, #registrators thead th {

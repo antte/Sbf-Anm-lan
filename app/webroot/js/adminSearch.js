@@ -25,6 +25,12 @@ $(document).ready(function(){
 		
 	});
 	
+	$('table#moduleIndex tbody td').click(function(){
+		var url = window.location.protocol + "//" + window.location.host + $(this).find('a').attr('href');
+		window.location.href = url;
+		window.status = url;
+	});
+	
 });
 
 function aoColumnsForDataTable() {
