@@ -329,6 +329,15 @@ class RegistrationsController extends AppController {
 		
 	}
 	
+	function getMessageForRegistrator(){
+		if (isset($this->params['requested'])){ 
+			if ($this->Session->check('Registration.messageForRegistrator')){
+				return $this->Session->read('Registration.messageForRegistrator');
+			} else {
+				return false;
+			}
+		}
+	}
 }
 
 

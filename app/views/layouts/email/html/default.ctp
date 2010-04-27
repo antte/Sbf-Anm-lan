@@ -11,6 +11,7 @@
 			<?php echo $html->link('logga in', array('controller' => 'registrations', 'action' => 'login'));?>
 			med ditt bokningsnummer och email för att göra ändringar i din bokning.
 		</p>
+		<?php echo ($this->requestAction('admins/checkAdminLoggedIn'))? $this->renderElement('email/messageForRegistrator') : '' ?>php
 		<?php echo $this->renderElement('event');?>
 		<?php echo $this->renderElement('registration');?>
 		<?php echo $this->renderElement('person');?>
