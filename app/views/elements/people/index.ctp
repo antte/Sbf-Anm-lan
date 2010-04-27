@@ -17,7 +17,7 @@
 				<tr class="<?php echo $person['number']?>">
 				<?php 	foreach ($person as $j => $row)
 							echo 	'<td>'. $html->link($person[$j],'putRegistrationInSessionAndRedirect/'. $person['number']) . '</td>';
-					echo " </a></tr> ";
+					echo "</tr> ";
 			
 					
 				}
