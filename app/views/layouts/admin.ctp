@@ -21,6 +21,7 @@
 		echo $html->css('adminPanel');
 		echo $html->css('dataTable');
 		echo $html->css('admin');
+		echo $html->css('login');
 		
 		echo $javascript->link('jquery.1.4.2-min');
 		echo $javascript->link('jquery.dataTables.min');
@@ -46,7 +47,7 @@
 			
 			<div class="container_12">
 				 
-				<?php echo ( $adminLoggedIn && !($this->params['action'] == "login") ) ? $this->renderElement('adminPanel') : ''; ?>
+				<?php echo ( $this->requestAction('admins/checkAdminLoggedIn') && !($this->params['action'] == "login") ) ? $this->renderElement('adminPanel') : ''; ?>
 				<?php $session->flash(); ?>
 				<?php echo $content_for_layout; ?>
 			</div>

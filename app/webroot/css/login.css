@@ -57,7 +57,7 @@ form#login .submit input {
 	background-color:#ffaaaa;
 }
 
-div.input.text {
+#login div.input.text {
 	margin-top: 0;
 }
 
