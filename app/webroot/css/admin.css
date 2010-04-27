@@ -34,14 +34,17 @@ table#registrators tr th {
 }
 
 .dataTables_filter {
+	position: relative;
 	float: right;
 	margin-right: 10px;
 	height: 50px;
 	margin-top: -50px;
+	line-height: 50px;
 }
 
 .dataTables_filter input {
 	float: none;
+	margin: 0;
 }
 
 table#registrations td {
@@ -50,10 +53,11 @@ table#registrations td {
 
 
 #moduleIndex a {
-	display:block;
-	width:100%;
-	height:100%;
-	padding:5px;
+	display: block;
+	width: 100%;
+	height: 100%;
+	padding: 5px 0;
+	text-indent: 5px;
 }
 
 #moduleIndex a.odd, #moduleIndex a.odd:visited, #moduleIndex a.odd:hover {
@@ -66,16 +70,13 @@ table#registrations td {
 	background:none;
 }
 
-#moduleIndex tbody tr.companyhover, #moduleIndex tbody tr.companyhover td.sorting_1 {
+#moduleIndex tbody tr.companyhover a, #moduleIndex tbody tr.companyhover td.sorting_1 a {
 	background: #7ac5cd;
 }
 
-#moduleIndex tbody tr.hover, #moduleIndex tbody tr.hover td.sorting_1 {
-	background: #00008b;
-}
-
-#moduleIndex tr.hover a, #registrators tr.hover a {
+#moduleIndex tbody tr.hover a, #moduleIndex tbody tr.hover td.sorting_1 a {
 	color: #fff;
+	background: #00008b;
 }
 
 #moduleIndex thead th, #registrators thead th {

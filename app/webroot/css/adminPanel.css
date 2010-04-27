@@ -17,16 +17,18 @@
 	margin: 0;
 }
 
+#adminPanel #adminUtilitiesMenu li {
+	float: right;
+	margin: 0px;
+}
+
 #adminPanel #adminUtilitiesMenu a {
 	font-size: 16px;
-	float: right;
-	vertical-align: middle;
 	padding: 0 7px;
 	color: white;
 }
 
 #adminPanel #adminSteps {
-	overflow: hidden;
 	font-size: 18px;
 	height: 37px;
 	list-style-type: none;

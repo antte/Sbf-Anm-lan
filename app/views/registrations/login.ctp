@@ -28,6 +28,7 @@
 		echo $javascript->link('jquery.validate', $inline = false);
 		echo $javascript->link('jq.form.conf/jq.validate.login', $inline = false);
 		echo $javascript->link('adminLoginInfo', $inline = false);
+		echo $javascript->link('highlightInputField', $inline = false);
 		echo $html->css('login', null, array(), false);
 		echo $form->create(null, array('id' => 'login', 'class' => 'grid_8', 'controller' => 'registrations' , 'action' => 'addlogin'));
 		echo $form->input('Registration.number', array('label' => 'Bokningsnummer'));
