@@ -38,7 +38,7 @@
 	
 	<div class="grid_8 login_info clearfix">
 		<div class="grid_full">
-			<p class="info">Skriv in i användarnamn och lösenord.</p>
+			<p class="info">Skriv in ditt användarnamn och lösenord.</p>
 		</div>
 	</div>
 	
