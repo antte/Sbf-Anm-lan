@@ -24,7 +24,7 @@ $(document).ready(function(){
 		$('table#moduleIndex tbody .' + booking).removeClass('companyhover');
 		
 	});
-
+	
 });
 
 function aoColumnsForDataTable() {
