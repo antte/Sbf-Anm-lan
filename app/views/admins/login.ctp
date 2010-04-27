@@ -29,9 +29,8 @@
 		echo $javascript->link('jquery.validate', $inline = false);
 		echo $javascript->link('jq.form.conf/jq.validate.adminLogin', $inline = false);
 		echo $javascript->link('adminLoginInfo', $inline = false);
-		echo $html->css('login', null, array(), false);
 		
-		echo $form->create(null, array('id' => 'login', 'class' => 'grid_8', 'controller' => 'admins' , 'action' => 'login'));
+		echo $form->create(null, array('id' => 'login', 'class' => 'grid_8', 'action' => 'login'));
 		echo $form->input('Admin.username', array('label' => 'Användarnamn'));
 		echo $form->input('Admin.password', array('label' => 'Lösenord'));
 	?>

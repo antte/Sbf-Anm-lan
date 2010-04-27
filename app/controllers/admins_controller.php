@@ -7,14 +7,17 @@ class AdminsController extends AppController {
 	var $layout = "admin";
 	
 	function beforeFilter() {
+		
 		$this->loadModel("Event");
-		if ($this->Session->check('adminLoggedIn')) {
-			$this->set('adminLoggedIn', 1);
-		} else {
-			if (!($this->params['action'] == 'login') && !($this->params['action'] == 'checkAdminLoggedIn'))
-				$this->redirect(array( 'controller' => 'admins' , 'action' => 'login' )); 
-			$this->set('adminLoggedIn', 0);			 	
+		
+		//you can't visit any admin pages if you arent logged in as admin, with some exceptions
+		if (!$this->Session->check('adminLoggedIn')) {
+			//if this action is not one of the permitted actions you are send to login
+			if (!$this->actionPermittedWithoutLogin($this->params['action'])) {
+				$this->redirect(array( 'controller' => 'admins' , 'action' => 'login' ));
+			}
 		}
+		
 	}
 
 	/**
@@ -31,21 +34,17 @@ class AdminsController extends AppController {
 			$this->set('loginErrors', $this->Admin->loginErrors);
 		}
 	}
-
+	
 	function events(){
-		//if you're here you want to change event so we "deselect" the current event from session
+		//if you're here we assume you want to change event so we "deselect" the current event from session
 		$this->Session->del('Event');
 		
-		$this->loadModel('Event');
 		$this->set('events', $this->Event->getEvents());
 	}
 	
-	function event($id){		
-		$this->loadModel('Event');
+	function event($id){
 		$event = $this->Event->find('first', array('conditions' => array('id' => $id) , 'recursive' => 0) );
 		$this->set('event' , $event);
-		$this->Session->write('Event',$event['Event']);
-		//$this->set('event',$this->params)		
 	}
 	
 	
@@ -177,6 +176,19 @@ class AdminsController extends AppController {
 		if(!isset($this->params['requested'])) return;
 		
 		return $this->Session->read('adminLoggedIn');
+		
+	}
+	
+	/**
+	 * If the specified action is permitted to be visited wihtout login this function returns true
+	 * @action string
+	 */
+	private function actionPermittedWithoutLogin($action) {
+		
+		if($action == 'login') return true;
+		if($action == 'checkAdminLoggedIn') return true;
+		
+		return false;
 		
 	}
 	
