@@ -29,7 +29,7 @@
 		 */
 		function translateFieldNames($fieldNames) {
 			
-			//This is for code readability
+			//This is for code readability - Search becomes replace
 			$search_replace = array(
 				'/Registration.number/' 			=> 'Bokningsnummer', 
 				'/Registration.modified_admin_id/' 	=> 'Admin som ändrat',
