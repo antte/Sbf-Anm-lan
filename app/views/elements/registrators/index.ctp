@@ -4,25 +4,24 @@
 	</div>
 	<table id="moduleIndex">
 	<?php 
+	
 		$registrators = $this->requestAction('registrators/index');
+		$tableHeaders = $this->requestAction('registrators/getTableHeaders');
 		
 		echo "<thead>";
-		echo $html->tableHeaders(
-			array('Förnamn', 'Efternamn', 'E-post', 'Telefonnummer', 'Bokningsnummer')
-		);
+		echo $html->tableHeaders($tableHeaders);
 		echo "</thead>";
-			foreach ($registrators as $i => $registrator){ ?> 
-				<tr >
-				<?php 	
-					foreach ($registrator as $modelName => $fields){
-						foreach($fields as $fieldName => $fieldValue) {
-							echo 	'<td>'. $html->link($fields[$fieldName],'putRegistrationInSessionAndRedirect/'. $registrator['Registrator']['number']) . '</td>';
-						}
-					}
-					echo " </a></tr> ";
-				
-				}
-			
-			?>
+		foreach ($registrators as $registrator): ?> 
+			<tr>
+			<?php foreach ($registrator as $modelName => $fields): ?>
+				<?php foreach($fields as $fieldName => $fieldValue): ?>
+					<td>
+						<?php echo $html->link($fields[$fieldName],'putRegistrationInSessionAndRedirect/'. $registrator['Registration']['number']); ?> 
+					</td>
+				<?php endforeach; ?>
+			<?php endforeach; ?>
+			</tr>
+		<?php endforeach; ?>
+		
 	</table>
 </div>
