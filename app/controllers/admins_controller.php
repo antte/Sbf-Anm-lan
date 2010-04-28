@@ -10,7 +10,7 @@ class AdminsController extends AppController {
 	function beforeFilter() {
 		
 		$this->loadModel("Event");
-		debug($this->Session->read());
+		//debug($this->Session->read());
 		//you can't visit any admin pages if you arent logged in as admin, with some exceptions
 		if (!$this->Session->check('adminLoggedIn')) {
 			$this->set('adminLoggedIn', 0);
@@ -212,6 +212,7 @@ class AdminsController extends AppController {
 		return false;
 		
 	}
+	
 	
 }
 
