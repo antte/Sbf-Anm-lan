@@ -7,7 +7,7 @@
 	
 		$registrators = $this->requestAction('registrators/index');
 		$tableHeaders = $this->requestAction('registrators/getTableHeaders');
-		
+		$tableHeaders[]= 'Mail';
 		echo "<thead>";
 		echo $html->tableHeaders($tableHeaders);
 		echo "</thead>";
@@ -17,10 +17,13 @@
 				<?php foreach($fields as $fieldName => $fieldValue): ?>
 					<td>
 						<?php echo $html->link($fields[$fieldName],'putRegistrationInSessionAndRedirect/'. $registrator['Registration']['number']);
-							  echo $html->link('Skicka nytt mail', array('controller' => 'Admins', 'action' => 'sendRegistrationConfirmMail'));?>
+							  ?>
 					</td>
 				<?php endforeach; ?>
 			<?php endforeach; ?>
+					<td>
+					<?php echo $html->link('Skicka', array('controller' => 'admins', 'action' => 'resendConfirmMail', $registrator['Registration']['number'] ));?></td>	
+					</td>
 			</tr>
 		<?php endforeach; ?>
 		

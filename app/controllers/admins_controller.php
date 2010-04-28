@@ -215,18 +215,14 @@ class AdminsController extends AppController {
 		return false;
 		
 	}
+
+	function resendConfirmMail($registrationNumber) {
+		$this->requestAction('registrations/resendConfirmMail/' . $registrationNumber);
+		$this->Session->setFlash('<h4 class="login_info grid_12">Ett bekräftelsemail har skickats</h4>');
+		$this->redirect('/admins/eventindex/registrators');
+	}	
 	
-	function resendConfirmEmail($registrationNumber) {
-		
-		$registrationNumber = Sanitize::clean($registrationNumber);
-		
-		$registration = $this->Event->Registration->findByNumber($registrationNumber);
-		
-		$this->Event->Registration->putRegistrationInSession($registration, $this->Session);
-		
-	
-	}
-	}
+}
 
 	
 

@@ -25,7 +25,6 @@ class Admin extends AppModel {
 		$loginErrors[] = 'Fel användarnamn eller lösenord';
 		return false;
 			
-<<<<<<< HEAD
 		}
 	/*function resendConfirmEmail($event,$registrator){
 		if($this->Session->read('dontSendEmails')) return;
@@ -50,8 +49,7 @@ class Admin extends AppModel {
 	}*/
 		
 	}
-=======
-	}
+
 	
 	/*
 	 * Fetches admin username from database
@@ -64,5 +62,4 @@ class Admin extends AppModel {
 	}
 
 
-}
->>>>>>> d4b67d368db3e94f6e244d9a8832af02cf2e522c
+
