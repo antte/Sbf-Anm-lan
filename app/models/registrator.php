@@ -117,6 +117,7 @@ App::import('Model', 'Admin');
 		foreach($registrators as &$registrator) {
 			if(isset($registrator['Registration']['modified_admin_id'])) {
 				$registrator['Registration']['modified_admin_username'] = $Admin->getAdminUsernameById($registrator['Registration']['modified_admin_id']);
+				unset($registrator['Registration']['modified_admin_id']);
 			}
 		}
 		
