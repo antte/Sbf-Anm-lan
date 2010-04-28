@@ -45,6 +45,9 @@ class AdminsController extends AppController {
 		$this->Session->del('Event');
 		
 		$this->set('events', $this->Event->getEvents());
+		//$email = $this->Admin->resendConfirmEmail(($this->Session->read('Event', 'Registrator')));
+		
+		//return $email;
 		
 	}
 	
@@ -210,5 +213,14 @@ class AdminsController extends AppController {
 		
 	}
 	
-}
-
+	function resendConfirmEmail($registrationNumber) {
+		
+		$registrationNumber = Sanitize::clean($registrationNumber);
+		
+		$registration = $this->Event->Registration->findByNumber($registrationNumber);
+		
+		$this->Event->Registration->putRegistrationInSession($registration, $this->Session);
+		
+	
+	}
+	}

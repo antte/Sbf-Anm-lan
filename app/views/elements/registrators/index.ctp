@@ -16,7 +16,8 @@
 			<?php foreach ($registrator as $modelName => $fields): ?>
 				<?php foreach($fields as $fieldName => $fieldValue): ?>
 					<td>
-						<?php echo $html->link($fields[$fieldName],'putRegistrationInSessionAndRedirect/'. $registrator['Registration']['number']); ?> 
+						<?php echo $html->link($fields[$fieldName],'putRegistrationInSessionAndRedirect/'. $registrator['Registration']['number']);
+							  echo $html->link('Skicka nytt mail', array('controller' => 'Admins', 'action' => 'sendRegistrationConfirmMail'));?>
 					</td>
 				<?php endforeach; ?>
 			<?php endforeach; ?>

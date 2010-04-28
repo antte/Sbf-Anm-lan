@@ -26,6 +26,26 @@
 			return false;
 			
 		}
+	/*function resendConfirmEmail($event,$registrator){
+		if($this->Session->read('dontSendEmails')) return;
+		$this->Email->smtpOptions = array(
+			'port'			=> '25', 
+			'timeout'		=> '30',
+			'host' 			=> 'localhost'
+		);
 		
+		$this->Email->delivery 	= 'smtp';
+		
+		$this->Email->from		= 'noreply@sbf.se';
+		$this->Email->to		= "{$registrator['first_name']} {$registrator['last_name']} <{$registrator['email']}>";
+		$this->Email->bcc		= "it sbf <it@sbf.se>";
+		$this->Email->replyTo	= 'it@sbf.se';
+		
+		$event = $this->Session->read('Event');
+		$this->Email->subject	= "Kvitto för din anmälan till {$event['name']}";
+		$this->Email->template	= 'default';
+		$this->Email->sendAs	= 'both'; //both text and html
+		$this->Email->send();
+	}*/
 		
 	}
