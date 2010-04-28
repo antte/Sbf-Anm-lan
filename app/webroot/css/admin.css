@@ -48,20 +48,12 @@ table#registrators tr th {
 	margin: 0;
 }
 
-#moduleIndex {
-	
-}
-
 #moduleIndex a {
 	display: block;
 	width: 100%;
 	height: 100%;
 	padding: 5px 0;
 	text-indent: 5px;
-}
-
-#moduleIndex tr:hover, #moduleIndex td:hover {
-	cursor: pointer;
 }
 
 #moduleIndex a.odd, #moduleIndex a.odd:visited, #moduleIndex a.odd:hover {
@@ -96,4 +88,8 @@ table#registrators tr th {
 
 .sorting_1 {
 	font-weight: bold;
+}
+
+.nounderline {
+	text-decoration: none;
 }

@@ -1,5 +1,7 @@
 <?php
 
+App::import('Model', 'Admin');
+
 	class Registrator extends AppModel {
 		var $belongsTo = array('Registration');
 		
@@ -107,6 +109,17 @@
 				'Registrator.phone',
 			)
 		));
+
+		// This is probably pretty bonkers but whatever :P
+		$Admin = ClassRegistry::init('Admin');
+		
+		// Adds modified_admin_username to array
+		foreach($registrators as &$registrator) {
+			if(isset($registrator['Registration']['modified_admin_id'])) {
+				$registrator['Registration']['modified_admin_username'] = $Admin->getAdminUsernameById($registrator['Registration']['modified_admin_id']);
+				unset($registrator['Registration']['modified_admin_id']);
+			}
+		}
 		
 		return $registrators;
 		

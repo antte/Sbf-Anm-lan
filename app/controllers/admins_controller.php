@@ -10,13 +10,14 @@ class AdminsController extends AppController {
 	function beforeFilter() {
 		
 		$this->loadModel("Event");
-		debug($this->Session->read());
+		//debug($this->Session->read());
 		//you can't visit any admin pages if you arent logged in as admin, with some exceptions
 		if (!$this->Session->check('adminLoggedIn')) {
 			$this->set('adminLoggedIn', 0);
 			//if this action is not one of the permitted actions you are send to login
 			if (!$this->actionPermittedWithoutLogin($this->params['action'])) {
-				$this->redirect(array( 'controller' => 'admins' , 'action' => 'login' ));
+				debug($this->params);
+				//$this->redirect(array( 'controller' => 'admins' , 'action' => 'login' ));
 			}
 		} else {
 			$this->set('adminLoggedIn' , $this->getCurrentAdminId());
@@ -48,6 +49,9 @@ class AdminsController extends AppController {
 		$this->Session->del('Event');
 		
 		$this->set('events', $this->Event->getEvents());
+		//$email = $this->Admin->resendConfirmEmail(($this->Session->read('Event', 'Registrator')));
+		
+		//return $email;
 		
 	}
 	
@@ -65,8 +69,12 @@ class AdminsController extends AppController {
 	
 	function logout() {
 		
-		//deletes the user session
+		// clear session
+		$this->Session->del('Registration');
+		$this->Session->del('Event');
+		$this->Session->del('errors');
 		$this->Session->del('adminLoggedIn');
+		$this->Session->del('loggedIn');
 		
 		$this->Session->setFlash("Du har nu loggat ut!", 'default', array('class' => 'loggedOut'));
 		
@@ -212,6 +220,23 @@ class AdminsController extends AppController {
 		return false;
 		
 	}
+
+
+	function resendConfirmMail($registrationNumber) {
+		$this->requestAction('registrations/resendConfirmMail/' . $registrationNumber);
+		$this->Session->setFlash('<h4 class="login_info grid_12">Ett bekräftelsemail har skickats</h4>');
+		$this->redirect('/admins/eventindex/registrators');
+	}	
+
+	
+	function getAdminUsernameById($id) {
+		if(!isset($this->params['requested'])) return;
+		return $this->Admin->getAdminUsernameById($id);
+	}
+	
 	
 }
+
+	
+
 

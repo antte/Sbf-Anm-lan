@@ -24,9 +24,9 @@
 		echo "<fieldset>";
 		echo '<div class="grid_full">';
 		
-		echo $form->input('message_for_registrator', array('type' => 'textarea', 'label' => 'Meddelande till Bokningens Kontaktperson'));
 		
 		if($this->requestAction('admins/checkAdminLoggedIn')) {
+			echo $form->input('message_for_registrator', array('type' => 'textarea', 'label' => 'Meddelande till Bokningens Kontaktperson'));
 			echo '<div class="resend">';
 			echo $form->input('sendConfirmationEmail', array('type' => 'checkbox', 'checked' => true, 'label' => 'Skicka ett nytt bekräftelsemail'));
 			echo '</div>';
