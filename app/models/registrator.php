@@ -1,5 +1,7 @@
 <?php
 
+App::import('Model', 'Admin');
+
 	class Registrator extends AppModel {
 		var $belongsTo = array('Registration');
 		
@@ -107,6 +109,21 @@
 				'Registrator.phone',
 			)
 		));
+		
+		// Replaces modified_admin_id with username
+		//$this->loadModel('Admin');
+		// TODO continue this crap
+		/*
+		foreach($registrators as &$registrator) {
+			if(isset($registrator['Registration']['modified_admin_id'])) {
+				//$registrator['Registration']['modified_admin_id'] = $this->requestAction('admins/getAdminUsernameFromId', array('pass' => array($registrator['Registration']['modified_admin_id'])));
+				//$registrator['Registration']['modified_admin_id'] = "Pelle";
+				$registrator['Registration']['modified_admin_id'] = $this->Admin->getAdminUsernameFromId($registrator['Registration']['modified_admin_id']);
+				
+			}
+			
+		}
+		*/
 		
 		return $registrators;
 		

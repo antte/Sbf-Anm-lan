@@ -17,16 +17,23 @@
 <div class="edit_link grid_8">
 	<?php echo $html->link( 'Redigera',array('controller'=>'Registrators', 'action'=>'create'));?>
 </div>
+
 <div class="grid_8">
 	<?php 
 		echo $form->create('Registration' , array('action' => 'add/review'));
 		echo "<fieldset>";
+		echo '<div class="grid_full">';
+		
+		echo $form->input('message_for_registrator', array('type' => 'textarea', 'label' => 'Meddelande till Bokningens Kontaktperson'));
 		
 		if($this->requestAction('admins/checkAdminLoggedIn')) {
-			echo $form->input('sendConfirmationEmail', array('type' => 'checkbox', 'checked' => true, 'label' => 'Vill du att ett bekräftelsemail ska skickas till Kontaktpersonen för bokningen?'));
+			echo '<div class="resend">';
+			echo $form->input('sendConfirmationEmail', array('type' => 'checkbox', 'checked' => true, 'label' => 'Skicka ett nytt bekräftelsemail'));
+			echo '</div>';
 		}
 		
 		echo $form->submit('Spara');
+		echo '</div>';
 		echo "</fieldset>";
 		echo $form->end();
 	?>

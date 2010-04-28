@@ -10,13 +10,16 @@ class AdminsController extends AppController {
 	function beforeFilter() {
 		
 		$this->loadModel("Event");
-		
+		//debug($this->Session->read());
 		//you can't visit any admin pages if you arent logged in as admin, with some exceptions
 		if (!$this->Session->check('adminLoggedIn')) {
+			$this->set('adminLoggedIn', 0);
 			//if this action is not one of the permitted actions you are send to login
 			if (!$this->actionPermittedWithoutLogin($this->params['action'])) {
 				$this->redirect(array( 'controller' => 'admins' , 'action' => 'login' ));
 			}
+		} else {
+			$this->set('adminLoggedIn' , $this->getCurrentAdminId());
 		}
 		
 	}
@@ -224,3 +227,7 @@ class AdminsController extends AppController {
 	
 	}
 	}
+
+	
+
+
