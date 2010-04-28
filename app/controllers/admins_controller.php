@@ -213,6 +213,11 @@ class AdminsController extends AppController {
 		
 	}
 	
+	function getAdminUsernameById($id) {
+		if(!isset($this->params['requested'])) return;
+		return $this->Admin->getAdminUsernameById($id);
+	}
+	
 	
 }
 

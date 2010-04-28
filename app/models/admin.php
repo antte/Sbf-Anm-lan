@@ -32,9 +32,9 @@ class Admin extends AppModel {
 	 * @param int $adminID
 	 * @return mixed $username
 	 */
-	function getAdminUsernameFromId($adminId) {
-		$username = $this->findById($adminId, array('fields' => array('username')));
-		return $username;
+	function getAdminUsernameById($adminId) {
+		$username = $this->findById($adminId);
+		return $username['Admin']['username'];
 	}
 
 

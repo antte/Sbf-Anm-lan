@@ -1,4 +1,5 @@
 <?php $registration = $this->requestAction('registrations/index');?>
+<?php $adminUsername = $this->requestAction('admins/getAdminUsernameById/'. $registration['Registration']['modified_admin_id']); ?>
 <?php $event = $this->requestAction('events/index/'. $registration['Registration']['event_id']);?>
 <div id="booking_nr" class="grid_8">
 	<div class="grid_full">
@@ -15,7 +16,7 @@
 			<?php endif; ?>
 			
 			<?php if ( $registration['Registration']['modified_admin']):?>
-				<p class="datetime">Senast ändrad av SBF: <?php echo $registration['Registration']['modified_admin'] . '<br /> Referens: ' . $registration['Registration']['modified_admin_id']?></p>
+				<p class="datetime">Senast ändrad av SBF: <?php echo $registration['Registration']['modified_admin'] . '<br /> Referens: ' . $adminUsername; ?></p>
 			<?php endif; ?>
 		
 		<?php endif; ?>
