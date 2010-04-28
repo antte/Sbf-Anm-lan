@@ -25,14 +25,17 @@ $(document).ready(function(){
 		
 	});
 	
-	/*
-	 * THIS IS CAUSING PROBLEMS LIKE CRAZY
-	$('table#moduleIndex tbody td').click(function(){
-		var url = window.location.protocol + "//" + window.location.host + $(this).find('a').attr('href');
-		window.location.href = url;
-		window.status = url;
+	// workaround: this extends the height of the a to match to height of the parent td
+	// also because of a rendering feature, the td must have some content in order to properly align
+	$('table#moduleIndex tbody td a').each(function(){
+		if(this.innerHTML == "") {
+			this.innerHTML = "&nbsp";
+			$(this).addClass('nounderline');
+		}
 	});
-	*/
+	var tdheight = $('table#moduleIndex tbody td').height() - 10;
+	$('table#moduleIndex tbody td a').height(tdheight);
+
 	
 });
 
