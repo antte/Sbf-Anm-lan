@@ -176,7 +176,7 @@ class RegistrationsController extends AppController {
 	function resendConfirmMail($registrationNumber) {
 		if(isset($this->params['requested']))
 	 	$registrationNumber = Sanitize::clean($registrationNumber);
-		$registration = $this->Registrations->findByNumber($registrationNumber);
+		$registration = $this->Registration->findByNumber($registrationNumber);
 		$mailArray['first_name'] = $registration['Registrator']['first_name'];
 		$mailArray['last_name'] = $registration['Registrator']['last_name'];
 		$mailArray['email'] = $registration['Registrator']['email'];
