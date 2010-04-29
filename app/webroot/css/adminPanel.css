@@ -122,3 +122,8 @@
 #adminPanel #adminSteps .current {
 	background: #FFE84C;
 }
+
+#adminPanel #adminUtilitiesMenu li#exportIcon span {
+	text-decoration: none;
+	font-size: 12px;
+}
