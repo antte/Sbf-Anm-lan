@@ -10,7 +10,7 @@ echo $javascript->link('adminPanel');
 		<ul id="adminUtilitiesMenu">
 			<li><?php echo $html->link( 'Logga ut', array('controller' => 'admins', 'action' => 'logout'), array( 'class' => 'logout') );?></li>
 			<li><?php echo $html->link( 'Byt evenemang', array('controller' => 'admins', 'action' => 'events') , array('class' => 'changeEvent')); ?></li>
-			<li id="exportIcon">Exportera
+			<li id="exportIcon">Exportera<span> ▼</span>
 				<ul id="excelExport">
 					<?php foreach($exportOptions as $exportOption): ?>
 					<li>

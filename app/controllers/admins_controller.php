@@ -239,7 +239,16 @@ class AdminsController extends AppController {
 	function getModelDump($modelName) {
 		$this->loadModel($modelName);
 		$modelName = mb_convert_encoding($modelName, "SJIS","UTF-8");
-		return $this->$modelName->find('all', array('recursive' => -1));
+		$eventId = $this->Session->read('Event.id');
+		
+		// the database model doesn't support a single find method for all the models
+		if($modelName == 'Registrations'){
+			$this->Event->$modelName->find('all', array('recursive' => -1));
+		}
+		
+		else {
+			return $this->$modelName->find('all', array('recursive' => -1));
+		}
 	}
 	
 	function excelExport($modelName) {
