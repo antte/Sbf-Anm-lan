@@ -94,11 +94,13 @@ table#registrators tr th {
 	text-decoration: none;
 }
 
-a.button {
-	margin: 0px;
+#moduleIndex a.button {
+	display:block-inline;
 	background-color: #ddd;
 	border-top:3px solid #999;
 	border-left: 3px solid #999;
 	border-right: 3px solid #444;
 	border-bottom: 3px solid #444;
+	height:0;
+	padding:0;
 }
