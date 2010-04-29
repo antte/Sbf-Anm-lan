@@ -32,7 +32,7 @@
 			echo '</div>';
 		}
 		
-		echo $form->submit('Spara');
+		echo $form->submit($submitLabel);;
 		echo '</div>';
 		echo "</fieldset>";
 		echo $form->end();
