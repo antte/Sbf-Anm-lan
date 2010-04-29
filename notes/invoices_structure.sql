@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 29, 2010 at 02:46 PM
+-- Generation Time: Apr 29, 2010 at 02:50 PM
 -- Server version: 5.1.36
 -- PHP Version: 5.3.0
 
@@ -28,7 +28,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 CREATE TABLE IF NOT EXISTS `invoices` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `registrations_id` int(64) NOT NULL,
-  `price` varchar(127) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `price` double NOT NULL,
   `created` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
