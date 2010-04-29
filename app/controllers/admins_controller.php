@@ -16,8 +16,7 @@ class AdminsController extends AppController {
 			$this->set('adminLoggedIn', 0);
 			//if this action is not one of the permitted actions you are send to login
 			if (!$this->actionPermittedWithoutLogin($this->params['action'])) {
-				debug($this->params);
-				//$this->redirect(array( 'controller' => 'admins' , 'action' => 'login' ));
+				$this->redirect(array( 'controller' => 'admins' , 'action' => 'login' ));
 			}
 		} else {
 			$this->set('adminLoggedIn' , $this->getCurrentAdminId());
@@ -233,7 +232,14 @@ class AdminsController extends AppController {
 		if(!isset($this->params['requested'])) return;
 		return $this->Admin->getAdminUsernameById($id);
 	}
-	
+	/**
+	 * 
+	 * @param unknown_type $modelName
+	 */
+	function getModelDump($modelName) {
+		$this->loadModel($modelName);
+		return $this->$modelName->find('all', array('recursive' => -1));
+	}
 	
 }
 
