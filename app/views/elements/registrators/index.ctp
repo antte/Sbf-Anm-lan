@@ -22,7 +22,7 @@
 				<?php endforeach; ?>
 			<?php endforeach; ?>
 					<td>
-					<?php echo $html->link('Skicka', array('controller' => 'admins', 'action' => 'resendConfirmMail', $registrator['Registration']['number'] ));?></td>	
+					<?php echo $html->link('Skicka', array('controller' => 'admins', 'action' => 'resendConfirmMail',$registrator['Registration']['number'] ), array('class' => 'button'));?></td>	
 					</td>
 			</tr>
 		<?php endforeach; ?>
