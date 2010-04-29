@@ -245,6 +245,20 @@ class AdminsController extends AppController {
 		$this->layout = "excel";
 	}
 	
+	function getExcelExportOptions() {
+		if(!isset($this->params['requested'])) return;
+		
+		return $exportOptions = array(
+			'Registration',
+			'Registrator',
+			'Person',
+			'Role',
+			'Event',
+			'Admin'
+		);
+		
+	}
+	
 }
 
 	
