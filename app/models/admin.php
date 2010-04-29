@@ -48,7 +48,7 @@ class Admin extends AppModel {
 		$this->Email->send();
 	}*/
 		
-	}
+	
 
 	
 	/*
@@ -60,6 +60,6 @@ class Admin extends AppModel {
 		$username = $this->findById($adminId);
 		return $username['Admin']['username'];
 	}
-
+}
 
 
