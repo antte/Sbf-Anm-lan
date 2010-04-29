@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<?php echo $html->charset(); ?>
+	<?php echo $html->charset('utf-8'); ?>
 	<title>
 		Svenska bilsportförbundet -
 		<?php echo $title_for_layout; ?>  
