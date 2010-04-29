@@ -5,7 +5,7 @@ class RegistrationsController extends AppController {
 	var $helpers = array('Form', 'Html', 'Javascript');
 	
 	var $components = array('Email');
-
+	
 	
 	function index() {
 		if (isset($this->params['requested'])) return $this->getRegistration();
