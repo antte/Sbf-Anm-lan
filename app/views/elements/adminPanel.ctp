@@ -1,6 +1,8 @@
 <?php 
 //get session stored event info	
 $event = $this->requestAction('events/index/'); 
+$exportOptions = $this->requestAction('admins/getExcelExportOptions');
+echo $javascript->link('adminPanel');
 ?>
 
 <div id="adminPanel" class="grid_12">
@@ -8,6 +10,15 @@ $event = $this->requestAction('events/index/');
 		<ul id="adminUtilitiesMenu">
 			<li><?php echo $html->link( 'Logga ut', array('controller' => 'admins', 'action' => 'logout'), array( 'class' => 'logout') );?></li>
 			<li><?php echo $html->link( 'Byt evenemang', array('controller' => 'admins', 'action' => 'events') , array('class' => 'changeEvent')); ?></li>
+			<li id="exportIcon">Exportera
+				<ul id="excelExport">
+					<?php foreach($exportOptions as $exportOption): ?>
+					<li>
+						<?php echo $html->link($exportOption, array('controller' => 'admins', 'action' => 'excelExport', $exportOption)); ?>
+					</li>
+					<?php endforeach;?>
+				</ul>
+			</li>
 		</ul>
 		
 		<?php if(isset($event['id'])): ?>
