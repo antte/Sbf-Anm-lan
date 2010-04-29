@@ -34,7 +34,11 @@ $(document).ready(function(){
 		}
 	});
 	var tdheight = $('table#moduleIndex tbody td').height() - 10;
-	$('table#moduleIndex tbody td a').height(tdheight);
+	$('table#moduleIndex tbody td a').each(function(){
+		if($(this).attr('class') !== 'button') {
+			$(this).height(tdheight);
+		}
+	});
 
 	
 });
