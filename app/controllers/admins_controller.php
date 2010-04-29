@@ -246,9 +246,11 @@ class AdminsController extends AppController {
 			$this->Event->$modelName->findByEventId($eventId, array('recursive' => -1));
 		}
 		
+		/*
 		elseif($modelName == 'Registrator') {
-			//$this->Registration->$modelName->find('all', array('recursive' => -1), 'conditions' => array('Registration.eventId' => $eventId));
+			$this->Registration->$modelName->find('all', array('recursive' => -1), 'conditions' => array('Registration.eventId' => $eventId));
 		}
+		*/
 		
 		else {
 			return $this->$modelName->find('all', array('recursive' => -1));
