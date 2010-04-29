@@ -2,14 +2,11 @@
 <?php $modelData = $this->requestAction('admins/getModelDump/'. $modelName); ?>
 <?php 
 
-debug($modelData);
-foreach($modelData[0]['Person'] as $fieldName => $fieldValue) {
-
 $modelNames = array_keys($modelData[0]);
 
 echo "<table style='border:1px solid black'>";
 echo "<thead style='font-weight:bold;'>";
-}
+
 //from the first row in the table ($modelData[0]) on the first model ($modelNames[0]) add fieldName to tabelHeaders
 foreach($modelData[0][$modelNames[0]] as $fieldName => $fieldValue) {
 	$tableHeaders[] = $fieldName;
