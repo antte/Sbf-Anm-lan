@@ -11,19 +11,19 @@ class Admin extends AppModel {
 	 * @param mixed $password
 	 */
 	function valid($username, $password) {
-			
+		
 		//delete old errors
 		$loginErrors = array();
 			
 		//findBy automatically Sanitizes so i omited that
 		$admin = $this->findByUsername($username);
-			
+		
 		if($admin['Admin']['password'] == md5($password))
-		return true;
+			return true;
 			
 		//just feels right to have a default return of false
 		$loginErrors[] = 'Fel användarnamn eller lösenord';
-		return false;
+			return false;
 			
 		}
 	/*function resendConfirmEmail($event,$registrator){
