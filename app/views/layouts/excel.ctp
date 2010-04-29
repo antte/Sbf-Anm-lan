@@ -1,6 +1,6 @@
 <?php 
 	$filename = $this->params['pass'][0].".xls";
-	header('Content-type: application/ms-excel');
+	header("Content-Type: application/vnd.ms-excel; charset=UTF-8");
 	header('Content-Disposition: attachment; filename=' . $filename);
 	echo $this->renderElement('excel');
 ?>

@@ -238,6 +238,7 @@ class AdminsController extends AppController {
 	 */
 	function getModelDump($modelName) {
 		$this->loadModel($modelName);
+		$modelName = mb_convert_encoding($modelName, "SJIS","UTF-8");
 		return $this->$modelName->find('all', array('recursive' => -1));
 	}
 	
