@@ -81,7 +81,11 @@ class RegistrationsController extends AppController {
 	 */
 	function review(){
 		$this->layout='registration';
-
+		if ($this->Session->check('adminLoggedIn'))
+			$this->set('submitLabel' , 'Spara');	
+		else 
+			$this->set('submitLabel' , 'Bekräfta anmälan');
+		
 		//you can't be in review if you haven't finished previous steps
 		if (!$this->previousStepsAreDone($this)){
 			$this->requestAction('steps/redirectToNextUnfinishedStep');	
