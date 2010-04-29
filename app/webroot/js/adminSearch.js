@@ -35,7 +35,7 @@ $(document).ready(function(){
 	});
 	var tdheight = $('table#moduleIndex tbody td').height() - 10;
 	$('table#moduleIndex tbody td a').each(function(){
-		if($(this).attr('class') !== 'button') {
+		if($(this).attr('class').match(^.{6}) != 'button') {
 			$(this).height(tdheight);
 		}
 	});
