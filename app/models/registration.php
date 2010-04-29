@@ -59,52 +59,10 @@ Class Registration extends AppModel {
 	 */
 	function putRegistrationInSession($registration, &$session) {
 		// Retype email is not stored in the database, so we add it to the array
-		$registration['Registrator']['retype_email'] = $registration['Registrator']['email'];
-		
+		$registration['Registrator']['retype_email'] = $registration['Registrator']['email'];		
 		$session->write('Registration', $registration);
 		$session->write('Event.steps', $this->Event->Step->getInitializedSteps($registration['Registration']['event_id']));
 	}
 	
-	function sendBookingMail($mailArray){	
-		$this->Email->smtpOptions = array(
-			'port'			=> '25', 
-			'timeout'		=> '30',
-			'host' 			=> 'localhost'
-		);
-		
-		$this->Email->delivery 	= 'smtp';
-		
-		$this->Email->from		= 'noreply@sbf.se';
-		$this->Email->to		= "{$mailArray['first_name']} {$mailArray['last_name']} <{$mailArray['email']}>";
-		$this->Email->bcc		= "it sbf <it@sbf.se>";
-		$this->Email->replyTo	= 'it@sbf.se';
-		
-		$event = $this->Session->read('Event');
-		$this->Email->subject	= "Kvitto för din anmälan till {$mailArray['event_name']}";
-		$this->Email->template	= 'default';
-		$this->Email->sendAs	= 'both'; //both text and html
-		$this->Email->send();
-		
-	
-	}
-
-	 function sendRegistrationConfirmMail($event,$registrator){
-	 		$mailArray['first_name'] = $registrator['first_name'];
-			$mailArray['last_name'] = $registrator['last_name'];
-			$mailArray['email'] = $registrator['email'];
-			$mailArray['event_name'] = $event['name'];
-	 		$this->sendBookingMail($mailArray);
-	 }
-	 
-	 function resendConfirmMail($registrationNumber){
-	 	$registrationNumber = Sanitize::clean($registrationNumber);
-		$registration = $this->findByNumber($registrationNumber);
-		$mailArray['first_name'] = $registration['Registrator']['first_name'];
-		$mailArray['last_name'] = $registration['Registrator']['last_name'];
-		$mailArray['email'] = $registration['Registrator']['email'];
-		$mailArray['event_name'] = $registration['Event']['name'];
-		
-		//$this->sendBookingMail($mailArray);
-}
 	 
 }

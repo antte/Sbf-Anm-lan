@@ -162,14 +162,45 @@ class RegistrationsController extends AppController {
 	 */
 	private function sendRegistrationConfirmMail($event,$registrator){
 		if($this->Session->read('dontSendEmails')) return;
-		$this->Registration->sendRegistrationConfirmMail($event,$registrator);
-	}
+	 		$mailArray['first_name'] = $registrator['first_name'];
+			$mailArray['last_name'] = $registrator['last_name'];
+			$mailArray['email'] = $registrator['email'];
+			$mailArray['event_name'] = $event['name'];
+	 		$this->sendBookingMail($mailArray);
+			}
 	
 	function resendConfirmMail($registrationNumber) {
-		if(isset($this->params['requested']));
-		$this->Registration->resendConfirmMail($registrationNumber);
-	}
+		if(isset($this->params['requested']))
+	 	$registrationNumber = Sanitize::clean($registrationNumber);
+		$registration = $this->Registrations->findByNumber($registrationNumber);
+		$mailArray['first_name'] = $registration['Registrator']['first_name'];
+		$mailArray['last_name'] = $registration['Registrator']['last_name'];
+		$mailArray['email'] = $registration['Registrator']['email'];
+		$mailArray['event_name'] = $registration['Event']['name'];
+		$this->sendBookingMail($mailArray);
+			}
 	
+	function sendBookingMail($mailArray){
+   	    
+		$this->Email->smtpOptions = array(
+			'port'			=> '25', 
+			'timeout'		=> '30',
+			'host' 			=> 'localhost'
+		);
+		
+		$this->Email->delivery 	= 'smtp';
+		
+		$this->Email->from		= 'noreply@sbf.se';
+		$this->Email->to		= "{$mailArray['first_name']} {$mailArray['last_name']} <{$mailArray['email']}>";
+		$this->Email->bcc		= "it sbf <it@sbf.se>";
+		$this->Email->replyTo	= 'it@sbf.se';
+		$this->Email->subject	= "Kvitto för din anmälan till {$mailArray['event_name']}";
+		$this->Email->template	= 'default';
+		$this->Email->sendAs	= 'both'; //both text and html
+		$this->Email->send();
+		
+	
+	}
 	
 	/**
 	 * if a registration has been made recently we return it
