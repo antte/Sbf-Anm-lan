@@ -111,12 +111,17 @@ App::import('Model', 'Admin');
 		));
 
 		// This is probably pretty bonkers but whatever :P
-		$Admin = ClassRegistry::init('Admin');
-		
+		//$Admin =& ClassRegistry::init('Admin');
+		//App::import('Model','Admin');
+		//$this->loadModel('Admin');
+	   
+   	   if (App::import('Model', 'Admin')) {
+    	   $this->Admin = new Admin();   
+      }
 		// Adds modified_admin_username to array
 		foreach($registrators as &$registrator) {
 			if(isset($registrator['Registration']['modified_admin_id'])) {
-				$registrator['Registration']['modified_admin_username'] = $Admin->getAdminUsernameById($registrator['Registration']['modified_admin_id']);
+				$registrator['Registration']['modified_admin_username'] = $this->Admin->getAdminUsernameById($registrator['Registration']['modified_admin_id']);
 				unset($registrator['Registration']['modified_admin_id']);
 			}
 		}
