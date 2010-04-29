@@ -1,6 +1,5 @@
 <!-- Help class that includes this js file even thou we are not in head tag -->
 <?php 
-	echo $this->renderElement('excel');
 	echo $javascript->link('jquery.1.4.2-min', $inline = false);
 	echo $javascript->link('jquery.validate', $inline = false);
 	echo $javascript->link('jq.form.conf/messages_se', $inline = false);

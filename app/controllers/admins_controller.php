@@ -241,6 +241,10 @@ class AdminsController extends AppController {
 		return $this->$modelName->find('all', array('recursive' => -1));
 	}
 	
+	function excelExport($modelName) {
+		$this->layout = "excel";
+	}
+	
 }
 
 	
