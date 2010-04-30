@@ -4,9 +4,9 @@ App::import('Sanitize');
 
 Class Registration extends AppModel {
 	var $belongsTo = array('Event');
-	var $hasMany = array('Person', 'Invoice');
+	var $hasMany = array('Invoice','Person');
 	var $hasOne = array('Registrator');
-
+	var $actsAs = array('Containable');
 	var $validate = array(
         	'event_id' => array (
 				'required'  => true,
