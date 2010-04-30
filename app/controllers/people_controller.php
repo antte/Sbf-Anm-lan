@@ -13,10 +13,10 @@ class PeopleController extends AppController {
 	function create($amountOfPeople = null){
 		
 		if (!$this->previousStepsAreDone($this)){
-			$this->requestAction('steps/redirectToNextUnfinishedStep');	
+			$this->requestAction('steps/redirectToNextUnfinishedStep');
 		}
 		
-		//No event selected redirekt to events
+		//No event selected redirect to events
 		if (!$this->Session->read('Registration.Registration.event_id')) {
 			$this->redirect(array('controller' => 'events', 'action' => 'index'));	
 		}
@@ -92,6 +92,7 @@ class PeopleController extends AppController {
 			if(empty($errors)) {
 				//if we dont have errors all was successful and we continue with the registration
 				$this->saveModelDataToSession($this);
+				
 				$this->updateStepStateToPrevious($this->params['controller'], $action);
 				$this->requestAction('steps/redirectToNextUnfinishedStep');
 			} else {
