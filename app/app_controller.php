@@ -59,7 +59,6 @@
 		}
 		$this->Session->write('Event.steps', $steps);
 	}
-	
 
 	/**
 	 * step specified becomes previous
@@ -75,4 +74,12 @@
 		}
 		$this->Session->write('Event.steps', $steps);
 	}
+	
+	/**
+	 * Checks to see if $modelName is a model
+	 */
+	function isModelName($modelName) { 
+		return in_array($modelName, Configure::listObjects('model'));
+	}
+	
 }

@@ -233,31 +233,36 @@ class AdminsController extends AppController {
 	}
 	
 	/**
-	 * @param $modelName This function returns all model data from model specified
-	 * @param $eventId This function can also return only the data from a model that belongs to a certain event (id)
+	 * Tries to figure out what kind of export the user wants to make from $exportType
+	 * @param string $exportType
 	 */
-	function getExportDump($modelName, $eventId = null) {
-		
-		if($eventId) {
-			//we have an eventid so caller wants just relevant data
-			
-			if($modelName == "Event") {
-				$this->Event->find('all', array('Event.id' => $eventId, 'recursive' => -1 ));			
-			} elseif(is_object($this->Event->$modelName)) {
-				$this->Event->$modelName->find('all', array($modelName . '.event_id' => $eventId, 'recursive' => -1 ));
-			} elseif(is_object($this->Event->Registration->$modelName)) {
-				
-			}
-			
-		} else {
-			//no event id, caller wants all data
-			$this->loadModel($modelName);
-			return $this->$modelName->find('all', array('recursive' => -1));
+	function getExportDump($exportType) {
+		if($this->isModelName($exportType)) {
+			return $this->getModelDump($exportType);
 		}
+	}
+	
+	/**
+	 * Depending on which model is requested, either event associated data or all data are returned
+	 * @param $modelName This function returns all model data from model specified
+	 */
+	function getModelDump($modelName) {
+		
+		//make sure this is a model
+		if(!$this->isModelName($modelName)) return;
+		
+		$this->loadModel($modelName);
+		
+		//getExcelDump is supposed to have a default behaviour in appmodel or a specific one in different models
+		return $this->$modelName->getExcelDump();
 		
 	}
 	
-	function excelExport($modelName) {
+	/**
+	 * excelExport renders an element, the element checks params pass 0 which contains $exportType
+	 * @param $exportType
+	 */
+	function excelExport($exportType) {
 		$this->layout = "excel";
 	}
 	
@@ -265,6 +270,7 @@ class AdminsController extends AppController {
 		if(!isset($this->params['requested'])) return;
 		
 		return $exportOptions = array(
+			'Allt',
 			'Registration',
 			'Registrator',
 			'Person',
@@ -273,15 +279,6 @@ class AdminsController extends AppController {
 			'Admin'
 		);
 		
-	}
-	
-	function test() {
-		$eventId = 7;
-		
-		$this->loadModel('Registration');
-		
-		//hitta alla personer som hör till ett visst event
-		return $this->Registration->Person->find('all', array('Registration.event_id' => $eventId, 'recursive' => -1 ));
 	}
 	
 }
