@@ -8,6 +8,7 @@
 		$registrators = $this->requestAction('registrators/index');
 		$tableHeaders = $this->requestAction('registrators/getTableHeaders');
 		$tableHeaders[]= 'Mail';
+		$tableHeaders[]= 'Ta bort';
 		echo "<thead>";
 		echo $html->tableHeaders($tableHeaders);
 		echo "</thead>";
@@ -23,6 +24,9 @@
 			<?php endforeach; ?>
 					<td>
 					<?php echo $html->link('Skicka', array('controller' => 'admins', 'action' => 'resendConfirmMail',$registrator['Registration']['number'] ), array('class' => 'button'));?></td>	
+					</td>
+					<td>
+					<?php echo $html->link('del', array('controller' => 'registrations', 'action' => 'deleteRegistrationAndRedirect',$registrator['Registration']['number'] ), array('class' => 'button delete' ));?></td>	
 					</td>
 			</tr>
 		<?php endforeach; ?>
