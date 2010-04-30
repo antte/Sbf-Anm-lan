@@ -226,33 +226,35 @@ class AdminsController extends AppController {
 		$this->Session->setFlash('<h4 class="login_info grid_12">Ett bekräftelsemail har skickats</h4>');
 		$this->redirect('/admins/eventindex/registrators');
 	}	
-
 	
 	function getAdminUsernameById($id) {
 		if(!isset($this->params['requested'])) return;
 		return $this->Admin->getAdminUsernameById($id);
 	}
+	
 	/**
-	 * 
-	 * @param unknown_type $modelName
+	 * @param $modelName This function returns all model data from model specified
+	 * @param $eventId This function can also return only the data from a model that belongs to a certain event (id)
 	 */
-	function getModelDump($modelName) {
-		$this->loadModel($modelName);
-		$modelName = mb_convert_encoding($modelName, "SJIS","UTF-8");
-		$eventId = $this->Session->read('Event.id');
+	function getExportDump($modelName, $eventId = null) {
 		
-		// the database model doesn't support a single find method for all the models
-		if($modelName == 'Registrations'){
-			$this->Event->$modelName->findByEventId($eventId, array('recursive' => -1));
-		}
-		
-		elseif($modelName == 'Registrator') {
-			$this->Registration->$modelName->find('all', array('recursive' => -1, 'conditions' => array('Registration.event_id' => $eventId)));
-		}
-		
-		else {
+		if($eventId) {
+			//we have an eventid so caller wants just relevant data
+			
+			if($modelName == "Event") {
+				$this->Event->find('all', array('Event.id' => $eventId, 'recursive' => -1 ));			
+			} elseif(is_object($this->Event->$modelName)) {
+				$this->Event->$modelName->find('all', array($modelName . '.event_id' => $eventId, 'recursive' => -1 ));
+			} elseif(is_object($this->Event->Registration->$modelName)) {
+				
+			}
+			
+		} else {
+			//no event id, caller wants all data
+			$this->loadModel($modelName);
 			return $this->$modelName->find('all', array('recursive' => -1));
 		}
+		
 	}
 	
 	function excelExport($modelName) {
@@ -274,10 +276,12 @@ class AdminsController extends AppController {
 	}
 	
 	function test() {
-		return "adfafas";
+		$eventId = 7;
+		
+		$this->loadModel('Registration');
+		
+		//hitta alla personer som hör till ett visst event
+		return $this->Registration->Person->find('all', array('Registration.event_id' => $eventId, 'recursive' => -1 ));
 	}
-}
-
 	
-
-
+}
