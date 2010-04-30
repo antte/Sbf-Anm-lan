@@ -13,13 +13,13 @@ $(document).ready(function(){
 	$('table#moduleIndex tbody tr').hover(function(){
 		
 		//finds the booking number class of the tr
-		var booking = $(this).attr('class').match("^.{6}").toString();
+		var booking = $(this).attr('class').toString().match("^.{6}");
 
 		$(this).addClass('hover');
 		$('table#moduleIndex tbody .' + booking).addClass('companyhover');
 		
 	},function(){
-		var booking = $(this).attr('class').match("^.{6}").toString();
+		var booking = $(this).attr('class').toString().match("^.{6}");
 		$(this).removeClass('hover');
 		$('table#moduleIndex tbody .' + booking).removeClass('companyhover');
 		
@@ -35,9 +35,11 @@ $(document).ready(function(){
 	});
 	var tdheight = $('table#moduleIndex tbody td').height() - 10;
 	$('table#moduleIndex tbody td a').each(function(){
-		if($(this).attr('class').match(^.{6}) != 'button') {
+		var className = $(this).attr('class').toString().match("^.{6}");
+		if( className != 'button') {
 			$(this).height(tdheight);
 		}
+		
 	});
 
 	
