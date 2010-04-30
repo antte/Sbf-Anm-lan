@@ -275,6 +275,9 @@ class AdminsController extends AppController {
 		
 	}
 	
+	function test() {
+		return "adfafas";
+	}
 }
 
 	
