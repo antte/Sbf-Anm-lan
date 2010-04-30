@@ -361,6 +361,13 @@ class RegistrationsController extends AppController {
 			return false;
 		}
 	}
+
+	function deleteRegistrationAndRedirect($registrationNumber){
+		$registrationId = $this->Registration->field('id',array ('number' => $registrationNumber));
+		$this->Registration->deleteAllRegistrationRelatedDataById($registrationId);
+		$this->Session->setFlash('<h4 class="login_info grid_12"> Registrationen '. $registrationNumber. ' är borttagen </h4>');
+		$this->redirect(array('controller' => 'admins' , 'action' => 'eventindex'));
+	}
 }
 
 
