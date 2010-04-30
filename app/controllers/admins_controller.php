@@ -243,7 +243,11 @@ class AdminsController extends AppController {
 		
 		// the database model doesn't support a single find method for all the models
 		if($modelName == 'Registrations'){
-			$this->Event->$modelName->find('all', array('recursive' => -1));
+			$this->Event->$modelName->findByEventId($eventId, array('recursive' => -1));
+		}
+		
+		elseif($modelName == 'Registrator') {
+			$this->Registration->$modelName->find('all', array('recursive' => -1, 'conditions' => array('Registration.event_id' => $eventId)));
 		}
 		
 		else {

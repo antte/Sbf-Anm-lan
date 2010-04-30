@@ -2,7 +2,6 @@
 //get session stored event info	
 $event = $this->requestAction('events/index/'); 
 $exportOptions = $this->requestAction('admins/getExcelExportOptions');
-echo $javascript->link('adminPanel');
 ?>
 
 <div id="adminPanel" class="grid_12">

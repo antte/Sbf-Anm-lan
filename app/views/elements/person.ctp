@@ -2,6 +2,10 @@
 	$registration = $this->requestAction('registrations');
 	$roles = $this->requestAction('roles');
 	$people  = $registration['Person'];
+	$event = $this->requestAction('events');
+	
+	$summa = $event['price_per_person'] * sizeof($people);
+
 ?> 
 <div id="entrants" class="grid_8">
 	<div class="grid_full">
@@ -14,6 +18,7 @@
 					<th>Förnamn</th>
 					<th>Efternamn</th>
 					<th>Anmäld som</th>
+					<th>Pris</th>
 				</tr>
 			</thead>
 			<tbody>			
@@ -27,12 +32,13 @@
 							if($id == $person['role_id']) echo $name;
 						} ?>
 					</td>
+					<td><?php echo $event['price_per_person']." kr";?></td>
 				</tr>
 			<?php 
 				$i++;	
 				endforeach;?>
 			</tbody>
 		</table>
-			
+		Summa: <?php echo $summa;?> kr
 	</div>
 </div>
