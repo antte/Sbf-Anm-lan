@@ -226,37 +226,43 @@ class AdminsController extends AppController {
 		$this->Session->setFlash('<h4 class="login_info grid_12">Ett bekräftelsemail har skickats</h4>');
 		$this->redirect('/admins/eventindex/registrators');
 	}	
-
 	
 	function getAdminUsernameById($id) {
 		if(!isset($this->params['requested'])) return;
 		return $this->Admin->getAdminUsernameById($id);
 	}
+	
 	/**
-	 * 
-	 * @param unknown_type $modelName
+	 * Tries to figure out what kind of export the user wants to make from $exportType
+	 * @param string $exportType
 	 */
-	function getModelDump($modelName) {
-		$this->loadModel($modelName);
-		//$modelName = mb_convert_encoding($modelName, "SJIS","ISO-8859-1", "UTF-8");
-		$modelName = mb_convert_encoding($modelName, "ISO-8859-1", "auto");
-		$eventId = $this->Session->read('Event.id');
-		
-		// the database model doesn't support a single find method for all the models
-		if($modelName == 'Registrations'){
-			$this->Event->$modelName->findByEventId($eventId, array('recursive' => -1));
-		}
-		
-		elseif($modelName == 'Registrator') {
-			$this->Registration->$modelName->find('all', array('recursive' => -1, 'conditions' => array('Registration.event_id' => $eventId)));
-		}
-		
-		else {
-			return $this->$modelName->find('all', array('recursive' => -1));
+	function getExportDump($exportType) {
+		if($this->isModelName($exportType)) {
+			return $this->getModelDump($exportType);
 		}
 	}
 	
-	function excelExport($modelName) {
+	/**
+	 * Depending on which model is requested, either event associated data or all data are returned
+	 * @param $modelName This function returns all model data from model specified
+	 */
+	function getModelDump($modelName) {
+		
+		//make sure this is a model
+		if(!$this->isModelName($modelName)) return;
+		
+		$this->loadModel($modelName);
+		
+		//getExcelDump is supposed to have a default behaviour in appmodel or a specific one in different models
+		return $this->$modelName->getExcelDump();
+		
+	}
+	
+	/**
+	 * excelExport renders an element, the element checks params pass 0 which contains $exportType
+	 * @param $exportType
+	 */
+	function excelExport($exportType) {
 		$this->layout = "excel";
 	}
 	
@@ -264,6 +270,7 @@ class AdminsController extends AppController {
 		if(!isset($this->params['requested'])) return;
 		
 		return $exportOptions = array(
+			'Allt',
 			'Registration',
 			'Registrator',
 			'Person',
@@ -275,7 +282,3 @@ class AdminsController extends AppController {
 	}
 	
 }
-
-	
-
-
