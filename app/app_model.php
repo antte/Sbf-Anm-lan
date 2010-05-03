@@ -46,14 +46,13 @@
 				'/Registrator.city/'				=> 'Stad',
 				'/Registrator.postal_code/'			=> 'Postkod',
 				'/Registrator.extra_information/'	=> 'Övrigt',
-				'/People.first_name/'				=> 'Förnamn',
-				'/People.last_name/'				=> 'Efternamn',
-				'/People.role_id/'					=> 'Roll id',
+				'/Person.first_name/'				=> 'Förnamn',
+				'/Person.last_name/'				=> 'Efternamn',
+				'/Person.role_id/'					=> 'Roll id',
 				'/Event.name/'						=> 'Evenemangsnamn',
 				'/Event.confirmation_message/'		=> 'Bekräftelsemeddelande',
 				'/Event.price_per_person/'			=> 'Pris/person'
 			);
-			
 			$search = array();
 			$replace = array();
 			
@@ -81,6 +80,23 @@
 				//this model doesnt have exportFields so we return it all
 				return $this->find('all', array('recursive' => -1));
 			}
+		}
+		
+		/**
+		 * Takes model field names such as Registration.number
+		 * into table field names such as registrations.number
+		 */
+		function modelFieldNamesToTableFieldNames($modelFieldNames) {
+			
+			foreach ($modelFieldNames as $i => &$modelFieldName) {
+				$modelFieldName = explode('.', $modelFieldName);
+				$modelFieldName[0] = Inflector::tableize($modelFieldName[0]);
+				$modelFieldName = implode('.', $modelFieldName);
+			}
+			
+			debug($modelFieldNames);
+			
+			return $modelFieldNames;
 		}
 			
 	}

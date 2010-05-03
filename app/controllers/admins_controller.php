@@ -266,7 +266,7 @@ class AdminsController extends AppController {
 	 * @param $exportType
 	 */
 	function excelExport($exportType) {
-		$this->layout = "admin";
+		$this->layout = "excel";
 	}
 	
 	function getExcelExportOptions() {
