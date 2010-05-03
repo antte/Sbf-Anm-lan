@@ -4,7 +4,6 @@
 	$people  = $registration['Person'];
 	$event = $this->requestAction('events');
 	
-	$sum = $event['price_per_person'] * sizeof($people);
 
 ?> 
 <div id="entrants" class="grid_8">

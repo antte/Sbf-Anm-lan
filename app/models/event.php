@@ -25,5 +25,6 @@
 		$event = $this->find('first', array('conditions' => array('Event.is_active' => 1) , 'recursive' => 0));
 		return $event;
 	}
+	
 }
 	

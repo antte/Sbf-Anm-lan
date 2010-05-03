@@ -42,8 +42,6 @@ class RegistrationsController extends AppController {
 		$this->updateStepStateToPrevious($this->params['controller'], $action);
 		
 		$registration = $this->Session->read('Registration');
-		$sum = $this->Invoice->calculateInvoiceSum('');
-		debug($sum);
 		debug($registration);
 		
 		if($this->requestAction('admins/checkAdminLoggedIn')) $registration = $this->touchByAdmin($registration);
@@ -53,7 +51,7 @@ class RegistrationsController extends AppController {
 			$this->Registration->deleteAllRegistrationRelatedDataById($registration['Registration']['id']);
 		}
 		
-		if($this->Registration->saveAll($sum, $registration)) {
+		if($this->Registration->saveAll($registration)) {
 			$this->Session->write('Event.registrationId', $this->Registration->id);
 			
 			if( !($this->data['Registration']['sendConfirmationEmail'] == 0) ) {
@@ -84,6 +82,11 @@ class RegistrationsController extends AppController {
 	 */
 	function review(){
 		$this->layout='registration';
+		$sum = $this->Registration->Invoice->calculatePrice($this->Session->read('Event.price_per_person'), sizeof($this->Session->read('Registration.Person')));
+		$this->Session->write('Registration.Invoice.price', $sum);
+		$this->set('sum', $sum);
+		debug($sum);
+		debug($this->Session->read());
 		if ($this->Session->check('adminLoggedIn'))
 			$this->set('submitLabel' , 'Spara');	
 		else 
