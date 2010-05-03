@@ -7,6 +7,16 @@ Class Registration extends AppModel {
 	var $hasMany = array('Invoice','Person');
 	var $hasOne = array('Registrator');
 	var $actsAs = array('Containable');
+	
+	var $exportFields = array (
+			'Registration.number', 
+			'Registration.created',
+			'Person.first_name',
+			'Person.last_name' ,
+			'Registrator.email',
+			'Registrator.extra_information' 
+		); 
+	
 	var $validate = array(
         	'event_id' => array (
 				'required'  => true,
@@ -14,6 +24,8 @@ Class Registration extends AppModel {
 				'rule'		=> 'numeric',
 		)
 	);
+
+
 
 	/**
 	 * Check and kreates unique number obs don't save just check if exists
@@ -62,5 +74,43 @@ Class Registration extends AppModel {
 		$session->write('Event.steps', $this->Event->Step->getInitializedSteps($registration['Registration']['event_id']));
 	}
 	
+	/**
+	 * specific 
+	 * @overloaded
+	 */
+	function getExportDump(){
+		
+		$exportFieldNames = $this->translateFieldNames($this->exportFields);
+		$exportFields = $this->modelFieldNamesToTableFieldNames($this->exportFields);
+		$columns = "";
+		foreach ($exportFields as $i => $exportField){
+			$columns .= "$exportField as ` {$exportFieldNames[$i]}`";  
+			
+			//so long as we're not on the last one add comma at the end
+			if (!(sizeof($exportFields)-1 == $i))			
+				$columns .= ",";
+				  
+		}
+		
+		$dump = $this->query("
+					SELECT 	 $columns
+					FROM registrations 
+					LEFT JOIN people ON registrations.id = people.registration_id
+					LEFT JOIN roles ON people.role_id = roles.id
+					LEFT JOIN registrators ON registrators.registration_id = registrations.id 
+					LEFT JOIN admins ON registrations.modified_admin_id = admins.id 
+					GROUP BY  people.id 
+					");
+		$a = array();
+		foreach ($dump as $i => $row){
+			foreach ($row as $modelName => $dataSet){
+				foreach($dataSet as $fieldKey => $fieldValue){
+					//formats the array as the view wants it
+					$a[$i]['whatever'][$fieldKey] = $fieldValue;
+				}
+			}
+		}
+		return $a;
+	}
 	 
 }
