@@ -4,6 +4,7 @@ App::import('Model', 'Admin');
 
 	class Registrator extends AppModel {
 		var $belongsTo = array('Registration');
+		var $exportAllowed = true;
 		
 		var $validate = array(
         	'first_name' => array (

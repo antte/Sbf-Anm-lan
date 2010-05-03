@@ -4,6 +4,7 @@ App::import('Santize');
 class Admin extends AppModel {
 
 	var $loginErrors = array();
+	var $exportAllowed = true;
 
 	/**
 	 * Checks to see if username and password is a valid admin

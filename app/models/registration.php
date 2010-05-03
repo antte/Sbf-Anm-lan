@@ -7,6 +7,7 @@ Class Registration extends AppModel {
 	var $hasMany = array('Invoice','Person');
 	var $hasOne = array('Registrator');
 	var $actsAs = array('Containable');
+	var $exportAllowed = true;
 	
 	var $exportFields = array (
 			'Registration.number', 
@@ -75,7 +76,7 @@ Class Registration extends AppModel {
 	}
 	
 	/**
-	 * specific 
+	 * specific
 	 * @overloaded
 	 */
 	function getExportDump(){

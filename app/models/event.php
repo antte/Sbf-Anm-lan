@@ -4,6 +4,7 @@
 		
 		var $hasMany = "Registration"; 
 		var $hasAndBelongsToMany = "Step";
+		var $exportAllowed = true;
 			
 	/*
 	 * TODO use findById instead, where is this used
