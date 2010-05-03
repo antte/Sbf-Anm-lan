@@ -15,8 +15,6 @@ Class Registration extends AppModel {
 		)
 	);
 
-
-
 	/**
 	 * Check and kreates unique number obs don't save just check if exists
 	 * @param $length = 6

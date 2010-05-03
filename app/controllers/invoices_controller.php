@@ -1,6 +1,4 @@
 <?php
-
-class InvoicesController extends AppController {
-	
-	
-}
+	class InvoicesController extends AppController {
+		
+	}

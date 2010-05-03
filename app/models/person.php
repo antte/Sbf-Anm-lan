@@ -51,5 +51,14 @@ Class Person extends AppModel {
 		endforeach;
 		return $registrations;
 	}
+	
+	/**
+	 * @overloaded
+	 * Only sends along people from current event
+	 */
+	function getExcelDump() {
+		$event = $this->requestAction('events');
+		return $this->find('all', array('Registration.event_id' => $event['id'], 'recursive' => -1));
+	}
     
 }

@@ -53,5 +53,15 @@
 			return preg_replace($search, $replace, $fieldNames);
 			
 		}
+		
+		/**
+		 * Generall function meant to be overloaded in models
+		 * Its important that this function returns a numerically indexed array
+		 * containing model name which is an array containing fieldNames and values
+		 * or results may vary :)
+		 */
+		function getExportDump() {
+			return $this->find('all', array('recursive' => -1));
+		}
 			
 	}
