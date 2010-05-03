@@ -74,7 +74,13 @@
 		 * or results may vary :)
 		 */
 		function getExportDump() {
-			return $this->find('all', array('recursive' => -1));
+			if(isset($this->exportFields)) {
+				//only return fields specified				
+				return $this->find('all', array('recursive' => -1, 'fields' => $exportFields));
+			} else {
+				//this model doesnt have exportFields so we return it all
+				return $this->find('all', array('recursive' => -1));
+			}
 		}
 			
 	}
