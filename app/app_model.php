@@ -1,7 +1,10 @@
 <?php
 
 	class AppModel extends Model {
-		 var $actsAs = array('Containable');
+		var $actsAs = array('Containable');
+		var $exportAllowed = false;
+		 
+		function isExportAllowed() { return $this->exportAllowed; }
 		
 		/**
 		 * Validates an array with multiple sets of data
@@ -93,8 +96,6 @@
 				$modelFieldName[0] = Inflector::tableize($modelFieldName[0]);
 				$modelFieldName = implode('.', $modelFieldName);
 			}
-			
-			debug($modelFieldNames);
 			
 			return $modelFieldNames;
 		}

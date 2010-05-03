@@ -237,6 +237,7 @@ class AdminsController extends AppController {
 	 * @param string $exportType
 	 */
 	function getExport($exportType) {
+		$exportType = Sanitize::clean($exportType);
 		if($this->isModelName($exportType)) {
 			return $this->getModelDump($exportType);
 		} else {
@@ -256,6 +257,8 @@ class AdminsController extends AppController {
 		
 		$this->loadModel($modelName);
 		
+		if(!$this->$modelName->isExportAllowed()) return;
+		
 		//getExcelDump is supposed to have a default behaviour in appmodel or a specific one in different models
 		return $this->$modelName->getExportDump();
 		
@@ -272,14 +275,7 @@ class AdminsController extends AppController {
 	function getExcelExportOptions() {
 		if(!isset($this->params['requested'])) return;
 		
-		return $exportOptions = array(
-			'Registration',
-			'Registrator',
-			'Person',
-			'Role',
-			'Event',
-			'Admin'
-		);
+		return $this->getModelsWithExportAllowed();
 		
 	}
 	

@@ -8,6 +8,8 @@ Class Person extends AppModel {
 			"Role",
 			"Registration" 
 			);
+			
+	var $exportAllowed = true;
 	
 	var $validate = array(
         'first_name' => array (

@@ -82,4 +82,14 @@
 		return in_array($modelName, Configure::listObjects('model'));
 	}
 	
+	function getModelsWithExportAllowed() {
+		$models = Configure::listObjects('model');
+		foreach($models as &$model) {
+			$this->loadModel($model);
+			if(!$this->$model->exportAllowed)
+				unset($model);
+		}
+		return $models;
+	}
+	
 }
