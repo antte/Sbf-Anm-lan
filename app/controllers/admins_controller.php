@@ -241,6 +241,7 @@ class AdminsController extends AppController {
 			return $this->getModelDump($exportType);
 		} else {
 			// if user wants a non-model export (special export) we handle it separately
+			return;
 		}
 	}
 	
@@ -272,7 +273,6 @@ class AdminsController extends AppController {
 		if(!isset($this->params['requested'])) return;
 		
 		return $exportOptions = array(
-			'Allt',
 			'Registration',
 			'Registrator',
 			'Person',
