@@ -30,15 +30,28 @@
 		function translateFieldNames($fieldNames) {
 			
 			//This is for code readability - Search becomes replace
+			//!OBS! the order in this array is not arbitrary!
 			$search_replace = array(
 				'/Registration.number/' 			=> 'Bokningsnummer', 
+				'/Registration.created/' 			=> 'Skapad',
 				'/Registration.modified_admin_id/' 	=> 'Admin som ändrat',
 				'/Registration.modified_admin/' 	=> 'Ändrad av admin', 
 				'/Registration.modified/' 			=> 'Ändrad av bokaren', 
-				'/Registrator.first_name/' 			=> 'Förnamn', 
-				'/Registrator.last_name/' 			=> 'Efternamn', 
+				'/Registrator.first_name/' 			=> 'Bokarens förnamn', 
+				'/Registrator.last_name/' 			=> 'Bokarens efternamn', 
 				'/Registrator.email/' 				=> 'Epost', 
-				'/Registrator.phone/' 				=> 'Telefon'
+				'/Registrator.phone/' 				=> 'Telefon',
+				'/Registrator.c_o/' 				=> 'C/O',
+				'/Registrator.street_address/'		=> 'Gatuaddress',
+				'/Registrator.city/'				=> 'Stad',
+				'/Registrator.postal_code/'			=> 'Postkod',
+				'/Registrator.extra_information/'	=> 'Övrigt',
+				'/People.first_name/'				=> 'Förnamn',
+				'/People.last_name/'				=> 'Efternamn',
+				'/People.role_id/'					=> 'Roll id',
+				'/Event.name/'						=> 'Evenemangsnamn',
+				'/Event.confirmation_message/'		=> 'Bekräftelsemeddelande',
+				'/Event.price_per_person/'			=> 'Pris/person'
 			);
 			
 			$search = array();
@@ -61,7 +74,13 @@
 		 * or results may vary :)
 		 */
 		function getExportDump() {
-			return $this->find('all', array('recursive' => -1));
+			if(isset($this->exportFields)) {
+				//only return fields specified				
+				return $this->find('all', array('recursive' => -1, 'fields' => $exportFields));
+			} else {
+				//this model doesnt have exportFields so we return it all
+				return $this->find('all', array('recursive' => -1));
+			}
 		}
 			
 	}
