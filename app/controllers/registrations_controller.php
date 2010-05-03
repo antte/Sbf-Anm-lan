@@ -364,6 +364,38 @@ class RegistrationsController extends AppController {
 			return false;
 		}
 	}
+
+	function deleteRegistrationAndRedirect($registrationNumber){
+		$registrationId = $this->Registration->field('id',array ('number' => $registrationNumber));
+		$this->Registration->deleteAllRegistrationRelatedDataById($registrationId);
+		$this->Session->setFlash('<h4 class="login_info grid_12"> Registrationen '. $registrationNumber. ' är borttagen </h4>');
+		$this->redirect(array('controller' => 'admins' , 'action' => 'eventindex'));
+	}
+
+	function renderDump(){
+	//$this->Registration->;
+	//$this->Registration->contain(array('Registrator','Person', 'Role'));	
+	$dump = $this->Registration->query('
+				SELECT *
+				FROM registrations 
+				LEFT JOIN people ON registrations.id = people.registration_id
+				LEFT JOIN roles ON people.role_id = roles.id
+				LEFT JOIN registrators ON registrators.registration_id = registrations.id 
+				GROUP BY  people.id 
+				');
+	$a=array();
+	foreach ($dump as $i => $row){
+		foreach ($row as $key => $subrow){
+			foreach($subrow as $subkey => $subsub){
+				$a[$i][$subkey] = $subsub;
+				$heads[$subkey]=$subkey;
+			}
+		}
+	} 
+	$this->set('dump', $a);
+	$this->set('heads', $heads);
+	//debug($dump);
+	}
 }
 
 
