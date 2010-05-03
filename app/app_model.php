@@ -60,7 +60,7 @@
 		 * containing model name which is an array containing fieldNames and values
 		 * or results may vary :)
 		 */
-		function getExcelDump() {
+		function getExportDump() {
 			return $this->find('all', array('recursive' => -1));
 		}
 			

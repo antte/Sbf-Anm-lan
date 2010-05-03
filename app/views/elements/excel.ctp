@@ -1,7 +1,7 @@
 <?php 
 
 $exportType = $this->params['pass'][0];
-$modelData = $this->requestAction('admins/getExportDump/'. $exportType);
+$modelData = $this->requestAction('admins/getExport/'. $exportType);
 
 $modelNames = array_keys($modelData[0]);
 
