@@ -236,11 +236,12 @@ class AdminsController extends AppController {
 	 * Tries to figure out what kind of export the user wants to make from $exportType
 	 * @param string $exportType
 	 */
-	function getExportDump($exportType) {
+	function getExport($exportType) {
 		if($this->isModelName($exportType)) {
 			return $this->getModelDump($exportType);
 		} else {
 			// if user wants a non-model export (special export) we handle it separately
+			return;
 		}
 	}
 	
@@ -256,7 +257,7 @@ class AdminsController extends AppController {
 		$this->loadModel($modelName);
 		
 		//getExcelDump is supposed to have a default behaviour in appmodel or a specific one in different models
-		return $this->$modelName->getExcelDump();
+		return $this->$modelName->getExportDump();
 		
 	}
 	
@@ -272,7 +273,6 @@ class AdminsController extends AppController {
 		if(!isset($this->params['requested'])) return;
 		
 		return $exportOptions = array(
-			'Allt',
 			'Registration',
 			'Registrator',
 			'Person',

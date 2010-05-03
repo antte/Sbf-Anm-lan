@@ -42,6 +42,7 @@ class RegistrationsController extends AppController {
 		$this->updateStepStateToPrevious($this->params['controller'], $action);
 		
 		$registration = $this->Session->read('Registration');
+		debug($registration);
 		
 		if($this->requestAction('admins/checkAdminLoggedIn')) $registration = $this->touchByAdmin($registration);
 		
@@ -62,16 +63,16 @@ class RegistrationsController extends AppController {
 				$this->sendRegistrationConfirmMail($this->Session->read('Event'), $registration['Registrator']);
 			}
 			
-			$this->clearSessionFromAllRegistrationInformation();
+			//$this->clearSessionFromAllRegistrationInformation();
 		} else {
-			$this->clearSessionFromAllRegistrationInformation();
+			//$this->clearSessionFromAllRegistrationInformation();
 			$this->Session->setFlash('Vi ber om ursäkt, din registrering kunde inte slutföras. Kontakta support.');
 		}
 		
 		//If you're an admin you dont want to get to receipt when you're done saving a registration
 		if($this->requestAction('admins/checkAdminLoggedIn')) $this->redirect(array('controller' => 'admins', 'action' => 'eventindex'));
 		
-		$this->redirect(array('action' => 'receipt'));
+		//$this->redirect(array('action' => 'receipt'));
 		
 	}
 	
@@ -81,6 +82,9 @@ class RegistrationsController extends AppController {
 	 */
 	function review(){
 		$this->layout='registration';
+		$sum = $this->Registration->Invoice->calculatePrice($this->Session->read('Event.price_per_person'), sizeof($this->Session->read('Registration.Person')));
+		//$this->Session->write('Registration.Invoice.price', $sum);
+		$this->set('sum', $sum);
 		if ($this->Session->check('adminLoggedIn'))
 			$this->set('submitLabel' , 'Spara');	
 		else 
@@ -369,30 +373,6 @@ class RegistrationsController extends AppController {
 		$this->redirect(array('controller' => 'admins' , 'action' => 'eventindex'));
 	}
 
-	function renderDump(){
-	//$this->Registration->;
-	//$this->Registration->contain(array('Registrator','Person', 'Role'));	
-	$dump = $this->Registration->query('
-				SELECT *
-				FROM registrations 
-				LEFT JOIN people ON registrations.id = people.registration_id
-				LEFT JOIN roles ON people.role_id = roles.id
-				LEFT JOIN registrators ON registrators.registration_id = registrations.id 
-				GROUP BY  people.id 
-				');
-	$a=array();
-	foreach ($dump as $i => $row){
-		foreach ($row as $key => $subrow){
-			foreach($subrow as $subkey => $subsub){
-				$a[$i][$subkey] = $subsub;
-				$heads[$subkey]=$subkey;
-			}
-		}
-	} 
-	$this->set('dump', $a);
-	$this->set('heads', $heads);
-	//debug($dump);
-	}
 }
 
 
