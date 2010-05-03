@@ -83,10 +83,8 @@ class RegistrationsController extends AppController {
 	function review(){
 		$this->layout='registration';
 		$sum = $this->Registration->Invoice->calculatePrice($this->Session->read('Event.price_per_person'), sizeof($this->Session->read('Registration.Person')));
-		$this->Session->write('Registration.Invoice.price', $sum);
+		//$this->Session->write('Registration.Invoice.price', $sum);
 		$this->set('sum', $sum);
-		debug($sum);
-		debug($this->Session->read());
 		if ($this->Session->check('adminLoggedIn'))
 			$this->set('submitLabel' , 'Spara');	
 		else 
