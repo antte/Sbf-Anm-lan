@@ -370,36 +370,8 @@ class RegistrationsController extends AppController {
 	}
 
 	function renderDump(){
-	//$this->Registration->;
-	//$this->Registration->contain(array('Registrator','Person', 'Role'));	
-	$dump = $this->Registration->query('
-				SELECT 	registrations.number as `Boknings nummer`, 
-						registrations.created as Skapad,
-						people.first_name as `Förnamn`,
-						people.last_name as Efternamn,
-						registrators.email as Epost,
-						registrators.extra_information as `Övrigt`
-						 
-				FROM registrations 
-				LEFT JOIN people ON registrations.id = people.registration_id
-				LEFT JOIN roles ON people.role_id = roles.id
-				LEFT JOIN registrators ON registrators.registration_id = registrations.id 
-				LEFT JOIN admins ON registrations.modified_admin_id = admins.id 
-				GROUP BY  people.id 
-				');
-	$a=array();
-	debug($dump);
-	foreach ($dump as $i => $row){
-		foreach ($row as $modelName => $dataSet){
-			foreach($dataSet as $fieldKey => $fieldValue){
-				$a[$i][$fieldKey] = $fieldValue;
-				$heads[$fieldKey] = $fieldKey;
-			}
-		}
-	} 
-	$this->set('dump', $a);
-	$this->set('heads', $heads);
-	//debug($dump);
+		$dump = $this->Registration->getExportDump();
+		$this->set('dump', $dump);
 	}
 }
 

@@ -15,6 +15,8 @@ Class Registration extends AppModel {
 		)
 	);
 
+
+
 	/**
 	 * Check and kreates unique number obs don't save just check if exists
 	 * @param $length = 6
@@ -63,16 +65,25 @@ Class Registration extends AppModel {
 	}
 
 	function getExportDump(){
-		//$this->Registration->;
+	//$this->Registration->;
 		//$this->Registration->contain(array('Registrator','Person', 'Role'));	
-		//'people.first_name' => 'Förnamn'
+		$exportFields = array (
+							'Registrations.number', 
+							'Registrations.created',
+							'People.first_name',
+							'People.last_name' ,
+							'Registrators.email',
+							'Registrators.extra_information' 
+							
+						); 
+		$exportFieldNames = $this->translateFieldNames($exportFields);
+		$colums = "";
+		foreach ($exportFields as $i => $exportField){
+			$colums .= "`$exportField` as ` {$exportFieldNames[$i]}`,";  
+		}
 		
-		/*foreach  ($fieldsNames as $field => $name){
-			$colums .= '`'.$field . '`' . ' as '.'`' . $name .'`';
-		}*/
-		
-		$dump = $this->Registration->query("
-					SELECT 	$colums 
+		$dump = $this->query("
+					SELECT 	 $colums
 					FROM registrations 
 					LEFT JOIN people ON registrations.id = people.registration_id
 					LEFT JOIN roles ON people.role_id = roles.id
@@ -86,7 +97,6 @@ Class Registration extends AppModel {
 			foreach ($row as $modelName => $dataSet){
 				foreach($dataSet as $fieldKey => $fieldValue){
 					$a[$i][$fieldKey] = $fieldValue;
-					$heads[$fieldKey] = $fieldKey;
 				}
 			}
 		} 
