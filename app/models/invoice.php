@@ -1,4 +1,4 @@
 <?php 
-	class InvoiceModel extends AppModel {
+	class Invoice extends AppModel {
 		var $belongsTo = array('Registration');
 	}

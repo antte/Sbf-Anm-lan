@@ -238,7 +238,8 @@ class AdminsController extends AppController {
 	 */
 	function getModelDump($modelName) {
 		$this->loadModel($modelName);
-		$modelName = mb_convert_encoding($modelName, "SJIS","UTF-8");
+		//$modelName = mb_convert_encoding($modelName, "SJIS","ISO-8859-1", "UTF-8");
+		$modelName = mb_convert_encoding($modelName, "ISO-8859-1", "auto");
 		$eventId = $this->Session->read('Event.id');
 		
 		// the database model doesn't support a single find method for all the models
