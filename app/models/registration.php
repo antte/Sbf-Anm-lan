@@ -7,6 +7,16 @@ Class Registration extends AppModel {
 	var $hasMany = array('Invoice','Person');
 	var $hasOne = array('Registrator');
 	var $actsAs = array('Containable');
+	
+	var $exportFields = array (
+			'Registration.number', 
+			'Registration.created',
+			'Person.first_name',
+			'Person.last_name' ,
+			'Registrator.email',
+			'Registrator.extra_information' 
+		); 
+	
 	var $validate = array(
         	'event_id' => array (
 				'required'  => true,
@@ -65,21 +75,14 @@ Class Registration extends AppModel {
 	}
 
 	function getExportDump(){
-	//$this->Registration->;
-		//$this->Registration->contain(array('Registrator','Person', 'Role'));	
-		$exportFields = array (
-							'Registrations.number', 
-							'Registrations.created',
-							'People.first_name',
-							'People.last_name' ,
-							'Registrators.email',
-							'Registrators.extra_information' 
-							
-						); 
-		$exportFieldNames = $this->translateFieldNames($exportFields);
+		
+		$exportFieldNames = $this->translateFieldNames($this->exportFields);
+		$exportFields = $this->modelFieldNamesToTableFieldNames($this->exportFields);
 		$colums = "";
 		foreach ($exportFields as $i => $exportField){
-			$colums .= "`$exportField` as ` {$exportFieldNames[$i]}`,";  
+				$colums .= "$exportField as ` {$exportFieldNames[$i]}`";  
+			if (!(sizeof($exportFields)-1 == $i))			
+				$colums .= ",";  
 		}
 		
 		$dump = $this->query("

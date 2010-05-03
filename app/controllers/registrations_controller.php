@@ -369,10 +369,6 @@ class RegistrationsController extends AppController {
 		$this->redirect(array('controller' => 'admins' , 'action' => 'eventindex'));
 	}
 
-	function renderDump(){
-		$dump = $this->Registration->getExportDump();
-		$this->set('dump', $dump);
-	}
 }
 
 
