@@ -4,7 +4,7 @@
 	$people  = $registration['Person'];
 	$event = $this->requestAction('events');
 	
-	$summa = $event['price_per_person'] * sizeof($people);
+	$sum = $event['price_per_person'] * sizeof($people);
 
 ?> 
 <div id="entrants" class="grid_8">
@@ -39,6 +39,6 @@
 				endforeach;?>
 			</tbody>
 		</table>
-		Summa: <?php echo $summa;?> kr
+		Summa: <?php echo $sum;?> kr
 	</div>
 </div>

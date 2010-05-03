@@ -64,8 +64,5 @@ Class Registration extends AppModel {
 		$session->write('Event.steps', $this->Event->Step->getInitializedSteps($registration['Registration']['event_id']));
 	}
 	
-	 function calculatePrice() {
-	 	$this->Event->find('all', array(
-	 		'contain' => array('')));
-	 }
+	 
 }

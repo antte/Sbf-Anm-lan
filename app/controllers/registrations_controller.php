@@ -42,6 +42,9 @@ class RegistrationsController extends AppController {
 		$this->updateStepStateToPrevious($this->params['controller'], $action);
 		
 		$registration = $this->Session->read('Registration');
+		$sum = $this->Invoice->calculateInvoiceSum('');
+		debug($sum);
+		debug($registration);
 		
 		if($this->requestAction('admins/checkAdminLoggedIn')) $registration = $this->touchByAdmin($registration);
 		
@@ -50,7 +53,7 @@ class RegistrationsController extends AppController {
 			$this->Registration->deleteAllRegistrationRelatedDataById($registration['Registration']['id']);
 		}
 		
-		if($this->Registration->saveAll($registration)) {
+		if($this->Registration->saveAll($sum, $registration)) {
 			$this->Session->write('Event.registrationId', $this->Registration->id);
 			
 			if( !($this->data['Registration']['sendConfirmationEmail'] == 0) ) {
@@ -62,16 +65,16 @@ class RegistrationsController extends AppController {
 				$this->sendRegistrationConfirmMail($this->Session->read('Event'), $registration['Registrator']);
 			}
 			
-			$this->clearSessionFromAllRegistrationInformation();
+			//$this->clearSessionFromAllRegistrationInformation();
 		} else {
-			$this->clearSessionFromAllRegistrationInformation();
+			//$this->clearSessionFromAllRegistrationInformation();
 			$this->Session->setFlash('Vi ber om ursäkt, din registrering kunde inte slutföras. Kontakta support.');
 		}
 		
 		//If you're an admin you dont want to get to receipt when you're done saving a registration
 		if($this->requestAction('admins/checkAdminLoggedIn')) $this->redirect(array('controller' => 'admins', 'action' => 'eventindex'));
 		
-		$this->redirect(array('action' => 'receipt'));
+		//$this->redirect(array('action' => 'receipt'));
 		
 	}
 	
