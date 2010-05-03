@@ -77,13 +77,18 @@ Class Registration extends AppModel {
 							
 						); 
 		$exportFieldNames = $this->translateFieldNames($exportFields);
-		$colums = "";
+		$columns = "";
 		foreach ($exportFields as $i => $exportField){
-			$colums .= "`$exportField` as ` {$exportFieldNames[$i]}`,";  
+			$columns .= "`$exportField` as ` {$exportFieldNames[$i]}`";
+			if( !(sizeof($exportFields)-1 == $i) ) {
+				$columns .= ",";
+			}  
 		}
 		
+		debug($columns);
+		
 		$dump = $this->query("
-					SELECT 	 $colums
+					SELECT 	 $columns
 					FROM registrations 
 					LEFT JOIN people ON registrations.id = people.registration_id
 					LEFT JOIN roles ON people.role_id = roles.id
