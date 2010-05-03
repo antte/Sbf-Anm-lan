@@ -239,6 +239,8 @@ class AdminsController extends AppController {
 	function getExportDump($exportType) {
 		if($this->isModelName($exportType)) {
 			return $this->getModelDump($exportType);
+		} else {
+			// if user wants a non-model export (special export) we handle it separately
 		}
 	}
 	
