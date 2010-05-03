@@ -3,9 +3,10 @@
 	App::import('Sanitize');
 	App::import('Inflector');
 
-	
 	class AppController extends Controller {
-			
+	var $sweName = 'Namn';
+	var $sweDescribe = 'Namn på kontrollern';
+		
 	/**
 	 * Takes data from controllers and puts in in the sesssion so that we can save it later
 	 * @param string $modelName to which name would you like to push (name should be the same as the model that will later be used to save the data)
@@ -90,6 +91,10 @@
 				unset($model);
 		}
 		return $models;
+	}
+	
+	function getSweName(){
+		return $this->sweName;
 	}
 	
 }
