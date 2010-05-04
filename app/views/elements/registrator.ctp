@@ -23,7 +23,7 @@
 		</div>
 		
 		<?php if( $registration['Registrator']['extra_information'] != ""): ?>
-		<div class="grid_8 alpha">
+		<div class="grid_7 alpha">
 			<h4>Extra Information</h4>
 			<p class="extra_information"><?php echo $registration['Registrator']['extra_information'] . "\r\n"?></p>
 		</div>

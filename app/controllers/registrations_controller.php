@@ -2,7 +2,7 @@
 
 class RegistrationsController extends AppController {
 	
-	var $helpers = array('Form', 'Html', 'Javascript');
+	var $helpers = array('Form', 'Html', 'Javascript', 'Number');
 	
 	var $components = array('Email');
 	var $altName = 'Bokningar';
@@ -180,7 +180,7 @@ class RegistrationsController extends AppController {
 			$mailArray['email'] = $registrator['email'];
 			$mailArray['event_name'] = $event['name'];
 	 		$this->sendBookingMail($mailArray);
-			}
+	}
 	
 	function resendConfirmMail($registrationNumber) {
 		if(isset($this->params['requested']))
@@ -191,7 +191,7 @@ class RegistrationsController extends AppController {
 		$mailArray['email'] = $registration['Registrator']['email'];
 		$mailArray['event_name'] = $registration['Event']['name'];
 		$this->sendBookingMail($mailArray);
-			}
+	}
 	
 	function sendBookingMail($mailArray){
    	    
@@ -374,7 +374,8 @@ class RegistrationsController extends AppController {
 	function deleteRegistrationAndRedirect($registrationNumber){
 		$registrationId = $this->Registration->field('id',array ('number' => $registrationNumber));
 		$this->Registration->deleteAllRegistrationRelatedDataById($registrationId);
-		$this->Session->setFlash('<h4 class="login_info grid_12"> Registrationen '. $registrationNumber. ' är borttagen </h4>');
+		$this->Session->setFlash('<div class="grid_12 admin_info"><h4 class="grid_full">Registrationen '. $registrationNumber. ' är borttagen</h4></div>');
+		
 		$this->redirect(array('controller' => 'admins' , 'action' => 'eventindex'));
 	}
 
