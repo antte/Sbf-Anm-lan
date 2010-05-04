@@ -8,8 +8,9 @@ Class Person extends AppModel {
 	
 	var $belongsTo = array(
 			"Role",
-			"Registration" 
-			);
+			"Registration",
+		);
+	var $hasOne = array("ReductionCode");
 			
 	var $exportAllowed = true;
 	
