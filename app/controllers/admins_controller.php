@@ -281,7 +281,7 @@ class AdminsController extends AppController {
 	function getExcelExportOptions() {
 		if(!isset($this->params['requested'])) return;
 		
-		return $this->getModelsWithExportAllowed();
+		return $this->getAltNameModelsWithExportAllowed();
 		
 	}
 	
