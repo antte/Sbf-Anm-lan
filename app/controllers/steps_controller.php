@@ -29,7 +29,7 @@ class StepsController extends AppController {
 		
 		$steps = $this->Session->read('Event.steps');
 		foreach($steps as $step) {
-			if($step['state'] != 'previous') {
+			if(($step['state'] != 'previous') && $step['label'] != '') {
 				$this->redirect(array('controller' => $step['controller'], 'action' => $step['action']));
 			}
 		}
@@ -53,7 +53,7 @@ class StepsController extends AppController {
 		
 		$stepCounter = 0;
 		$firstComingStepFound = false;
-		
+
 		//The function of this foreach is to arrange css classes so that the view can handle it correctly
 		foreach($steps as &$step) {
 			//receipt should always be disabled if its not current
