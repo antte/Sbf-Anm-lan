@@ -8,7 +8,7 @@ Class Registration extends AppModel {
 	var $hasOne = array('Registrator');
 	var $actsAs = array('Containable');
 	var $exportAllowed = true;
-	
+	var $altName = 'Bokningar';
 	var $exportFields = array (
 			'Registration.number', 
 			'Registration.created',

@@ -5,7 +5,9 @@ class Admin extends AppModel {
 
 	var $loginErrors = array();
 	var $exportAllowed = true;
-
+	var $altName = 'Administratörer';
+	var $altDescribe = 'Administratör kontroller';
+	
 	/**
 	 * Checks to see if username and password is a valid admin
 	 * @param mixed $username

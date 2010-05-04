@@ -99,5 +99,10 @@
 			
 			return $modelFieldNames;
 		}
+	
+		function getAltName(){
+			return $this->altName;
+		}
+	
 			
 	}

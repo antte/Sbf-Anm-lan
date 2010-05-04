@@ -3,7 +3,9 @@
 App::import('Sanitize');
 
 Class Person extends AppModel {
-
+	var $altName = 'Anmälda';
+	var $altDescribe = 'Personer som ingår i en sällskap';
+	
 	var $belongsTo = array(
 			"Role",
 			"Registration" 

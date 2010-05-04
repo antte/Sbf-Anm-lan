@@ -93,6 +93,23 @@
 		return $models;
 	}
 	
+	function getAltNameModelsWithExportAllowed() {
+		$models = Configure::listObjects('model');
+		$altNames =array();
+		foreach($models as &$model) {
+			$this->loadModel($model);
+			if(!$this->$model->exportAllowed)
+				unset($model);
+			else {
+				if (isset($this->$model->altName)){
+					$altNames[$model] = $this->$model->getAltName();
+				}	else {
+					$altNames[$model] = $model;
+				}
+			}
+		}
+		return $altNames;
+	}
 	function getAltName(){
 		return $this->altName;
 	}

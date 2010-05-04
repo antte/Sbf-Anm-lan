@@ -5,7 +5,9 @@
 		var $hasMany = "Registration"; 
 		var $hasAndBelongsToMany = "Step";
 		var $exportAllowed = true;
-			
+		var $altName = 'Evenemang';
+		var $altDescribe = 'Hanterar olika tillställningar';
+		
 	/*
 	 * TODO use findById instead, where is this used
 	 * Returns the event from DB based on Id
