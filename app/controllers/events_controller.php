@@ -2,7 +2,7 @@
 class EventsController extends AppController {
 
 	var $helpers = array('Html', 'Form', 'Javascript');
-	var $altName = 'Tillställningar';
+	var $altName = 'Evenemang';
 	var $altDescribe = 'Hanterar olika tillställningar';
 	/**
 	 * Get an array of all the events in the database and returns it to the index view
