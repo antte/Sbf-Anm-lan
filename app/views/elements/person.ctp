@@ -36,6 +36,8 @@
 				endforeach;?>
 			</tbody>
 		</table>
-		Summa: <?php echo $this->requestAction('invoices/getSum');?> kr
+			<p class="sum">
+				Summa: <?php echo $this->requestAction('invoices/getSum');?> kr
+			</p>
 	</div>
 </div>

@@ -314,3 +314,10 @@ table td {
 	height: 25px;
 	width: 25px;
 }
+
+p.sum {
+	float:right;
+	font-size: 120%;
+	font-weight: bold;
+	margin-right: 10px;
+}
