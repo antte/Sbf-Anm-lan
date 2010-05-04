@@ -1,26 +1,17 @@
 <?php
 	class InvoicesController extends AppController {
-	var $sweName = 'Fakturor';
-	var $sweDescribe = 'Fakturor som listas';
-		
-		function saveDataToSession($sum) {
-			
-			if($this->Session->check('Registration.Invoice')) {
-				// TODO check for duplicate
-				$invoices = $this->Session->read('Registration.Invoice');
-				$this->Session->write('Registration.Invoice.'. sizeof($invoices) .'.price', $sum);
-			} else {
-				$this->Session->write('Registration.Invoice.0.price', $sum);
-			}
-			
-		}
+	var $altName = 'Fakturor';
+	var $altDescribe = 'Fakturor som listas';
 		
 		/**
-		 * 
+		 * Calculate the sum of the people based on prize_per_person from current event and amount of people in current registration
+		 * @return sum of registration.
 		 */
+	
 		function getSum() {
-			
+			//Get current active registration
 			$registration = $this->requestAction('registrations');
+			//Get current active event
 			$event = $this->requestAction('events');
 			
 			if($this->Session->check('Registration.Person') && $this->Session->check('Event.price_per_person')) {
