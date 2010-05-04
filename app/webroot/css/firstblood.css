@@ -80,11 +80,6 @@ fieldset {
 	margin-bottom: 10px;
 }
 
-p.extra_information {
-	overflow:hidden;
-	width: 300px;
-}
-
 .amount label {
 	clear: right;	
 }

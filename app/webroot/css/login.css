@@ -52,6 +52,13 @@ form#login .submit input {
 	padding: 5px 0;
 }
 
+.admin_info {
+	float: none;
+	display: block;
+	clear: both;
+	background: #fffcbb;
+}
+
 #login_error {
 	margin-bottom: 0;
 	background-color:#ffaaaa;
