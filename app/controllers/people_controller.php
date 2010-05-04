@@ -5,9 +5,6 @@ class PeopleController extends AppController {
 	var $altName = 'Sällskap';
 	var $altDescribe = 'Personer som ingår i en sällskap';
 	
-	function getSweName(){
-		return $this->sweName;
-	}
 	/**
 	 * Inits the view for adding people (including amount of people) to the party
 	 * @param unknown_type $amountOfPeople
