@@ -15,18 +15,22 @@
 			
 		}
 		
+		/**
+		 * 
+		 */
 		function getSum() {
 			
 			$registration = $this->requestAction('registrations');
 			$event = $this->requestAction('events');
-			debug($registration);
 			
-			if(!$this->Session->check('Registration.Invoice.0')) {
+			if($this->Session->check('Registration.Person') && $this->Session->check('Event.price_per_person')) {
+				return $this->Invoice->calculatePrice($this->Session->read('Event.price_per_person'), sizeof($this->Session->read('Registration.Person')));
+			} else {
+				// We get here when we are in receipt view basicly
 				$latestInvoice = $this->Invoice->getLatest($registration['Registration']['id']);
 				return $latestInvoice['Invoice']['price'];
-			} else {
-				return $this->Invoice->calculatePrice($event['price_per_person'], sizeof($registration['Person']));
 			}
+			
 			
 		}
 		

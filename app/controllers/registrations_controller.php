@@ -43,13 +43,10 @@ class RegistrationsController extends AppController {
 		$this->saveModelDataToSession($this,$registrationRegistration);
 		$this->updateStepStateToPrevious($this->params['controller'], $action);
 		
-		$sum = $this->Registration->Invoice->calculatePrice($this->Session->read('Event.price_per_person'), sizeof($this->Session->read('Registration.Person')));
-		$this->requestAction('invoices/saveDataToSession/'. $sum);
-		
+		//Here we get Registration from session so we can run saveAll on it
 		$registration = $this->Session->read('Registration');
-		debug($registration);
 		
-		
+		$registration = $this->Registration->Invoice->addInvoiceToRegistration($registration);
 		
 		if($this->requestAction('admins/checkAdminLoggedIn')) $registration = $this->touchByAdmin($registration);
 		
@@ -84,23 +81,24 @@ class RegistrationsController extends AppController {
 	}
 	
 	/*
-	 * Inits the review mode
-	 * TODO (lies?) no it doesnt :P its essentially an empty action for the review view 
+	 * 
 	 */
 	function review(){
 		$this->layout='registration';
+				
+		//you can't be in review if you haven't finished previous steps
+		if (!$this->previousStepsAreDone($this)){
+			$this->requestAction('steps/redirectToNextUnfinishedStep');	
+		}
+		
 		$sum = $this->Registration->Invoice->calculatePrice($this->Session->read('Event.price_per_person'), sizeof($this->Session->read('Registration.Person')));
-		$this->requestAction('invoices/saveDataToSession/'. $sum);
 		$this->set('sum', $sum);
+		
 		if ($this->Session->check('adminLoggedIn'))
 			$this->set('submitLabel' , 'Spara');	
 		else 
 			$this->set('submitLabel' , 'Bekräfta anmälan');
 		
-		//you can't be in review if you haven't finished previous steps
-		if (!$this->previousStepsAreDone($this)){
-			$this->requestAction('steps/redirectToNextUnfinishedStep');	
-		}		
 	}
 		
 	/*
@@ -114,16 +112,15 @@ class RegistrationsController extends AppController {
 		}						
 	}
 	
-	/*
-	 * Recieve and process login credentials, fetches and stores the registration to session and redirects to review
-	 */
 	function login() {
 		$this->set('errors', $this->Session->read('errors'));
 		$this->Session->write('errors', null);
 		
 	}
 	
-	
+	/*
+	 * Recieve and process login credentials, fetches and stores the registration to session and redirects to review
+	 */
 	function addLogin(){
 		if(!$this->data['Registration']['number'] && !$this->data['Registrator']['email']) {
 			// First time visiting the site, do nothing and just display the view
@@ -148,6 +145,7 @@ class RegistrationsController extends AppController {
 				if($registration = $this->Registration->findByNumber($number)){
 					$event = $registration['Event'];
 					unset($registration['Event']);
+					unset($registration['Invoice']);
 					$this->Session->write('Event', $event);
 					// Checks the array from the database and tries to match the email with the form//
 					$email = $this->data['Registrator']['email'];
