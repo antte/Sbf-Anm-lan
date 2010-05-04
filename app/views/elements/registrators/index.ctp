@@ -23,10 +23,16 @@
 				<?php endforeach; ?>
 			<?php endforeach; ?>
 					<td>
-					<?php echo $html->link('Skicka', array('controller' => 'admins', 'action' => 'resendConfirmMail',$registrator['Registration']['number'] ), array('class' => 'button'));?></td>	
+						<?php echo $html->image('email-arrow.png', array(
+							'alt' => 'Skicka bekräftelsen igen',
+							'url' => array('controller' => 'admins', 'action' => 'resendConfirmMail',$registrator['Registration']['number'] ), array('class' => 'button')
+						)); ?>
 					</td>
 					<td>
-					<?php echo $html->link('del', array('controller' => 'registrations', 'action' => 'deleteRegistrationAndRedirect',$registrator['Registration']['number'] ), array('class' => 'button delete' ));?></td>	
+						<?php echo $html->image('remove.png', array(
+							'alt' => 'Ta bort registreringen',
+							'url' => array('controller' => 'registrations', 'action' => 'deleteRegistrationAndRedirect',$registrator['Registration']['number'] ), array('class' => 'button delete')
+						)); ?>	
 					</td>
 			</tr>
 		<?php endforeach; ?>
