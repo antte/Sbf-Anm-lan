@@ -2,8 +2,8 @@
 
 class PeopleController extends AppController {
 	var $helpers = array('Html','Form','Javascript');
-	var $sweName = 'Sällskap';
-	var $sweDescribe = 'Personer som ingår i en sällskap';
+	var $altName = 'Sällskap';
+	var $altDescribe = 'Personer som ingår i en sällskap';
 	
 	function getSweName(){
 		return $this->sweName;

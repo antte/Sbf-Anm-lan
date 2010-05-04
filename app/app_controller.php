@@ -4,8 +4,8 @@
 	App::import('Inflector');
 
 	class AppController extends Controller {
-	var $sweName = 'Namn';
-	var $sweDescribe = 'Namn på kontrollern';
+	var $altName = 'Namn';
+	var $altDescribe = 'Namn på kontrollern';
 		
 	/**
 	 * Takes data from controllers and puts in in the sesssion so that we can save it later
@@ -93,8 +93,8 @@
 		return $models;
 	}
 	
-	function getSweName(){
-		return $this->sweName;
+	function getAltName(){
+		return $this->altName;
 	}
 	
 }

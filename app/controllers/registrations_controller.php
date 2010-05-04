@@ -5,8 +5,8 @@ class RegistrationsController extends AppController {
 	var $helpers = array('Form', 'Html', 'Javascript');
 	
 	var $components = array('Email');
-	var $sweName = 'Bokningar';
-	var $sweDescribe = 'Det som en registration gör';
+	var $altName = 'Bokningar';
+	var $altDescribe = 'Det som en registration gör';
 	
 	
 	function index() {

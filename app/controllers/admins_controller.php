@@ -6,6 +6,8 @@ class AdminsController extends AppController {
 	var $helpers = array('html','form','javascript');
 	var $layout = "admin";
 	var $defaultElementAction = "index";
+	var $altName = 'Administratör';
+	var $altDescribe = 'Administratör kontroller';
 	
 	function beforeFilter() {
 		
