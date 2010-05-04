@@ -3,6 +3,14 @@
 	$roles = $this->requestAction('roles');
 	$people  = $registration['Person'];
 	$event = $this->requestAction('events');
+	
+	$numberFormat = array(
+		'before' => '', 
+		'decimals' => ',', 
+		'thousands' => '.',
+		'after' => ' kr'
+	);
+	$sum = $this->requestAction('invoices/getSum');
 	?> 
 <div id="entrants" class="grid_8">
 	<div class="grid_full">
@@ -37,7 +45,7 @@
 			</tbody>
 		</table>
 			<p class="sum">
-				Summa: <?php echo $this->requestAction('invoices/getSum');?> kr
+				Summa: <?php echo $number->format( $sum, $numberFormat );?>
 			</p>
 	</div>
 </div>
