@@ -3,6 +3,8 @@
 class RegistratorsController extends AppController {
 	
 	var $helpers = array('Form', 'Html', 'Javascript');
+	var $altName = 'Bokare';
+	var $altDescribe = '';
 	
 	
 	function beforeFilter(){

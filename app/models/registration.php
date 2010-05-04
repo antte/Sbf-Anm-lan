@@ -77,7 +77,8 @@ Class Registration extends AppModel {
 	}
 	
 	/**
-	 * specific
+	 * When the user exports registration we send along associated data from people and registrator
+	 * TODO refactor?
 	 * @overloaded
 	 */
 	function getExportDump(){
@@ -89,7 +90,7 @@ Class Registration extends AppModel {
 			$columns .= "$exportField as ` {$exportFieldNames[$i]}`";  
 			
 			//so long as we're not on the last one add comma at the end
-			if (!(sizeof($exportFields)-1 == $i))			
+			if (!(sizeof($exportFields)-1 == $i))
 				$columns .= ",";
 				  
 		}
@@ -108,7 +109,7 @@ Class Registration extends AppModel {
 			foreach ($row as $modelName => $dataSet){
 				foreach($dataSet as $fieldKey => $fieldValue){
 					//formats the array as the view wants it
-					$a[$i]['whatever'][$fieldKey] = $fieldValue;
+					$a[$i]['Registration'][$fieldKey] = $fieldValue;
 				}
 			}
 		}

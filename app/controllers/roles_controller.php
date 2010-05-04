@@ -1,5 +1,7 @@
 <?php
 	class RolesController extends AppController {
+	var $altName = 'Roller';
+	var $altDescribe = 'Roll som person kan ha';
 		
 		/*
 		 * Fetches a list of all the roles stored in the database

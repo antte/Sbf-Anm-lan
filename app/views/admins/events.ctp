@@ -3,9 +3,11 @@
 		<h1>Admin</h1>
 	</div>
 	<div class="eventslist">
-		<table>
+		<table id="events">
+			<thead>
 		<?php
 		echo $html->tableHeaders(array('Event namn','Bekräftningsmedelande','Aktiv'));
+		echo "</thead>";
 		foreach ($events as $i => $event){ ?>
 			<tr class ="<?php echo ($i%2)? 'even': 'odd';?>" >
 			<?php
