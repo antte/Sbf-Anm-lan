@@ -1,6 +1,6 @@
 <?php
 
-	Class ReductionCodes extends AppModel {
+	Class ReductionCode extends AppModel {
 		
 		var $exportAllowed = true;
 		var $altName = 'Rabatter';
