@@ -1,8 +1,8 @@
 <?php
 
 class StepsController extends AppController {
-	var $sweName = 'Steg';
-	var $sweDescribe = 'Steg i ett event';
+	var $altName = 'Steg';
+	var $altDescribe = 'Steg i ett event';
 	
 	function index($controller = null  , $action = null){
 		if (!isset($this->params['requested'])) return;

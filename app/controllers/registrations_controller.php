@@ -5,8 +5,8 @@ class RegistrationsController extends AppController {
 	var $helpers = array('Form', 'Html', 'Javascript');
 	
 	var $components = array('Email');
-	var $sweName = 'Bokningar';
-	var $sweDescribe = 'Det som en registration gör';
+	var $altName = 'Bokningar';
+	var $altDescribe = 'Det som en registration gör';
 	
 	
 	function index() {
@@ -43,8 +43,10 @@ class RegistrationsController extends AppController {
 		$this->saveModelDataToSession($this,$registrationRegistration);
 		$this->updateStepStateToPrevious($this->params['controller'], $action);
 		
+		//Here we get Registration from session so we can run saveAll on it
 		$registration = $this->Session->read('Registration');
-		debug($registration);
+		
+		$registration = $this->Registration->Invoice->addInvoiceToRegistration($registration);
 		
 		if($this->requestAction('admins/checkAdminLoggedIn')) $registration = $this->touchByAdmin($registration);
 		
@@ -65,37 +67,38 @@ class RegistrationsController extends AppController {
 				$this->sendRegistrationConfirmMail($this->Session->read('Event'), $registration['Registrator']);
 			}
 			
-			//$this->clearSessionFromAllRegistrationInformation();
+			$this->clearSessionFromAllRegistrationInformation();
 		} else {
-			//$this->clearSessionFromAllRegistrationInformation();
+			$this->clearSessionFromAllRegistrationInformation();
 			$this->Session->setFlash('Vi ber om ursäkt, din registrering kunde inte slutföras. Kontakta support.');
 		}
 		
 		//If you're an admin you dont want to get to receipt when you're done saving a registration
 		if($this->requestAction('admins/checkAdminLoggedIn')) $this->redirect(array('controller' => 'admins', 'action' => 'eventindex'));
 		
-		//$this->redirect(array('action' => 'receipt'));
+		$this->redirect(array('action' => 'receipt'));
 		
 	}
 	
 	/*
-	 * Inits the review mode
-	 * TODO (lies?) no it doesnt :P its essentially an empty action for the review view 
+	 * 
 	 */
 	function review(){
 		$this->layout='registration';
+				
+		//you can't be in review if you haven't finished previous steps
+		if (!$this->previousStepsAreDone($this)){
+			$this->requestAction('steps/redirectToNextUnfinishedStep');	
+		}
+		
 		$sum = $this->Registration->Invoice->calculatePrice($this->Session->read('Event.price_per_person'), sizeof($this->Session->read('Registration.Person')));
-		//$this->Session->write('Registration.Invoice.price', $sum);
 		$this->set('sum', $sum);
+		
 		if ($this->Session->check('adminLoggedIn'))
 			$this->set('submitLabel' , 'Spara');	
 		else 
 			$this->set('submitLabel' , 'Bekräfta anmälan');
 		
-		//you can't be in review if you haven't finished previous steps
-		if (!$this->previousStepsAreDone($this)){
-			$this->requestAction('steps/redirectToNextUnfinishedStep');	
-		}		
 	}
 		
 	/*
@@ -109,16 +112,15 @@ class RegistrationsController extends AppController {
 		}						
 	}
 	
-	/*
-	 * Recieve and process login credentials, fetches and stores the registration to session and redirects to review
-	 */
 	function login() {
 		$this->set('errors', $this->Session->read('errors'));
 		$this->Session->write('errors', null);
 		
 	}
 	
-	
+	/*
+	 * Recieve and process login credentials, fetches and stores the registration to session and redirects to review
+	 */
 	function addLogin(){
 		if(!$this->data['Registration']['number'] && !$this->data['Registrator']['email']) {
 			// First time visiting the site, do nothing and just display the view
@@ -143,6 +145,7 @@ class RegistrationsController extends AppController {
 				if($registration = $this->Registration->findByNumber($number)){
 					$event = $registration['Event'];
 					unset($registration['Event']);
+					unset($registration['Invoice']);
 					$this->Session->write('Event', $event);
 					// Checks the array from the database and tries to match the email with the form//
 					$email = $this->data['Registrator']['email'];

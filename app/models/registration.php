@@ -8,7 +8,7 @@ Class Registration extends AppModel {
 	var $hasOne = array('Registrator');
 	var $actsAs = array('Containable');
 	var $exportAllowed = true;
-	
+	var $altName = 'Bokningar';
 	var $exportFields = array (
 			'Registration.number', 
 			'Registration.created',
@@ -62,7 +62,8 @@ Class Registration extends AppModel {
 	function deleteAllRegistrationRelatedDataById($registrationId) {
 		$this->deleteAll				( array('Registration.id' => $registrationId));
 		$this->Person->deleteAll		( array('Person.registration_id' => $registrationId )); //Funkar Inte						
-		$this->Registrator->deleteAll	( array('Registrator.registration_id' => $registrationId ));	
+		$this->Registrator->deleteAll	( array('Registrator.registration_id' => $registrationId ));
+		$this->Invoice->deleteAll		( array('Invoice.registration_id' => $registrationId ));
 	}
 	
 	/**
@@ -76,7 +77,8 @@ Class Registration extends AppModel {
 	}
 	
 	/**
-	 * specific
+	 * When the user exports registration we send along associated data from people and registrator
+	 * TODO refactor?
 	 * @overloaded
 	 */
 	function getExportDump(){
@@ -88,7 +90,7 @@ Class Registration extends AppModel {
 			$columns .= "$exportField as ` {$exportFieldNames[$i]}`";  
 			
 			//so long as we're not on the last one add comma at the end
-			if (!(sizeof($exportFields)-1 == $i))			
+			if (!(sizeof($exportFields)-1 == $i))
 				$columns .= ",";
 				  
 		}
@@ -107,7 +109,7 @@ Class Registration extends AppModel {
 			foreach ($row as $modelName => $dataSet){
 				foreach($dataSet as $fieldKey => $fieldValue){
 					//formats the array as the view wants it
-					$a[$i]['whatever'][$fieldKey] = $fieldValue;
+					$a[$i]['Registration'][$fieldKey] = $fieldValue;
 				}
 			}
 		}

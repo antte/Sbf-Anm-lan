@@ -3,9 +3,7 @@
 	$roles = $this->requestAction('roles');
 	$people  = $registration['Person'];
 	$event = $this->requestAction('events');
-	
-
-?> 
+	?> 
 <div id="entrants" class="grid_8">
 	<div class="grid_full">
 	
@@ -38,6 +36,6 @@
 				endforeach;?>
 			</tbody>
 		</table>
-		Summa: <?php echo $sum;?> kr
+		Summa: <?php echo $this->requestAction('invoices/getSum');?> kr
 	</div>
 </div>

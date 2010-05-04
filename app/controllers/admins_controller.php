@@ -6,6 +6,8 @@ class AdminsController extends AppController {
 	var $helpers = array('html','form','javascript');
 	var $layout = "admin";
 	var $defaultElementAction = "index";
+	var $altName = 'Administratör';
+	var $altDescribe = 'Administratör kontroller';
 	
 	function beforeFilter() {
 		
@@ -237,6 +239,10 @@ class AdminsController extends AppController {
 	 * @param string $exportType
 	 */
 	function getExport($exportType) {
+		
+		if(!isset($this->params['requested'])) return;
+		if(!is_string($exportType)) return;
+		
 		$exportType = Sanitize::clean($exportType);
 		if($this->isModelName($exportType)) {
 			return $this->getModelDump($exportType);
@@ -275,7 +281,7 @@ class AdminsController extends AppController {
 	function getExcelExportOptions() {
 		if(!isset($this->params['requested'])) return;
 		
-		return $this->getModelsWithExportAllowed();
+		return $this->getAltNameModelsWithExportAllowed();
 		
 	}
 	

@@ -11,9 +11,9 @@ $exportOptions = $this->requestAction('admins/getExcelExportOptions');
 			<li><?php echo $html->link( 'Byt evenemang', array('controller' => 'admins', 'action' => 'events') , array('class' => 'changeEvent')); ?></li>
 			<li id="exportIcon">Exportera<span> ▼</span>
 				<ul id="excelExport">
-					<?php foreach($exportOptions as $exportOption): ?>
+					<?php foreach($exportOptions as $exportModels => $exportOption): ?>
 					<li>
-						<?php echo $html->link($exportOption, array('controller' => 'admins', 'action' => 'excelExport', $exportOption)); ?>
+						<?php echo $html->link($exportOption, array('controller' => 'admins', 'action' => 'excelExport', $exportModels)); ?>
 					</li>
 					<?php endforeach;?>
 				</ul>

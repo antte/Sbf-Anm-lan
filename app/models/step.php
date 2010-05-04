@@ -2,7 +2,7 @@
 	class Step extends AppModel {
 		
 		var $hasAndBelongsToMany = "Event";
-		var $exportAllowed = true;
+		//var $exportAllowed = true;
 		
 		/**
 		 * Populates and returns an initialized steps array that can be used by the step view.

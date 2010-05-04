@@ -4,8 +4,8 @@
 	App::import('Inflector');
 
 	class AppController extends Controller {
-	var $sweName = 'Namn';
-	var $sweDescribe = 'Namn på kontrollern';
+	var $altName = 'Namn';
+	var $altDescribe = 'Namn på kontrollern';
 		
 	/**
 	 * Takes data from controllers and puts in in the sesssion so that we can save it later
@@ -93,8 +93,25 @@
 		return $models;
 	}
 	
-	function getSweName(){
-		return $this->sweName;
+	function getAltNameModelsWithExportAllowed() {
+		$models = Configure::listObjects('model');
+		$altNames =array();
+		foreach($models as &$model) {
+			$this->loadModel($model);
+			if(!$this->$model->exportAllowed)
+				unset($model);
+			else {
+				if (isset($this->$model->altName)){
+					$altNames[$model] = $this->$model->getAltName();
+				}	else {
+					$altNames[$model] = $model;
+				}
+			}
+		}
+		return $altNames;
+	}
+	function getAltName(){
+		return $this->altName;
 	}
 	
 }
