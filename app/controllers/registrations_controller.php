@@ -43,8 +43,13 @@ class RegistrationsController extends AppController {
 		$this->saveModelDataToSession($this,$registrationRegistration);
 		$this->updateStepStateToPrevious($this->params['controller'], $action);
 		
+		$sum = $this->Registration->Invoice->calculatePrice($this->Session->read('Event.price_per_person'), sizeof($this->Session->read('Registration.Person')));
+		$this->requestAction('invoices/saveDataToSession/'. $sum);
+		
 		$registration = $this->Session->read('Registration');
 		debug($registration);
+		
+		
 		
 		if($this->requestAction('admins/checkAdminLoggedIn')) $registration = $this->touchByAdmin($registration);
 		
@@ -65,16 +70,16 @@ class RegistrationsController extends AppController {
 				$this->sendRegistrationConfirmMail($this->Session->read('Event'), $registration['Registrator']);
 			}
 			
-			//$this->clearSessionFromAllRegistrationInformation();
+			$this->clearSessionFromAllRegistrationInformation();
 		} else {
-			//$this->clearSessionFromAllRegistrationInformation();
+			$this->clearSessionFromAllRegistrationInformation();
 			$this->Session->setFlash('Vi ber om ursäkt, din registrering kunde inte slutföras. Kontakta support.');
 		}
 		
 		//If you're an admin you dont want to get to receipt when you're done saving a registration
 		if($this->requestAction('admins/checkAdminLoggedIn')) $this->redirect(array('controller' => 'admins', 'action' => 'eventindex'));
 		
-		//$this->redirect(array('action' => 'receipt'));
+		$this->redirect(array('action' => 'receipt'));
 		
 	}
 	
@@ -85,7 +90,7 @@ class RegistrationsController extends AppController {
 	function review(){
 		$this->layout='registration';
 		$sum = $this->Registration->Invoice->calculatePrice($this->Session->read('Event.price_per_person'), sizeof($this->Session->read('Registration.Person')));
-		//$this->Session->write('Registration.Invoice.price', $sum);
+		$this->requestAction('invoices/saveDataToSession/'. $sum);
 		$this->set('sum', $sum);
 		if ($this->Session->check('adminLoggedIn'))
 			$this->set('submitLabel' , 'Spara');	
