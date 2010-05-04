@@ -225,7 +225,8 @@ class AdminsController extends AppController {
 
 	function resendConfirmMail($registrationNumber) {
 		$this->requestAction('registrations/resendConfirmMail/' . $registrationNumber);
-		$this->Session->setFlash('<h4 class="login_info grid_12">Ett bekräftelsemail har skickats</h4>');
+		$this->Session->setFlash('<div class="grid_12 admin_info"><h4 class="grid_full">Ett bekräftelsemail har skickats</h4></div>');
+		
 		$this->redirect('/admins/eventindex/registrators');
 	}	
 	
