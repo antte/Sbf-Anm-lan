@@ -239,6 +239,10 @@ class AdminsController extends AppController {
 	 * @param string $exportType
 	 */
 	function getExport($exportType) {
+		
+		if(!isset($this->params['requested'])) return;
+		if(!is_string($exportType)) return;
+		
 		$exportType = Sanitize::clean($exportType);
 		if($this->isModelName($exportType)) {
 			return $this->getModelDump($exportType);

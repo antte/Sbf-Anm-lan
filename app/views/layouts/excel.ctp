@@ -5,7 +5,7 @@
         header("Expires: 0");
         header("Content-Type: application/vnd.ms-excel");
         header("Content-Type: application/force-download");
-        header("Content-Type: application/download");;
+        header("Content-Type: application/download");
         header("Content-Disposition: inline; filename=\"".$filename);
     }
 	echo $content_for_layout;
