@@ -47,9 +47,6 @@ class RegistrationsController extends AppController {
 		$this->requestAction('invoices/saveDataToSession/'. $sum);
 		
 		$registration = $this->Session->read('Registration');
-		debug($registration);
-		
-		
 		
 		if($this->requestAction('admins/checkAdminLoggedIn')) $registration = $this->touchByAdmin($registration);
 		

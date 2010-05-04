@@ -19,8 +19,6 @@
 			
 			$registration = $this->requestAction('registrations');
 			$event = $this->requestAction('events');
-			debug($registration);
-			
 			if(!$this->Session->check('Registration.Invoice.0')) {
 				$latestInvoice = $this->Invoice->getLatest($registration['Registration']['id']);
 				return $latestInvoice['Invoice']['price'];
