@@ -94,7 +94,7 @@ class RegistrationsController extends AppController {
 		$sum = $this->Registration->Invoice->calculatePrice($this->Session->read('Event.price_per_person'), sizeof($this->Session->read('Registration.Person')));
 		$this->set('sum', $sum);
 		
-		if ($this->Session->check('adminLoggedIn'))
+		if ($this->Session->check('adminLoggedIn') || $this->Session->check('Registration.Registration.number'))
 			$this->set('submitLabel' , 'Spara');	
 		else 
 			$this->set('submitLabel' , 'Bekräfta anmälan');

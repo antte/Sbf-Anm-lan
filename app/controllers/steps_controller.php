@@ -29,7 +29,7 @@ class StepsController extends AppController {
 		
 		$steps = $this->Session->read('Event.steps');
 		foreach($steps as $step) {
-			if($step['state'] != 'previous') {
+			if(($step['state'] != 'previous') && $step['label'] != '') {
 				$this->redirect(array('controller' => $step['controller'], 'action' => $step['action']));
 			}
 		}
@@ -53,36 +53,40 @@ class StepsController extends AppController {
 		
 		$stepCounter = 0;
 		$firstComingStepFound = false;
-		
+		$newSteps = array();
 		//The function of this foreach is to arrange css classes so that the view can handle it correctly
-		foreach($steps as &$step) {
+		foreach($steps as $key=> &$step) {
 			//receipt should always be disabled if its not current
-			if ($controller == 'Registrations' && $action == 'receipt'){
-				$step['classes'] = 'disabled';
-			} else {
-				$step['classes'] = $step['state'];
-			}
-			
-			if ($step['state'] == 'coming' && $firstComingStepFound != true) {
-				$step['classes'] = 'started'; 
-				$firstComingStepFound = true;	
-			}
-			
-			if ($controller == $step['controller'] && $action == $step['action']) {
-				//make current the step corresponding to the calling controller
-				$step['classes'] = 'current';
-			}
-						
-			if($stepCounter === 0) {
-				$step['classes'] .= " first";
-			} else if ($stepCounter === (sizeof($steps) -1) ){
-				$step['classes'] .= " last";
-			}
-			
-			$stepCounter++;
-			unset($step['state']);
+			if (isset($step['label']) && $step['label'] !=''){
+				
+				if ($controller == 'Registrations' && $action == 'receipt'){
+					$step['classes'] = 'disabled';
+				} else {
+					$step['classes'] = $step['state'];
+				}
+				
+				if ($step['state'] == 'coming' && $firstComingStepFound != true) {
+					$step['classes'] = 'started'; 
+					$firstComingStepFound = true;	
+				}
+				
+				if ($controller == $step['controller'] && $action == $step['action']) {
+					//make current the step corresponding to the calling controller
+					$step['classes'] = 'current';
+				}
+							
+				if($stepCounter === 0) {
+					$step['classes'] .= " first";
+				} else if ($stepCounter === (sizeof($steps) -1) ){
+					$step['classes'] .= " last";
+				}
+				
+				$stepCounter++;
+				unset($step['state']);
+				$newSteps[$key]= $step;
+			}	
 		}
-		return $steps;
+		return $newSteps;
 	}
 	
 }
