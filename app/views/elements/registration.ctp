@@ -1,6 +1,6 @@
 <?php $registration = $this->requestAction('registrations/index');?>
 
-<?php if ( $registration['Registration']['modified_admin']):?>
+<?php if ( isset($registration['Registration']['modified_admin'])):?>
 	<?php $adminUsername = $this->requestAction('admins/getAdminUsernameById/'. $registration['Registration']['modified_admin_id']); ?>
 <?php endif; ?>
 
