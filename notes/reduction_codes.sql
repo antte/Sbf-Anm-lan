@@ -21,8 +21,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 CREATE TABLE `reduction_codes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `event_id` int(11) NOT NULL,
   `code` varchar(128) NOT NULL,
   `number_of_people` varchar(128) NOT NULL,
-  PRIMARY KEY (`id`,`event_id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;

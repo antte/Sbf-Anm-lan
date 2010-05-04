@@ -2,7 +2,7 @@
 
 	Class ReductionCode extends AppModel {
 		
-		var $exportAllowed = true;
+		var $exportAllowed = false;
 		var $altName = 'Rabatter';
 		var $hasMany = array(
 			"Person"
