@@ -16,11 +16,21 @@ class ReductionCodesController extends AppController {
 	 * Fetches a list of all the roles stored in the database
 	 * @return array list of roles
 	 */
-	function index(){
+	function index($eventId = null){
 		if (isset($this->params['requested'])){
-			return $this->ReductionCode->find('all',array ('recursive' => 0 ));
+			if (isset($eventId))
+				return $this->ReductionCode->listReductionCodesByEventId($eventId);
+			else if ($this->Session->check('Event.id'))
+				return $this->ReductionCode->listReductionCodesByEventId($this->Session->read('Event.id'));
+			else if ($eventId == 'all' )  
+				return $this->ReductionCodes->find('all'); 
+			else 
+				return $this->ReductionCodes->find('all'); 
 		}		
 	}
+	
+	
+	
 	
 	function create(){
 		//check if previous step is done
@@ -46,9 +56,7 @@ class ReductionCodesController extends AppController {
 	 * @return array list of roles
 	 */
 	function add() {
-		debug($this->data);
 		$this->data['ReductionCode']['event_id'] = $this->Session->read('Event.id');
-		debug($this->data);
 		$this->ReductionCode->save($this->data);
 		$commingFromUrl = $this->Session->read('commingFromUrl');
 		$this->redirect( array('controller' => $commingFromUrl['controller'], 'action' => $commingFromUrl['action'] . '/'. $commingFromUrl['pass'][0] ) );

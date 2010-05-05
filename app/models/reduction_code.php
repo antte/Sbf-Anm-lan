@@ -10,7 +10,9 @@
 		var $belongsTo = array(
 			'Event'
 		);
-		
+		var $unsetFields= array(
+			'event_id'
+		);		
 		var $validate = array(
 			'code' => array(
 				'rule1' => array(
@@ -62,5 +64,19 @@
 			return $requiredFields;
 			
 		}
-		
+		/*
+		 * 
+		 * @return a selection of colums from a event 
+		 */
+		function listReductionCodesByEventId($eventId){
+			$reductionCodes = $this->find('all' ,array ('conditions' => array('event_id'=> $eventId),'recursive'=> -1 ));
+			foreach ($reductionCodes as $i => $reductionCode){
+				foreach ($this->unsetFields as $unsetField) {
+					unset($reductionCodes[$i]['ReductionCode'][$unsetField]);
+				
+				}
+			}
+			
+			return $reductionCodes; 
+		}
 	}
