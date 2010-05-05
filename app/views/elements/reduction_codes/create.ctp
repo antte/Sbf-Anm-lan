@@ -19,4 +19,3 @@
 </ul>
 	<?php endforeach; ?>
 	<?php echo $form->end('Spara'); ?>
-	
