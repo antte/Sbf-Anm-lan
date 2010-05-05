@@ -120,5 +120,17 @@
 			unset($array[array_search($value , $array)]);
 			return $array;
 		}
+		
+		function getFieldNames() {
 			
+			$fieldNames = array();
+			
+			foreach($this->_schema as $fieldName => $notUsed) {
+				$fieldNames[] = $fieldName;
+			}
+			
+			return $fieldNames;
+			
+		}
+		
 	}

@@ -54,19 +54,24 @@ class ReductionCodesController extends AppController {
 			$this->data['number_of_people'] = Sanitize::clean($this->data['number_of_people']);
 			$this->ReductionCode->save($this->data);
 		}
+		
+		function getFieldNamesForAdd() {
 			
-
-	
-	function getFieldNamesForAdd() {
+			if(!isset($this->params['requested'])) return;
+			
+			$fieldNamesAndLabels = array();
+			
+			$fieldNames = $this->ReductionCode->getFieldNames();
+			$fieldLabels = $this->ReductionCode->translateFieldNames($fieldNames);
+			
+			for ($i = 0; $i < $fieldNames; $i++) {
+				$fieldNamesAndLabels[$fieldLabels[$i]] = $fieldNames[$i];	
+			}
+			
+			return $this->ReductionCode->unsetArrayKeyByValue( $fieldNamesAndLabels, 'id' );
+			
+		}
 		
-		if(!isset($this->params['requested'])) return;
-		
-		$fieldNames = $this->ReductionCode->getFieldNames();
-		
-		return $this->ReductionCode->unsetArrayKeyByValue($fieldNames, 'id');
-		
-	}
-	
 	}	
 	
 
