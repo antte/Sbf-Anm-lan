@@ -46,15 +46,10 @@ class ReductionCodesController extends AppController {
 	 * @return array list of roles
 	 */
 	function add() {
-		$this->data['code'] = 'itchy'; 
-		$this->data['number_of_people'] = '3'; 
-		$this->data['code'] = Sanitize::clean($this->data['code']);
-		$this->data['number_of_people'] = Sanitize::clean($this->data['number_of_people']);
-		$this->ReductionCode->saveAll($this->data);
-		debug($this->Session->read('commingFromUrl'));
-		//$this->redirect($this->Session->read('commingFromUrl'));
+		$this->ReductionCode->save($this->data);
+		$commingFromUrl = $this->Session->read('commingFromUrl');
+		$this->redirect( array('controller' => $commingFromUrl['controller'], 'action' => $commingFromUrl['action'] . '/'. $commingFromUrl['pass'][0] ) );
 	}	
-		
 	function getFieldNamesForAdd() {
 		
 		if(!isset($this->params['requested'])) return;
