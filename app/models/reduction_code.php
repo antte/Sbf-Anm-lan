@@ -22,6 +22,10 @@
 					'message' 	=> 'Rabattkoden måste vara ifylld.'
 				),
 				'rule2' => array(
+					'rule' => 'alphaNumeric',
+					'message' => 'Rabattkoden får bara innehålla bokstäver och siffror.'
+				),
+				'rule3' => array(
 					'rule' => 'isUnique',
 					'message' => 'Den här rabattkoden är redan använd, fyll i en ny.'
 				)
