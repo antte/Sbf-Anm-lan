@@ -6,7 +6,7 @@ class AdminsController extends AppController {
 	var $helpers = array('html','form','javascript');
 	var $layout = "admin";
 	var $defaultElementAction = "index";
-	var $defaultAdminPanelActiveController = 'registrators';
+	var $defaultElementController = 'registrators';
 	var $altName = 'Administratör';
 	var $altDescribe = 'Administratör kontroller';
 	
@@ -91,7 +91,9 @@ class AdminsController extends AppController {
 	 * @return admin steps (event steps without review and receipt)
 	 */
 	function steps( $controller = null ) {
+		debug($controller);
 		$controller = Inflector::camelize($controller);
+		debug($controller);
 		if(!isset($this->params['requested'])) return;
 		
 		//if we can't find eventId we wont be able to find steps
@@ -143,7 +145,7 @@ class AdminsController extends AppController {
 	 * The view renders the index element of the controller (ex app/views/elements/registrators/index.ctp) 
 	 * the user is currently on. (selected in the panel)
 	 */
-	function eventindex() {
+	function eventIndex() {
 		
 		// elementUrl dicides which element the view renders 
 		if ($this->params['pass']) {
@@ -155,9 +157,9 @@ class AdminsController extends AppController {
 			 * the admin panel checks in pass for the current action
 			 * so that it can display which "step" is "current"
 			 */ 
-			$this->params['pass'][0] = $this->defaultAdminPanelActiveController. '/' . $this->defaultElementAction;
+			$this->params['pass'][0] = $this->defaultElementController. '/' . $this->defaultElementAction;
 			
-			$elementUrl = $this->defaultAdminPanelActiveController. '/' . $this->defaultElementAction;
+			$elementUrl = $this->defaultElementController. '/' . $this->defaultElementAction;
 			
 		}
 		
