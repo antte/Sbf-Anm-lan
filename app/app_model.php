@@ -32,6 +32,15 @@
 		 */
 		function translateFieldNames($fieldNames) {
 			
+			//if fieldName doesnt have model infront of it add the calling model
+			foreach($fieldNames as &$fieldName) {
+				if(strstr($fieldName, '.')) {
+					continue;
+				} else {
+					$fieldName = $this->name .".". $fieldName;
+				}
+			}
+			
 			//This is for code readability - Search becomes replace
 			//!OBS! the order in this array is not arbitrary!
 			$search_replace = array(
@@ -60,7 +69,7 @@
 				'/Event.price_per_person/'			=> 'Pris/person',
 			
 				'/ReductionCode.code/'				=> 'Rabattkod',
-				'/ReductionCode.number_of_people/'	=> 'Antal Personer'
+				'/ReductionCode.number_of_people/'	=> 'Antal personer'
 			);
 			
 			$search = array();

@@ -64,7 +64,7 @@ class ReductionCodesController extends AppController {
 			$fieldNames = $this->ReductionCode->getFieldNames();
 			$fieldLabels = $this->ReductionCode->translateFieldNames($fieldNames);
 			
-			for ($i = 0; $i < $fieldNames; $i++) {
+			for ($i = 0; $i < sizeof($fieldNames); $i++) {
 				$fieldNamesAndLabels[$fieldLabels[$i]] = $fieldNames[$i];	
 			}
 			
