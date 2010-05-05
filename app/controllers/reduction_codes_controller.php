@@ -1,4 +1,5 @@
 <?php
+App::import('Sanitize');
 class ReductionCodesController extends AppController {
 	var $altName = 'Rabatter';
 	var $altDescribe = 'Hantera rabattkoder';
@@ -11,6 +12,10 @@ class ReductionCodesController extends AppController {
 		$this->layout='registration';	
 	}
 	
+	/*
+	 * Fetches a list of all the roles stored in the database
+	 * @return array list of roles
+	 */
 	function index(){
 		if (isset($this->params['requested'])){
 			return $this->ReductionCode->find('all',array ('recursive' => 0 ));
@@ -18,8 +23,9 @@ class ReductionCodesController extends AppController {
 	}
 	
 	
+	// TODO kanske fel namn på denna funktion	
 	function create(){
-		
+		//check if previous step is done
 		if (!$this->previousStepsAreDone($this)){
 			$this->requestAction('steps/redirectToNextUnfinishedStep');
 		}
@@ -36,18 +42,16 @@ class ReductionCodesController extends AppController {
 		}
 				
 	}
-}	
+	
 
-		/*
-		 * Fetches a list of all the roles stored in the database
-		 * @return array list of roles
-		 */
-		function index() {
-			
-		}
-		
 		function add() {
-			$fields = $this->ReductionCode->getRequiredFields();
+			$this->data['code'] = 'jakan'; 
+			$this->data['number_of_people'] = 'jakan'; 
+			debug($this->data);
+			$this->data['code'] = Sanitize::clean($this->data['code']);
+			$this->data['number_of_people'] = Sanitize::clean($this->data['number_of_people']);
+			$this->ReductionCode->save($this->data);
+		}
 			
 			
 	}	

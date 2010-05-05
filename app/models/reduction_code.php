@@ -8,6 +8,13 @@
 			"Person"
 		);
 		
+		
+		
+		
+		
+		
+		
+		//DEPRECATED finns för att den är så fin
 		/**
 		 * return array of all the required fields for reduction codes
 		 */
