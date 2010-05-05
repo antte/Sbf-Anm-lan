@@ -22,11 +22,6 @@ class ReductionCodesController extends AppController {
 		}		
 	}
 	
-<<<<<<< HEAD
-	
-	// TODO kanske fel namn på denna funktion	
-=======
->>>>>>> 44c4544c73cbf8c3939601fe841687ef5b91d8b8
 	function create(){
 		//check if previous step is done
 		if (!$this->previousStepsAreDone($this)){
@@ -45,8 +40,32 @@ class ReductionCodesController extends AppController {
 		}
 				
 	}
+
 <<<<<<< HEAD
+	function add() {
+		$this->data['code'] = 'itchy'; 
+		$this->data['number_of_people'] = '3'; 
+//		debug($this->data);
+		$this->data['code'] = Sanitize::clean($this->data['code']);
+		$this->data['number_of_people'] = Sanitize::clean($this->data['number_of_people']);
+		$this->ReductionCode->saveAll($this->data);
+		$this->redirect(array('controller'=>'admins','action'=> 'eventindex' , 'reduction_codes'));
+	}
+			
+		
 	
+	function getFieldNames() {
+		return $fieldName = array(
+			'code',
+			'number_of_people'
+		);
+	}	
+}
+=======
+		/*
+		 * Fetches a list of all the roles stored in the database
+		 * @return array list of roles
+		 */
 
 		function add() {
 			$this->data['code'] = 'jakan'; 
@@ -57,32 +76,21 @@ class ReductionCodesController extends AppController {
 			$this->ReductionCode->save($this->data);
 		}
 			
-=======
 
-	/*
-	 * Fetches a list of all the roles stored in the database
-	 * @return array list of roles
-	 */
-	function index() {
+	
+	function getFieldNamesForAdd() {
+		
+		if(!isset($this->params['requested'])) return;
+		
+		$fieldNames = $this->ReductionCode->getFieldNames();
+		
+		return $this->ReductionCode->unsetArrayKeyByValue($fieldNames, 'id');
 		
 	}
 	
-	function add() {
-		
-		$fields = $this->ReductionCode->getRequiredFields();
->>>>>>> 44c4544c73cbf8c3939601fe841687ef5b91d8b8
-			
 	}	
 	
-	function getFieldNames() {
-		return $fieldName = array(
-			'code',
-			'number_of_people'
-		);
-	}
-	
-	
-}
+>>>>>>> e15acaeac74cc76f5f2830bea196d648a23d87a6
 
 
 
