@@ -8,6 +8,15 @@
 			"Person"
 		);
 		
+<<<<<<< HEAD
+		
+		
+		
+		
+		
+		
+		//DEPRECATED finns för att den är så fin
+=======
 		var $validate = array(
 			'code' => array(
 				'rule1' => array(
@@ -29,6 +38,7 @@
 			)
 		);
 		
+>>>>>>> 44c4544c73cbf8c3939601fe841687ef5b91d8b8
 		/**
 		 * return array of all the required fields for reduction codes
 		 */
@@ -57,18 +67,6 @@
 			}
 			
 			return $requiredFields;
-			
-		}
-		
-		function getFieldNames() {
-			
-			$fieldNames = array();
-			
-			foreach($this->_schema as $fieldName => $notUsed) {
-				$fieldNames[] = $fieldName;
-			}
-			
-			return $fieldNames;
 			
 		}
 		
