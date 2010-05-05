@@ -1,1 +1,1 @@
-<?php echo $this->renderElement($elementUrl);?>
+<?php echo $this->element($elementUrl);?>
