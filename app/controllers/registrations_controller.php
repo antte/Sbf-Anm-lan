@@ -74,7 +74,7 @@ class RegistrationsController extends AppController {
 		}
 		
 		//If you're an admin you dont want to get to receipt when you're done saving a registration
-		if($this->requestAction('admins/checkAdminLoggedIn')) $this->redirect(array('controller' => 'admins', 'action' => 'eventindex'));
+		if($this->requestAction('admins/checkAdminLoggedIn')) $this->redirect(array('controller' => 'admins', 'action' => 'eventIndex'));
 		
 		$this->redirect(array('action' => 'receipt'));
 		
@@ -376,7 +376,7 @@ class RegistrationsController extends AppController {
 		$this->Registration->deleteAllRegistrationRelatedDataById($registrationId);
 		$this->Session->setFlash('<div class="grid_12 admin_info"><h4 class="grid_full">Registrationen '. $registrationNumber. ' är borttagen</h4></div>');
 		
-		$this->redirect(array('controller' => 'admins' , 'action' => 'eventindex'));
+		$this->redirect(array('controller' => 'admins' , 'action' => 'eventIndex'));
 	}
 
 }

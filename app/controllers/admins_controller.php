@@ -6,7 +6,7 @@ class AdminsController extends AppController {
 	var $helpers = array('html','form','javascript');
 	var $layout = "admin";
 	var $defaultElementAction = "index";
-	var $defaultElementController = 'registrators';
+	var $defaultElementController = 'Registrators';
 	var $altName = 'Administratör';
 	var $altDescribe = 'Administratör kontroller';
 	
@@ -91,9 +91,7 @@ class AdminsController extends AppController {
 	 * @return admin steps (event steps without review and receipt)
 	 */
 	function steps( $controller = null ) {
-		debug($controller);
 		$controller = Inflector::camelize($controller);
-		debug($controller);
 		if(!isset($this->params['requested'])) return;
 		
 		//if we can't find eventId we wont be able to find steps
@@ -149,7 +147,7 @@ class AdminsController extends AppController {
 		
 		// elementUrl dicides which element the view renders 
 		if ($this->params['pass']) {
-			$elementUrl = $this->params['pass'][0] . '/' .  $this->defaultElementAction; 
+			$elementDir = Inflector::underscore($this->params['pass'][0]) . '/' .  $this->defaultElementAction; 
 		} else {
 			
 			/* 
@@ -159,11 +157,11 @@ class AdminsController extends AppController {
 			 */ 
 			$this->params['pass'][0] = $this->defaultElementController. '/' . $this->defaultElementAction;
 			
-			$elementUrl = $this->defaultElementController. '/' . $this->defaultElementAction;
+			$elementDir = Inflector::underscore($this->defaultElementController) . '/' . $this->defaultElementAction;
 			
 		}
 		
-		$this->set('elementUrl' , $elementUrl);
+		$this->set('elementDir' , $elementDir);
 	}
 	
 	/**
@@ -172,7 +170,7 @@ class AdminsController extends AppController {
 	 */
 	function chooseEvent($id) {
 		$this->requestAction('events/setEvent/'. $id);
-		$this->redirect( array('action' => 'eventindex'));
+		$this->redirect( array('action' => 'eventIndex'));
 	}
 	
 	/**
@@ -229,7 +227,7 @@ class AdminsController extends AppController {
 		$this->requestAction('registrations/resendConfirmMail/' . $registrationNumber);
 		$this->Session->setFlash('<div class="grid_12 admin_info"><h4 class="grid_full">Ett bekräftelsemail har skickats</h4></div>');
 		
-		$this->redirect('/admins/eventindex/registrators');
+		$this->redirect('/admins/eventIndex/registrators');
 	}	
 	
 	function getAdminUsernameById($id) {

@@ -35,7 +35,7 @@ $exportOptions = $this->requestAction('admins/getExcelExportOptions');
 			<ol id="adminSteps">
 				<?php foreach($steps as $step): ?>
 					<li class="<?php echo $step['classes']; ?>">
-						<?php echo $html->link($step['admin_label'], array('controller' => 'admins', 'action' => 'eventindex', strtolower($step['controller'])));?>
+						<?php echo $html->link($step['admin_label'], array('controller' => 'admins', 'action' => 'eventIndex', $step['controller']));?>
 					</li>
 				<?php endforeach; ?>
 			</ol>
