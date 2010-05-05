@@ -41,14 +41,21 @@ class ReductionCodesController extends AppController {
 				
 	}
 
-	function add() {
-		$this->data['code'] = 'jakan'; 
-		$this->data['number_of_people'] = 'jakan'; 
-		debug($this->data);
-		$this->data['code'] = Sanitize::clean($this->data['code']);
-		$this->data['number_of_people'] = Sanitize::clean($this->data['number_of_people']);
-		$this->ReductionCode->save($this->data);
-	}
+		/*
+		 * Fetches a list of all the roles stored in the database
+		 * @return array list of roles
+		 */
+
+		function add() {
+			$this->data['code'] = 'jakan'; 
+			$this->data['number_of_people'] = 'jakan'; 
+			debug($this->data);
+			$this->data['code'] = Sanitize::clean($this->data['code']);
+			$this->data['number_of_people'] = Sanitize::clean($this->data['number_of_people']);
+			$this->ReductionCode->save($this->data);
+		}
+			
+
 	
 	function getFieldNamesForAdd() {
 		
@@ -60,8 +67,8 @@ class ReductionCodesController extends AppController {
 		
 	}
 	
+	}	
 	
-}
 
 
 
