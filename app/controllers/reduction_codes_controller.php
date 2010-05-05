@@ -45,7 +45,6 @@ class ReductionCodesController extends AppController {
 	 * Fetches a list of all the roles stored in the database
 	 * @return array list of roles
 	 */
-
 	function add() {
 		$this->data['code'] = 'itchy'; 
 		$this->data['number_of_people'] = '3'; 
@@ -54,21 +53,25 @@ class ReductionCodesController extends AppController {
 		$this->ReductionCode->saveAll($this->data);
 		debug($this->Session->read('commingFromUrl'));
 		//$this->redirect($this->Session->read('commingFromUrl'));
-	}
-			
+	}	
 		
-	
 	function getFieldNamesForAdd() {
 		
 		if(!isset($this->params['requested'])) return;
 		
-		$fieldNames = $this->ReductionCode->getFieldNames();
+		$fieldNamesAndLabels = array();
 		
-		return $this->ReductionCode->unsetArrayKeyByValue($fieldNames, 'id');
+		$fieldNames = $this->ReductionCode->getFieldNames();
+		$fieldLabels = $this->ReductionCode->translateFieldNames($fieldNames);
+		
+		for ($i = 0; $i < sizeof($fieldNames); $i++) {
+			$fieldNamesAndLabels[$fieldLabels[$i]] = $fieldNames[$i];
+		}
+		
+		return $this->ReductionCode->unsetArrayKeyByValue( $fieldNamesAndLabels, 'id' );
 		
 	}
-	
-}	
+}
 	
 
 
