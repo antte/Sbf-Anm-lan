@@ -11,6 +11,13 @@ class ReductionCodesController extends AppController {
 		$this->layout='registration';	
 	}
 	
+	function index(){
+		if (isset($this->params['requested'])){
+			return $this->ReductionCode->find('all',array ('recursive' => 0 ));
+		}		
+	}
+	
+	
 	function create(){
 		
 		if (!$this->previousStepsAreDone($this)){
