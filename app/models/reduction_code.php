@@ -8,6 +8,27 @@
 			"Person"
 		);
 		
+		var $validate = array(
+			'code' => array(
+				'rule1' => array(
+					'required'  => true,
+					'allowEmpty'=> false,
+					'rule'		=> array('maxLength', 127),
+					'message' 	=> 'Rabattkoden måste vara ifylld.'
+				),
+				'rule2' => array(
+					'rule' => 'isUnique',
+					'message' => 'Den här rabattkoden är redan använd, fyll i en ny.'
+				)
+			),
+			'number_of_people' => array(
+				'required'  => true,
+				'allowEmpty'=> false,
+				'rule'		=> array('maxLength', 127),
+				'message' 	=> 'Antal personer måste vara ifyllt.'
+			)
+		);
+		
 		/**
 		 * return array of all the required fields for reduction codes
 		 */
