@@ -113,5 +113,9 @@
 	function getAltName(){
 		return $this->altName;
 	}
-	
+
+	function afterFilter(){
+		if (!isset($this->params['requested']))
+			$this->Session->write('commingFromUrl', $this->params['url']);	
+	}
 }

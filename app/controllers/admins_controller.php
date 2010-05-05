@@ -6,7 +6,7 @@ class AdminsController extends AppController {
 	var $helpers = array('html','form','javascript');
 	var $layout = "admin";
 	var $defaultElementAction = "index";
-	var $defaultAdminPanelActiveController = "registrator";
+	var $defaultAdminPanelActiveController = 'registrators';
 	var $altName = 'Administratör';
 	var $altDescribe = 'Administratör kontroller';
 	
@@ -162,7 +162,6 @@ class AdminsController extends AppController {
 		}
 		
 		$this->set('elementUrl' , $elementUrl);
-		
 	}
 	
 	/**

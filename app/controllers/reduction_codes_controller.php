@@ -41,25 +41,35 @@ class ReductionCodesController extends AppController {
 				
 	}
 
+	/*
+	 * Fetches a list of all the roles stored in the database
+	 * @return array list of roles
+	 */
+
 	function add() {
 		$this->data['code'] = 'itchy'; 
 		$this->data['number_of_people'] = '3'; 
-//		debug($this->data);
 		$this->data['code'] = Sanitize::clean($this->data['code']);
 		$this->data['number_of_people'] = Sanitize::clean($this->data['number_of_people']);
 		$this->ReductionCode->saveAll($this->data);
-		$this->redirect(array('controller'=>'admins','action'=> 'eventindex' , 'reduction_codes'));
+		debug($this->Session->read('commingFromUrl'));
+		//$this->redirect($this->Session->read('commingFromUrl'));
 	}
 			
 		
 	
-	function getFieldNames() {
-		return $fieldName = array(
-			'code',
-			'number_of_people'
-		);
-	}	
-}
+	function getFieldNamesForAdd() {
+		
+		if(!isset($this->params['requested'])) return;
+		
+		$fieldNames = $this->ReductionCode->getFieldNames();
+		
+		return $this->ReductionCode->unsetArrayKeyByValue($fieldNames, 'id');
+		
+	}
+	
+}	
+	
 
 
 

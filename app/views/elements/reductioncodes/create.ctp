@@ -1,6 +1,10 @@
-<?php $reductionCode = $this->requestAction('reduction_codes');?>
-
-
+<?php $fieldNames = $this->requestAction('reduction_codes/getFieldNamesForAdd');?>
+<?php 
+	$fieldNames = array(
+		'code',
+		'number_of_people'
+	);
+?>
 <div class="grid_12">
 	<div class="grid_full">
 		<h2>Fyll i din rabattkod</h2>
@@ -14,4 +18,5 @@
 	</li>
 </ul>
 	<?php endforeach; ?>
+	<?php echo $form->end('Spara'); ?>
 	
