@@ -55,15 +55,21 @@ class ReductionCodesController extends AppController {
 			$this->ReductionCode->save($this->data);
 		}
 			
-	}	
+
 	
-	function getFieldNames() {
-		return $fieldName = array(
-			'code',
-			'number_of_people'
-		);
+	function getFieldNamesForAdd() {
+		
+		if(!isset($this->params['requested'])) return;
+		
+		$fieldNames = $this->ReductionCode->getFieldNames();
+		
+		unset($fieldNames[array_search('id', $fieldNames)]);
+		
+		return $fieldNames;
+		
 	}
 	
+	}	
 	
 
 
