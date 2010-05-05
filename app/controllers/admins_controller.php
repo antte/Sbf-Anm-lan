@@ -6,6 +6,7 @@ class AdminsController extends AppController {
 	var $helpers = array('html','form','javascript');
 	var $layout = "admin";
 	var $defaultElementAction = "index";
+	var $defaultAdminPanelActiveController = 'registrators';
 	var $altName = 'Administratör';
 	var $altDescribe = 'Administratör kontroller';
 	
@@ -154,14 +155,13 @@ class AdminsController extends AppController {
 			 * the admin panel checks in pass for the current action
 			 * so that it can display which "step" is "current"
 			 */ 
-			$this->params['pass'][0] = 'registrators/' . $this->defaultElementAction;
+			$this->params['pass'][0] = $this->defaultAdminPanelActiveController. '/' . $this->defaultElementAction;
 			
-			$elementUrl = 'registrators/' . $this->defaultElementAction;
+			$elementUrl = $this->defaultAdminPanelActiveController. '/' . $this->defaultElementAction;
 			
 		}
 		
 		$this->set('elementUrl' , $elementUrl);
-		
 	}
 	
 	/**

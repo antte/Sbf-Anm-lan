@@ -3,7 +3,7 @@
 		<h2>Bokningsbekräftelse</h2>
 	</div>
 </div>
-<?php echo $this->renderElement('event')?>
-<?php echo $this->renderElement('registration')?>
-<?php echo $this->renderElement('person')?>
-<?php echo $this->renderElement('registrator')?>
+<?php echo $this->element('event')?>
+<?php echo $this->element('registration')?>
+<?php echo $this->element('person')?>
+<?php echo $this->element('registrator')?>
