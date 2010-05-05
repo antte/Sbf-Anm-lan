@@ -41,11 +41,6 @@ class ReductionCodesController extends AppController {
 		 * @return array list of roles
 		 */
 
-		function add() {
-			$fields = $this->ReductionCode->getRequiredFields();
-			
-
-			
 	}	
 	
 	function getFieldNames() {
@@ -56,7 +51,6 @@ class ReductionCodesController extends AppController {
 	}
 	
 	
-}
 
 
 
