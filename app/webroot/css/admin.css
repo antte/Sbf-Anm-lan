@@ -107,3 +107,30 @@ table#registrators tr th {
 	width:100%;
 	clear:both;
 }
+
+#addCode {
+	float: left;
+	width: 455px;
+	margin-right: 5px;
+	display: inline;
+	background: #eee;
+}
+
+#viewCode {
+	float: right;
+	width: 455px;
+	margin-left: 5px;
+	display: inline;
+	background: #eee;
+}
+
+#viewCode #moduleIndex_filter {
+	width: auto;
+	margin-top: -119px;
+	margin-right: 0;
+	background: #eee;
+}
+
+.inner_push {
+	margin: 10px;
+}
