@@ -56,9 +56,7 @@ class ReductionCodesController extends AppController {
 		
 		$fieldNames = $this->ReductionCode->getFieldNames();
 		
-		unset($fieldNames[array_search('id', $fieldNames)]);
-		
-		return $fieldNames;
+		return $this->ReductionCode->unsetArrayKeyByValue($fieldNames, 'id');
 		
 	}
 	
