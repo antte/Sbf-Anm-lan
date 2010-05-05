@@ -5,7 +5,10 @@
 		var $exportAllowed = false;
 		var $altName = 'Rabatter';
 		var $hasMany = array(
-			"Person"
+			'Person'
+		);
+		var $belongsTo = array(
+			'Event'
 		);
 		
 		var $validate = array(

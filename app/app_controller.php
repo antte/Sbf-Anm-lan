@@ -115,7 +115,11 @@
 	}
 
 	function afterFilter(){
-		if (!isset($this->params['requested']))
+		if (!isset($this->params['requested'])) {
 			$this->Session->write('commingFromUrl', $this->params['url']);	
+			$this->Session->write('commingFromUrl.controller', $this->params['controller']);	
+			$this->Session->write('commingFromUrl.action', $this->params['action']);
+			$this->Session->write('commingFromUrl.pass', $this->params['pass']);
+		}	
 	}
 }

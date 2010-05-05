@@ -2,7 +2,7 @@
 
 	Class Event extends AppModel {
 		
-		var $hasMany = "Registration"; 
+		var $hasMany = array( 'Registration', 'ReductionCode'); 
 		var $hasAndBelongsToMany = "Step";
 		var $exportAllowed = true;
 		var $altName = 'Evenemang';
