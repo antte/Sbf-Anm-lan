@@ -35,14 +35,6 @@ class ReductionCodesController extends AppController {
 		}
 				
 	}
-
-	/*
-	 * Fetches a list of all the roles stored in the database
-	 * @return array list of roles
-	 */
-	function index() {
-		
-	}
 	
 	function add() {
 		
@@ -50,11 +42,16 @@ class ReductionCodesController extends AppController {
 			
 	}	
 	
-	function getFieldNames() {
-		return $fieldName = array(
-			'code',
-			'number_of_people'
-		);
+	function getFieldNamesForAdd() {
+		
+		if(!isset($this->params['requested'])) return;
+		
+		$fieldNames = $this->ReductionCode->getFieldNames();
+		
+		unset($fieldNames[array_search('id', $fieldNames)]);
+		
+		return $fieldNames;
+		
 	}
 	
 	
