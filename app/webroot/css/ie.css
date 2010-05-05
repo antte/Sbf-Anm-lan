@@ -21,3 +21,12 @@ form#login {
 #adminPanel {
 	height:55px;
 }
+
+#viewCode #moduleIndex_filter {
+	margin-top: -70px;
+}
+
+#code_fields .submit {
+	display: inline;
+	margin-top: 25px;
+}
