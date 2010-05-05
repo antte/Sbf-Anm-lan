@@ -41,25 +41,24 @@ class ReductionCodesController extends AppController {
 				
 	}
 
-		function add() {
-			$this->data['code'] = 'jakan'; 
-			$this->data['number_of_people'] = 'jakan'; 
-			debug($this->data);
-			$this->data['code'] = Sanitize::clean($this->data['code']);
-			$this->data['number_of_people'] = Sanitize::clean($this->data['number_of_people']);
-			$this->ReductionCode->save($this->data);
-		}
+	function add() {
+		$this->data['code'] = 'itchy'; 
+		$this->data['number_of_people'] = '3'; 
+//		debug($this->data);
+		$this->data['code'] = Sanitize::clean($this->data['code']);
+		$this->data['number_of_people'] = Sanitize::clean($this->data['number_of_people']);
+		$this->ReductionCode->saveAll($this->data);
+		$this->redirect(array('controller'=>'admins','action'=> 'eventindex' , 'reduction_codes'));
+	}
 			
-	}	
+		
 	
 	function getFieldNames() {
 		return $fieldName = array(
 			'code',
 			'number_of_people'
 		);
-	}
-	
-	
+	}	
 }
 
 
