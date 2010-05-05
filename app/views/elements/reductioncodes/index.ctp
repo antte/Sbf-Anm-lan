@@ -8,7 +8,7 @@
 	<div class="grid_full">
 		<h2>Lista på alla rabattkoder</h2>
 	
-		
+		<?php echo $this->element('reductioncodes/create'); ?>
 		
 		<?php 
 			if(!isset($reduction_codes[0])) {
