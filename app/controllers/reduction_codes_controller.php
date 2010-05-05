@@ -36,7 +36,6 @@ class ReductionCodesController extends AppController {
 				
 	}
 
-<<<<<<< HEAD
 		/*
 		 * Fetches a list of all the roles stored in the database
 		 * @return array list of roles
@@ -45,19 +44,7 @@ class ReductionCodesController extends AppController {
 		function add() {
 			$fields = $this->ReductionCode->getRequiredFields();
 			
-=======
-	/*
-	 * Fetches a list of all the roles stored in the database
-	 * @return array list of roles
-	 */
-	function index() {
-		
-	}
-	
-	function add() {
-		
-		$fields = $this->ReductionCode->getRequiredFields();
->>>>>>> 8cc1fe6cd507dff1549740b54f352e76a141f53e
+
 			
 	}	
 	

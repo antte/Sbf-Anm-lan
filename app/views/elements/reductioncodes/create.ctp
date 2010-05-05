@@ -5,9 +5,6 @@
 		'number_of_people'
 	);
 ?>
-
-
-
 <div class="grid_12">
 	<div class="grid_full">
 		<h2>Fyll i din rabattkod</h2>
