@@ -22,10 +22,10 @@ class ReductionCodesController extends AppController {
 				return $this->ReductionCode->listReductionCodesByEventId($eventId);
 			else if ($this->Session->check('Event.id'))
 				return $this->ReductionCode->listReductionCodesByEventId($this->Session->read('Event.id'));
-			else if ($eventId == 'all' )  
-				return $this->ReductionCodes->find('all'); 
+			else if ($eventId == 'all' )
+				return $this->ReductionCodes->find('all');
 			else 
-				return $this->ReductionCodes->find('all'); 
+				return $this->ReductionCodes->find('all');
 		}		
 	}
 	
@@ -61,6 +61,7 @@ class ReductionCodesController extends AppController {
 		$commingFromUrl = $this->Session->read('commingFromUrl');
 		$this->redirect( array('controller' => $commingFromUrl['controller'], 'action' => $commingFromUrl['action'] . '/'. $commingFromUrl['pass'][0] ) );
 	}	
+	
 	function getFieldNamesForAdd() {
 		
 		if(!isset($this->params['requested'])) return;

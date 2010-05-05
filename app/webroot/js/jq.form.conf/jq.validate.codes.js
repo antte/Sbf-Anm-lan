@@ -5,12 +5,12 @@ $(document).ready(function(){
 			'data[ReductionCode][code]': {
 				required: true,
 				maxlength: 127,
-				regex: "^[A-Z,0-9 ']{1,127}$" 
+				regex: "^[A-Z0-9']{1,127}$" 
 			},
 			'data[ReductionCode][number_of_people]': {
 	      		required: true,
 	      		maxlength: 6,
-	      		regex: "^[0-9 ']{1,6}$" 
+	      		regex: "^[0-9']{1,6}$" 
 			}
 		},
 		messages: {
