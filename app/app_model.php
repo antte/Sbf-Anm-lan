@@ -110,6 +110,15 @@
 		function getAltName(){
 			return $this->altName;
 		}
-	
+		
+		/**
+		 * 
+		 * @param array $array
+		 * @param string $value
+		 */
+		function unsetArrayKeyByValue($array, $value) {
+			unset($array[array_search($value , $array)]);
+			return $array;
+		}
 			
 	}
