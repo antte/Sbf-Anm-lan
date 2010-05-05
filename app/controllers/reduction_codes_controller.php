@@ -63,7 +63,10 @@ class ReductionCodesController extends AppController {
 			$fieldNamesAndLabels[$fieldLabels[$i]] = $fieldNames[$i];
 		}
 		
-		return $this->ReductionCode->unsetArrayKeyByValue( $fieldNamesAndLabels, 'id' );
+		$fieldNamesAndLabels = $this->ReductionCode->unsetArrayKeyByValue( $fieldNamesAndLabels, 'id' );
+		$fieldNamesAndLabels = $this->ReductionCode->unsetArrayKeyByValue( $fieldNamesAndLabels, 'event_id' );
+		
+		return $fieldNamesAndLabels;
 		
 	}
 }
