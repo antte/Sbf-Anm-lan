@@ -128,12 +128,12 @@ table#registrators tr th {
 
 #viewCode #moduleIndex_filter {
 	width: auto;
-	margin-top: -99px;
+	margin-top: -104px;
 	margin-right: 0;
 }
 
 #viewCode h3 {
-	margin-bottom: 0;
+	margin-bottom: 5px;
 }
 
 .inner_push {
