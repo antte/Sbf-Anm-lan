@@ -1,3 +1,9 @@
+<?php 
+	echo $javascript->link('jquery.validate');
+	echo $javascript->link('jq.form.conf/jq.validate.codes');
+
+?>
+
 <div class="grid_12">
 	<div class="grid_full">
 		<h2>Mata i din bokningskod och antal personer den gäller</h2>
