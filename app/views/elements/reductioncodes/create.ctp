@@ -1,4 +1,11 @@
-<?php $reductionCode = $this->requestAction('reduction_codes');?>
+<?php //$fieldNames = $this->requestAction('reduction_codes/getFieldNames');?>
+<?php 
+	$fieldNames = array(
+		'code',
+		'number_of_people'
+	);
+?>
+
 
 
 <div class="grid_12">
