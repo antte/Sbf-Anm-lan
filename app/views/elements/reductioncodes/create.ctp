@@ -1,4 +1,4 @@
-<?php //$fieldNames = $this->requestAction('reduction_codes/getFieldNames');?>
+<?php $fieldNames = $this->requestAction('reduction_codes/getFieldNamesForAdd');?>
 <?php 
 	$fieldNames = array(
 		'code',
@@ -21,4 +21,5 @@
 	</li>
 </ul>
 	<?php endforeach; ?>
+	<?php echo $form->end('Spara'); ?>
 	

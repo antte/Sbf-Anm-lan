@@ -40,6 +40,7 @@
 				'/Registration.modified_admin_id/' 	=> 'Admin som ändrat',
 				'/Registration.modified_admin/' 	=> 'Ändrad av admin', 
 				'/Registration.modified/' 			=> 'Ändrad av bokaren', 
+			
 				'/Registrator.first_name/' 			=> 'Bokarens förnamn', 
 				'/Registrator.last_name/' 			=> 'Bokarens efternamn', 
 				'/Registrator.email/' 				=> 'Epost', 
@@ -49,13 +50,19 @@
 				'/Registrator.city/'				=> 'Stad',
 				'/Registrator.postal_code/'			=> 'Postkod',
 				'/Registrator.extra_information/'	=> 'Övrigt',
+			
 				'/Person.first_name/'				=> 'Förnamn',
 				'/Person.last_name/'				=> 'Efternamn',
 				'/Person.role_id/'					=> 'Roll id',
+			
 				'/Event.name/'						=> 'Evenemangsnamn',
 				'/Event.confirmation_message/'		=> 'Bekräftelsemeddelande',
-				'/Event.price_per_person/'			=> 'Pris/person'
+				'/Event.price_per_person/'			=> 'Pris/person',
+			
+				'/ReductionCode.code/'				=> 'Rabattkod',
+				'/ReductionCode.number_of_people/'	=> 'Antal Personer'
 			);
+			
 			$search = array();
 			$replace = array();
 			
