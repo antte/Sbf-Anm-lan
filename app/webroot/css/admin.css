@@ -102,3 +102,8 @@ table#registrators tr th {
 	color:black;
 	text-weiht:bold;
 }
+
+#code_fields {
+	width:100%;
+	clear:both;
+}
