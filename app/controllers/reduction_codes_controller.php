@@ -46,6 +46,9 @@ class ReductionCodesController extends AppController {
 	 * @return array list of roles
 	 */
 	function add() {
+		debug($this->data);
+		$this->data['ReductionCode']['event_id'] = $this->Session->read('Event.id');
+		debug($this->data);
 		$this->ReductionCode->save($this->data);
 		$commingFromUrl = $this->Session->read('commingFromUrl');
 		$this->redirect( array('controller' => $commingFromUrl['controller'], 'action' => $commingFromUrl['action'] . '/'. $commingFromUrl['pass'][0] ) );
