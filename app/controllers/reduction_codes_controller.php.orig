@@ -22,6 +22,11 @@ class ReductionCodesController extends AppController {
 		}		
 	}
 	
+<<<<<<< HEAD
+	
+	// TODO kanske fel namn på denna funktion	
+=======
+>>>>>>> 44c4544c73cbf8c3939601fe841687ef5b91d8b8
 	function create(){
 		//check if previous step is done
 		if (!$this->previousStepsAreDone($this)){
@@ -40,11 +45,8 @@ class ReductionCodesController extends AppController {
 		}
 				
 	}
-
-		/*
-		 * Fetches a list of all the roles stored in the database
-		 * @return array list of roles
-		 */
+<<<<<<< HEAD
+	
 
 		function add() {
 			$this->data['code'] = 'jakan'; 
@@ -54,6 +56,21 @@ class ReductionCodesController extends AppController {
 			$this->data['number_of_people'] = Sanitize::clean($this->data['number_of_people']);
 			$this->ReductionCode->save($this->data);
 		}
+			
+=======
+
+	/*
+	 * Fetches a list of all the roles stored in the database
+	 * @return array list of roles
+	 */
+	function index() {
+		
+	}
+	
+	function add() {
+		
+		$fields = $this->ReductionCode->getRequiredFields();
+>>>>>>> 44c4544c73cbf8c3939601fe841687ef5b91d8b8
 			
 	}	
 	
@@ -65,6 +82,7 @@ class ReductionCodesController extends AppController {
 	}
 	
 	
+}
 
 
 
