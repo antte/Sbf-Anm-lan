@@ -53,4 +53,12 @@
 			
 			return $reductionCodes; 
 		}
+		
+		function getNumberOfPeopleByCode($code,$eventId){
+			return $this->field('number_of_people', array(
+					'code'=> $code ,
+					'event_id' => $eventId
+				));
+		}
+		
 	}

@@ -122,4 +122,10 @@
 			$this->Session->write('commingFromUrl.pass', $this->params['pass']);
 		}	
 	}
+	
+	function redirectBack() {
+		$commingFromUrl = $this->Session->read('commingFromUrl');		
+		$this->redirect( array('controller' => $commingFromUrl['controller'], 'action' => $commingFromUrl['action'] . '/'. $commingFromUrl['pass'][0] ) );
+	}
+	
 }

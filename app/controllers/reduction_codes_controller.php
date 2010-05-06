@@ -70,10 +70,8 @@ class ReductionCodesController extends AppController {
 		} else {
 			$this->Session->setFlash('<div class="grid_12"><p class="admin_info success">Rabattkoden sparades</p></div>');
 		}
-		$commingFromUrl = $this->Session->read('commingFromUrl');
-		
-		$this->redirect( array('controller' => $commingFromUrl['controller'], 'action' => $commingFromUrl['action'] . '/'. $commingFromUrl['pass'][0] ) );
-	}	
+		$this->redirectBack();
+	}
 	
 	function getFieldNamesForAdd() {
 		
@@ -94,6 +92,12 @@ class ReductionCodesController extends AppController {
 		return $fieldNamesAndLabels;
 		
 	}
+	
+	function getNumberOfPeopleByCode($code){
+		$eventId = $this->Session->read('Event.id');
+		$this->ReductionCode->getNumberOfPeopleByCode($code,$eventId);
+	}
+	
 }
 	
 

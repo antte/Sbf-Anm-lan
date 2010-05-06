@@ -89,7 +89,7 @@ class StepsController extends AppController {
 		return $newSteps;
 	}
 	function debug(){
-		return $this->Session->read('errors');	
+		return $this->Session->read();	
 
 	}
 }
