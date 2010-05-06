@@ -43,7 +43,7 @@ $(document).ready(function(){
 	
 	
 	//animate in the delete verification box and then hide it after 10 sec
-	$('.admin_info').hide().show(1000).delay(8000).hide(1000);
+	$('.admin_info').hide().show(500).delay(9000).hide(500);
 	
 	
 });

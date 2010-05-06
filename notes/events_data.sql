@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 29, 2010 at 01:56 PM
+-- Generation Time: May 06, 2010 at 08:07 AM
 -- Server version: 5.1.36
 -- PHP Version: 5.3.0
 
@@ -24,5 +24,6 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 
 INSERT INTO `events` (`id`, `name`, `is_active`, `confirmation_message`, `price_per_person`) VALUES
-(7, 'Gala', 1, 'gala confirm message super duper', 1100.5),
-(8, 'Konferens', 0, NULL, NULL);
+(7, 'Gala', 1, 'Välkommen!', 1100.5),
+(8, 'Konferens', 1, 'Du är välkommen att ta med mat till konferensen', 150),
+(9, 'Gala 2009', 0, 'hejhopp', 1100.5);

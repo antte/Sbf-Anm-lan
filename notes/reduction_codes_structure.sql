@@ -25,4 +25,4 @@ CREATE TABLE IF NOT EXISTS `reduction_codes` (
   `code` varchar(128) NOT NULL,
   `number_of_people` varchar(128) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;

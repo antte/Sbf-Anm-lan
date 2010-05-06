@@ -17,5 +17,4 @@
 				<?php echo $this->element('reduction_codes/view')?>
 			</div>
 		</div>
-	</div>
 </div>

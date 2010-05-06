@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 29, 2010 at 01:56 PM
+-- Generation Time: May 06, 2010 at 07:58 AM
 -- Server version: 5.1.36
 -- PHP Version: 5.3.0
 
@@ -27,9 +27,9 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 CREATE TABLE IF NOT EXISTS `events` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(127) COLLATE utf8_bin NOT NULL,
+  `name` varchar(127) CHARACTER SET utf8 NOT NULL,
   `is_active` int(1) DEFAULT '0',
-  `confirmation_message` varchar(1023) COLLATE utf8_bin DEFAULT NULL,
+  `confirmation_message` varchar(1023) CHARACTER SET utf8 DEFAULT NULL,
   `price_per_person` double DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=9 ;

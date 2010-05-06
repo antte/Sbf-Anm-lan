@@ -143,3 +143,11 @@ table#registrators tr th {
 #viewCode #moduleIndex td {
 	padding: 5px;
 }
+
+p.success {
+	display: block;
+	background: lightgreen url("../img/success.png") no-repeat 2px 3px;
+	padding-left: 20px;
+	font-size: 16px;
+	font-weight: bold;
+}

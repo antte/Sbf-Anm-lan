@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 06, 2010 at 07:57 AM
+-- Generation Time: May 06, 2010 at 08:00 AM
 -- Server version: 5.1.36
 -- PHP Version: 5.3.0
 
@@ -20,8 +20,12 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 
 --
--- Dumping data for table `admins`
+-- Dumping data for table `events_steps`
 --
 
-INSERT INTO `admins` (`id`, `username`, `password`) VALUES
-(3, 'user', '1a1dc91c907325c69271ddf0c944bc72');
+INSERT INTO `events_steps` (`event_id`, `step_id`, `order`) VALUES
+(7, 1, 1),
+(7, 2, 2),
+(7, 5, 5),
+(7, 3, 3),
+(7, 4, 4);

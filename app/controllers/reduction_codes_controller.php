@@ -22,10 +22,10 @@ class ReductionCodesController extends AppController {
 				return $this->ReductionCode->listReductionCodesByEventId($eventId);
 			else if ($this->Session->check('Event.id'))
 				return $this->ReductionCode->listReductionCodesByEventId($this->Session->read('Event.id'));
-			else if ($eventId == 'all' )  
-				return $this->ReductionCodes->find('all'); 
+			else if ($eventId == 'all' )
+				return $this->ReductionCodes->find('all');
 			else 
-				return $this->ReductionCodes->find('all'); 
+				return $this->ReductionCodes->find('all');
 		}		
 	}
 	
@@ -48,7 +48,7 @@ class ReductionCodesController extends AppController {
 		} else {
 			$reductionCodes = false;
 		}
-				
+		
 	}
 
 	/*
@@ -57,10 +57,16 @@ class ReductionCodesController extends AppController {
 	 */
 	function add() {
 		$this->data['ReductionCode']['event_id'] = $this->Session->read('Event.id');
-		$this->ReductionCode->save($this->data);
+		if (!$this->ReductionCode->save($this->data)) {
+			$this->Session->write('errors.reduction_codes', 'Rabattkoden du försöker skriva in <strong>finns redan</strong> kopplat till eventet.');
+		} else {
+			$this->Session->setFlash('<div class="grid_12"><p class="admin_info success">Rabattkoden sparades</p></div>');
+		}
 		$commingFromUrl = $this->Session->read('commingFromUrl');
+		
 		$this->redirect( array('controller' => $commingFromUrl['controller'], 'action' => $commingFromUrl['action'] . '/'. $commingFromUrl['pass'][0] ) );
 	}	
+	
 	function getFieldNamesForAdd() {
 		
 		if(!isset($this->params['requested'])) return;

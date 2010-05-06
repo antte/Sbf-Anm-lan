@@ -160,6 +160,8 @@ class AdminsController extends AppController {
 			$elementDir = Inflector::underscore($this->defaultElementController) . '/' . $this->defaultElementAction;
 			
 		}
+		$this->set('errors', $this->Session->read('errors'));
+		$this->Session->write('errors',null);
 		$this->set('elementDir' , $elementDir);
 	}
 	
