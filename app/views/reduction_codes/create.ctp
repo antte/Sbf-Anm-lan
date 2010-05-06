@@ -3,6 +3,7 @@
 	echo $javascript->link('jquery.1.4.2-min', $inline = false);
 	echo $javascript->link('jquery.validate', $inline = false);
 	echo $javascript->link('jq.form.conf/messages_se', $inline = false);
+	echo $javascript->link('jq.form.conf/jq.validate.codes', $inline = false);
 	
 	$people = $this->requestAction('people/getPeopleListFromSession');
 ?>

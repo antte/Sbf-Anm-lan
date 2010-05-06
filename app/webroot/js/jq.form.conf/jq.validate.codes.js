@@ -5,7 +5,7 @@ $(document).ready(function(){
 			'data[ReductionCode][code]': {
 				required: true,
 				maxlength: 127,
-				regex: "^[A-Z0-9']{1,127}$" 
+				regex: "^[a-zA-Z0-9']{1,127}$" 
 			},
 			'data[ReductionCode][number_of_people]': {
 	      		required: true,
@@ -26,4 +26,21 @@ $(document).ready(function(){
 			
 		});
 		
+		$('form#addReductionCode').validate({
+			rules: {
+			'data[Person][code]': {
+				required: true,
+				maxlength: 127,
+				regex: "^[a-zA-Z0-9']{1,127}$" 
+			}
+			
+		},
+		messages: {
+			'data[Person][code]': {
+				required: "Du måste fylla i något.",
+				regex: "Rabattkoden får bara innehålla bokstäver och siffror."
+				}
+			}
+		});
+		concole.log('hej');
 });
