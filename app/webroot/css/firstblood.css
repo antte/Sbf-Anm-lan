@@ -338,3 +338,7 @@ p.sum {
 #reduction_codes label.error {
 	width:160px;
 }
+
+#reduction_codes .input option {
+	padding-right:20px;
+}
