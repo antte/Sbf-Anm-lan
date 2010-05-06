@@ -95,8 +95,8 @@ class PeopleController extends AppController {
 			if(empty($errors)) {
 				//if we dont have errors all was successful and we continue with the registration
 				foreach($this->data['Person'] as &$person) {
-					if(!isset($person['reduction_code_code'])) {
-						$person['reduction_code_code'] = '';
+					if(!isset($person['reduction_code_id'])) {
+						$person['reduction_code_id'] = '';
 					}
 				}
 				$this->saveModelDataToSession($this);
@@ -152,7 +152,7 @@ class PeopleController extends AppController {
 		
 		
 		$this->data['Person']['code'] = strtoupper($this->data['Person']['code']);
-		$this->Session->write('Registration.Person.' . $this->data['Person']['person'] . '.reduction_code_code', $this->data['Person']['code']);
+		$this->Session->write('Registration.Person.' . $this->data['Person']['person'] . '.reduction_code_id', $this->data['Person']['code']);
 		
 		//Skicka med i flash hur många person som är kvar på rabattkoden 
 		$amountOfPeopleWithCode = $this->Person->getNumberOfPeopleWithCode($code, $eventId, $this->Session->read('Registration.Person'));

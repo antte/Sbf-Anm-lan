@@ -80,7 +80,7 @@
 		}
 		
 		function codeExists($id){
-			if($this->field('code',array('code'=>$code, 'event_id'=>$eventId)))
+			if($this->field('code',array('id'=>$id)))
 				return true;
 			else 
 				return false;	
