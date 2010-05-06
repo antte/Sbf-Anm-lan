@@ -16,11 +16,21 @@ class ReductionCodesController extends AppController {
 	 * Fetches a list of all the roles stored in the database
 	 * @return array list of roles
 	 */
-	function index(){
+	function index($eventId = null){
 		if (isset($this->params['requested'])){
-			return $this->ReductionCode->find('all',array ('recursive' => 0 ));
+			if (isset($eventId))
+				return $this->ReductionCode->listReductionCodesByEventId($eventId);
+			else if ($this->Session->check('Event.id'))
+				return $this->ReductionCode->listReductionCodesByEventId($this->Session->read('Event.id'));
+			else if ($eventId == 'all' )
+				return $this->ReductionCodes->find('all');
+			else 
+				return $this->ReductionCodes->find('all');
 		}		
 	}
+	
+	
+	
 	
 	function create(){
 		//check if previous step is done
@@ -38,59 +48,51 @@ class ReductionCodesController extends AppController {
 		} else {
 			$reductionCodes = false;
 		}
-				
-	}
-
-<<<<<<< HEAD
-	function add() {
-		$this->data['code'] = 'itchy'; 
-		$this->data['number_of_people'] = '3'; 
-//		debug($this->data);
-		$this->data['code'] = Sanitize::clean($this->data['code']);
-		$this->data['number_of_people'] = Sanitize::clean($this->data['number_of_people']);
-		$this->ReductionCode->saveAll($this->data);
-		$this->redirect(array('controller'=>'admins','action'=> 'eventindex' , 'reduction_codes'));
-	}
-			
 		
-	
-	function getFieldNames() {
-		return $fieldName = array(
-			'code',
-			'number_of_people'
-		);
-	}	
-}
-=======
-		/*
-		 * Fetches a list of all the roles stored in the database
-		 * @return array list of roles
-		 */
+	}
 
-		function add() {
-			$this->data['code'] = 'jakan'; 
-			$this->data['number_of_people'] = 'jakan'; 
-			debug($this->data);
-			$this->data['code'] = Sanitize::clean($this->data['code']);
-			$this->data['number_of_people'] = Sanitize::clean($this->data['number_of_people']);
-			$this->ReductionCode->save($this->data);
+	/*
+	 * Fetches a list of all the roles stored in the database
+	 * @return array list of roles
+	 */
+	function add() {
+		$this->data['ReductionCode']['event_id'] = $this->Session->read('Event.id');
+		if (!$this->ReductionCode->save($this->data)) {
+			$this->Session->write('errors.reduction_codes', 'Rabattkoden du försöker skriva in <strong>finns redan</strong> kopplat till eventet.');
+		} else {
+			$this->Session->setFlash('<div class="grid_12"><p class="admin_info success">Rabattkoden sparades</p></div>');
 		}
-			
-
+		$commingFromUrl = $this->Session->read('commingFromUrl');
+		
+		$this->redirect( array('controller' => $commingFromUrl['controller'], 'action' => $commingFromUrl['action'] . '/'. $commingFromUrl['pass'][0] ) );
+<<<<<<< HEAD
+	}
+		
+=======
+	}	
 	
+>>>>>>> 590df90011a0ee57632e195ce5486388764afc2e
 	function getFieldNamesForAdd() {
 		
 		if(!isset($this->params['requested'])) return;
 		
-		$fieldNames = $this->ReductionCode->getFieldNames();
+		$fieldNamesAndLabels = array();
 		
-		return $this->ReductionCode->unsetArrayKeyByValue($fieldNames, 'id');
+		$fieldNames = $this->ReductionCode->getFieldNames();
+		$fieldLabels = $this->ReductionCode->translateFieldNames($fieldNames);
+		
+		for ($i = 0; $i < sizeof($fieldNames); $i++) {
+			$fieldNamesAndLabels[$fieldLabels[$i]] = $fieldNames[$i];
+		}
+		
+		$fieldNamesAndLabels = $this->ReductionCode->unsetArrayKeyByValue( $fieldNamesAndLabels, 'id' );
+		$fieldNamesAndLabels = $this->ReductionCode->unsetArrayKeyByValue( $fieldNamesAndLabels, 'event_id' );
+		
+		return $fieldNamesAndLabels;
 		
 	}
+}
 	
-	}	
-	
->>>>>>> e15acaeac74cc76f5f2830bea196d648a23d87a6
 
 
 

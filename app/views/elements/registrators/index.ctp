@@ -1,3 +1,4 @@
+<!--  element/registration/index -->
 <div class="grid_12">
 	<div class="grid_full">
 		<h1>Lista på alla bokningar</h1>
