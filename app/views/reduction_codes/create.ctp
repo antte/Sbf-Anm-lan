@@ -34,11 +34,20 @@
 		echo $form->create('Person', array('id' => 'addReductionCode', 'action' => 'addCodeToPersonInSession'));
 		echo '<fieldset class="reduction_code grid_8 alpha">';
 		echo $form->input('code', array('type' => 'text', 'label' => 'Fyll i din rabattkod', 'maxLength' => '8'));
-		echo $form->input('person', array('options' => $people, 'label' => 'Välj person'));
+		echo $form->input('person', array('options' => $people, 'label' => 'För person'));
 		echo $form->submit('OK');
 		echo "</fieldset>";
 		echo $form->end();
+	?>
+</div>
+<div id="next" class="grid_8">
 	
+	<?php 
+		echo $form->create('ReductionCode', array('action' => 'next'));
+		echo '<fieldset class="next grid_8 alpha">';
+		echo $form->submit('Nästa');
+		echo "</fieldset>";
+		echo $form->end();
 	?>
 </div>
 
