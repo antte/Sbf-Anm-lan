@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 06, 2010 at 08:18 AM
+-- Generation Time: May 06, 2010 at 08:28 AM
 -- Server version: 5.1.36
 -- PHP Version: 5.3.0
 
@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `people` (
   `registration_id` int(11) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `role_id` int(11) DEFAULT NULL,
-  `reduction_code_id` int(11) DEFAULT NULL,
+  `reduction_code_code` varchar(128) CHARACTER SET utf8 DEFAULT NULL,
   `first_name` varchar(127) CHARACTER SET utf8 NOT NULL,
   `last_name` varchar(127) CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`id`),
@@ -136,12 +136,10 @@ CREATE TABLE IF NOT EXISTS `people` (
 --
 
 CREATE TABLE IF NOT EXISTS `reduction_codes` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
   `event_id` int(11) NOT NULL,
-  `code` varchar(128) CHARACTER SET utf8 NOT NULL,
-  `number_of_people` varchar(128) CHARACTER SET utf8 NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+  `code` varchar(128) NOT NULL,
+  `number_of_people` varchar(128) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `reduction_codes`
