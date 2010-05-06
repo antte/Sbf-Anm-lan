@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 06, 2010 at 07:57 AM
+-- Generation Time: May 06, 2010 at 08:15 AM
 -- Server version: 5.1.36
 -- PHP Version: 5.3.0
 
@@ -20,8 +20,11 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 
 --
--- Dumping data for table `admins`
+-- Dumping data for table `roles`
 --
 
-INSERT INTO `admins` (`id`, `username`, `password`) VALUES
-(3, 'user', '1a1dc91c907325c69271ddf0c944bc72');
+INSERT INTO `roles` (`id`, `name`) VALUES
+(14, 'Besökare'),
+(15, 'VIP'),
+(16, 'Ordförande'),
+(17, 'Styrelsemedlem');

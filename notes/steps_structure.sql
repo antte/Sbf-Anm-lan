@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 22, 2010 at 01:53 PM
+-- Generation Time: May 06, 2010 at 08:17 AM
 -- Server version: 5.1.36
 -- PHP Version: 5.3.0
 
@@ -32,4 +32,4 @@ CREATE TABLE IF NOT EXISTS `steps` (
   `controller` varchar(128) NOT NULL,
   `action` varchar(128) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
