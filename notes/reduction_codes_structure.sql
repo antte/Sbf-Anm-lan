@@ -24,5 +24,5 @@ CREATE TABLE IF NOT EXISTS `reduction_codes` (
   `event_id` int(11) NOT NULL,
   `code` varchar(128) NOT NULL,
   `number_of_people` varchar(128) NOT NULL,
-  PRIMARY KEY (`id`, `code`)
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
