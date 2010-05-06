@@ -1,6 +1,9 @@
 <?php
 App::import('Sanitize');
 class ReductionCodesController extends AppController {
+	
+	var $helpers = array('html','form','javascript');
+	
 	var $altName = 'Rabatter';
 	var $altDescribe = 'Hantera rabattkoder';
 		
