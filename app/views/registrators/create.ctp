@@ -1,4 +1,4 @@
-﻿<!-- Help class that	 includes this js file even thou we are not in head tag -->
+﻿<!-- Help class that includes this js file even thou we are not in head tag -->
 <?php 
 	echo $javascript->link('jquery.1.4.2-min', $inline = false);
 	echo $javascript->link('jquery.validate', $inline = false);

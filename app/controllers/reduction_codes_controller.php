@@ -65,6 +65,7 @@ class ReductionCodesController extends AppController {
 	 */
 	function add() {
 		$this->data['ReductionCode']['event_id'] = $this->Session->read('Event.id');
+		$this->data['ReductionCode']['code'] = strtoupper($this->data['ReductionCode']['code']);
 		if (!$this->ReductionCode->save($this->data)) {
 			$this->Session->write('errors.reduction_codes', 'Rabattkoden du försöker skriva in <strong>finns redan</strong> kopplat till eventet.');
 		} else {

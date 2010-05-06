@@ -335,3 +335,6 @@ p.sum {
 #reduction_codes .select {
 	margin-left:20px;
 }
+#reduction_codes label.error {
+	width:160px;
+}
