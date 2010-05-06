@@ -30,7 +30,7 @@ CREATE TABLE `reduction_codes` (
   `code` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `number_of_people` int(128) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Data i tabell `reduction_codes`

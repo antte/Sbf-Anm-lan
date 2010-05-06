@@ -34,4 +34,4 @@ CREATE TABLE IF NOT EXISTS `people` (
   `last_name` varchar(127) CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`id`),
   KEY `registration_id` (`registration_id`,`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
