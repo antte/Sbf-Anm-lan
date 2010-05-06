@@ -3,13 +3,15 @@
 	echo $javascript->link('jquery.1.4.2-min', $inline = false);
 	echo $javascript->link('jquery.validate', $inline = false);
 	echo $javascript->link('jq.form.conf/messages_se', $inline = false);
+	
+	$people = $this->requestAction('people/getPeopleListFromSession');
 ?>
 <div class="grid_12">
 	<div class="grid_full">
 		<h2>Prisuppgifter och rabattkoder för <?php echo $eventName;?></h2>
 	</div>
 </div>
-<div id="reduction_codes" class="grid_8">
+<div id="people" class="grid_8">
 	
 	
 	<?php 
@@ -22,10 +24,23 @@
 				<?php endforeach;?>			
 			</ul>
 		<?php } ?>
-<?php echo $this->element('person');?>		
+	<?php echo $this->element('person');?>
+	
 </div>
 
- 
+<div id="reduction_codes" class="grid_8">
+	<?php 
+		echo $form->create('Person', array('id' => 'addReductionCode', 'action' => 'addCodeToPersonInSession'));
+		echo '<fieldset class="reduction_code grid_8 alpha">';
+		echo $form->input('code', array('type' => 'text', 'label' => 'Fyll i din rabattkod', 'div' => 'amount', 'maxLength' => '8'));
+		echo $form->input('person', array('options' => $people, 'label' => 'Välj person'));
+		echo $form->submit('Ändra antal personer');
+		echo "</fieldset>";
+		echo $form->end();
+	
+	?>
+
+</div>
 
 <noscript>
 	<div id="javascript_info" class="grid_4" >

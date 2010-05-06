@@ -51,6 +51,8 @@ class ReductionCodesController extends AppController {
 		} else {
 			$reductionCodes = false;
 		}
+		
+		
 		$eventId = $this->Session->read('Registration.Registration.event_id');
 		$this->set('eventName' , $this->ReductionCode->Event->field('name', array('id' => $eventId)));
 		$this->set('errors', $this->Session->read('errors'));

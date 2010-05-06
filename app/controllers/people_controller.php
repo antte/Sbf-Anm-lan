@@ -106,6 +106,7 @@ class PeopleController extends AppController {
 			} else {
 				$this->Session->write('errors.people', 'Du måste fylla i <strong>förnamn</strong>, <strong>efternamn</strong> och <strong>roll</strong> för alla personer.');
 				$this->redirect(array('action' => 'create', sizeof($this->data['Person'])));
+				
 			}
 		}
 	}
@@ -119,6 +120,18 @@ class PeopleController extends AppController {
 
 		return $this->Session->check('Registration.Person');
 		
+	}
+	
+	/*
+	 * send the people from session to the drop down list in the view
+	 */
+	function getPeopleListFromSession(){
+		$people = $this->Session->read('Registration.Person');
+		$listOfPeople = array();
+		foreach($people as $key => $person){
+			$listOfPeople[$key] = $person['first_name'] . " " . $person['last_name'];
+		}
+		return $listOfPeople;
 	}
 	
 }	
