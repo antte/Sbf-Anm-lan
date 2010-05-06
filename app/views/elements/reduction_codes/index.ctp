@@ -1,7 +1,6 @@
 <?php 
 	echo $javascript->link('jquery.validate');
 	echo $javascript->link('jq.form.conf/jq.validate.codes');
-
 ?>
 
 <div class="grid_12">
