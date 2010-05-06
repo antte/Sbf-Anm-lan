@@ -61,4 +61,21 @@
 				));
 		}
 		
+		function getNumberOfPeopleLeft($reductionCodeCode) {
+			$reductionCode = $this->findByCode($reductionCodeCode);
+			$numberOfPeople = $reductionCode['ReductionCode']['code'];
+			
+			$amountUsed = $this->getAmountUsed($reductionCodeCode); 
+			
+			$peopleLeft = $numberOfPeople - $amountUsed;
+			
+			return $peopleLeft;
+			
+		}
+		
+		function getAmountUsed($reductionCodeCode) {
+			$peopleWithReductionCode = $this->Person->find('all', array('conditions' => array('reduction_code_code' => $reductionCodeCode)));
+			return sizeof($peopleWithReductionCode);
+		}
+		
 	}
