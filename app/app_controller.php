@@ -125,7 +125,15 @@
 	
 	function redirectBack() {
 		$commingFromUrl = $this->Session->read('commingFromUrl');		
-		$this->redirect( array('controller' => $commingFromUrl['controller'], 'action' => $commingFromUrl['action'] . '/'. $commingFromUrl['pass'][0] ) );
+		$passes ='';
+		foreach ($commingFromUrl['pass'] as $pass){
+			$passes .= '/'. $pass;	
+		}		
+		$option = array(
+			'controller' => $commingFromUrl['controller'], 
+			'action' => $commingFromUrl['action'] . $passes
+		);
+		$this->redirect($option);
 	}
 	
 }
