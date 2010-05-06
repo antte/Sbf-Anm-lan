@@ -24,22 +24,22 @@
 				<?php endforeach;?>			
 			</ul>
 		<?php } ?>
-	<?php echo $this->element('person');?>
 	
 </div>
+<?php echo $this->element('person');?>
 
-<div id="reduction_codes" class="grid_8">
+<div id="reduction_codes" class="grid_full">
+	
 	<?php 
 		echo $form->create('Person', array('id' => 'addReductionCode', 'action' => 'addCodeToPersonInSession'));
 		echo '<fieldset class="reduction_code grid_8 alpha">';
-		echo $form->input('code', array('type' => 'text', 'label' => 'Fyll i din rabattkod', 'div' => 'amount', 'maxLength' => '8'));
+		echo $form->input('code', array('type' => 'text', 'label' => 'Fyll i din rabattkod', 'maxLength' => '8'));
 		echo $form->input('person', array('options' => $people, 'label' => 'Välj person'));
-		echo $form->submit('Ändra antal personer');
+		echo $form->submit('OK');
 		echo "</fieldset>";
 		echo $form->end();
 	
 	?>
-
 </div>
 
 <noscript>

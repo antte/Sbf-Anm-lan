@@ -3,7 +3,6 @@
 	$roles = $this->requestAction('roles');
 	$people  = $registration['Person'];
 	$event = $this->requestAction('events');
-	debug($people);
 	
 	$numberFormat = array(
 		'before' => '', 

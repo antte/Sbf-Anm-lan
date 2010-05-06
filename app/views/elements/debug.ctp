@@ -14,7 +14,7 @@
 		<?php echo $html->link('sendingEmails', array( 'controller' =>'registrations' , 'action' => 'toggleSendEmails', $this->params['controller'], $this->params['action'] ), array('class' => 'sendingEmails')); ?>
 		</li>
 		<li style="margin-top: 100px; text-align: right;">
-		<?php debug( $this->requestAction('steps/debug'))?>
+		<?php //debug( $this->requestAction('steps/debug'))?>
 		</li>
 	</ul>
 <?php endif; ?>

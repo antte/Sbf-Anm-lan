@@ -316,3 +316,22 @@ p.sum {
 	font-weight: bold;
 	margin-right: 10px;
 }
+
+#reduction_codes div {
+	float:left;
+	margin:10px;
+}
+
+#reduction_codes .input input {
+	width:160px;
+}
+
+#reduction_codes .submit input, #reduction_codes .submit  {
+	float:right;
+	margin-top:20px;
+	width: 80px;
+}
+
+#reduction_codes .select {
+	margin-left:20px;
+}
