@@ -3,6 +3,7 @@
 	$roles = $this->requestAction('roles');
 	$people  = $registration['Person'];
 	$event = $this->requestAction('events');
+	debug($people);
 	
 	$numberFormat = array(
 		'before' => '', 
@@ -38,6 +39,7 @@
 						} ?>
 					</td>
 					<td><?php echo $event['price_per_person']." kr";?></td>
+					<td><?php echo $person['reduction_code_code']?></td>
 				</tr>
 			<?php 
 				$i++;	

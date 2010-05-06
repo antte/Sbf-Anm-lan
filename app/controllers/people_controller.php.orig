@@ -122,6 +122,14 @@ class PeopleController extends AppController {
 		
 	}
 	
+<<<<<<< HEAD
+	function addCodeToPersonInSession($personSessionIndex){	
+		
+		$this->Session->write('Registration.Person.' . $personSessionIndex . '.reduction_code_code', $this->data['Person']['code']);
+		
+		$this->redirectBack();
+		
+=======
 	/*
 	 * send the people from session to the drop down list in the view
 	 */
@@ -132,14 +140,7 @@ class PeopleController extends AppController {
 			$listOfPeople[$key] = $person['first_name'] . " " . $person['last_name'];
 		}
 		return $listOfPeople;
-	}
-	
-	function addCodeToPersonInSession($personSessionIndex){	
-		
-		$this->Session->write('Registration.Person.' . $personSessionIndex . '.reduction_code_code', $this->data['Person']['code']);
-		
-		$this->redirectBack();
-		
+>>>>>>> ee7d460cabaae2f1c4deb4fd2ff92bb83d1b3d68
 	}
 	
 }	
