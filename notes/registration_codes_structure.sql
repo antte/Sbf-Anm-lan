@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.2.4
+-- version 3.2.0.1
 -- http://www.phpmyadmin.net
 --
--- Värd: localhost
--- Skapad: 05 maj 2010 kl 10:16
--- Serverversion: 5.1.37
--- PHP-version: 5.2.11
+-- Host: localhost
+-- Generation Time: May 06, 2010 at 08:39 AM
+-- Server version: 5.1.36
+-- PHP Version: 5.3.0
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
@@ -16,27 +16,17 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Databas: `sbf-anmalan`
+-- Database: `sbf-anmalan`
 --
 
 -- --------------------------------------------------------
 
 --
--- Struktur för tabell `reduction_codes`
+-- Table structure for table `reduction_codes`
 --
 
-CREATE TABLE `reduction_codes` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `code` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `number_of_people` int(128) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
-
---
--- Data i tabell `reduction_codes`
---
-
-INSERT INTO `reduction_codes` VALUES(1, 'Firstblood', 4);
-INSERT INTO `reduction_codes` VALUES(2, 'Loosers', 10);
-INSERT INTO `reduction_codes` VALUES(3, 'jakan', 0);
-INSERT INTO `reduction_codes` VALUES(4, 'jakan', 0);
+CREATE TABLE IF NOT EXISTS `reduction_codes` (
+  `event_id` int(11) NOT NULL,
+  `code` varchar(128) NOT NULL,
+  `number_of_people` varchar(128) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
