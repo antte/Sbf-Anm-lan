@@ -1,7 +1,7 @@
 <?php
 
 	Class ReductionCode extends AppModel {
-		
+		var $primaryKey = 'code'; 
 		var $exportAllowed = true;
 		var $altName = 'Rabatter';
 		var $hasMany = array(
@@ -61,13 +61,14 @@
 				));
 		}
 		
-		function getNumberOfPeopleLeft($reductionCodeCode) {
+		function getNumberOfPeopleLeft($id, $reduction = 0) {
 			$reductionCode = $this->findByCode($reductionCodeCode);
 			$numberOfPeople = $reductionCode['ReductionCode']['code'];
 			
 			$amountUsed = $this->getAmountUsed($reductionCodeCode); 
-			
-			$peopleLeft = $numberOfPeople - $amountUsed;
+			if (!is_numerical($reduction))
+				$reduction = 0;
+			$peopleLeft = $numberOfPeople - $amountUsed-$reduction;
 			
 			return $peopleLeft;
 			
@@ -76,6 +77,26 @@
 		function getAmountUsed($reductionCodeCode) {
 			$peopleWithReductionCode = $this->Person->find('all', array('conditions' => array('reduction_code_code' => $reductionCodeCode)));
 			return sizeof($peopleWithReductionCode);
+		}
+		
+		function codeExists($id){
+			if($this->field('code',array('code'=>$code, 'event_id'=>$eventId)))
+				return true;
+			else 
+				return false;	
+		}
+		
+		function getNumberOfPeopleWithCode ($id,$people){
+			//if(!is_array($people)) 
+			//	throw new Exception('People is not an array');
+			debug($this->Person->find('all',array('conditions'=> array('id'=> $id),'recursive'=> -1)));	
+			//debug(sizeOf($people));
+			debug($people);
+		}
+		
+		function getIdByCodeAndEventId($code,$eventId){
+			return $this->field('id',array('code'=> $code, 'event_id' => $eventId));	
+			
 		}
 		
 	}
