@@ -116,4 +116,12 @@ class PeopleController extends AppController {
 		
 	}
 	
+	function addCodeToPersonInSession($personSessionIndex){	
+		
+		$this->Session->write('Registration.Person.' . $personSessionIndex . '.reduction_code_code', $this->data['Person']['code']);
+		
+		$this->redirectBack();
+		
+	}
+	
 }	
