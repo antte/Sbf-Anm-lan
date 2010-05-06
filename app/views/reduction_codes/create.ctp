@@ -11,6 +11,7 @@
 </div>
 <div id="reduction_codes" class="grid_8">
 	
+	
 	<?php 
 		if (!empty($errors)) {?>
 			<ul id="validationErrors" class="message">
@@ -21,8 +22,10 @@
 				<?php endforeach;?>			
 			</ul>
 		<?php } ?>
-		
-</div> 
+<?php echo $this->element('person');?>		
+</div>
+
+ 
 
 <noscript>
 	<div id="javascript_info" class="grid_4" >

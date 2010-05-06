@@ -2,7 +2,7 @@
 App::import('Sanitize');
 class ReductionCodesController extends AppController {
 	
-	var $helpers = array('html','form','javascript');
+	var $helpers = array('html','form','javascript', 'number');
 	
 	var $altName = 'Rabatter';
 	var $altDescribe = 'Hantera rabattkoder';
@@ -51,7 +51,10 @@ class ReductionCodesController extends AppController {
 		} else {
 			$reductionCodes = false;
 		}
-		
+		$eventId = $this->Session->read('Registration.Registration.event_id');
+		$this->set('eventName' , $this->ReductionCode->Event->field('name', array('id' => $eventId)));
+		$this->set('errors', $this->Session->read('errors'));
+		$this->Session->write('errors',null);
 	}
 
 	/*

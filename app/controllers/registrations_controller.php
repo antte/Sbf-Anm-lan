@@ -303,17 +303,20 @@ class RegistrationsController extends AppController {
 						'0' => 	array(
 								'first_name' => 'Andreas',
 								'last_name'  => 'Fliesberg',
-								'role_id' => 14
+								'role_id' => 14,
+								'reduction_code_code' => ''
 						),
 						'1' => array(
 								'first_name' => 'Tim',
 								'last_name'  => 'Olsson',
-								'role_id' => 17
+								'role_id' => 17,
+								'reduction_code_code' => ''
 						),
 						'2' => array(
 								'first_name' => 'Pelle',
 								'last_name'  => 'Skarsgård',
-								'role_id' => 17
+								'role_id' => 17,
+								'reduction_code_code' => ''
 						)
 			),
 			'Registrator' => array(

@@ -7,13 +7,13 @@
 		<h2>Granska dina uppgifter </h2>
 	</div>
 </div>
-<?php echo $this->renderElement('registrations/review_info'); ?>
-<?php echo $this->renderElement('registration')?>
-<?php echo $this->renderElement('person');?>
+<?php echo $this->element('registrations/review_info'); ?>
+<?php echo $this->element('registration')?>
+<?php echo $this->element('person');?>
 <div class="edit_link grid_8">
 	<?php echo $html->link( 'Redigera',array('controller'=>'People', 'action'=>'create'));?>
 </div>
-<?php echo $this->renderElement('registrator');?>
+<?php echo $this->element('registrator');?>
 <div class="edit_link grid_8">
 	<?php echo $html->link( 'Redigera',array('controller'=>'Registrators', 'action'=>'create'));?>
 </div>
