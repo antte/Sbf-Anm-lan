@@ -304,19 +304,19 @@ class RegistrationsController extends AppController {
 								'first_name' => 'Andreas',
 								'last_name'  => 'Fliesberg',
 								'role_id' => 14,
-								'reduction_code_code' => ''
+								'reduction_code_id' => ''
 						),
 						'1' => array(
 								'first_name' => 'Tim',
 								'last_name'  => 'Olsson',
 								'role_id' => 17,
-								'reduction_code_code' => ''
+								'reduction_code_id' => ''
 						),
 						'2' => array(
 								'first_name' => 'Pelle',
 								'last_name'  => 'Skarsgård',
 								'role_id' => 17,
-								'reduction_code_code' => ''
+								'reduction_code_id' => ''
 						)
 			),
 			'Registrator' => array(
