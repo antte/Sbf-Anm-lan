@@ -134,9 +134,9 @@ class PeopleController extends AppController {
 		return $listOfPeople;
 	}
 	
-	function addCodeToPersonInSession($personSessionIndex){	
+	function addCodeToPersonInSession(){	
 		
-		$this->Session->write('Registration.Person.' . $personSessionIndex . '.reduction_code_code', $this->data['Person']['code']);
+		$this->Session->write('Registration.Person.' . $this->data['Person']['person'] . '.reduction_code_code', $this->data['Person']['code']);
 		
 		$this->redirectBack();
 		
