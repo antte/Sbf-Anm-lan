@@ -135,7 +135,6 @@ class PeopleController extends AppController {
 	}
 	
 	function addCodeToPersonInSession(){
-
 		
 		$eventId = $this->Session->read('Event.id');
 		

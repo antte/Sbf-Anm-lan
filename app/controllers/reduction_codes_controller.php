@@ -34,7 +34,6 @@ class ReductionCodesController extends AppController {
 	
 	
 	
-	
 	function create(){
 		//check if previous step is done
 		if (!$this->previousStepsAreDone($this)){

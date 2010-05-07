@@ -62,11 +62,12 @@
 		}
 		
 		function getNumberOfPeopleLeft($id, $reduction = 0) {
-			$reductionCode = $this->findByCode($reductionCodeCode);
+			//$reductionCode = $this->findByCode($reductionCodeCode);
+			$reductionCode = $this->findById($id);
 			$numberOfPeople = $reductionCode['ReductionCode']['code'];
 			
-			$amountUsed = $this->getAmountUsed($reductionCodeCode); 
-			if (!is_numerical($reduction))
+			$amountUsed = $this->getAmountUsed($reductionCode); 
+			if (!is_numeric($reduction))
 				$reduction = 0;
 			$peopleLeft = $numberOfPeople - $amountUsed-$reduction;
 			
@@ -79,8 +80,8 @@
 			return sizeof($peopleWithReductionCode);
 		}
 		
-		function codeExists($id){
-			if($this->field('code',array('id'=>$id)))
+		function codeExists($code, $eventId){
+			if($this->field('code',array('code' => $code, 'event_id' => $eventId)))
 				return true;
 			else 
 				return false;	
