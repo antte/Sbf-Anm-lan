@@ -135,27 +135,29 @@ class PeopleController extends AppController {
 	}
 	
 	function addCodeToPersonInSession(){
+		$this->data['Person']['code'] = strtoupper($this->data['Person']['code']);
 		
 		$eventId = $this->Session->read('Event.id');
-		
+		$reductionCodeId = $this->Person->ReductionCode->getIdByCodeAndEventId($this->data['Person']['code'], $eventId);
 		//if the code does not exist ...
-		if(!$this->Person->ReductionCode->codeExists($this->data['Person']['code'], $eventId)) {
+
+		if(!$this->Person->ReductionCode->codeExists($reductionCodeId)) {
+			$this->Session->setFlash('Kontrollera din rabattkod, det verkar som om du har skrivit fel. Om felet kvarstår <a href="mailto:support@sbf.se">kontakta support</a>.');
 			$this->Session->setFlash('<strong>Kontrollera din rabattkod, det verkar som om du har skrivit fel. Om felet kvarstår <a href="mailto:support@sbf.se">kontakta support</a>.</strong>');
 			$this->redirectBack();
 		}
 		// ... or doesnt have people left on it give error message
-		if(!$this->Person->ReductionCode->getNumberOfPeopleLeft($this->data['Person']['code'], $eventId)) {
+		if(!$this->Person->ReductionCode->getNumberOfPeopleLeft($reductionCodeId)) {
+			$this->Session->setFlash('Det verkar som att rabattkoden redan är använd. Om det här är fel <a href="mailto:support@sbf.se">kontakta support</a>.');
 			$this->Session->setFlash('<strong>Det verkar som att rabattkoden redan är använd. Om det här är fel <a href="mailto:support@sbf.se">kontakta support</a>.</strong');
 			$this->redirectBack();
 		}
 		
-		
-		$this->data['Person']['code'] = strtoupper($this->data['Person']['code']);
 		$this->Session->write('Registration.Person.' . $this->data['Person']['person'] . '.reduction_code_id', $this->data['Person']['code']);
 		
 		//Skicka med i flash hur många person som är kvar på rabattkoden 
-		$amountOfPeopleWithCode = $this->Person->getNumberOfPeopleWithCode($code, $eventId, $this->Session->read('Registration.Person'));
-		$amountOfPeopleLeft = $this->Person->getNumberOfPeopleLeft($code, $eventId, $amountOfPeopleWithCode );
+		$amountOfPeopleWithCode = $this->Person->ReductionCode->getNumberOfPeopleWithCode($reductionCodeId, sizeof($this->Session->read('Registration.Person')));
+		$amountOfPeopleLeft = $this->Person->ReductionCode->getNumberOfPeopleLeft($reductionCodeId, $amountOfPeopleWithCode );
 		
 		$this->Session->setFlash('<strong>Rabattkoden är nu tillagd och den har ' . $amountOfPeopleLeft . ' användningar kvar.</strong>');
 		
