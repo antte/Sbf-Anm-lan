@@ -1,3 +1,9 @@
+<?php 
+	$registration = $this->requestAction('people/index');
+	$peopleHeaders = $this->requestAction('people/getListHeaders');
+	$i=0;
+?>
+
 <!-- element/people/index.ctp -->
 
 <div class="grid_12">
@@ -5,25 +11,25 @@
 		<h1>Lista på alla bokade</h1>
 	</div>
 	<table id="moduleIndex">
-		<?php 
-			$people = $this->requestAction('people/index');
-			echo "<thead>";
-				echo $html->tableHeaders(array ('Förnamn', 'Efternamn', 'Roll', 'Bokningsnummer'));
-			echo "</thead>";
-			$k=0;
-			$i=0;
-			foreach ($people as $company){ 
-				foreach ($company as $person){ ?> 
-				<tr class="<?php echo $person['number']?>">
-				<?php 	foreach ($person as $j => $row)
-							echo 	'<td>'. $html->link($person[$j],'putRegistrationInSessionAndRedirect/'. $person['number']) . '</td>';
-					echo "</tr> ";
-			
-					
-				}
-				$i++;
-			}
-		?>
+		<thead>
+			<?php echo $html->tableHeaders($peopleHeaders); ?>
+		</thead>
+		<tbody>
+			<?php foreach ($registration['Person'] as $row):?>
+			<tr class="<?php echo $row['number']?>">
+			<?php foreach ($row as $fieldValue): ?>
+			<td>
+			<?php 
+				echo $html->link($fieldValue,'putRegistrationInSessionAndRedirect/'. $row['number']);
+			?>
+			</td>
+			<?php endforeach;?>
+			</tr>
+			<?php
+			$i++;
+			endforeach;
+			?>
+		</tbody>
 	</table> 
 </div>
 

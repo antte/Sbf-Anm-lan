@@ -74,16 +74,13 @@ class PeopleController extends AppController {
 	}
 	
 	function index() {
-		if($this->Session->check('adminLoggedIn')) {
-			if($this->Session->check('Event.id')) {
-				$people = $this->Person->listAllPeople($this->Session->read('Event.id'));
-
-				return $people;
-				
-			}
-		}
-		//$this->setFlash('Vi ber om ursäkt men vi kunde inte genomföra din önskan');
-		//$this->redirect(array('controller' => 'events'));
+		
+		if(!isset($this->params['requested'])) return;
+		if(!$this->Session->check('adminLoggedIn')) return;
+		if(!$this->Session->check('Event.id')) return;
+		
+		return $this->Person->listAllPeople($this->Session->read('Event.id'));
+		
 	}
 	/**
 	* Saves People to Session and redirects to next unfinished step
@@ -158,11 +155,25 @@ class PeopleController extends AppController {
 		
 		//Skicka med i flash hur många person som är kvar på rabattkoden 
 		$amountOfPeopleWithCode = $this->Person->getNumberOfPeopleWithCode( $reductionCodeId , $this->Session->read('Registration.Person') );
+		//counting the people in session from above
 		$amountOfPeopleLeft = $this->Person->getNumberOfPeopleLeft( $reductionCodeId , $amountOfPeopleWithCode );
 		
 		$this->Session->setFlash('Rabattkoden är nu tillagd och den har ' . $amountOfPeopleLeft . ' användningar kvar.');
 		
 		$this->redirectBack();
+		
+	}
+	
+	function getListHeaders() {
+		
+		if(!isset($this->params['requested'])) return;
+		
+		$headers = $this->getHeaders();
+		
+		$headers[] = 'Roll';
+		$headers[] = 'Bokningsnummer';
+		
+		return $headers;
 		
 	}
 	

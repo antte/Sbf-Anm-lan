@@ -128,12 +128,25 @@
 		$passes ='';
 		foreach ($commingFromUrl['pass'] as $pass){
 			$passes .= '/'. $pass;	
-		}		
+		}
 		$option = array(
 			'controller' => $commingFromUrl['controller'], 
 			'action' => $commingFromUrl['action'] . $passes
 		);
 		$this->redirect($option);
+	}
+	
+	/**
+	 * DEPENDS on app_model for translateFieldNames and getFieldNames
+	 * DEPENDS on that you dont change default model and/or controller name
+	 * gets translated tablefields from current model
+	 */
+	function getHeaders() {
+		if(!isset($this->params['requested'])) return;
+		
+		$modelName = Inflector::Singularize($this->name);
+		
+		return $this->$modelName->translateFieldNames($this->$modelName->removeUnsetFields($this->$modelName->getFieldNames()));
 	}
 	
 }
