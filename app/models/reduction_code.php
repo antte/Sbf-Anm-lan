@@ -39,6 +39,11 @@
 			)
 		);
 		
+		function beforeValidate() {
+			//the code can't already exist
+			return !($this->codeExists($this->data['ReductionCode']['code'], $this->data['ReductionCode']['event_id']));
+		}
+		
 		/*
 		 * 
 		 * @return a selection of colums from a event 
@@ -79,11 +84,26 @@
 			return sizeof($peopleWithReductionCode);
 		}
 		
-		function codeExists($id){
-			if($this->field('id',array('id' => $id)))
-				return true;
-			else 
-				return false;	
+		/**
+		 * Checks to see if this combination of code and event_id is unique
+		 * @param $code reduction code
+		 * @param $eventId reduction event_id
+		 * Or if you call it with only one parameter
+		 * @param $id
+		 * it looks to see if that id exists
+		 * @return true/false
+		 */
+		function codeExists(){
+			if(func_num_args() === 1) {
+				if ($this->field('id',array('id' => $id))) return true;
+					else return false;
+			} else if(func_num_args() === 2) {
+				$reductionCodes = $this->find('all', array('recursive' => -1 ,'conditions' => array('code' => func_get_arg(0))));
+				if(sizeof($reductionCodes) > 0) return true;
+					else return false;
+			} else {
+				return;
+			}
 		}
 		
 		function getNumberOfPeopleWithCode ($id,$increase){
@@ -96,8 +116,8 @@
 			
 		
 		function getIdByCodeAndEventId($code,$eventId){
-			return $this->field('id',array('code'=> $code, 'event_id' => $eventId));	
-			
+			return $this->field('id',array('code'=> $code, 'event_id' => $eventId));
 		}
+		
 		
 	}

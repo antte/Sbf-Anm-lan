@@ -111,6 +111,17 @@ class ReductionCodesController extends AppController {
 		$this->updateStepStateToPrevious('reduction_codes', 'create');
 		$this->requestAction('steps/redirectToNextUnfinishedStep');
 	}
+	
+	function getReductionCodeCodeById($reductionCodeId) {
+		if(!isset($this->params['requested'])) return;
+		
+		return $this->ReductionCode->field('code', array('id' => $reductionCodeId));		
+	}
+	
+	function test2() {
+		debug($this->ReductionCode->codeExists('H', 1));
+	}
+	
 }
 	
 

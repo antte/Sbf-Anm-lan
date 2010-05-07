@@ -55,7 +55,7 @@ class RegistrationsController extends AppController {
 			$this->Registration->deleteAllRegistrationRelatedDataById($registration['Registration']['id']);
 		}
 		
-		if($this->Registration->saveAll($registration)) {
+		if($this->Registration->saveAll($registration, array('validate' => 'first'))) {
 			$this->Session->write('Event.registrationId', $this->Registration->id);
 			
 			if( !($this->data['Registration']['sendConfirmationEmail'] == 0) ) {
