@@ -50,6 +50,8 @@ form#login .submit input {
 	background: #fffcbb;
 	margin: 20px auto 20px auto;
 	padding: 5px 0;
+	font-size:14px;
+	font-weight:bold;
 }
 
 .admin_info {
