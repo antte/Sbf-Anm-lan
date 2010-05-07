@@ -57,13 +57,14 @@
 								echo $form->input("Person.$key.first_name", array('type' => 'text', 'label' => 'Förnamn *', 'div' => 'first_name grid_2', 'class' => 'required', 'maxLength' => '127' , 'default' => $person['first_name']));
 								echo $form->input("Person.$key.last_name", array('type' => 'text', 'label' => 'Efternamn *', 'div' => 'last_name grid_2', 'class' => 'required', 'maxLength' => '127' , 'default' => $person['last_name']));
 								echo $form->input("Person.$key.role_id", array('options' => array($roles), 'label' => 'Anmäl dig som *', 'empty' => '(välj en)', 'div' => 'role grid_3', 'class' => 'required role', 'default' => $person['role_id']));
+								echo $form->input("Person.$key.reduction_code_id", array('type' => 'hidden', 'value' => $person['reduction_code_id']));
 								$k++;
 							?>
 						</fieldset>
 					</li>
 				<?php endforeach; ?>
 			<?php endif; ?>
-			<?php //If amount of people extends the amount stored in session loop emty fields?>
+			<?php //If amount of people extends the amount stored in session loop empty fields?>
 			<?php for( $i = $k; $i < $amountOfPeople; $i++ ): ?>
 				<li>
 					<fieldset class="name grid_8 alpha" >
@@ -71,6 +72,8 @@
 							echo $form->input("Person.$i.first_name", array('type' => 'text', 'label' => 'Förnamn *', 'div' => 'first_name grid_2', 'class' => 'required', 'maxLength' => '127'));
 							echo $form->input("Person.$i.last_name", array('type' => 'text', 'label' => 'Efternamn *', 'div' => 'last_name grid_2', 'class' => 'required', 'maxLength' => '127'));
 							echo $form->input("Person.$i.role_id", array('options' => array($roles), 'label' => 'Anmäl dig som *', 'empty' => '(välj en)', 'div' => 'role grid_3', 'class' => 'required role'));
+							echo $form->input("Person.$i.reduction_code_id", array('type' => 'hidden', 'value' => ''));
+							
 						?>
 					</fieldset>
 				</li>
