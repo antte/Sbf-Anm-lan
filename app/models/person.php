@@ -14,6 +14,13 @@ Class Person extends AppModel {
 			
 	var $exportAllowed = true;
 	
+	var $unsetFields = array(
+		'id',
+		'reduction_code_id',
+		'registration_id',
+		'role_id'
+	);
+	
 	var $validate = array(
         'first_name' => array (
 			'rule' 		=> array('notEmpty', 'maxLength'=>127),
@@ -35,26 +42,22 @@ Class Person extends AppModel {
 		$registrations = $this->Registration->findAllByEventId($eventId, array('recursive' => 0));
 		$roles = $this->Role->find('list');
 		
-		foreach($registrations as &$registration) :
+		foreach($registrations as &$registration) {
 			$number = $registration['Registration']['number'];	
 			// get booking number in this return
-			// in view: fix so that each booking är en td
-			$registration = $registration['Person'];
-			foreach($registration as &$model) :
+			// in view: fix so that each booking is a td
+			$people = $registration['Person'];
+			foreach($people as &$model) {
 				foreach($roles as $id => $name) {
 					if($id == $model['role_id']) {
 						$model['role'] = $name;
 						$model['number'] = $number;
 					}	
 				}
-				unset($model['id']);
-				unset($model['registration_id']);
-				unset($model['role_id']);
-				
-			endforeach;
-			
-		endforeach;
-		return $registrations;
+			}
+			$registration['Person'] = $this->removeUnsetFieldsFromMultiple($people);
+		}
+		return $registration;
 	}
 	
 	/**

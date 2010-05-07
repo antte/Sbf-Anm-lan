@@ -32,14 +32,7 @@
 		 */
 		function translateFieldNames($fieldNames) {
 			
-			//if fieldName doesnt have model infront of it add the calling model
-			foreach($fieldNames as &$fieldName) {
-				if(strstr($fieldName, '.')) {
-					continue;
-				} else {
-					$fieldName = $this->name .".". $fieldName;
-				}
-			}
+			$this->addModelToFieldNames($fieldNames);
 			
 			//This is for code readability - Search becomes replace
 			//!OBS! the order in this array is not arbitrary!
@@ -63,6 +56,7 @@
 				'/Person.first_name/'				=> 'Förnamn',
 				'/Person.last_name/'				=> 'Efternamn',
 				'/Person.role_id/'					=> 'Roll id',
+				'/Person.reduction_code_id/'		=> 'Rabattkod id',
 			
 				'/Event.name/'						=> 'Evenemangsnamn',
 				'/Event.confirmation_message/'		=> 'Bekräftelsemeddelande',
@@ -140,6 +134,63 @@
 			
 			return $fieldNames;
 			
+		}
+		
+		/**
+		 * 
+		 * @param $fieldNames array of strings
+		 */
+		function removeUnsetFields($fieldNames) {
+			if(!isset($this->unsetFields)) return $fieldNames;
+			
+			//This makes them uniform atleast, so that they can be compared
+			$fieldNames = $this->addModelToFieldNames($fieldNames);
+			$unsetFields = $this->addModelToFieldNames($this->unsetFields);
+			
+			foreach( $fieldNames as $i => $fieldName) {
+				foreach( $unsetFields as $unsetField) {
+					if($fieldName == $unsetField) {
+						unset($fieldNames[$i]);
+					}
+				}
+			}
+			
+			return $fieldNames;
+			
+		}
+		
+		/**
+		 * 
+		 * @param $array numerically indexed array of model X with index => fieldnames => values inside it
+		 */
+		function removeUnsetFieldsFromMultiple($array) {
+			
+			foreach($array as $i => $dataSet) {
+				foreach($dataSet as $fieldName => $unused) {
+					foreach($this->unsetFields as $unsetField) {
+						if($unsetField == $fieldName)
+							unset($array[$i][$fieldName]);
+					}
+				}
+			}
+			
+			return $array;
+			
+		}
+		
+		/**
+		 * if fieldName doesnt have model infront of it add the calling model
+		 * @param $fieldNames
+		 */
+		function addModelToFieldNames($fieldNames) {
+			foreach($fieldNames as &$fieldName) {
+				if(strstr($fieldName, '.')) {
+					continue;
+				} else {
+					$fieldName = $this->name .".". $fieldName;
+				}
+			}
+			return $fieldNames;
 		}
 		
 	}

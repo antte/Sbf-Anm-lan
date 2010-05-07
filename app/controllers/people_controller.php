@@ -74,16 +74,13 @@ class PeopleController extends AppController {
 	}
 	
 	function index() {
-		if($this->Session->check('adminLoggedIn')) {
-			if($this->Session->check('Event.id')) {
-				$people = $this->Person->listAllPeople($this->Session->read('Event.id'));
-
-				return $people;
-				
-			}
-		}
-		//$this->setFlash('Vi ber om ursäkt men vi kunde inte genomföra din önskan');
-		//$this->redirect(array('controller' => 'events'));
+		
+		if(!isset($this->params['requested'])) return;
+		if(!$this->Session->check('adminLoggedIn')) return;
+		if(!$this->Session->check('Event.id')) return;
+		
+		return $this->Person->listAllPeople($this->Session->read('Event.id'));
+		
 	}
 	/**
 	* Saves People to Session and redirects to next unfinished step
@@ -138,17 +135,19 @@ class PeopleController extends AppController {
 		$this->data['Person']['code'] = strtoupper($this->data['Person']['code']);
 		
 		$eventId = $this->Session->read('Event.id');
+
+		
 		$reductionCodeId = $this->Person->ReductionCode->getIdByCodeAndEventId($this->data['Person']['code'], $eventId);
+		
 		//if the code does not exist ...
 
+
 		if(!$this->Person->ReductionCode->codeExists($reductionCodeId)) {
-			$this->Session->setFlash('Kontrollera din rabattkod, det verkar som om du har skrivit fel. Om felet kvarstår <a href="mailto:support@sbf.se">kontakta support</a>.');
 			$this->Session->setFlash('<strong>Kontrollera din rabattkod, det verkar som om du har skrivit fel. Om felet kvarstår <a href="mailto:support@sbf.se">kontakta support</a>.</strong>');
 			$this->redirectBack();
 		}
 		// ... or doesnt have people left on it give error message
 		if(!$this->Person->ReductionCode->getNumberOfPeopleLeft($reductionCodeId)) {
-			$this->Session->setFlash('Det verkar som att rabattkoden redan är använd. Om det här är fel <a href="mailto:support@sbf.se">kontakta support</a>.');
 			$this->Session->setFlash('<strong>Det verkar som att rabattkoden redan är använd. Om det här är fel <a href="mailto:support@sbf.se">kontakta support</a>.</strong');
 			$this->redirectBack();
 		}
@@ -162,6 +161,19 @@ class PeopleController extends AppController {
 		$this->Session->setFlash('<strong>Rabattkoden är nu tillagd och den har ' . $amountOfPeopleLeft . ' användningar kvar.</strong>');
 		
 		$this->redirectBack();
+		
+	}
+	
+	function getListHeaders() {
+		
+		if(!isset($this->params['requested'])) return;
+		
+		$headers = $this->getHeaders();
+		
+		$headers[] = 'Roll';
+		$headers[] = 'Bokningsnummer';
+		
+		return $headers;
 		
 	}
 	
