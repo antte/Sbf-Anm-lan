@@ -80,8 +80,8 @@
 			return sizeof($peopleWithReductionCode);
 		}
 		
-		function codeExists($code, $eventId){
-			if($this->field('code',array('code' => $code, 'event_id' => $eventId)))
+		function codeExists($id){
+			if($this->field('id',array('id' => $id)))
 				return true;
 			else 
 				return false;	
