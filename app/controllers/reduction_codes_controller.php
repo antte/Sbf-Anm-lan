@@ -118,6 +118,10 @@ class ReductionCodesController extends AppController {
 		return $this->ReductionCode->field('code', array('id' => $reductionCodeId));		
 	}
 	
+	function test2() {
+		debug($this->ReductionCode->codeExists('H', 1));
+	}
+	
 }
 	
 
