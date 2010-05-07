@@ -12,7 +12,7 @@
 <?php echo $this->element('person');?>
 <div class="edit_link grid_8">
 	<?php echo $html->link( 'Redigera',array('controller'=>'People', 'action'=>'create'));?>
-	<?php echo $html->link('Lägg till Rabattkod', array('controller' => 'ReductionCodes', 'action' =>'create'));?>
+	<?php echo $html->link('Lägg till rabattkod', array('controller' => 'ReductionCodes', 'action' =>'create'));?>
 </div>
 <?php echo $this->element('registrator');?>
 <div class="edit_link grid_8">
