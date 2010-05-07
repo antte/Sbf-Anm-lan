@@ -39,6 +39,11 @@
 			)
 		);
 		
+		function beforeValidate() {
+			//the code can't already exist
+			return !($this->codeExists($this->data['ReductionCode']['code'], $this->data['ReductionCode']['event_id']));
+		}
+		
 		/*
 		 * 
 		 * @return a selection of colums from a event 
