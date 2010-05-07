@@ -54,46 +54,46 @@
 			return $reductionCodes; 
 		}
 		
-		function getNumberOfPeopleByCode($code,$eventId){
-			return $this->field('number_of_people', array(
-					'code'=> $code ,
-					'event_id' => $eventId
-				));
+		function getNumberOfPeopleById($id){
+			return $this->field('number_of_people', array('id'=> $id));
 		}
 		
+		/*
+		 * Get amount of unused code, 
+		 * @ return int numberleft
+		 */
 		function getNumberOfPeopleLeft($id, $reduction = 0) {
-			//$reductionCode = $this->findByCode($reductionCodeCode);
-			$reductionCode = $this->findById($id);
-			$numberOfPeople = $reductionCode['ReductionCode']['code'];
-			
-			$amountUsed = $this->getAmountUsed($reductionCode); 
+			$amountUsed = $this->getAmountUsed($id); 
+			$amountOfPeople = $this->getNumberOfPeopleById($id);
 			if (!is_numeric($reduction))
 				$reduction = 0;
-			$peopleLeft = $numberOfPeople - $amountUsed-$reduction;
-			
+			$peopleLeft = $amountOfPeople - $amountUsed - $reduction;
 			return $peopleLeft;
+			
 			
 		}
 		
-		function getAmountUsed($reductionCodeCode) {
-			$peopleWithReductionCode = $this->Person->find('all', array('conditions' => array('reduction_code_code' => $reductionCodeCode)));
+		function getAmountUsed($id) {
+			$peopleWithReductionCode = $this->Person->find('all', array('conditions' => array('reduction_code_id' => $id)));
+			//$peopleWithReductionCode = $this->Person->findByReductionCodeId();
 			return sizeof($peopleWithReductionCode);
 		}
 		
-		function codeExists($code, $eventId){
-			if($this->field('code',array('code' => $code, 'event_id' => $eventId)))
+		function codeExists($id){
+			if($this->field('id',array('id' => $id)))
 				return true;
 			else 
 				return false;	
 		}
 		
-		function getNumberOfPeopleWithCode ($id,$people){
-			//if(!is_array($people)) 
-			//	throw new Exception('People is not an array');
-			debug($this->Person->find('all',array('conditions'=> array('id'=> $id),'recursive'=> -1)));	
-			//debug(sizeOf($people));
-			debug($people);
-		}
+		function getNumberOfPeopleWithCode ($id,$increase){
+			$amountUsed = $this->getAmountUsed($id); 
+			if (!is_numeric($increase))
+				$increase = 0;
+			$amount = $amountUsed + $increase;
+			return $amount;
+		}	
+			
 		
 		function getIdByCodeAndEventId($code,$eventId){
 			return $this->field('id',array('code'=> $code, 'event_id' => $eventId));	
