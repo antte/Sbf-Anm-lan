@@ -62,7 +62,6 @@
 		}
 		
 		function getNumberOfPeopleLeft($id, $reduction = 0) {
-			//$reductionCode = $this->findByCode($reductionCodeCode);
 			$reductionCode = $this->findById($id);
 			$numberOfPeople = $reductionCode['ReductionCode']['code'];
 			
