@@ -34,7 +34,6 @@ class ReductionCodesController extends AppController {
 	
 	
 	
-	
 	function create(){
 		//check if previous step is done
 		if (!$this->previousStepsAreDone($this)){
@@ -98,6 +97,12 @@ class ReductionCodesController extends AppController {
 		$eventId = $this->Session->read('Event.id');
 		$this->ReductionCode->getNumberOfPeopleByCode($code,$eventId);
 	}
+	function test(){
+		debug($this->Session->read('Registration.Person'));
+		$people = $this->Session->read('Registration.Person');
+		$this->ReductionCode->getNumberOfPeopleWithCode(1,$people);						
+		//$this->ReductionCode->getIdByCodeAndEventId('AB',7);
+	}	
 
 	/*
 	 * reuduction_code doesn't contain any data so we just want to go to next unfinished step

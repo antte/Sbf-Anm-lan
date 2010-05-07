@@ -1,7 +1,7 @@
 <?php
 
 	Class ReductionCode extends AppModel {
-		
+		var $primaryKey = 'code'; 
 		var $exportAllowed = true;
 		var $altName = 'Rabatter';
 		var $hasMany = array(
@@ -54,28 +54,50 @@
 			return $reductionCodes; 
 		}
 		
-		function getNumberOfPeopleByCode($code,$eventId){
-			return $this->field('number_of_people', array(
-					'code'=> $code ,
-					'event_id' => $eventId
-				));
+		function getNumberOfPeopleById($id){
+			return $this->field('number_of_people', array('id'=> $id));
 		}
 		
-		function getNumberOfPeopleLeft($reductionCodeCode) {
-			$reductionCode = $this->findByCode($reductionCodeCode);
-			$numberOfPeople = $reductionCode['ReductionCode']['code'];
-			
-			$amountUsed = $this->getAmountUsed($reductionCodeCode); 
-			
-			$peopleLeft = $numberOfPeople - $amountUsed;
-			
+		/*
+		 * Get amount of unused code, 
+		 * @ return int numberleft
+		 */
+		function getNumberOfPeopleLeft($id, $reduction = 0) {
+			$amountUsed = $this->getAmountUsed($id); 
+			$amountOfPeople = $this->getNumberOfPeopleById($id);
+			if (!is_numeric($reduction))
+				$reduction = 0;
+			$peopleLeft = $amountOfPeople - $amountUsed - $reduction;
 			return $peopleLeft;
 			
+			
 		}
 		
-		function getAmountUsed($reductionCodeCode) {
-			$peopleWithReductionCode = $this->Person->find('all', array('conditions' => array('reduction_code_code' => $reductionCodeCode)));
+		function getAmountUsed($id) {
+			$peopleWithReductionCode = $this->Person->find('all', array('conditions' => array('reduction_code_id' => $id)));
+			//$peopleWithReductionCode = $this->Person->findByReductionCodeId();
 			return sizeof($peopleWithReductionCode);
+		}
+		
+		function codeExists($id){
+			if($this->field('id',array('id' => $id)))
+				return true;
+			else 
+				return false;	
+		}
+		
+		function getNumberOfPeopleWithCode ($id,$increase){
+			$amountUsed = $this->getAmountUsed($id); 
+			if (!is_numeric($increase))
+				$increase = 0;
+			$amount = $amountUsed + $increase;
+			return $amount;
+		}	
+			
+		
+		function getIdByCodeAndEventId($code,$eventId){
+			return $this->field('id',array('code'=> $code, 'event_id' => $eventId));	
+			
 		}
 		
 	}

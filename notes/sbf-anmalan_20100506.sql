@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `people` (
   `registration_id` int(11) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `role_id` int(11) DEFAULT NULL,
-  `reduction_code_code` varchar(128) CHARACTER SET utf8 DEFAULT NULL,
+  `reduction_code_id` varchar(128) CHARACTER SET utf8 DEFAULT NULL,
   `first_name` varchar(127) CHARACTER SET utf8 NOT NULL,
   `last_name` varchar(127) CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`id`),

@@ -38,7 +38,7 @@
 						} ?>
 					</td>
 					<td><?php echo $event['price_per_person']." kr";?></td>
-					<td><?php echo $person['reduction_code_code']?></td>
+					<td><?php echo $person['reduction_code_id']?></td>
 				</tr>
 			<?php 
 				$i++;	
