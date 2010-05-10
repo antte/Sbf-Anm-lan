@@ -189,13 +189,19 @@ label.error {
 	background: url(../img/warning.png) no-repeat 0 0;
 }
 
-#javascript_info, #event_info {
+#event_info {
 	background: #eee;
 	margin-bottom: 20px;
 	float: right;
 }
 
-#javascript_info em {
+.javascript_info {
+	background: #eee;
+	margin-bottom: 20px;
+	float: right;
+}
+
+.javascript_info em {
 	padding-left: 20px;
 	background: url(../img/warning.png) no-repeat 0 0;
 }

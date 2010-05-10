@@ -24,6 +24,7 @@
 					<th>Efternamn</th>
 					<th>Anmäld som</th>
 					<th>Pris</th>
+					<th>Rabattkod</th>
 				</tr>
 			</thead>
 			<tbody>			
@@ -37,11 +38,14 @@
 							if($id == $person['role_id']) echo $name;
 						} ?>
 					</td>
-					<td><?php echo $event['price_per_person']." kr";?></td>
-					<td><?php //echo $person['reduction_code_id']
-						echo $this->requestAction('ReductionCodes/getReductionCodeCodeById/'.  $person['reduction_code_id'])
-						
-						?></td>
+					<?php $reductionCode = $this->requestAction('ReductionCodes/getReductionCodeCodeById/'.  $person['reduction_code_id']);?>
+					<td><?php if($reductionCode) {
+							echo '0'; 
+						} else {
+							echo $event['price_per_person'];
+						}
+						echo " kr"?></td>
+					<td><?php echo $reductionCode?></td>
 				
 				</tr>	
 			<?php 

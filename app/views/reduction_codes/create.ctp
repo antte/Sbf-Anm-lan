@@ -29,6 +29,8 @@
 	
 </div>
 <?php echo $this->element('person');?>
+<?php echo $this->element('reduction_codes/create_info');?>
+<?php echo $this->element('javascript_info');?>
 
 <div id="reduction_codes" class="grid_full">
 	
@@ -54,13 +56,3 @@
 	?>
 </div>
 
-<noscript>
-	<div id="javascript_info" class="grid_4" >
-		<div class="grid_full">
-			<h2>Information</h2>
-			<p>
-				<em>För bästa funktionalitet rekommenderas att ni sätter på JavaScript - annars kan information gå förlorad vid felaktigt införda värden i formulären.</em> 
-			</p>
-		</div>
-	</div>
-</noscript>
