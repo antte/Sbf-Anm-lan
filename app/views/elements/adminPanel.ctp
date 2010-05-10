@@ -2,13 +2,21 @@
 //get session stored event info	
 $event = $this->requestAction('events/index/'); 
 $exportOptions = $this->requestAction('admins/getExcelExportOptions');
+$eventOptions = $this->requestAction('events/index');
 ?>
 
 <div id="adminPanel" class="grid_12">
 	<div class="grid_full">
 		<ul id="adminUtilitiesMenu">
 			<li><?php echo $html->link( 'Logga ut', array('controller' => 'admins', 'action' => 'logout'), array( 'class' => 'logout') );?></li>
-			<li><?php echo $html->link( 'Byt evenemang', array('controller' => 'admins', 'action' => 'events') , array('class' => 'changeEvent')); ?></li>
+			<li id="exportIcon">Byt evenemang<span> ▼</span>
+				<ul id="changeEvent">
+				<?php foreach($eventOptions as $eventName => $event): ?>
+				<li>	 
+				<?php echo $html->link($event, array('controller' => 'admins', 'action' => 'events', $eventName)); ?>
+			</li>
+				<?php endforeach;?>
+			</ul>
 			<li id="exportIcon">Exportera<span> ▼</span>
 				<ul id="excelExport">
 					<?php foreach($exportOptions as $exportModels => $exportOption): ?>

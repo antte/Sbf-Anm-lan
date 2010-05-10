@@ -6,6 +6,8 @@ class ReductionCodesController extends AppController {
 	
 	var $altName = 'Rabatter';
 	var $altDescribe = 'Hantera rabattkoder';
+
+	
 		
 		/**
 	 * Inits the view for adding people (including amount of people) to the party
