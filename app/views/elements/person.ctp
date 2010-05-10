@@ -24,6 +24,7 @@
 					<th>Efternamn</th>
 					<th>Anmäld som</th>
 					<th>Pris</th>
+					<th>Rabattkod</th>
 				</tr>
 			</thead>
 			<tbody>			
