@@ -8,7 +8,7 @@ $exportOptions = $this->requestAction('admins/getExcelExportOptions');
 	<div class="grid_full">
 		<ul id="adminUtilitiesMenu">
 			<li><?php echo $html->link( 'Logga ut', array('controller' => 'admins', 'action' => 'logout'), array( 'class' => 'logout') );?></li>
-			<li><?php echo $html->link( 'Byt evenemang', array('controller' => 'admins', 'action' => 'events') , array('class' => 'changeEvent')); ?></li>
+			<li><?php echo $html->link('Byt evenemang', array('controller' => 'admins', 'action' => 'events'));?></li>
 			<li id="exportIcon">Exportera<span> ▼</span>
 				<ul id="excelExport">
 					<?php foreach($exportOptions as $exportModels => $exportOption): ?>

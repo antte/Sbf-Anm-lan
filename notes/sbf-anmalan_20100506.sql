@@ -51,6 +51,7 @@ CREATE TABLE IF NOT EXISTS `events` (
   `is_active` int(1) DEFAULT '0',
   `confirmation_message` varchar(1023) CHARACTER SET utf8 DEFAULT NULL,
   `price_per_person` double DEFAULT NULL,
+   `bank_giro` varchar(127) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=11 ;
 
