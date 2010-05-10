@@ -18,7 +18,7 @@ class ReductionCodesController extends AppController {
 	}
 	
 	/*
-	 * Fetches a list of all the roles stored in the database
+	 * Fetches a list of all the codes stored in the database
 	 * @return array list of roles
 	 */
 	function index($eventId = null){
