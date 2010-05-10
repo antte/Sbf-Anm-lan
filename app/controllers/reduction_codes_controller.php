@@ -119,6 +119,10 @@ class ReductionCodesController extends AppController {
 		
 	}
 	
+	function test2() {
+		debug($this->ReductionCode->codeExists('H', 1));
+	}
+	
 }
 	
 

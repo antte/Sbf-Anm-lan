@@ -4,8 +4,6 @@ $(document).ready(function(){
 	$('#addamount').remove();
 	$('#choosepeopleamount ol').after("<div class='grid_3'><a href='#' id='addField'>Lägg till fler personer</a></div>");
 	
-	//TODO check how many people fields already exists (only a problem when the user disables and then allows javascript in the middle of failure)
-
 	var i = $('#PersonAddForm ol li').length;
 	
 	$('#addField').click(function(){
@@ -76,6 +74,11 @@ function fieldValue(i) {
 	sel.find('.role label').attr('for', 'Person' + i + 'RoleId');
 	sel.find('.role select').attr('id', 'data[Person][' + i + '][role_id]');
 	sel.find('.role select').attr('name', 'data[Person][' + i + '][role_id]');
+	
+	//Reduction Code
+	sel.find('input[type=hidden]').attr('value', '');
+	sel.find('input[type=hidden]').attr('id', 'Person' + i + 'ReductionCodeId');
+	sel.find('input[type=hidden]').attr('name', 'data[Person][' + i + '][reduction_code_id]');
 	
 	if(sel.find('a.removeField').length == 0) {
 		sel.find('fieldset').append("<a href='#' class='removeField'>Ta bort</a>");

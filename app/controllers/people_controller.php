@@ -91,11 +91,6 @@ class PeopleController extends AppController {
 			$errors = $this->Person->validatesMultiple($this->data);
 			if(empty($errors)) {
 				//if we dont have errors all was successful and we continue with the registration
-				foreach($this->data['Person'] as &$person) {
-					if(!isset($person['reduction_code_id'])) {
-						$person['reduction_code_id'] = '';
-					}
-				}
 				$this->saveModelDataToSession($this);
 				
 				$this->updateStepStateToPrevious($this->params['controller'], $action);
