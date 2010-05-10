@@ -106,32 +106,36 @@
 			}
 		}
 		
-		function getNumberOfPeopleWithCode ($id, $registration){
+		function getNumberOfPeopleWithCode($id, $registration){
 
 		//hämta antal personer med reducrtion_code.id ur DB 
-		$peopleWithReductionCode = $this->Person->find('all', array('conditions' => array('reduction_code_id' => $id)));			
+		$peopleWithReductionCodeFromDb = $this->Person->find('all', array('conditions' => array('reduction_code_id' => $id)));			
 
 		//räkna ut antal personer i arrayen som har reduction_code_id = id
-		$amountUsed = sizeof($peopleWithReductionCode);
+		$amountUsed = sizeof($peopleWithReductionCodeFromDb);
 		
+		//result contains all people with reduction code id id in session
 		$path = '/Person[reduction_code_id='. $id.']';
-		$result	= Set::extract($path,$registration);
-		debug($result);
-		debug($peopleWithReductionCode);
+		$peopleWithReductionCodeFromSession	= Set::extract($path,$registration);
+		
 		if (!is_numeric($registration))
 			$increase = 0;
-
-		foreach ($peopleWithReductionCode as $j => $dbPerson ){
-			if (isset($person['Person']['id'])){
-				foreach ($result as $i => $person){
-					if ($person['Person']['reduction_code_id']== $dbPerson['Person']['reduction_code_id'] &&
-			  			$person['Person']['id'] == $dbPerson['Person']['id'] );  
-				}
+		
+		//debug($peopleWithReductionCodeFromSession);
+		//debug($peopleWithReductionCodeFromDb);
+		$duplicate = 0;
+		foreach ($peopleWithReductionCodeFromDb as $j => $dbPerson ){
+			foreach ($peopleWithReductionCodeFromSession as $i => $sessionPerson){
+				if (isset($sessionPerson['Person']['id'])){
+					if ($sessionPerson['Person']['reduction_code_id']== $dbPerson['Person']['reduction_code_id'] &&
+			  			$sessionPerson['Person']['id'] == $dbPerson['Person']['id'] )  
+						$duplicate++;
+				} 
 			}					
 		}
 				
 				
-			$amount = ($amountUsed + sizeof($result));
+			$amount = ($amountUsed + sizeof($peopleWithReductionCodeFromSession)) - $duplicate;
 			return $amount;
 	}	
 		
