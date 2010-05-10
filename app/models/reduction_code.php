@@ -66,23 +66,21 @@
 		/*
 		 * Get amount of unused code, 
 		 * @ return int numberleft
-		 */
+		 
 		function getNumberOfPeopleLeft($id, $reduction = 0) {
-			$amountUsed = $this->getNumberOfPeopleById($id); 
-			if (is_numeric($reduction))
-				$reduction = 0;
-			
-			
-			
-			$peopleLeft = $amountUsed - $reduction;
-			return $peopleLeft;
-			
-			
-		}
+			$peopleWithReductionCode = $this->Person->find('all', array('conditions' => array('reduction_code_id' => $id)));
+			debug($peopleWithReductionCode);
+						
+			$path = '/Person[reduction_code_id='. $id.']';
+			$result	= Set::extract($path,$people);
+			debug($result);
+			return $maxPeopleWithCode - $peopleWithCode; 				
+		}*/
 		
 		function getNumberOfPeopleWithReductionCodeById($id) {
 			$peopleWithReductionCode = $this->Person->find('all', array('conditions' => array('reduction_code_id' => $id)));
 			//$peopleWithReductionCode = $this->Person->findByReductionCodeId();
+			
 			return sizeof($peopleWithReductionCode);
 		}
 		
@@ -95,7 +93,7 @@
 		 * it looks to see if that id exists
 		 * @return true/false
 		 */
-		function codeExists(){
+		function codeExists($id){
 			if(func_num_args() === 1) {
 				if ($this->field('id',array('id' => $id))) return true;
 					else return false;
@@ -108,24 +106,34 @@
 			}
 		}
 		
-		function getNumberOfPeopleWithCode ($id,$people){
-			//hämta antal personer med reducrtion_code.id ur DB 
-			//räkna ut antal personer i arrayen dom har reduction_code_id = id
-			$amountUsed = $this->getNumberOfPeopleWithReductionCodeById($id);
+		function getNumberOfPeopleWithCode ($id, $registration){
+
+		//hämta antal personer med reducrtion_code.id ur DB 
+		$peopleWithReductionCode = $this->Person->find('all', array('conditions' => array('reduction_code_id' => $id)));			
+
+		//räkna ut antal personer i arrayen som har reduction_code_id = id
+		$amountUsed = sizeof($peopleWithReductionCode);
 		
-			$path = '/Person[reduction_code_id='. $id.']';
-			$result	= Set::extract($path,$people);
-			
-			if (!is_numeric($people))
-				$increase = 0;
-			
+		$path = '/Person[reduction_code_id='. $id.']';
+		$result	= Set::extract($path,$registration);
+		debug($result);
+		debug($peopleWithReductionCode);
+		if (!is_numeric($registration))
+			$increase = 0;
+
+		foreach ($peopleWithReductionCode as $j => $dbPerson ){
+			if (isset($person['Person']['id'])){
+				foreach ($result as $i => $person){
+					if ($person['Person']['reduction_code_id']== $dbPerson['Person']['reduction_code_id'] &&
+			  			$person['Person']['id'] == $dbPerson['Person']['id'] );  
+				}
+			}					
+		}
 				
 				
-			//debug($result);	
-			$amount = $amountUsed;
+			$amount = ($amountUsed + sizeof($result));
 			return $amount;
-		}	
-			
+	}	
 		
 		function getIdByCodeAndEventId($code,$eventId){
 			return $this->field('id',array('code'=> $code, 'event_id' => $eventId));

@@ -15,7 +15,14 @@
 			$event = $this->requestAction('events');
 			
 			if($this->Session->check('Registration.Person') && $this->Session->check('Event.price_per_person')) {
-				return $this->Invoice->calculatePrice($this->Session->read('Event.price_per_person'), sizeof($this->Session->read('Registration.Person')));
+				$amountWithReductionCode = 0;
+				foreach ($registration['Person'] as $person){
+					if (isset($person['reduction_code_id']) && $person['reduction_code_id'] > 0)
+						$amountWithReductionCode++;
+						 
+				}
+				$amountOfPeople = (sizeof($registration['Person'])) - $amountWithReductionCode;
+				return $this->Invoice->calculatePrice($this->Session->read('Event.price_per_person'), $amountOfPeople);
 			} else {
 				// We get here when we are in receipt view basicly
 				$latestInvoice = $this->Invoice->getLatest($registration['Registration']['id']);
