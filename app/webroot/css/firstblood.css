@@ -351,3 +351,12 @@ p.sum {
 #reduction_codes .input option {
 	padding-right:20px;
 }
+
+img.addCode, img.removeCode {
+	float: right;
+	cursor: pointer;
+}
+
+#receipt_entrants tr.highlight {
+	background: lightblue;
+}
