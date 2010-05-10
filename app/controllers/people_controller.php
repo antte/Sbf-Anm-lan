@@ -168,18 +168,13 @@ class PeopleController extends AppController {
 		if($peopleWithCode >= $maxPeopleWithCode) {
 			$this->Session->setFlash('<strong>Det verkar som att rabattkoden redan är använd. Om det här är fel <a href="mailto:support@sbf.se">kontakta support</a>.</strong> :');
 			$this->redirectBack();
+		} else {
+			$this->Session->write('Registration.Person.' . $this->data['Person']['person'] . '.reduction_code_id', $reductionCodeId);		
+			$peopleWithCode = $this->Person->ReductionCode->getNumberOfPeopleWithCode($reductionCodeId, $this->Session->read('Registration'));
+			$amountOfPeopleLeft = $maxPeopleWithCode - $peopleWithCode;  
+			//Skicka med i flash hur många person som är kvar på rabattkoden 
+			$this->Session->setFlash('<strong>Rabattkoden är nu tillagd och den har ' . $amountOfPeopleLeft . ' användningar kvar.</strong>');
 		}
-		$this->Session->write('Registration.Person.' . $this->data['Person']['person'] . '.reduction_code_id', $reductionCodeId);		
-		//Skicka med i flash hur många person som är kvar på rabattkoden 
-		
-		
-		
-		$peopleWithCode = $this->Person->ReductionCode->getNumberOfPeopleWithCode($reductionCodeId, $this->Session->read('Registration'));
-		
-		$amountOfPeopleLeft = $maxPeopleWithCode - $peopleWithCode;  
-		//debug($amountOfPeopleLeft);
-		$this->Session->setFlash('<strong>Rabattkoden är nu tillagd och den har ' . $amountOfPeopleLeft . ' användningar kvar.</strong>');
-		
 		$this->redirectBack();
 		
 	}

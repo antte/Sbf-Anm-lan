@@ -77,12 +77,12 @@
 			return $maxPeopleWithCode - $peopleWithCode; 				
 		}*/
 		
-		function getNumberOfPeopleWithReductionCodeById($id) {
+	/*	function getNumberOfPeopleWithReductionCodeById($id) {
 			$peopleWithReductionCode = $this->Person->find('all', array('conditions' => array('reduction_code_id' => $id)));
 			//$peopleWithReductionCode = $this->Person->findByReductionCodeId();
 			
 			return sizeof($peopleWithReductionCode);
-		}
+		}*/
 		
 		/**
 		 * Checks to see if this combination of code and event_id is unique
@@ -117,12 +117,7 @@
 		//result contains all people with reduction code id id in session
 		$path = '/Person[reduction_code_id='. $id.']';
 		$peopleWithReductionCodeFromSession	= Set::extract($path,$registration);
-		
-		if (!is_numeric($registration))
-			$increase = 0;
-		
-		//debug($peopleWithReductionCodeFromSession);
-		//debug($peopleWithReductionCodeFromDb);
+	
 		$duplicate = 0;
 		foreach ($peopleWithReductionCodeFromDb as $j => $dbPerson ){
 			foreach ($peopleWithReductionCodeFromSession as $i => $sessionPerson){
@@ -134,9 +129,9 @@
 			}					
 		}
 				
-				
-			$amount = ($amountUsed + sizeof($peopleWithReductionCodeFromSession)) - $duplicate;
-			return $amount;
+			
+		$amount = ($amountUsed + sizeof($peopleWithReductionCodeFromSession)) - $duplicate;
+		return $amount;
 	}	
 		
 		function getIdByCodeAndEventId($code,$eventId){
