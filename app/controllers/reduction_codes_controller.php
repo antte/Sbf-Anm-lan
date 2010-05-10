@@ -114,10 +114,15 @@ class ReductionCodesController extends AppController {
 		$this->requestAction('steps/redirectToNextUnfinishedStep');
 	}
 	
-	function getReductionCodeCodeById($reductionCodeId) {
+	function getReductionCodeCodeById($reductionCodeId = 0) {
 		if(!isset($this->params['requested'])) return;
-		
+		if(!isset($reductionCodeId)) return;
 		return $this->ReductionCode->field('code', array('id' => $reductionCodeId));		
+		
+	}
+	
+	function test2() {
+		debug($this->ReductionCode->codeExists('H', 1));
 	}
 	
 }

@@ -7,7 +7,7 @@
 	$numberFormat = array(
 		'before' => '', 
 		'decimals' => ',', 
-		'thousands' => '.',
+		'thousands' => '.', 
 		'after' => ' kr'
 	);
 	$sum = $this->requestAction('invoices/getSum');
@@ -38,8 +38,12 @@
 						} ?>
 					</td>
 					<td><?php echo $event['price_per_person']." kr";?></td>
-					<td><?php echo $person['reduction_code_id']?></td>
-				</tr>
+					<td><?php //echo $person['reduction_code_id']
+						echo $this->requestAction('ReductionCodes/getReductionCodeCodeById/'.  $person['reduction_code_id'])
+						
+						?></td>
+				
+				</tr>	
 			<?php 
 				$i++;	
 				endforeach;?>

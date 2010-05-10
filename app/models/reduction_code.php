@@ -39,6 +39,11 @@
 			)
 		);
 		
+		function beforeValidate() {
+			//the code can't already exist
+			return !($this->codeExists($this->data['ReductionCode']['code'], $this->data['ReductionCode']['event_id']));
+		}
+		
 		/*
 		 * 
 		 * @return a selection of colums from a event 
@@ -55,7 +60,7 @@
 		}
 		
 		function getNumberOfPeopleById($id){
-			return $this->field('number_of_people', array('id'=> $id));
+			return ( $this->field('number_of_people', array('id'=> $id)));
 		}
 		
 		/*
@@ -63,41 +68,68 @@
 		 * @ return int numberleft
 		 */
 		function getNumberOfPeopleLeft($id, $reduction = 0) {
-			$amountUsed = $this->getAmountUsed($id); 
-			$amountOfPeople = $this->getNumberOfPeopleById($id);
-			if (!is_numeric($reduction))
+			$amountUsed = $this->getNumberOfPeopleById($id); 
+			if (is_numeric($reduction))
 				$reduction = 0;
-			$peopleLeft = $amountOfPeople - $amountUsed - $reduction;
+			
+			
+			
+			$peopleLeft = $amountUsed - $reduction;
 			return $peopleLeft;
 			
 			
 		}
 		
-		function getAmountUsed($id) {
+		function getNumberOfPeopleWithReductionCodeById($id) {
 			$peopleWithReductionCode = $this->Person->find('all', array('conditions' => array('reduction_code_id' => $id)));
 			//$peopleWithReductionCode = $this->Person->findByReductionCodeId();
 			return sizeof($peopleWithReductionCode);
 		}
 		
-		function codeExists($id){
-			if($this->field('id',array('id' => $id)))
-				return true;
-			else 
-				return false;	
+		/**
+		 * Checks to see if this combination of code and event_id is unique
+		 * @param $code reduction code
+		 * @param $eventId reduction event_id
+		 * Or if you call it with only one parameter
+		 * @param $id
+		 * it looks to see if that id exists
+		 * @return true/false
+		 */
+		function codeExists(){
+			if(func_num_args() === 1) {
+				if ($this->field('id',array('id' => $id))) return true;
+					else return false;
+			} else if(func_num_args() === 2) {
+				$reductionCodes = $this->find('all', array('recursive' => -1 ,'conditions' => array('code' => func_get_arg(0))));
+				if(sizeof($reductionCodes) > 0) return true;
+					else return false;
+			} else {
+				return;
+			}
 		}
 		
-		function getNumberOfPeopleWithCode ($id,$increase){
-			$amountUsed = $this->getAmountUsed($id); 
-			if (!is_numeric($increase))
+		function getNumberOfPeopleWithCode ($id,$people){
+			//hämta antal personer med reducrtion_code.id ur DB 
+			//räkna ut antal personer i arrayen dom har reduction_code_id = id
+			$amountUsed = $this->getNumberOfPeopleWithReductionCodeById($id);
+		
+			$path = '/Person[reduction_code_id='. $id.']';
+			$result	= Set::extract($path,$people);
+			
+			if (!is_numeric($people))
 				$increase = 0;
-			$amount = $amountUsed + $increase;
+			
+				
+				
+			//debug($result);	
+			$amount = $amountUsed;
 			return $amount;
 		}	
 			
 		
 		function getIdByCodeAndEventId($code,$eventId){
-			return $this->field('id',array('code'=> $code, 'event_id' => $eventId));	
-			
+			return $this->field('id',array('code'=> $code, 'event_id' => $eventId));
 		}
+		
 		
 	}
