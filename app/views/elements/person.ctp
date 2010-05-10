@@ -7,7 +7,7 @@
 	$numberFormat = array(
 		'before' => '', 
 		'decimals' => ',', 
-		'thousands' => '.',
+		'thousands' => '.', 
 		'after' => ' kr'
 	);
 	$sum = $this->requestAction('invoices/getSum');

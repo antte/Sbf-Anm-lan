@@ -3,7 +3,7 @@ $(document).ready(function(){
 		$('form#reduction_codes').validate({
 			rules: {
 			'data[ReductionCode][code]': {
-				required: true,
+				required: false,
 				maxlength: 127,
 				regex: "^[a-zA-Z0-9']{1,127}$" 
 			},
@@ -29,7 +29,7 @@ $(document).ready(function(){
 		$('form#addReductionCode').validate({
 			rules: {
 			'data[Person][code]': {
-				required: true,
+				required: false,
 				maxlength: 127,
 				regex: "^[a-zA-Z0-9']{1,127}$" 
 			}
@@ -42,5 +42,4 @@ $(document).ready(function(){
 				}
 			}
 		});
-		concole.log('hej');
 });

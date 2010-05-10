@@ -127,12 +127,34 @@ class PeopleController extends AppController {
 	}
 	
 	function addCodeToPersonInSession(){
-		$this->data['Person']['code'] = strtoupper($this->data['Person']['code']);
-		$eventId = $this->Session->read('Event.id');
-		$reductionCodeId = $this->Person->ReductionCode->getIdByCodeAndEventId($this->data['Person']['code'], $eventId);
 		
-		//if the code does not exist ...
+		$this->data['Person']['code'] = strtoupper($this->data['Person']['code']);
+		
+		$userWantsToRemoveReductionCode = in_array('remove', array_keys($this->params['form']));
+		
+		//special case for when user presses the remove submit button
+		if($userWantsToRemoveReductionCode) {
+			//write empty string to reduction_code_id
+			$this->Session->write('Registration.Person.' . $this->data['Person']['person'] . '.reduction_code_id', '');
+			$firstName = $this->Session->read('Registration.Person.' . $this->data['Person']['person'] . '.first_name');
+			$lastName = $this->Session->read('Registration.Person.' . $this->data['Person']['person'] . '.last_name');
+			$this->Session->setFlash('Rabattkoden för ' . $firstName . ' ' . $lastName . ' är nu borttagen.');
+			$this->redirectBack();
+		}
+		
+		//OBS make sure to check this after userwantstoremovereductioncode because in that case we wont have code and we wont need it
+		if(!$this->data['Person']['code']) {
+			//code evaluates to false (for example its an empty string)
+			//and the user doesnt want to remove the code (in which case we allow them to not write a code)
+			$this->Session->setFlash('Du måste fylla i en rabattkod.');
+			$this->redirectBack();
+		}
+		
+		$eventId = $this->Session->read('Event.id');
+		
+		$reductionCodeId = $this->Person->ReductionCode->getIdByCodeAndEventId($this->data['Person']['code'], $eventId);
 
+		//if the code does not exist ...
 
 		if(!$this->Person->ReductionCode->codeExists($reductionCodeId)) {
 			$this->Session->setFlash('<strong>Kontrollera din rabattkod, det verkar som om du har skrivit fel. Om felet kvarstår <a href="mailto:support@sbf.se">kontakta support</a>.</strong>');

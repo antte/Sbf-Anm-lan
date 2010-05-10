@@ -37,7 +37,8 @@
 		echo '<fieldset class="reduction_code grid_8 alpha">';
 		echo $form->input('code', array('type' => 'text', 'label' => 'Fyll i din rabattkod', 'maxLength' => '8'));
 		echo $form->input('person', array('options' => $people, 'label' => 'För person'));
-		echo $form->submit('OK');
+		echo $form->submit('Lägg till', array('name' => 'create', 'style' => 'background: #96f97b;'));
+		echo $form->submit('Ta bort', array('name' => 'remove', 'style' => 'background: #ff474c;'));
 		echo "</fieldset>";
 		echo $form->end();
 	?>
