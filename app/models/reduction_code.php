@@ -55,7 +55,7 @@
 		}
 		
 		function getNumberOfPeopleById($id){
-			return $this->field('number_of_people', array('id'=> $id));
+			return ( $this->field('number_of_people', array('id'=> $id)));
 		}
 		
 		/*
@@ -63,17 +63,19 @@
 		 * @ return int numberleft
 		 */
 		function getNumberOfPeopleLeft($id, $reduction = 0) {
-			$amountUsed = $this->getAmountUsed($id); 
-			$amountOfPeople = $this->getNumberOfPeopleById($id);
-			if (!is_numeric($reduction))
+			$amountUsed = $this->getNumberOfPeopleById($id); 
+			if (is_numeric($reduction))
 				$reduction = 0;
-			$peopleLeft = $amountOfPeople - $amountUsed - $reduction;
+			
+			
+			
+			$peopleLeft = $amountUsed - $reduction;
 			return $peopleLeft;
 			
 			
 		}
 		
-		function getAmountUsed($id) {
+		function getNumberOfPeopleWithReductionCodeById($id) {
 			$peopleWithReductionCode = $this->Person->find('all', array('conditions' => array('reduction_code_id' => $id)));
 			//$peopleWithReductionCode = $this->Person->findByReductionCodeId();
 			return sizeof($peopleWithReductionCode);
@@ -86,11 +88,21 @@
 				return false;	
 		}
 		
-		function getNumberOfPeopleWithCode ($id,$increase){
-			$amountUsed = $this->getAmountUsed($id); 
-			if (!is_numeric($increase))
+		function getNumberOfPeopleWithCode ($id,$people){
+			//hämta antal personer med reducrtion_code.id ur DB 
+			//räkna ut antal personer i arrayen dom har reduction_code_id = id
+			$amountUsed = $this->getNumberOfPeopleWithReductionCodeById($id);
+		
+			$path = '/Person[reduction_code_id='. $id.']';
+			$result	= Set::extract($path,$people);
+			
+			if (!is_numeric($people))
 				$increase = 0;
-			$amount = $amountUsed + $increase;
+			
+				
+				
+			//debug($result);	
+			$amount = $amountUsed;
 			return $amount;
 		}	
 			
