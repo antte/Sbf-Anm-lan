@@ -381,6 +381,10 @@ class RegistrationsController extends AppController {
 		
 		$this->redirect(array('controller' => 'admins' , 'action' => 'eventIndex'));
 	}
+	
+	function test() {
+		$this->Registration->Invoice->generateExpiryDate();
+	}
 
 }
 

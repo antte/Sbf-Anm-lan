@@ -5,5 +5,6 @@
 </div>
 <?php echo $this->element('event')?>
 <?php echo $this->element('registration')?>
-<?php echo $this->element('person')?>
 <?php echo $this->element('registrator')?>
+<?php echo $this->element('person')?>
+<?php echo $this->element('invoice')?>

@@ -76,4 +76,9 @@ class EventsController extends AppController {
 			return $this->Event->getEvents();
 		}
 	}
+	
+	function getBankgiroNumber() {
+		$eventId = $this->Session->read('Event.id');
+		return $this->Event->field('bank_giro', array('id' => $eventId));
+	}
 }
