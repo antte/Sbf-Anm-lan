@@ -206,7 +206,7 @@ label.error {
 	background: url(../img/warning.png) no-repeat 0 0;
 }
 
-#booking_nr, #registrator, #entrants, #event, #fourofour {
+#booking_nr, #registrator, #entrants, #event, #fourofour, #invoice {
 	background: #eee;
 	margin-bottom: 20px;
 }
@@ -359,4 +359,15 @@ img.addCode, img.removeCode {
 
 #receipt_entrants tr.highlight {
 	background: lightblue;
+}
+
+#invoice_info {
+	font-weight: bold;
+}
+
+#invoice_info dd {
+	text-indent: 20px;
+	font-size: 18px;
+	margin-bottom: 5px;
+	font-family: "lucida grande unicode", "courier new", courier, verdana;
 }

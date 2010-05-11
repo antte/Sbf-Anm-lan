@@ -28,10 +28,10 @@ $(document).ready(function(){
 		});
 		
 		//find the person we clicked and set the value of the dropdown to that person
-		var person = $(this).parents('tr').attr('rel');
+		var personId = $(this).parents('tr').attr('rel');
 
 		$('select#PersonPerson').children('option').each(function(){
-			if($(this).attr('value') == person){
+			if($(this).attr('value') == personId){
 				$(this).attr('selected', 'selected');
 			}
 		});
@@ -42,6 +42,7 @@ $(document).ready(function(){
 		//if we clicked an add button, hide the delete submit and vice versa
 		if($(this).attr('class') == "addCode") {
 			$('fieldset.reduction_code .remove').hide();
+			$('input#PersonCode').focus();
 		} else {
 			//hide the name field as well
 			$('fieldset.reduction_code .remove').before('<p style="width:300px;font-size:14px;font-weight:bold;display:inline;padding:10px 0 0 10px;">Är du säker på att du vill ta bort koden från den här personen?</p>')

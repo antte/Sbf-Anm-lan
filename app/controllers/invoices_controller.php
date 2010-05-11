@@ -62,9 +62,13 @@
 				return $sum;
 				
 			}
-			
-			
-			
+
 		}
+		
+		
+		function getLatest($registrationId){
+			return $this->Invoice->getLatest($registrationId);
+		}
+		
 		
 	}
