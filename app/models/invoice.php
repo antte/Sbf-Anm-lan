@@ -20,6 +20,9 @@
 		 */
 		function addInvoiceToRegistration($registration) {
 			
+			//We need to create two invoices depending on the payment method of each person (which depends on role)
+			
+			
 			//if registration id exists this is an existing registration and we need to add the invoice last to the invoices array
 			if(isset($registration['Registration']['id'])) {
 				
@@ -33,7 +36,7 @@
 				$newIndex = 0;
 			}
 			
-			$registration['Invoice'][$newIndex]['price'] = $this->requestAction('invoices/getSum');
+			$registration['Invoice'][$newIndex]['price'] = $this->requestAction('invoices/getTotalSum');
 			$registration['Invoice'][$newIndex]['expiry_date'] = $this->generateExpiryDate();
 			
 			return $registration;	
