@@ -70,5 +70,4 @@
 			return $this->Invoice->getLatest($registrationId);
 		}
 		
-		
 	}
