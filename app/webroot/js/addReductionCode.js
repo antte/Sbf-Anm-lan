@@ -39,13 +39,13 @@ $(document).ready(function(){
 		$('fieldset.reduction_code').show();
 		$('fieldset.reduction_code .select').hide();
 		
-		
-		
 		//if we clicked an add button, hide the delete submit and vice versa
 		if($(this).attr('class') == "addCode") {
 			$('fieldset.reduction_code .remove').hide();
 		} else {
 			//hide the name field as well
+			$('fieldset.reduction_code .remove').before('<p style="width:300px;font-size:14px;font-weight:bold;display:inline;padding:10px 0 0 10px;">Är du säker på att du vill ta bort koden från den här personen?</p>')
+			$('fieldset.reduction_code .submit').css({'margin-top' : '0'});
 			$('fieldset.reduction_code .input').hide();
 			$('fieldset.reduction_code .create').hide();
 		}
