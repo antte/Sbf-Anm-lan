@@ -30,5 +30,6 @@ CREATE TABLE IF NOT EXISTS `invoices` (
   `registrations_id` int(64) NOT NULL,
   `price` double NOT NULL,
   `created` datetime NOT NULL,
+  `expiry_date` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
