@@ -13,7 +13,7 @@
 		<?php endif; ?>
 		<?php echo $html->link('sendingEmails', array( 'controller' =>'registrations' , 'action' => 'toggleSendEmails', $this->params['controller'], $this->params['action'] ), array('class' => 'sendingEmails')); ?>
 		</li>
-		<li style="margin-top: 100px; z-index:999;">
+		<li style="margin-top: 100px; left:100%; z-index:1;">
 		<?php debug( $this->requestAction('steps/debug'))?>
 		</li>
 	</ul>

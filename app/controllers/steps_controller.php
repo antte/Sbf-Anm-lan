@@ -90,7 +90,7 @@ class StepsController extends AppController {
 	}
 	
 	function debug(){
-		//return $this->Session->read('Registration');
+		return $this->Session->read('Registration');
 	}
 	
 }

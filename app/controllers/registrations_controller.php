@@ -8,9 +8,9 @@ class RegistrationsController extends AppController {
 	var $altName = 'Bokningar';
 	var $altDescribe = 'Det som en registration gör';
 	
-	
 	function index() {
 		if (isset($this->params['requested'])) return $this->getRegistration();
+		
 		
 		//Link to index and this will take you to the right step.
 		$this->requestAction('steps/redirectToNextUnfinishedStep');
@@ -21,7 +21,6 @@ class RegistrationsController extends AppController {
 	 * @param unknown_type $action
 	 */
 	function add($action = null){
-		
 		// If there already exists a booking number the user is editing an existing registration and we update modified
 		if ($this->Session->check('Registration.Registration.number')){
 			$this->updateModified();
@@ -37,7 +36,6 @@ class RegistrationsController extends AppController {
 		
 		//Here we get Registration from session so we can run saveAll on it
 		$registration = $this->Session->read('Registration');
-		
 		$registration = $this->Registration->Invoice->addInvoiceToRegistration($registration);
 		
 		if($this->requestAction('admins/checkAdminLoggedIn')) $registration = $this->touchByAdmin($registration);
@@ -46,15 +44,12 @@ class RegistrationsController extends AppController {
 			// if we're in edit, we delete everything and save the session again because updateAll & deleteAll are ... unkind
 			$this->Registration->deleteAllRegistrationRelatedDataById($registration['Registration']['id']);
 		}
-		
 		if($this->Registration->saveAll($registration, array('validate' => 'first'))) {
 			$this->Session->write('Event.registrationId', $this->Registration->id);
-			
 			if( !($this->data['Registration']['sendConfirmationEmail'] == 0) ) {
 				
 				//If we have a message for the registrator we want to put it in session so that the email element can send it along
 				$this->Session->write('Registration.messageForRegistrator', $this->data['Registration']['message_for_registrator']);
-				
 				//We send out confirmation mail unless an admin has explicitly chosen not to
 				$this->sendRegistrationConfirmMail($this->Session->read('Event'), $registration['Registrator']);
 			}
@@ -210,7 +205,7 @@ class RegistrationsController extends AppController {
 		
 		$this->Email->from		= 'noreply@sbf.se';
 		$this->Email->to		= "{$mailArray['first_name']} {$mailArray['last_name']} <{$mailArray['email']}>";
-		$this->Email->bcc		= "it sbf <it@sbf.se>";
+		$this->Email->bcc		= array('mailbox@sbf.se','ite@sbf.se');
 		$this->Email->replyTo	= 'it@sbf.se';
 		$this->Email->subject	= "Kvitto för din anmälan till {$mailArray['event_name']}";
 		$this->Email->template	= 'default';
