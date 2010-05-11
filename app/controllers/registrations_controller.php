@@ -21,19 +21,10 @@ class RegistrationsController extends AppController {
 	 * @param unknown_type $action
 	 */
 	function add($action = null){
-		// If there already exists a booking number the user is editing an existing registration
+		
+		// If there already exists a booking number the user is editing an existing registration and we update modified
 		if ($this->Session->check('Registration.Registration.number')){
-			
-			/**
-			 * If this registration is being edited by an admin we dont want modified to be
-			 * updated because it isnt the registrator that is updating it.
-			 */
-
-			if (!$this->requestAction('admins/checkAdminLoggedIn')) {
-				// Set the modified date for the editation and leave registration number unchanged
-				$this->Session->write('Registration.Registration.modified', date('Y-m-d H:i:s'));
-			}
-			
+			$this->updateModified();
 		} else {
 			// Make and set a booking number to Session
 			$this->Session->write('Registration.Registration.number' , $this->Registration->generateUniqueNumber());			
@@ -41,6 +32,7 @@ class RegistrationsController extends AppController {
 		
 		$registrationRegistration = $this->Session->read('Registration.Registration');
 		$this->saveModelDataToSession($this,$registrationRegistration);
+		
 		$this->updateStepStateToPrevious($this->params['controller'], $action);
 		
 		//Here we get Registration from session so we can run saveAll on it
@@ -78,6 +70,19 @@ class RegistrationsController extends AppController {
 		
 		$this->redirect(array('action' => 'receipt'));
 		
+	}
+	
+	
+	function updateModified() {
+			/**
+			 * If this registration is being edited by an admin we dont want modified to be
+			 * updated because it isnt the registrator that is updating it.
+			 */
+
+			if (!$this->requestAction('admins/checkAdminLoggedIn')) {
+				// Set the modified date for the editation and leave registration number unchanged
+				$this->Session->write('Registration.Registration.modified', date('Y-m-d H:i:s'));
+			}
 	}
 	
 	/*
