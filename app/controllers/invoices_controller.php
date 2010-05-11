@@ -28,8 +28,12 @@
 				$latestInvoice = $this->Invoice->getLatest($registration['Registration']['id']);
 				return $latestInvoice['Invoice']['price'];
 			}
-			
-			
+				
 		}
+		
+		function getLatest($registrationId){
+			return $this->Invoice->getLatest($registrationId);
+		}
+		
 		
 	}

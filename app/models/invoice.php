@@ -36,7 +36,7 @@
 				$newIndex = 0;
 			}
 			
-			$registration['Invoice'][$newIndex]['price'] = $this->requestAction('invoices/getTotalSum');
+			$registration['Invoice'][$newIndex]['price'] = $this->requestAction('invoices/getSum');
 			$registration['Invoice'][$newIndex]['expiry_date'] = $this->generateExpiryDate();
 			
 			return $registration;	
