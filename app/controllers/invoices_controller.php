@@ -40,8 +40,9 @@
 				
 				//return only sum of all the internal people (people that has a role where is_external is false/null/0)
 				foreach($registration['Person'] as $person) {
-					if(isset($person['is_external'])) {
-						if(!$person['is_external']) {
+					if(isset($person['role_id'])) {
+						$isExternal = $this->Invoice->Registration->Person->Role->field('is_external', array('id' => $person['role_id']));
+						if(!$isExternal) {
 							$sum += $pricePerPerson;
 						}
 					}
@@ -55,7 +56,8 @@
 				
 				//return only sum of all the external people (people that has a role where is_external is true/1)
 				foreach($registration['Person'] as $person) {
-					if($person['is_external']) {
+					$isExternal = $this->Invoice->Registration->Person->Role->field('is_external', array('id' => $person['role_id']));
+					if($isExternal) {
 						$sum += $pricePerPerson;
 					}
 				}

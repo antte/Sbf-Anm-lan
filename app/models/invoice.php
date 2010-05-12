@@ -21,10 +21,19 @@
 		 * @param $registration
 		 * @param $isChange
 		 */
-		function addInvoiceToRegistration($registration) {
+		function createAndAddInvoicesToRegistration($registration) {
 			
 			//We need to create two invoices depending on the payment method of each person (which depends on role)
+			$externalPeople = array();
+			$internalPeople = array();
 			
+			foreach($registration['Person'] as $person) {
+				if($isExternal = $this->Registration->Person->Role->field('is_external', array('id' => $person['role_id']))) {
+					$externalPeople[] = $person;
+				} else {
+					$internalPeople[] = $person;
+				}
+			}
 			
 			//if registration id exists this is an existing registration and we need to add the invoice last to the invoices array
 			if(isset($registration['Registration']['id'])) {
@@ -39,13 +48,40 @@
 				$newIndex = 0;
 			}
 			
-			$registration['Invoice'][$newIndex]['price'] = $this->requestAction('invoices/getSum/1');
-			$registration['Invoice'][$newIndex]['is_external'] = 0;
-			$registration['Invoice'][$newIndex]['expiry_date'] = $this->generateExpiryDate();
-			
-			$registration['Invoice'][($newIndex+1)]['price'] = $this->requestAction('invoices/getSum/0');
-			$registration['Invoice'][($newIndex+1)]['is_external'] = 1;
-			$registration['Invoice'][($newIndex+1)]['expiry_date'] = $this->generateExpiryDate();
+			//TODO this isnt very DRY
+			if			(!is_empty($externalPeople) && is_empty($internalPeople)) {
+				
+				//we only have external people
+				$registration['Invoice'][$newIndex]['expiry_date'] = $this->generateExpiryDate();
+				foreach($externalPeople as $person) {
+					$registration['Invoice'][$newIndex]['Item'][] = $this->Invoice->Registration->Person->toItem($person);
+				}
+							
+			} else if 	(!is_empty($internalPeople) && is_empty($externalPeople)) {
+				
+				//we only have internal people
+				$registration['Invoice'][$newIndex]['expiry_date'] = $this->generateExpiryDate();				
+				foreach($internalPeople as $person) {
+					$registration['Invoice'][$newIndex]['Item'][] = $this->Invoice->Registration->Person->toItem($person);
+				}
+				
+			} else if 	(!is_empty($externalPeople) && !is_empty($internalPeople)) {
+				
+				//we have both
+				
+				$registration['Invoice'][$newIndex]['expiry_date'] = $this->generateExpiryDate();
+				foreach($externalPeople as $person) {
+					$registration['Invoice'][$newIndex]['Item'][] = $this->Invoice->Registration->Person->toItem($person);
+				}
+				
+				$registration['Invoice'][($newIndex+1)]['expiry_date'] = $this->generateExpiryDate();	
+				foreach($internalPeople as $person) {
+					$registration['Invoice'][$newIndex+1]['Item'][] = $this->Invoice->Registration->Person->toItem($person);
+				}			
+				
+			} else {
+				//TODO some kind of error?
+			}
 			
 			return $registration;	
 		}

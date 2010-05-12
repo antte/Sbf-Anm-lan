@@ -34,7 +34,7 @@ class RegistrationsController extends AppController {
 		
 		//Here we get Registration from session so we can run saveAll on it
 		$registration = $this->Session->read('Registration');
-		$registration = $this->Registration->Invoice->addInvoiceToRegistration($registration);
+		$registration = $this->Registration->Invoice->createAndAddInvoicesToRegistration($registration);
 		
 		if($this->requestAction('admins/checkAdminLoggedIn')) $registration = $this->touchByAdmin($registration);
 		

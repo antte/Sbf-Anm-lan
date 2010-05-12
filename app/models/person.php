@@ -68,5 +68,17 @@ Class Person extends AppModel {
 		$event = $this->requestAction('events');
 		return $this->find('all', array('Registration.event_id' => $event['id'], 'recursive' => -1));
 	}
+	
+	/**
+	 * Turns a person into an invoice item
+	 */
+	function toItem() {
+		
+		$array = array();
+		
+		
+		
+		return $array;
+	}
     
 }
