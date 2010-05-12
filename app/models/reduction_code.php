@@ -134,9 +134,22 @@
 		return $amount;
 	}	
 		
-		function getIdByCodeAndEventId($code,$eventId){
-			return $this->field('id',array('code'=> $code, 'event_id' => $eventId));
+	function getIdByCodeAndEventId($code,$eventId){
+		return $this->field('id',array('code'=> $code, 'event_id' => $eventId));
+	}
+	
+	function getPeopleWithoutRecuiredCode($people){
+		foreach ($people as $key => $person){
+			if(!($person['reduction_code_id'])){
+				$roleIsExternal = $this->Person->Role->field('is_external', array('id' => $person['role_id']));
+				if($roleIsExternal == 1){
+					unset($people[$key]);	
+				}
+			} else {
+					unset($people[$key]);	
+			}
 		}
-		
-		
+		return $people;	
+	}
+	
 	}

@@ -110,8 +110,16 @@ class ReductionCodesController extends AppController {
 	 * reuduction_code doesn't contain any data so we just want to go to next unfinished step
 	 */
 	function next() {
-		$this->updateStepStateToPrevious('reduction_codes', 'create');
-		$this->requestAction('steps/redirectToNextUnfinishedStep');
+		$peoleWithoutRedictionCode = $this->ReductionCode->getPeopleWithoutRecuiredCode($this->Session->read('Registration.Person'));
+		if ($peoleWithoutRedictionCode){	
+			foreach ($peoleWithoutRedictionCode as $key => $personWithoutRedictionCode){
+				$this->Session->write("errors.$key" , "{$personWithoutRedictionCode['first_name']} {$personWithoutRedictionCode['last_name']} behöver skriva in en Rabattkod");	
+			}
+			$this->redirectBack();
+		} else {
+			$this->updateStepStateToPrevious('reduction_codes', 'create');
+			$this->requestAction('steps/redirectToNextUnfinishedStep');
+		}
 	}
 	
 	function getReductionCodeCodeById($reductionCodeId = 0) {
@@ -124,6 +132,7 @@ class ReductionCodesController extends AppController {
 	function test2() {
 		debug($this->ReductionCode->codeExists('H', 1));
 	}
+	
 	
 }
 	

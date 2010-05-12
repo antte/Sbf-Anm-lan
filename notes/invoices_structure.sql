@@ -28,7 +28,6 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 CREATE TABLE IF NOT EXISTS `invoices` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `registrations_id` int(11) NOT NULL,
-  `price` double NOT NULL,
   `created` datetime NOT NULL,
   `expiry_date` datetime NOT NULL,
   `is_external` int(1) NOT NULL,
