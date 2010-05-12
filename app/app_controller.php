@@ -4,6 +4,7 @@
 	App::import('Inflector');
 
 	class AppController extends Controller {
+	var $helpers = array('Form', 'Html', 'Javascript', 'Number', 'date');
 	var $altName = 'Namn';
 	var $altDescribe = 'Namn på kontrollern';
 		

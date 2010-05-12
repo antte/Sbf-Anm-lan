@@ -1,5 +1,6 @@
 <?php
 	class InvoicesController extends AppController {
+	var $helpers = array('Html','Form','Javascript');
 	var $altName = 'Fakturor';
 	var $altDescribe = 'Fakturor som listas';
 		

@@ -1,4 +1,4 @@
-<?php $bankgiro = $this->requestAction('events/getBankgiroNumber'); ?>
+<?php $bank_giro = $this->requestAction('events/getBankgiroNumber'); ?>
 <?php $registration = $this->requestAction('registrations'); ?>
 <?php 
 	$registrationId = $registration['Registration']['id'];
@@ -12,15 +12,14 @@
 		<dl id="invoice_info">
 		
 			<dt>Bankgironummer</dt>
-			<dd><?php echo $bankgiro; ?></dd>
+			<dd><?php echo $bank_giro; ?></dd>
 			
 			<dt>OCR/Fakturanummer</dt>
 			<dd><?php echo $registration['Registration']['number']?></dd>
 			
 			<dt>Förfallodatum</dt>
-			<dd><?php echo $invoice['Invoice']['expiry_date']; ?></dd>
-			
+			<dd><?php echo $date->SE($invoice['Invoice']['expiry_date'], true);?></dd>
 		</dl>
-		<p><em>Bokningen ska betalas in inom 30 dagar netto fr.o.m. beställningsdatumet. Du får en bekräftelse från oss när vi har mottagit din betalning.</em></p>
+		<p><em>Du får en bekräftelse från oss när vi har mottagit din betalning.</em></p>
 	</div>
 </div>
