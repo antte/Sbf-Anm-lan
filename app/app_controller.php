@@ -120,7 +120,7 @@
 			$this->Session->write('commingFromUrl.controller', $this->params['controller']);	
 			$this->Session->write('commingFromUrl.action', $this->params['action']);
 			$this->Session->write('commingFromUrl.pass', $this->params['pass']);
-		}	
+		}	 
 	}
 	
 	function redirectBack() {
