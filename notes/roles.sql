@@ -2,10 +2,10 @@
 -- version 3.2.0.1
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: May 11, 2010 at 09:02 AM
--- Server version: 5.1.36
--- PHP Version: 5.3.0
+-- Värd: localhost
+-- Skapad: 12 maj 2010 kl 11:03
+-- Serverversion: 5.1.36
+-- PHP-version: 5.3.0
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
@@ -16,65 +16,65 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `sbf-anmalan`
+-- Databas: `sbf-anmalan`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `roles`
+-- Struktur för tabell `roles`
 --
 
 CREATE TABLE IF NOT EXISTS `roles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(127) CHARACTER SET utf8 NOT NULL,
   `code` int(11) DEFAULT NULL,
-  `is_external` int(1) NOT NULL,
+  `is_external` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=58 ;
 
 --
--- Dumping data for table `roles`
+-- Data i tabell `roles`
 --
 
 INSERT INTO `roles` (`id`, `name`, `code`, `is_external`) VALUES
-(21, 'Kansliet', 1120, 0),
-(20, 'Styrelsen', 1110, 0),
-(19, 'Förbund', NULL, 0),
-(18, 'Besökare', NULL, 1),
-(22, 'SBF', 1130, 0),
-(23, 'Rally', 2000, 0),
-(24, 'Racing', 2100, 0),
-(25, 'Dragracing', 2200, 0),
-(26, 'Rallycross', 2300, 0),
-(27, 'Rallycross Junior', 2301, 0),
-(28, 'Folkrace', 2400, 0),
-(29, 'Karting', 2500, 0),
-(30, 'Radiostyrdbilsport', 2600, 0),
-(31, 'Crosscart', 2700, 0),
-(32, 'Offroad', 2800, 0),
-(33, 'Bil-O', 2900, 0),
-(34, 'Internationella kommittén', 3000, 0),
-(35, 'Säkerhetskommittén', 3100, 0),
-(36, 'Historiska kommittén', 3200, 0),
-(37, 'Virtuell bilsport', 3300, 0),
-(38, 'Drifting', 3400, 0),
-(39, 'Tekniska kommittén', 5700, 0),
-(40, 'Banbesiktningskommittén', 5800, 0),
-(41, 'Juridiska kommittén', 5900, 0),
-(42, 'Förbundsjurist', 5901, 0),
-(43, 'Miljökommittén', 6000, 0),
-(44, 'Ungdomsgruppen', 6400, 0),
-(45, 'Förbundskapten rally', 6500, 0),
-(46, 'Förbundskapten racing', 6501, 0),
-(47, 'Förbundskapten karting', 6502, 0),
-(48, 'Marknadsavdelningen', 6503, 0),
-(49, 'Rig', 6504, 0),
-(50, 'Utbildning/Förbundsfunktionär', 6505, 0),
-(51, 'Valberedningen', 6506, 0),
-(52, 'Nez', 6507, 0),
-(53, 'Bosön / JES', 6509, 0),
-(54, 'Gästmekaniker', 6513, 0),
-(55, 'Bilsportarvet', 6518, 0),
-(56, 'Idrottslyftet', 6521, 0),
-(57, 'Enkla tävlingsformer', 6522, 0);
+(1, 'Kansliet', 1120, NULL),
+(2, 'Styrelsen', 1110, NULL),
+(3, 'Förbund', NULL, NULL),
+(4, 'Besökare', NULL, NULL),
+(5, 'SBF', 1130, NULL),
+(6, 'Rally', 2000, NULL),
+(7, 'Racing', 2100, NULL),
+(8, 'Dragracing', 2200, NULL),
+(9, 'Rallycross', 2300, NULL),
+(10, 'Rallycross Junior', 2301, NULL),
+(11, 'Folkrace', 2400, NULL),
+(12, 'Karting', 2500, NULL),
+(13, 'Radiostyrdbilsport', 2600, NULL),
+(14, 'Crosscart', 2700, NULL),
+(15, 'Offroad', 2800, NULL),
+(16, 'Bil-O', 2900, NULL),
+(17, 'Internationella kommittén', 3000, NULL),
+(18, 'Säkerhetskommittén', 3100, NULL),
+(19, 'Historiska kommittén', 3200, NULL),
+(20, 'Virtuell bilsport', 3300, NULL),
+(21, 'Drifting', 3400, NULL),
+(22, 'Tekniska kommittén', 5700, NULL),
+(23, 'Banbesiktningskommittén', 5800, NULL),
+(24, 'Juridiska kommittén', 5900, NULL),
+(25, 'Förbundsjurist', 5901, NULL),
+(26, 'Miljökommittén', 6000, NULL),
+(27, 'Ungdomsgruppen', 6400, NULL),
+(28, 'Förbundskapten rally', 6500, NULL),
+(29, 'Förbundskapten racing', 6501, NULL),
+(30, 'Förbundskapten karting', 6502, NULL),
+(31, 'Marknadsavdelningen', 6503, NULL),
+(32, 'Rig', 6504, NULL),
+(33, 'Utbildning/Förbundsfunktionär', 6505, NULL),
+(34, 'Valberedningen', 6506, NULL),
+(35, 'Nez', 6507, NULL),
+(36, 'Bosön / JES', 6509, NULL),
+(37, '1', 6513, NULL),
+(38, 'Bilsportarvet', 6518, NULL),
+(39, 'Idrottslyftet', 6521, NULL),
+(40, 'Enkla tävlingsformer', 6522, NULL);
