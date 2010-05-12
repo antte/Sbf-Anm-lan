@@ -206,7 +206,7 @@ label.error {
 	background: url(../img/warning.png) no-repeat 0 0;
 }
 
-#booking_nr, #registrator, #entrants, #event, #fourofour, #invoice {
+#booking_nr, #registrator, #entrants, #event, #fourofour, #invoice, #item {
 	background: #eee;
 	margin-bottom: 20px;
 }
@@ -361,7 +361,7 @@ img.addCode, img.removeCode {
 	background: lightblue;
 }
 
-#invoice_info {
+#invoice_info, #item_info {
 	font-weight: bold;
 }
 
@@ -371,3 +371,11 @@ img.addCode, img.removeCode {
 	margin-bottom: 5px;
 	font-family: "lucida grande unicode", "courier new", courier, verdana;
 }
+
+#item_info dd {
+	text-indent: 20px;
+	font-size: 18px;
+	margin-bottom: 5px;
+	font-family: "lucida grande unicode", "courier new", courier, verdana;
+}
+
