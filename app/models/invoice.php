@@ -36,8 +36,13 @@
 				$newIndex = 0;
 			}
 			
-			$registration['Invoice'][$newIndex]['price'] = $this->requestAction('invoices/getSum');
+			$registration['Invoice'][$newIndex]['price'] = $this->requestAction('invoices/getSum/1');
+			$registration['Invoice'][$newIndex]['is_external'] = 0;
 			$registration['Invoice'][$newIndex]['expiry_date'] = $this->generateExpiryDate();
+			
+			$registration['Invoice'][($newIndex+1)]['price'] = $this->requestAction('invoices/getSum/0');
+			$registration['Invoice'][($newIndex+1)]['is_external'] = 1;
+			$registration['Invoice'][($newIndex+1)]['expiry_date'] = $this->generateExpiryDate();
 			
 			return $registration;	
 		}

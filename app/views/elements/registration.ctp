@@ -15,17 +15,17 @@
 		<?php endif; ?>
 		
 		<?php if( isset($registration['Registration']['created']) ):?>
-			<p class="datetime">Skapad: <?php echo $registration['Registration']['created']?></p>
+			<p class="datetime">Skapad: <?php echo $date->SE($registration['Registration']['created'])?></p>
 		<?php endif; ?>
 		
 		<?php if( isset($registration['Registration']['created']) && isset($registration['Registration']['modified']) ):?>
 			<?php if ( $registration['Registration']['created'] != $registration['Registration']['modified'] ):?>
-				<p class="datetime">Senast ändrad: <?php echo $registration['Registration']['modified']?></p>
+				<p class="datetime">Senast ändrad: <?php echo $date->SE($registration['Registration']['modified'])?></p>
 			<?php endif; ?>
 		<?php endif; ?>
 		
 		<?php if ( isset($registration['Registration']['modified_admin'])):?>
-			<p class="datetime">Senast ändrad av SBF: <?php echo $registration['Registration']['modified_admin'] . '<br /> Referens: ' . $adminUsername; ?></p>
+			<p class="datetime">Senast ändrad av SBF: <?php echo $date->SE($registration['Registration']['modified_admin']) . '<br /> Referens: ' . $adminUsername; ?></p>
 		<?php endif; ?>
 		
 	</div>
