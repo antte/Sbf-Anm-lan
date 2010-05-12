@@ -21,7 +21,16 @@
 		function addInvoiceToRegistration($registration) {
 			
 			//We need to create two invoices depending on the payment method of each person (which depends on role)
+			$externalPeople = array();
+			$internalPeople = array();
 			
+			foreach($registration['Person'] as $person) {
+				if($isExternal = $this->Registration->Person->Role->field('is_external', array('id' => $person['role_id']))) {
+					$externalPeople[] = $person;
+				} else {
+					$internalPeople[] = $person;
+				}
+			}
 			
 			//if registration id exists this is an existing registration and we need to add the invoice last to the invoices array
 			if(isset($registration['Registration']['id'])) {
@@ -37,11 +46,9 @@
 			}
 			
 			$registration['Invoice'][$newIndex]['price'] = $this->requestAction('invoices/getSum/1');
-			$registration['Invoice'][$newIndex]['is_external'] = 0;
 			$registration['Invoice'][$newIndex]['expiry_date'] = $this->generateExpiryDate();
 			
 			$registration['Invoice'][($newIndex+1)]['price'] = $this->requestAction('invoices/getSum/0');
-			$registration['Invoice'][($newIndex+1)]['is_external'] = 1;
 			$registration['Invoice'][($newIndex+1)]['expiry_date'] = $this->generateExpiryDate();
 			
 			return $registration;	
