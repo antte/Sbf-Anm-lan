@@ -206,6 +206,8 @@ CREATE TABLE IF NOT EXISTS `registrators` (
 CREATE TABLE IF NOT EXISTS `roles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(127) CHARACTER SET utf8 NOT NULL,
+  `code` int(11) DEFAULT NULL,
+  `is_external` int(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=18 ;
 
