@@ -113,7 +113,7 @@ class ReductionCodesController extends AppController {
 		$peoleWithoutRedictionCode = $this->ReductionCode->getPeopleWithoutRecuiredCode($this->Session->read('Registration.Person'));
 		if ($peoleWithoutRedictionCode){	
 			foreach ($peoleWithoutRedictionCode as $key => $personWithoutRedictionCode){
-				$this->Session->write("errors.$key" , "{$personWithoutRedictionCode['first_name']} {$personWithoutRedictionCode['last_name']} behöver skriva in en Rabattkod");	
+				$this->Session->write("errors.$key" , "{$personWithoutRedictionCode['first_name']} {$personWithoutRedictionCode['last_name']} behöver skriva in en rabattkod");	
 			}
 			$this->redirectBack();
 		} else {
