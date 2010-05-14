@@ -24,7 +24,8 @@ class RegistrationsController extends AppController {
 			$this->updateModified();
 		} else {
 			// Make and set a booking number to Session
-			$this->Session->write('Registration.Registration.number' , $this->Registration->generateUniqueNumber());			
+			// TODO refactor could be put in beforesave
+			$this->Session->write('Registration.Registration.number' , $this->Registration->generateUniqueNumber());
 		}
 		
 		$registrationRegistration = $this->Session->read('Registration.Registration');
@@ -34,7 +35,9 @@ class RegistrationsController extends AppController {
 		
 		//Here we get Registration from session so we can run saveAll on it
 		$registration = $this->Session->read('Registration');
-		$registration = $this->Registration->Invoice->createAndAddInvoicesToRegistration($registration);
+		debug($registration);
+		$registration = $this->Registration->Invoice->createAndAddInvoicesToRegistration($registration);		
+		debug($registration);
 		
 		if($this->requestAction('admins/checkAdminLoggedIn')) $registration = $this->touchByAdmin($registration);
 		
@@ -42,8 +45,10 @@ class RegistrationsController extends AppController {
 			// if we're in edit, we delete everything and save the session again because updateAll & deleteAll are ... unkind
 			$this->Registration->deleteAllRegistrationRelatedDataById($registration['Registration']['id']);
 		}
+		
 		if($this->Registration->saveAll($registration, array('validate' => 'first'))) {
 			$this->Session->write('Event.registrationId', $this->Registration->id);
+			debug($this->Registration->validationErrors);
 			if( !($this->data['Registration']['sendConfirmationEmail'] == 0) ) {
 				
 				//If we have a message for the registrator we want to put it in session so that the email element can send it along
@@ -52,16 +57,17 @@ class RegistrationsController extends AppController {
 				$this->sendRegistrationConfirmMail($this->Session->read('Event'), $registration['Registrator']);
 			}
 			
-			$this->clearSessionFromAllRegistrationInformation();
+			//$this->clearSessionFromAllRegistrationInformation();
 		} else {
-			$this->clearSessionFromAllRegistrationInformation();
+			debug($this->Registration->validationErrors);
+			//$this->clearSessionFromAllRegistrationInformation();
 			$this->Session->setFlash('Vi ber om ursäkt, din registrering kunde inte slutföras. Kontakta support.');
 		}
 		
 		//If you're an admin you dont want to get to receipt when you're done saving a registration
 		if($this->requestAction('admins/checkAdminLoggedIn')) $this->redirect(array('controller' => 'admins', 'action' => 'eventIndex'));
 		
-		$this->redirect(array('action' => 'receipt'));
+		//$this->redirect(array('action' => 'receipt'));
 		
 	}
 	
@@ -301,19 +307,19 @@ class RegistrationsController extends AppController {
 						'0' => 	array(
 								'first_name' => 'Andreas',
 								'last_name'  => 'Fliesberg',
-								'role_id' => 14,
+								'role_id' => 18,
 								'reduction_code_id' => ''
 						),
 						'1' => array(
 								'first_name' => 'Tim',
 								'last_name'  => 'Olsson',
-								'role_id' => 17,
+								'role_id' => 18,
 								'reduction_code_id' => ''
 						),
 						'2' => array(
 								'first_name' => 'Pelle',
 								'last_name'  => 'Skarsgård',
-								'role_id' => 17,
+								'role_id' => 18,
 								'reduction_code_id' => ''
 						)
 			),
@@ -381,7 +387,8 @@ class RegistrationsController extends AppController {
 	}
 	
 	function test() {
-		$this->Registration->Invoice->generateExpiryDate();
+		$data = array();
+		$this->Registration->Invoice->save($data);
 	}
 
 }
