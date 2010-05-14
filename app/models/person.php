@@ -83,10 +83,5 @@ Class Person extends AppModel {
 		
 		return $array;
 	}
-	
-	function beforeSave() {
-		debug($this->data);
-		return true;
-	}
     
 }

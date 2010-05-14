@@ -46,7 +46,7 @@ class RegistrationsController extends AppController {
 			$this->Registration->deleteAllRegistrationRelatedDataById($registration['Registration']['id']);
 		}
 		
-		if($this->Registration->saveAll($registration, array('validate' => 'first'))) {
+		if($this->Registration->saveAll($registration, array('atomic' => false))) {
 			$this->Session->write('Event.registrationId', $this->Registration->id);
 			debug($this->Registration->validationErrors);
 			if( !($this->data['Registration']['sendConfirmationEmail'] == 0) ) {
@@ -387,8 +387,11 @@ class RegistrationsController extends AppController {
 	}
 	
 	function test() {
-		$data = array();
-		$this->Registration->Invoice->save($data);
+		debug($this->data);
+		if(isset($this->data)) {
+			$this->data['Invoice'][0]['expiry_date'] = date('Y-m-d H:i:s');
+			$this->Registration->saveAll($this->data);
+		}
 	}
 
 }

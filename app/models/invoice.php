@@ -55,7 +55,7 @@
 				//we only have external people
 				$registration['Invoice'][$newIndex]['expiry_date'] = $this->generateExpiryDate();
 				foreach($externalPeople as $person) {
-					$registration['Invoice'][$newIndex]['Item'][]['Item'] = $this->Registration->Person->toItem($person);
+					$registration['Invoice'][$newIndex]['Item'][] = $this->Registration->Person->toItem($person);
 				}
 							
 			} else if 	(!empty($internalPeople) && empty($externalPeople)) {
@@ -65,7 +65,7 @@
 				//we only have internal people
 				$registration['Invoice'][$newIndex]['expiry_date'] = $this->generateExpiryDate();				
 				foreach($internalPeople as $person) {
-					$registration['Invoice'][$newIndex]['Item'][]['Item'] = $this->Registration->Person->toItem($person);
+					$registration['Invoice'][$newIndex]['Item'][] = $this->Registration->Person->toItem($person);
 				}
 				
 			} else if 	(!empty($externalPeople) && !empty($internalPeople)) {
@@ -77,15 +77,16 @@
 				
 				$registration['Invoice'][$newIndex]['expiry_date'] = $this->generateExpiryDate();
 				foreach($externalPeople as $person) {
-					$registration['Invoice'][$newIndex]['Item'][]['Item'] = $this->Registration->Person->toItem($person);
+					$registration['Invoice'][$newIndex]['Item'][] = $this->Registration->Person->toItem($person);
 				}
 				
 				$registration['Invoice'][($newIndex+1)]['expiry_date'] = $this->generateExpiryDate();	
 				foreach($internalPeople as $person) {
-					$registration['Invoice'][$newIndex+1]['Item'][]['Item'] = $this->Registration->Person->toItem($person);
+					$registration['Invoice'][$newIndex+1]['Item'][] = $this->Registration->Person->toItem($person);
 				}			
 				
 			} else {
+				//Both are empty
 				//TODO some kind of error?
 				debug("the what???!!?!?");
 			}
@@ -95,26 +96,6 @@
 		
 		function generateExpiryDate() {
 			return date('Y-m-d H:i:s', (mktime() + $this->expiryTime));
-		}
-		
-		function beforeSave() {
-			debug("before invoice save");
-			return true;
-		}
-		
-		function afterSave() {
-			debug("after invoice save");
-			
-			if(isset($this->data['Invoice']['Item'])) {
-				foreach($this->data['Invoice']['Item'] as $item) {
-					$item['Item']['invoice_id'] = $this->id;
-					debug($item);
-					$this->Item->save($item);
-				}
-				
-			}
-			
-			return true;
 		}
 		
 	}
