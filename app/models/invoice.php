@@ -54,7 +54,7 @@
 				//we only have external people
 				$registration['Invoice'][$newIndex]['expiry_date'] = $this->generateExpiryDate();
 				foreach($externalPeople as $person) {
-					$registration['Invoice'][$newIndex]['Item'][] = $this->Invoice->Registration->Person->toItem($person);
+					$registration['Invoice'][$newIndex]['Item'][] = $this->Registration->Person->toItem($person);
 				}
 							
 			} else if 	(!empty($internalPeople) && empty($externalPeople)) {
@@ -62,7 +62,7 @@
 				//we only have internal people
 				$registration['Invoice'][$newIndex]['expiry_date'] = $this->generateExpiryDate();				
 				foreach($internalPeople as $person) {
-					$registration['Invoice'][$newIndex]['Item'][] = $this->Invoice->Registration->Person->toItem($person);
+					$registration['Invoice'][$newIndex]['Item'][] = $this->Registration->Person->toItem($person);
 				}
 				
 			} else if 	(!empty($externalPeople) && !empty($internalPeople)) {
@@ -71,12 +71,12 @@
 				
 				$registration['Invoice'][$newIndex]['expiry_date'] = $this->generateExpiryDate();
 				foreach($externalPeople as $person) {
-					$registration['Invoice'][$newIndex]['Item'][] = $this->Invoice->Registration->Person->toItem($person);
+					$registration['Invoice'][$newIndex]['Item'][] = $this->Registration->Person->toItem($person);
 				}
 				
 				$registration['Invoice'][($newIndex+1)]['expiry_date'] = $this->generateExpiryDate();	
 				foreach($internalPeople as $person) {
-					$registration['Invoice'][$newIndex+1]['Item'][] = $this->Invoice->Registration->Person->toItem($person);
+					$registration['Invoice'][$newIndex+1]['Item'][] = $this->Registration->Person->toItem($person);
 				}			
 				
 			} else {
