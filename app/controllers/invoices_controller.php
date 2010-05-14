@@ -74,7 +74,7 @@
 		}
 		
 		function getItem($invoiceId) {
-			return $this->Invoice->getItem($invoiceId);
+			return $this->Invoice->Item->getItem($invoiceId);
 		}
 		
 	}

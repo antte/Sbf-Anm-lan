@@ -13,7 +13,7 @@
 		}
 		
 		function getLatest($registrationId) {
-			return $this->find('first', array('order' => 'Invoice.created DESC', 'limit' => '1', 'recursive' => -1 , 'condition' => array('Invoices.registration_id' => $registrationId)));
+			return $this->find('first', array('order' => 'Invoice.created DESC', 'limit' => '1', 'recursive' => -1 , 'conditions' => array('Invoices.registration_id' => $registrationId)));
 		}
 		
 		/**
