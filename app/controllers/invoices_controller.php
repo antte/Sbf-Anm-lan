@@ -73,4 +73,8 @@
 			return $this->Invoice->getLatest($registrationId);
 		}
 		
+		function getItem($invoiceId) {
+			return $this->Invoice->Item->getItem($invoiceId);
+		}
+		
 	}
