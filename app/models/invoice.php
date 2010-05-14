@@ -1,12 +1,10 @@
 <?php 
 	class Invoice extends AppModel {
 		var $belongsTo = array('Registration');
-		var $hasMany = array(
-			'Item'
-		);
+		var $hasMany = array('Item');
 		var $exportAllowed = true;
 		var $altName = 'Fakturor';
-		var $expiryTime = 2592000; //30 days
+		var $expiryTime = 2592000; //30 days in seconds
 		
 		function calculatePrice($price, $amountOfPeople) {
 			return $price * $amountOfPeople;
@@ -51,36 +49,45 @@
 			//TODO this isnt very DRY
 			if			(!empty($externalPeople) && empty($internalPeople)) {
 				
+				debug("external people only");
+				debug($externalPeople);
+				
 				//we only have external people
 				$registration['Invoice'][$newIndex]['expiry_date'] = $this->generateExpiryDate();
 				foreach($externalPeople as $person) {
-					$registration['Invoice'][$newIndex]['Item'][] = $this->Registration->Person->toItem($person);
+					$registration['Invoice'][$newIndex]['Item'][]['Item'] = $this->Registration->Person->toItem($person);
 				}
 							
 			} else if 	(!empty($internalPeople) && empty($externalPeople)) {
 				
+				debug("internal people only");
+				debug($internalPeople);
 				//we only have internal people
 				$registration['Invoice'][$newIndex]['expiry_date'] = $this->generateExpiryDate();				
 				foreach($internalPeople as $person) {
-					$registration['Invoice'][$newIndex]['Item'][] = $this->Registration->Person->toItem($person);
+					$registration['Invoice'][$newIndex]['Item'][]['Item'] = $this->Registration->Person->toItem($person);
 				}
 				
 			} else if 	(!empty($externalPeople) && !empty($internalPeople)) {
 				
+				debug("both");
+				debug($externalPeople);
+				debug($internalPeople);
 				//we have both
 				
 				$registration['Invoice'][$newIndex]['expiry_date'] = $this->generateExpiryDate();
 				foreach($externalPeople as $person) {
-					$registration['Invoice'][$newIndex]['Item'][] = $this->Registration->Person->toItem($person);
+					$registration['Invoice'][$newIndex]['Item'][]['Item'] = $this->Registration->Person->toItem($person);
 				}
 				
 				$registration['Invoice'][($newIndex+1)]['expiry_date'] = $this->generateExpiryDate();	
 				foreach($internalPeople as $person) {
-					$registration['Invoice'][$newIndex+1]['Item'][] = $this->Registration->Person->toItem($person);
+					$registration['Invoice'][$newIndex+1]['Item'][]['Item'] = $this->Registration->Person->toItem($person);
 				}			
 				
 			} else {
 				//TODO some kind of error?
+				debug("the what???!!?!?");
 			}
 			
 			return $registration;	
@@ -88,6 +95,26 @@
 		
 		function generateExpiryDate() {
 			return date('Y-m-d H:i:s', (mktime() + $this->expiryTime));
+		}
+		
+		function beforeSave() {
+			debug("before invoice save");
+			return true;
+		}
+		
+		function afterSave() {
+			debug("after invoice save");
+			
+			if(isset($this->data['Invoice']['Item'])) {
+				foreach($this->data['Invoice']['Item'] as $item) {
+					$item['Item']['invoice_id'] = $this->id;
+					debug($item);
+					$this->Item->save($item);
+				}
+				
+			}
+			
+			return true;
 		}
 		
 	}
