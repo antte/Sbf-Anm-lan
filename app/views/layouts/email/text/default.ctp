@@ -1,9 +1,11 @@
-<?php echo ($this->requestAction('admins/checkAdminLoggedIn'))? $this->renderElement('email/messageForRegistrator') : '' ?>php
-<?php echo strip_html_tags($this->renderElement('event'))?>
+<?php echo ($this->requestAction('admins/checkAdminLoggedIn'))? $this->element('email/messageForRegistrator') : '' ?>
+<?php echo strip_html_tags($this->element('event'))?>
 Du kan logga in med ditt bokningsnummer och email för att göra ändringar i din bokning på den här adressen: http://www.sbf.se/anmalan/registrations/login
-<?php echo strip_html_tags($this->renderElement('registration'))?>
-<?php echo strip_html_tags($this->renderElement('person'))?>
-<?php echo strip_html_tags($this->renderElement('registrator'))?>
+Du kommer då få en ny faktura skickad till dig 
+<?php echo strip_html_tags($this->element('registration'))?>
+<?php echo strip_html_tags($this->element('registrator'))?>
+<?php echo strip_html_tags($this->element('item'))?>
+<?php echo strip_html_tags($this->element('invoice'));?>
 
 <?php
 	/**
