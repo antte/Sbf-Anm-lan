@@ -49,7 +49,7 @@
 			}
 			
 			//TODO this isnt very DRY
-			if			(!is_empty($externalPeople) && is_empty($internalPeople)) {
+			if			(!empty($externalPeople) && empty($internalPeople)) {
 				
 				//we only have external people
 				$registration['Invoice'][$newIndex]['expiry_date'] = $this->generateExpiryDate();
@@ -57,7 +57,7 @@
 					$registration['Invoice'][$newIndex]['Item'][] = $this->Invoice->Registration->Person->toItem($person);
 				}
 							
-			} else if 	(!is_empty($internalPeople) && is_empty($externalPeople)) {
+			} else if 	(!empty($internalPeople) && empty($externalPeople)) {
 				
 				//we only have internal people
 				$registration['Invoice'][$newIndex]['expiry_date'] = $this->generateExpiryDate();				
@@ -65,7 +65,7 @@
 					$registration['Invoice'][$newIndex]['Item'][] = $this->Invoice->Registration->Person->toItem($person);
 				}
 				
-			} else if 	(!is_empty($externalPeople) && !is_empty($internalPeople)) {
+			} else if 	(!empty($externalPeople) && !empty($internalPeople)) {
 				
 				//we have both
 				
