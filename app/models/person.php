@@ -72,11 +72,14 @@ Class Person extends AppModel {
 	/**
 	 * Turns a person into an invoice item
 	 */
-	function toItem() {
+	function toItem($person) {
+		
+		$event = $this->requestAction('events');
 		
 		$array = array();
 		
-		
+		$array['price'] = $event['price_per_person'];
+		$array['description'] = $person['first_name'] . ' ' . $person['last_name'];
 		
 		return $array;
 	}
