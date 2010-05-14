@@ -2,7 +2,7 @@
 	class Invoice extends AppModel {
 		var $belongsTo = array('Registration');
 		var $hasMany = array(
-			'Person'
+			'Item'
 		);
 		var $exportAllowed = true;
 		var $altName = 'Fakturor';

@@ -73,8 +73,16 @@
 			return $this->Invoice->getLatest($registrationId);
 		}
 		
-		function getItem($invoiceId) {
-			return $this->Invoice->Item->getItem($invoiceId);
+		function getItems($invoiceId) {
+			return $this->Invoice->Item->getItems($invoiceId);
 		}
 		
+		function getInvoiceId(){
+			return $this->Session->read('Invoice.id');
+		}
+		
+		function getSumPrice($invoiceId){
+			return $this->Invoice->Item->getSumPrice($invoiceId);
+			
+		}
 	}
