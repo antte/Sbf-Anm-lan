@@ -1,6 +1,6 @@
 <?php $price = $this->requestAction('invoices');?>
 <?php $description = $this->requestAction('');?>
-<?php $invoice_id = $invoice['Invoice']['id']?>
+<?php $invoiceId = $invoice['Invoice']['id']?>
 <?php $item = $this->requestAction('invoices/getItem' . $invoiceId)?>
 
 <div id="item" class="grid_8">
